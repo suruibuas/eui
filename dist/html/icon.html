@@ -1,0 +1,37 @@
+<div class="font-h2">
+    图标库
+</div>
+<div class="font-h6 mt10 mb20">
+    EAdmin的字体图标使用的是font-awesome，以下列出了常用的一些图标，更多图标以及使用文档请到官网查看
+</div>
+<div class="block-box" data-template="icon">
+    <script id="icon" type="text/html">
+    {{each icon}}
+    <div class="col-md-1">
+        <div class="block hover tc">
+            <div class="fs24">
+                <i class="fa fa-{{$value}}"></i>
+            </div>
+            <div class="font-h6 mt10">
+                {{$value}}
+            </div>
+        </div>
+    </div>
+    {{/each}}
+    </script>
+</div>
+
+<script>
+    (function(){
+        Eadmin.template('icon', {
+            icon : [
+                'bars', 'bandcamp', 'asterisk', 'etsy', 'id-badge', 'linode',
+                'quora', 'bug', 'bullhorn', 'clock-o', 'close', 'cloud',
+                'etsy', 'id-card', 'linode', 'quora', 'telegram', 'adjust',
+                'anchor', 'archive', 'at', 'ban', 'bell', 'battery',
+                'bluetooth', 'bolt', 'bomb', 'book', 'bookmark', 'bullhorn',
+                'bullseye', 'bus', 'cab', 'calculator', 'check', 'clone'
+            ]
+        });
+    })();
+</script>

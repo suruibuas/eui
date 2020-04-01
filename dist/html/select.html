@@ -1,0 +1,117 @@
+<div class="font-h2">
+    下拉菜单
+</div>
+<div class="font-h6 mt10 mb20">
+    EAdmin提供后台开发中常用的下拉菜单组件
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <span class="title">默认下拉菜单</span>
+                <select name="fruit">
+                    <option value="-999">请选择</option>
+                    <option value="1">苹果</option>
+                    <option value="2">香蕉</option>
+                    <option value="3">梨</option>
+                    <option value="4">橘子</option>
+                    <option value="5">西瓜</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <span class="title">有选中值的下拉菜单</span>
+                <select name="fruit">
+                    <option value="-999">请选择</option>
+                    <option value="1">苹果</option>
+                    <option value="2" selected>香蕉</option>
+                    <option value="3">梨</option>
+                    <option value="4">橘子</option>
+                    <option value="5">西瓜</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <span class="title">禁用选项的下拉菜单</span>
+                <select name="fruit">
+                    <option value="-999">请选择</option>
+                    <option value="1">苹果</option>
+                    <option value="2" disabled>香蕉</option>
+                    <option value="3">梨</option>
+                    <option value="4">橘子</option>
+                    <option value="5">西瓜</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <span class="title">禁用的下拉菜单</span>
+                <select name="fruit" disabled>
+                    <option value="-999">请选择</option>
+                    <option value="1" selected>苹果</option>
+                    <option value="2">香蕉</option>
+                    <option value="3">梨</option>
+                    <option value="4">橘子</option>
+                    <option value="5">西瓜</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <span class="title">指定宽度的下拉菜单</span>
+                <select name="fruit" data-width="80">
+                    <option value="-999">请选择</option>
+                    <option value="1">苹果</option>
+                    <option value="2">香蕉</option>
+                    <option value="3">梨</option>
+                    <option value="4">橘子</option>
+                    <option value="5">西瓜</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <span class="title">联动菜单</span>
+                <select id="a" name="one" data-width="80" data-bind="child" data-api="fruit.php?type=">
+                    <option value="-999">请选择</option>
+                    <option value="1">水果</option>
+                    <option value="2">运动</option>
+                </select>
+                <select id="child" name="two" data-width="80">
+                    <option value="-999">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

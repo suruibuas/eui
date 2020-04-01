@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EAdmin - 开箱即用的后台中台</title>
+    <link href="./css/eadmin.min.css" rel="stylesheet">
+    <link href="./css/font-awesome.min.css" rel="stylesheet">
+    <link href="./css/animate.min.css" rel="stylesheet">
+    <link href="./css/login.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- 大盒子 -->
+    <div class="block-box">
+        <div class="block">
+            <form action="submit.php" method="POST" data-native>
+                <div class="main-title">
+                    EAdmin
+                </div>
+                <div class="sub-title">
+                    致力于打造开箱即用的后台UI框架
+                </div>
+                <!-- 表单组盒子 -->
+                <div class="form-group mb10">
+                    <input 
+                        name="uname" 
+                        type="text" 
+                        placeholder="账号" 
+                        data-validate="require" 
+                        data-validate-msg="请输入账号"
+                    >
+                </div>
+                <!-- 表单组盒子 -->
+                <div class="form-group mb10">
+                    <input 
+                        name="pword" 
+                        type="password" 
+                        placeholder="密码" 
+                        data-validate="require" 
+                        data-validate-msg="请输入密码"
+                    >
+                </div>
+                <!-- 表单组盒子 -->
+                <div class="form-group mb10">
+                    <input 
+                        name="yzcode" 
+                        type="text" 
+                        placeholder="验证码" 
+                        data-validate="require" 
+                        data-validate-msg="请输入验证码"
+                        style="width: 145px;"
+                    >
+                    <img id="yzcode" src="./img/yzcode.png" alt="图形验证码">
+                </div>
+                <button class="highlight" data-loading="登录中..." data-submit>登 录</button>
+            </form>
+        </div>
+    </div>
+    <div class="bq">Copyright © 2020 合肥一红文化传媒有限公司 / 官网：<a href="http://www.eadmin.com.cn" target="_blank">http://www.eadmin.com.cn</a></div>
+    <div id="star"></div>
+    <div id="notice" style="top: 50px;"></div>
+</body>
+<script src="./js/core/al.load.min.js" init="./js/core/al.init.min.js"></script>
+<script>
+    var module = {
+        // 框架全局配置
+        conf : {
+            // 表单验证正确时是否需要高亮提示效果，如果为false，则在表单验证通过时还原成默认效果
+            'validate_success' : false
+        },
+        // 加载依赖框架
+        framework: {
+            'jquery' : '3.4.0',
+            'lodash' : '4.17.11'
+        },
+        // 默认加载的类库，如果用不到可以在此删除
+        lib : [
+            // 表单
+            'form',
+            // 表单验证
+            'validate',
+            // 按钮
+            'button',
+            // 通知消息
+            'notice'
+        ],
+        // 插件
+        plugin : [
+            'particles/particles',
+			'particles/app'
+        ],
+        // 全部加载完成回调
+        ready : function(){
+            Form.event();
+            Button.event();
+            Validate.run();
+            Notice.info({
+                title : '版本更新',
+                desc  : 'EAdmin版本更新至1.0.1，文档同步更新',
+                href  : [
+                    {
+                        href : 'http://doc.eadmin.com.cn',
+                        txt  : '查看详情'
+                    }
+                ],
+                duration : 5
+            });
+        }
+    }
+</script>
+</html>

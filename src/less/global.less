@@ -1,0 +1,117 @@
+/**
+ * eadmin / www.eadmin.net
+ * 
+ * 全局配置
+ */
+
+/**
+ * ================= 颜色设置 ==================
+ */
+
+// 主背景色
+@color-1:#151935;
+// 高亮色
+@color-2:#1C2340;
+// 选中色
+@color-3:#0084FF;
+// 横块移入颜色
+@color-4:#2D3C5C;
+// 角标颜色
+@color-5:#333957;
+// 表头背景色
+@color-6:#19203b;
+
+// 默认字体颜色
+@font-color-1:#B1b1b1;
+// 字体高亮色
+@font-color-2:#FFF;
+
+// 边框颜色
+@border-color-1:#2F365A;
+// 高亮边框颜色
+@border-color-2:#727B9B;
+// 深色边框色
+@border-color-3:darken(@color-1, 20%);
+// 表单边框色
+@border-color-4:#30375B;
+// 按钮边框色
+@border-color-5:#4E5675;
+
+// 成功色
+@other-color-1:#36D144;
+// 错误色
+@other-color-2:#ff2727;
+// 警告色
+@other-color-3:#D1C31D;
+// 禁用
+@other-color-4:#BBC5D8;
+
+// 表单背景色
+@input-color-1:#232B4C;
+// 表单移入背景色
+@input-color-2:#2a3560;
+// 表单禁用背景色
+@input-color-3:#BBC5D8;
+// 按钮禁用色
+@input-color-4:lighten(@color-3, 20%);
+
+// 阴影颜色
+@shadow-color:#131630;
+
+/**
+ * ================= 字体设置 ==================
+ */
+
+// 默认字体大小
+@font-size-1: 12px;
+// 标题字体大小
+@font-size-2: 14px;
+// 大号字体大小
+@font-size-3: 16px;
+// 默认字体
+@font-family: "Microsoft YaHei","黑体","宋体",sans-serif;
+
+/**
+ * ================= 宽度高度设置 ==================
+ */
+
+// 主导航高度
+@nav-height: 50px;
+// 二级导航高度
+@sub-nav-height:41px;
+// 导航高亮内边距
+@nav-pd:10px;
+// 头像宽度高度
+@icon-width:28px;
+@icon-height:28px;
+
+/**
+ * ================= 通用方法 ==================
+ */
+
+// 延时动画
+.animate(@action, @time : 0.2s){
+    transition:@action @time linear;
+}
+// 表单延时动画
+.animate-form(){
+    transition:border-color 0.2s linear,background-color 0.2s linear, box-shadow 0.2s linear;
+}
+// 圆角
+.border-radius(@radius : 2px) {
+    border-radius: @radius;
+}
+// 阴影
+.box-shadow(@color:@shadow-color, @width:10px) {
+    box-shadow: @color 0px 0px @width;
+}
+// 透明度
+.alpha(@alpha : 1) {
+    opacity: @alpha;
+}
+// 渐变
+.linear(@start, @end, @position:left){
+    background: -moz-linear-gradient(@position, @start, @end);
+    background: -webkit-linear-gradient(@position, @start, @end);
+    background: -o-linear-gradient(@position, @start, @end);
+}

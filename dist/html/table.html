@@ -1,0 +1,205 @@
+<div class="font-h2">
+    表格
+</div>
+<div class="font-h6 mt10 mb20">
+    EAdmin提供后台开发中常用的表格组件，通过配置文件就可以生成表格，包括分页、工具栏等常用功能
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-12 col-md-12">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <div id="p1"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function(){
+        Eadmin.table('#p1', {
+            // 表格配置
+            config : {
+                // 指定复选框绑定的字段名，如果不指定该项则无复选框
+                checkbox : 'id',
+                // 固定首尾列
+                fixed : {
+                    // 首列
+                    first : false,
+                    // 尾列
+                    last  : false
+                },
+                // 按钮工具
+                button : [
+                    {
+                        name : '新建数据',
+                        icon : 'fa-plus-circle',
+                        open : {
+                            title  : '新建数据',
+                            width  : '30%',
+                            height : '80%',
+                            url    : './html/1.html',
+                            btn : [
+                                {
+                                    // 按钮名称
+                                    name : '确定',
+                                    // 执行的动作
+                                    action  : 'submit',
+                                    // 按钮是否高亮
+                                    highlight : true
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        name : '删除',
+                        icon : 'fa-trash-o',
+                        // 是否需要确认框
+                        confirm : true,
+                        // 是否需要检测复选框未选中
+                        check_checked : true,
+                        // 执行完毕是否需要刷新，此设置在callback中不起作用
+                        refresh : true,
+                        // 调用的API地址
+                        api : 'del.php'
+                    }
+                ],
+                // 分页
+                page : {
+                    // 每页条数
+                    size : 10,
+                    // 数字分页数目
+                    num  : 5,
+                    // 传递给后端代表页数的字段名，用来后端取值
+                    page_field : 'page',
+                    // 传递给后端代表条数的字段名，用来后端取值
+                    size_field : 'size'
+                },
+                // 数据源接口地址
+                data : 'table.php'
+            },
+            // 表格列
+            column : [
+                {
+                    name  : 'ID',
+                    field : 'id',
+                    order : true
+                },
+                {
+                    name  : '所属实例',
+                    field : 'emp'
+                },
+                {
+                    name   : '服务名称',
+                    field  : 'name',
+                    search : true
+                },
+                {
+                    name   : '接口地址',
+                    field  : 'api',
+                    search : true
+                },
+                {
+                    name   : '创建人',
+                    field  : 'create'
+                },
+                {
+                    name   : '创建日期',
+                    field  : 'addtime',
+                    search : true
+                },
+                {
+                    name  : '审核人',
+                    field : 'audit'
+                },
+                {
+                    name   : '请求方式',
+                    field  : 'type',
+                    search : true
+                },
+                {
+                    name   : '状态',
+                    field  : 'state',
+                    search : true,
+                    switch : true,
+                    api    : 'state.php?id=$id'
+                },
+                {
+                    name  : '查看次数',
+                    field : 'view',
+                    order : true
+                },
+                {
+                    name  : '请求次数',
+                    field : 'use',
+                    order : true
+                },
+                {
+                    name : '操作',
+                    // 如果有button，则表示是按钮列
+                    button : [
+                        {
+                            name : '编辑',
+                            icon : 'fa-pencil',
+                            open : {
+                                title : '编辑数据',
+                                width : '30%',
+                                height  : '80%',
+                                refresh : true,
+                                url : './html/1.html?id=$id',
+                                btn : [
+                                    {
+                                        // 按钮名称
+                                        name : '确定',
+                                        // 执行的动作
+                                        action  : 'submit',
+                                        // 按钮是否高亮
+                                        highlight : true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            name : '删除',
+                            icon : 'fa-times',
+                            confirm : true,
+                            refresh : true,
+                            api  : 'del.php?id=$id'
+                        }
+                    ]
+                }
+            ],
+            // 搜索配置
+            search : {
+                addtime : {
+                    type : 'datepicker'
+                },
+                type : {
+                    type : 'select',
+                    option : [
+                        {
+                            key : 'GET',
+                            val : 'get'
+                        },
+                        {
+                            key : 'POST',
+                            val : 'post'
+                        }
+                    ]
+                },
+                state : {
+                    type : 'select',
+                    option : [
+                        {
+                            key : '正常',
+                            val : 1
+                        },
+                        {
+                            key : '禁用',
+                            val : 0
+                        }
+                    ]
+                }
+            }
+        });
+    })();
+</script>

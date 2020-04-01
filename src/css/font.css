@@ -1,0 +1,49 @@
+/**
+ * eadmin / www.eadmin.net
+ * 
+ * 字体样式
+ */
+/**
+ * eadmin / www.eadmin.net
+ * 
+ * 全局配置
+ */
+/**
+ * ================= 颜色设置 ==================
+ */
+/**
+ * ================= 字体设置 ==================
+ */
+/**
+ * ================= 宽度高度设置 ==================
+ */
+/**
+ * ================= 通用方法 ==================
+ */
+.font-h1,
+.font-h2,
+.font-h3,
+.font-h4,
+.font-h5,
+.font-h6 {
+  color: #FFF;
+}
+.font-h1 {
+  font-size: 20px;
+}
+.font-h2 {
+  font-size: 18px;
+}
+.font-h3 {
+  font-size: 16px;
+}
+.font-h4 {
+  font-size: 14px;
+}
+.font-h5 {
+  font-size: 13px;
+}
+.font-h6 {
+  line-height: 1.5;
+  font-size: 12px;
+}

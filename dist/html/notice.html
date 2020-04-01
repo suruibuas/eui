@@ -1,0 +1,169 @@
+<div class="font-h2">
+    通知消息
+</div>
+<div class="font-h6 mt10 mb20">
+    EAdmin提供后台开发中常用的通知消息组件
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <div class="font-h3">
+                普通通知消息
+            </div>
+            <div class="mt20">
+                <button id="p1">普通</button>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <div class="font-h3">
+                成功通知消息
+            </div>
+            <div class="mt20">
+                <button id="p2">成功</button>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <div class="font-h3">
+                错误通知消息
+            </div>
+            <div class="mt20">
+                <button id="p3">错误</button>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <div class="font-h3">
+                通知消息简洁版
+            </div>
+            <div class="mt20">
+                <button id="p4">简洁</button>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <div class="font-h3">
+                自定义显示时间长度
+            </div>
+            <div class="mt20">
+                <button id="p5">显示3秒</button>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <div class="font-h3">
+                带链接的通知
+            </div>
+            <div class="mt20">
+                <button id="p6">带链接的通知</button>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <div class="font-h3">
+                不自动关闭的通知
+            </div>
+            <div class="mt20">
+                <button id="p7">不自动关闭</button>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <div class="font-h3">
+                带关闭回调的通知
+            </div>
+            <div class="mt20">
+                <button id="p8">关闭回调</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function(){
+        $('#p1').click(function(){
+            Eadmin.notice.info({
+                title : 'EAdmin',
+                desc  : 'EAdmin，开箱即用的后台UI'
+            });
+        });
+        $('#p2').click(function(){
+            Eadmin.notice.success({
+                title : 'EAdmin',
+                desc  : 'EAdmin，开箱即用的后台UI'
+            });
+        });
+        $('#p3').click(function(){
+            Eadmin.notice.error({
+                title : 'EAdmin',
+                desc  : 'EAdmin，开箱即用的后台UI'
+            });
+        });
+        $('#p4').click(function(){
+            Eadmin.notice.success({
+                title : '简约版通知'
+            });
+        });
+        $('#p5').click(function(){
+            Eadmin.notice.info({
+                title    : '自定义时长',
+                desc     : 'EAdmin，开箱即用的后台UI，显示3秒',
+                duration : 3
+            });
+        });
+        $('#p6').click(function(){
+            Eadmin.notice.info({
+                title : 'EAdmin',
+                desc  : 'EAdmin，开箱即用的后台UI',
+                href  : [
+                    {
+                        href : '',
+                        txt  : '查看详情'
+                    }
+                ]
+            });
+        });
+        $('#p7').click(function(){
+            Eadmin.notice.info({
+                title : '不会自动关闭',
+                desc  : 'duration设置为0则不会自动关闭',
+                duration : 0
+            });
+        });
+        $('#p8').click(function(){
+            Eadmin.notice.info({
+                title : '关闭后有回调',
+                desc  : 'EAdmin，开箱即用的后台UI',
+                close : () => {
+                    Eadmin.message.success({
+                        content : '通知消息的关闭回调'
+                    });
+                }
+            });
+        });
+    })();
+</script>

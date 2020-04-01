@@ -1,0 +1,82 @@
+/**
+ * eadmin / www.eadmin.net
+ * 
+ * 头部导航文件
+ */
+
+@import "global";
+
+header{
+    width: 100%;
+    .main-nav{
+        height: @nav-height;
+        background: @color-1;
+        border-bottom: 1px @border-color-3 solid;
+        display: flex;
+        font-weight: bold;
+        >div{
+            height: @nav-height;
+            line-height: @nav-height;
+            padding: 0;
+        }
+        >div:first-child{
+            padding-left: 100px;
+        }
+        >div:last-child{
+            color: @font-color-1;
+            text-align: right;
+            padding-right: 20px;
+            img{
+                position: absolute;
+                width: @icon-width;
+                height: @icon-height;
+                top: 10px;
+                left: 0;
+            }
+        }
+        .nav{
+            li{
+                float: left;
+                padding: 0 15px;
+            }
+            .active{
+                color:@font-color-2;
+                font-size: @font-size-2;
+            }
+        }
+        .logo{
+            font-size: 24px;
+            font-weight: bold;
+            color: @font-color-2;
+            em{
+                color: @color-3;
+                font-style: normal;
+                font-size: 32px;
+            }
+        }
+    }
+    .sub-nav{
+        height: @sub-nav-height;
+        background: @color-2;
+        display: flex;
+        border-bottom: 1px @border-color-3 solid;
+        >div{
+            height: 40px;
+            line-height: 40px;
+            padding: 0;
+        }
+        li{
+            float: left;
+            text-align: center;
+            padding: 0 15px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .active{
+            li{
+                background: @color-3;
+                color: @font-color-2;
+            }
+        }
+    }
+}

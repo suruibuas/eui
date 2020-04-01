@@ -1,0 +1,74 @@
+<div class="font-h2">
+    颜色选择器
+</div>
+<div class="font-h6 mt10 mb20">
+    EAdmin提供后台开发中常用的颜色选择器组件，摈弃了复杂的颜色选择，提供了日常最常使用到的色值
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <span class="title">默认颜色选择器</span>
+                <div id="p1"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <span class="title">自定义色值</span>
+                <div id="p2"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <span class="title">有回调的颜色选择</span>
+                <div id="p3"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <span class="title">将选中色值绑定到隐藏域</span>
+                <div id="p4"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function(){
+        Eadmin.colorpicker('#p1');
+        Eadmin.colorpicker('#p2', {
+            color : [
+                '#000',
+                '#CCC'
+            ]
+        });
+        Eadmin.colorpicker('#p3', {
+            change : (color) => {
+                Eadmin.message.info({
+                    content : '选择的色值是：' + color
+                });
+            }
+        });
+        Eadmin.colorpicker('#p4', {
+            bind : 'color'
+        });
+    })();
+</script>

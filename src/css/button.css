@@ -1,0 +1,67 @@
+/**
+ * eadmin / www.eadmin.net
+ * 
+ * 按钮
+ */
+/**
+ * eadmin / www.eadmin.net
+ * 
+ * 全局配置
+ */
+/**
+ * ================= 颜色设置 ==================
+ */
+/**
+ * ================= 字体设置 ==================
+ */
+/**
+ * ================= 宽度高度设置 ==================
+ */
+/**
+ * ================= 通用方法 ==================
+ */
+button {
+  border-radius: 50px;
+  transition: border-color 0.2s linear, background-color 0.2s linear, box-shadow 0.2s linear;
+  background: none;
+  border: 2px #4E5675 solid;
+  cursor: pointer;
+  padding: 10px 20px;
+  color: #FFF;
+  outline: none;
+  font-family: inherit;
+  line-height: 1.15;
+  font-size: 14px;
+}
+button:hover:not(:disabled) {
+  box-shadow: #131630 0px 0px 10px;
+  transition: border-color 0.2s linear, background-color 0.2s linear, box-shadow 0.2s linear;
+  border-color: #0084FF;
+}
+button:disabled {
+  color: #BBC5D8;
+  cursor: not-allowed;
+  border-color: #BBC5D8;
+}
+.middle {
+  padding: 8px 15px;
+  font-size: 12px;
+}
+.small {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+.highlight {
+  background: #0084FF;
+  border-color: #0084FF;
+}
+.highlight:hover:not(:disabled) {
+  background: #339dff;
+  border-color: #339dff;
+}
+.highlight:disabled {
+  color: #FFF;
+  background: #66b5ff;
+  cursor: not-allowed;
+  border-color: #66b5ff;
+}

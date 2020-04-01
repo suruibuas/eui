@@ -1,0 +1,89 @@
+<div class="font-h2">
+    模态弹框
+</div>
+<div class="font-h6 mt10 mb20">
+    EAdmin提供后台开发中常用的弹框组件
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <div class="font-h3">
+                提醒弹框
+            </div>
+            <div class="mt20">
+                <button id="p1">alert</button>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <div class="font-h3">
+                失败弹框
+            </div>
+            <div class="mt20">
+                <button id="p2">error</button>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <div class="font-h3">
+                成功弹框
+            </div>
+            <div class="mt20">
+                <button id="p3">success</button>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <div class="font-h3">
+                确认弹框
+            </div>
+            <div class="mt20">
+                <button id="p4">confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function(){
+        $('#p1').click(function(){
+            Eadmin.popup.alert({
+                content : 'EAdmin，开箱即用的后台UI',
+                refresh : true
+            });
+        });
+        $('#p2').click(function(){
+            Eadmin.popup.error({
+                content : 'EAdmin，开箱即用的后台UI'
+            });
+        });
+        $('#p3').click(function(){
+            Eadmin.popup.success({
+                content : 'EAdmin，开箱即用的后台UI'
+            });
+        });
+        $('#p4').click(function(){
+            Eadmin.popup.confirm({
+                content  : 'EAdmin，开箱即用的后台UI',
+                callback : () => {
+                    setTimeout(() => {
+                        Eadmin.popup.success({
+                            content : '操作执行成功'
+                        });
+                    }, 1000);
+                }
+            });
+        });
+    })();
+</script>

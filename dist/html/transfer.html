@@ -1,0 +1,76 @@
+<div class="font-h2">
+    穿梭框
+</div>
+<div class="font-h6 mt10 mb20">
+    EAdmin提供后台开发中常用的穿梭框组件
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-6 col-md-6">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <span class="title">默认穿梭框</span>
+                <div id="p1"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-6 col-md-6">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <span class="title">带搜索的穿梭框</span>
+                <div id="p2"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-6 col-md-6">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <span class="title">自定义宽度高度的穿梭框</span>
+                <div id="p3"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function(){
+        // 定义数据源
+        var data = [];
+        for (var _i = 1; _i <= 10; _i++)
+        {
+            data.push({
+                name : 'default',
+                txt  : 'Content ' + _i,
+                val  : _i,
+                checked  : false,
+                disabled : false
+            });
+        }
+        Eadmin.transfer('#p1', {
+            // 数据源
+            data : data
+        }).transfer('#p2', {
+            // 数据源
+            data   : data,
+            // 支持搜索
+            search : true
+        }).transfer('#p3', {
+            // 数据源
+            data   : data,
+            // 支持搜索
+            search : true,
+            // 宽度
+            width  : 260,
+            // 高度
+            height : 330
+        });
+    })();
+</script>

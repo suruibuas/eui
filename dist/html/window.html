@@ -1,0 +1,140 @@
+<div class="font-h2">
+    弹窗
+</div>
+<div class="font-h6 mt10 mb20">
+    EAdmin提供后台开发中常用的弹窗组件，可以方便的实现页面内弹窗
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <div class="font-h3">
+                最常用的弹窗
+            </div>
+            <div class="font-h6 mt20">
+                覆盖90%的使用场景，极简调用
+            </div>
+            <div class="mt20">
+                <button id="p1" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <div class="font-h3">
+                禁止拖动
+            </div>
+            <div class="font-h6 mt20">
+                不允许被拖动
+            </div>
+            <div class="mt20">
+                <button id="p2" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <div class="font-h3">
+                每次打开都刷新
+            </div>
+            <div class="font-h6 mt20">
+                每次打开都刷新窗口内的页面
+            </div>
+            <div class="mt20">
+                <button id="p3" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <div class="font-h3">
+                自定义宽高
+            </div>
+            <div class="font-h6 mt20">
+                支持 px和百分比
+            </div>
+            <div class="mt20">
+                <button id="p4" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <div class="font-h3">
+                带按钮栏的窗口
+            </div>
+            <div class="font-h6 mt20">
+                支持按钮栏
+            </div>
+            <div class="mt20">
+                <button id="p5" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <div class="font-h3">
+                有关闭回调
+            </div>
+            <div class="font-h6 mt20">
+                窗口关闭后会调用close函数
+            </div>
+            <div class="mt20">
+                <button id="p6" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function(){
+        Eadmin.window('#p1');
+        Eadmin.window('#p2', {
+            drag : false
+        });
+        Eadmin.window('#p3', {
+            refresh  : true
+        });
+        Eadmin.window('#p4', {
+            width  : '90%',
+            height : '90%'
+        });
+        Eadmin.window('#p5', {
+            // 按钮栏
+            btn : [
+                {
+                    name : '取消',
+                    action : 'cancel'
+                },
+                {
+                    // 按钮名称
+                    name : '确定',
+                    // 按钮是否高亮
+                    highlight : true,
+                    // 执行的动作
+                    action  : 'submit',
+                    // 窗口关闭后是否刷新页面
+                    refresh_on_close : true
+                }
+            ]
+        });
+        Eadmin.window('#p6', {
+            close : () => {
+                Eadmin.message.info({
+                    content : '窗口关闭了'
+                });
+            }
+        });
+    })();
+</script>
