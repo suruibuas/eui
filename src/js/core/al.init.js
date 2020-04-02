@@ -18,7 +18,9 @@ let selectEnabled = true;
 // BODY的JQ缓存
 let body;
 // 是否需要清理页面
-let clear = false;
+let clear  = false;
+// 全局动作
+let Method = {};
 
 // 默认执行异步加载过程
 (function(){

@@ -121,7 +121,9 @@
                     field  : 'state',
                     search : true,
                     switch : true,
-                    api    : 'state.php?id=$id'
+                    api : (row) => {
+                        return 'state.php?id=' + row.id
+                    }
                 },
                 {
                     name  : '查看次数',
@@ -135,9 +137,11 @@
                 },
                 {
                     name : '操作',
-                    // 如果有button，则表示是按钮列
-                    button : [
-                        {
+                    // 如果有button，则表示是按钮列，注入当前行的数据作为参数
+                    // 可用来做具体业务处理
+                    button : (row) => {
+                        let btns = [];
+                        btns[0] = {
                             name : '编辑',
                             icon : 'fa-pencil',
                             open : {
@@ -145,7 +149,7 @@
                                 width : '30%',
                                 height  : '80%',
                                 refresh : true,
-                                url : './html/1.html?id=$id',
+                                url : './html/1.html?id=' + row.id,
                                 btn : [
                                     {
                                         // 按钮名称
@@ -157,15 +161,29 @@
                                     }
                                 ]
                             }
-                        },
-                        {
+                        };
+                        btns[1] = {
                             name : '删除',
                             icon : 'fa-times',
                             confirm : true,
                             refresh : true,
-                            api  : 'del.php?id=$id'
+                            api  : 'del.php?id=' + row.id
+                        };
+                        // 根据当前行的某个字段来改变按钮
+                        if (row.status == 0)
+                        {
+                            btns[0] = {
+                                name : '查看',
+                                open : {
+                                    title  : '查看详情',
+                                    width  : '30%',
+                                    height : '80%',
+                                    url : './html/1.html?id=$id'
+                                }
+                            };
                         }
-                    ]
+                        return btns;
+                    }
                 }
             ],
             // 搜索配置

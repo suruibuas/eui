@@ -916,8 +916,8 @@ class Table{
 			// 构建表格
 			_.each(v.data.list, (row) => {
 				v.fl += `<tr>`;
-				v.html += `<tr>`;
 				v.fr += `<tr>`;
+				v.html += `<tr>`;
 				// 全选
 				v.html += this._checkbox(row);
 				v.fl += this._checkbox(row, true);
@@ -925,39 +925,35 @@ class Table{
 					let _html = `<td>`;
 					if (c.switch === true)
 					{
-						let api = c.api;
-						if (api == undefined)
+						let api = '';
+						if ( ! _.isFunction(c.api))
 						{
 							console.log('没有指定保存开关状态的API地址');
 						}
-						api = _.replace(api, /\$(\w+)/g, (key) => {
-							key = _.replace(key, '$', '');
-							return row[key];
-						});
+						else
+						{
+							api = c.api(row);
+						}
 						_html += `<label class="no-padding" data-api="${api}" data-field="${c.field}">
 									<input type="checkbox" data-model="switch"${row[c.field] == 1 ? ' checked' : ''}>
 								</label>`;
 					}
-					else if(_.isArray(c.button))
+					else if(_.isFunction(c.button))
 					{
-						_.each(c.button, (b, btn_key) => {
+						let _btn = c.button(row);
+						_.each(_btn, (b, btn_key) => {
 							let icon = '';
-							if (b.icon != undefined) icon = `<i class="fa ${b.icon}"></i>`;
+							if (b.icon != undefined) 
+								icon = `<i class="fa ${b.icon}"></i>`;
 							let api = '';
 							if (b.api != undefined)
 							{
-								api = _.replace(b.api, /\$(\w+)/g, (key) => {
-									key = _.replace(key, '$', '');
-									return row[key];
-								});
+								api = b.api;
 							}
 							let url = "";
 							if (b.open != undefined)
 							{
-								url = _.replace(b.open.url, /\$(\w+)/g, (key) => {
-									key = _.replace(key, '$', '');
-									return row[key];
-								});
+								url = b.open.url
 							}
 							_html += `<button 
 										data-api="${api}" 

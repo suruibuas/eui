@@ -273,6 +273,7 @@ let eadmin = class Eadmin{
         if ( ! refresh) return;
         // 加载
         setTimeout(() => {
+            Method = {};
             that.href = that.href == '' ? module.conf.homepage : that.href;
             box.
                 empty().
