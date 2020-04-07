@@ -169,16 +169,15 @@
                             refresh : true,
                             api  : 'del.php?id=' + row.id
                         };
-                        // 根据当前行的某个字段来改变按钮
-                        if (row.status == 0)
+                        if (row.state == 0)
                         {
                             btns[0] = {
                                 name : '查看',
                                 open : {
-                                    title  : '查看详情',
-                                    width  : '30%',
+                                    title : '查看详情',
+                                    width : '30%',
                                     height : '80%',
-                                    url : './html/1.html?id=$id'
+                                    url : './html/1.html?id=' + row.id
                                 }
                             };
                         }

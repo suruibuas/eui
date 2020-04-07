@@ -4,7 +4,7 @@
 
 class Window{
 
-	constructor(dom, param){
+	constructor(dom, param, bind = true){
 		// 窗口
 		this.window = null;
 		this.windowDom = '';
@@ -18,6 +18,9 @@ class Window{
 		this.top    = 0;
 		// 窗口的left值
 		this.left   = 0;
+		// 是否绑定dom元素的点击事件，如果设置为false，则可以手动调用click来触发弹窗
+		// 用在一个页面有多个相同弹窗只是参数不同的情况下，例如列表页
+		this.bind   = bind;
 		// 默认参数
 		let _param  = {
 			// 弹窗页面地址
@@ -76,6 +79,15 @@ class Window{
 		// 过滤选择器中的符号
 		v.dom = _.replace(this.dom, '#', '');
 		v.dom = _.replace(v.dom, '.', '');
+		// 窗口原始DOM名称
+		this.windowDom = '#window-' + v.dom;
+		// 选择器缓存
+		this.window = $(this.windowDom);
+		if ( ! this.bind)
+		{
+			if (this.window.length > 0)
+				this.window.off().remove();
+		}
 		// 真实宽度高度
 		if (_.isInteger(this.param.width) || 
 			this.param.width.indexOf('%') == -1)
@@ -134,8 +146,6 @@ class Window{
 		}
 		v.html += `</div>`;
 		body.append(v.html);
-		// 窗口原始DOM名称
-		this.windowDom = '#window-' + v.dom;
 		// 选择器缓存
 		this.window = $(this.windowDom);
 	}
@@ -230,18 +240,8 @@ class Window{
 		// 关闭按钮
 		v.close = that.window.children('.window-close');
 		// 打开弹窗
-		box.
-		on('click', that.dom, function(){
-			let _var = {
-				this : $(this)
-			};
-			_var.url = _var.this.data('window-url');
-			if (_var.url == undefined || _var.url == '')
-			{
-				console.log('没有指定弹窗地址，打开失败');
-				return;
-			}
-			that.param.url = _var.url;
+		if ( ! that.bind)
+		{
 			that.window.
 				off('animationend').
 				show().
@@ -254,9 +254,37 @@ class Window{
 			}
 			// 加载页面
 			func.load();
-		});
+		}
+		else
+		{
+			box.
+			on('click', that.dom, function(){
+				let _var = {
+					this : $(this)
+				};
+				_var.url = _var.this.data('window-url');
+				if (_var.url == undefined || _var.url == '')
+				{
+					console.log('没有指定弹窗地址，打开失败');
+					return;
+				}
+				that.param.url = _var.url;
+				that.window.
+					off('animationend').
+					show().
+					addClass('zoomIn');
+				Eadmin.mask();
+				if(v.body.html() != '' && 
+					! that.param.refresh)
+				{
+					return;
+				}
+				// 加载页面
+				func.load();
+			});
+		}
 		// 关闭弹窗
-		v.close.click(function(){
+		v.close.on('click', function(){
 			func.close();
 		});
 		// 拖动

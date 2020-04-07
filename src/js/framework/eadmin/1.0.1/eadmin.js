@@ -413,8 +413,8 @@ let eadmin = class Eadmin{
     /**
      * 弹窗
      */
-    window(dom, param){
-        new Window(dom, param);
+    window(dom, param, bind = true){
+        new Window(dom, param, bind);
         return this;
     }
 
@@ -543,6 +543,11 @@ loader.ready(() => {
             axios.defaults[key] = val;
         });
     }
+    // 上传
+    if (module.plugin.indexOf('dropzone') != -1)
+    {
+        Dropzone.autoDiscover = false;
+    }
     // 导航
     Eadmin.nav();
     // 主界面
@@ -552,6 +557,9 @@ loader.ready(() => {
     // TIPS
     if(module.lib.indexOf('tips') != -1)
         Eadmin.tips = Tips;
+    // 上传
+    if(module.lib.indexOf('upload') != -1)
+        Eadmin.upload = Upload;
     // POPUP
     if(module.lib.indexOf('popup') != -1)
         Eadmin.popup = Popup;

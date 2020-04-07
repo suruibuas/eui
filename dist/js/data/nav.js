@@ -58,7 +58,7 @@ window.nav = [
             },
             {
                 'name' : '上传',
-                'href' : './html/file.html',
+                'href' : './html/upload.html',
                 'icon' : 'cloud-upload'
             },
             {

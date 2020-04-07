@@ -42,7 +42,7 @@
         // 框架全局配置
         conf : {
             // 启动页
-            'homepage'           : './html/table.html',
+            'homepage'           : './html/window.html',
             // 关闭input的autocomplete
             'close_autocomplete' : true,
             // 加载页面默认延迟时长，避免页面过快刷新
@@ -146,13 +146,20 @@
             // 图表
             'chart',
             // 树形
-            'tree'
+            'tree',
+            // 上传
+            'upload'
         ],
         // 插件
         plugin : [
+            // 必须
             'perfect-scrollbar',
+            // 必须
             'time',
-            'ztree'
+            // 不需要树形菜单可删除
+            'ztree',
+            // 不需要上传可删除
+            'dropzone'
         ],
         // 全部加载完成回调
         ready : function(){

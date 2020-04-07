@@ -32,6 +32,8 @@ class Table{
 		this.shade     = null;
 		// 有没有初始化过表格
 		this.init      = false;
+		// 列按钮配置数据
+		this.btns      = [];
 		// 选中的个数
 		this.checked   = 0;
 		// GET参数
@@ -162,6 +164,7 @@ class Table{
 			},
 			// 搜索
 			search : () => {
+				if (v.search.length == 0) return;
 				let html = `<div class="table-search"><form><div class="block-box">`;
 				let param = [];
 				_.each(v.search, (v, k) => {
@@ -723,43 +726,44 @@ class Table{
 			});
 		});
 		// 列按钮
-		let key = _.findIndex(this.param.column, function(o){return o.button != undefined;});
-		if (key != -1)
-		{
-			_.each(this.param.column[key].button, (row, key) => {
-				// 打开弹窗
-				if (row.open != undefined)
-				{
-					Eadmin.window('.column-btn-' + key, row.open);
-					return true;
-				}
-				// 指定API
-				if (row.api != undefined)
-				{
-					box.on('click', '.column-btn-' + key, function(){
-						let api = $(this).data('api');
-						let _func = () => {
-							axios.get(api).
-							then((response) => {
-								let data = response.data;
-								func.result(data, () => {
-									if (row.refresh === true) that._loadData();
-								});
-							});
-						};
-						if (row.confirm === true)
-						{
-							Eadmin.popup.confirm({
-								content  : '确定执行此操作吗？',
-								callback : _func
-							});
-							return;
-						}
-						_func();
+		box.
+		on('click', '.column-btn', function(){
+			let _v = {
+				this : $(this)
+			}
+			_v.row = _v.this.data('row');
+			_v.key = _v.this.data('key');
+			_v.btn = that.btns[_v.row][_v.key];
+			// 打开弹窗
+			if (_v.btn.open != undefined)
+			{
+				Eadmin.window('.table-column-btn-open-window', _v.btn.open, false);
+				return;
+			}
+			// 调用接口
+			if (_v.btn.api != undefined)
+			{
+				let _func = () => {
+					axios.get(_v.btn.api).
+					then((response) => {
+						let data = response.data;
+						func.result(data, () => {
+							if (_v.btn.refresh === true) 
+								that._loadData();
+						});
 					});
+				};
+				if (_v.btn.confirm === true)
+				{
+					Eadmin.popup.confirm({
+						content  : '确定执行此操作吗？',
+						callback : _func
+					});
+					return;
 				}
-			});
-		}
+				_func();
+			}
+		});
 	}
 
 	/**
@@ -890,6 +894,7 @@ class Table{
 	 */
 	_loadData(page = false){
 		this.checked = 0;
+		this.btns = [];
 		this.shade.css('display', 'flex');
 		// 请求数据
 		axios.get(this.param.config.data, {
@@ -914,7 +919,7 @@ class Table{
 				return;
 			}
 			// 构建表格
-			_.each(v.data.list, (row) => {
+			_.each(v.data.list, (row, row_key) => {
 				v.fl += `<tr>`;
 				v.fr += `<tr>`;
 				v.html += `<tr>`;
@@ -941,24 +946,21 @@ class Table{
 					else if(_.isFunction(c.button))
 					{
 						let _btn = c.button(row);
+						this.btns.push(_btn);
 						_.each(_btn, (b, btn_key) => {
 							let icon = '';
 							if (b.icon != undefined) 
 								icon = `<i class="fa ${b.icon}"></i>`;
-							let api = '';
-							if (b.api != undefined)
-							{
-								api = b.api;
-							}
-							let url = "";
+							let url = '';
 							if (b.open != undefined)
 							{
-								url = b.open.url
+								url = b.open.url;
 							}
 							_html += `<button 
-										data-api="${api}" 
-										data-window-url="${url}"
-										class="small mr5 column-btn-${btn_key}" 
+										data-row="${row_key}" 
+										data-key="${btn_key}" 
+										data-window-url="${url}" 
+										class="small mr5 column-btn" 
 										style="background:${this.color[btn_key]};"
 										>
 										${icon} ${b.name}
