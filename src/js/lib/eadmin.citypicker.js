@@ -63,6 +63,8 @@ class Citypikcer{
 		// 过滤选择器中的符号
 		let _dom = _.replace(this.input, '#', '');
 		_dom = _.replace(_dom, '.', '');
+		if ($('#citypicker-' + _dom).length > 0)
+			$('#citypicker-' + _dom).remove();
 		// 组装HTML结构
 		let _html = '<div id="citypicker-' + _dom + '" class="citypicker animated faster dn"';
 		if (this.param.type == 1)
@@ -127,9 +129,9 @@ class Citypikcer{
 			};
 		}
 		// 开始监听事件
-		box.
+		$(this.input).
 		// 显示面板
-		on('focus', this.input, function(){
+		on('focus', function(){
 			if( ! that.init)
 			{
 				that._formatData(v.body);
@@ -139,7 +141,7 @@ class Citypikcer{
 			clear = true;
 		}).
 		// 隐藏面板
-		on('blur', this.input, function(){
+		on('blur', function(){
 			if (that.focus) return;
 			fadeOut(that.picker);
 			clear = false;
@@ -221,7 +223,8 @@ class Citypikcer{
 		});
 		if (that.param.type == 1)
 		{
-			box.on('keydown', that.input, function(event){
+			$(that.input).
+			on('keydown', function(event){
 				if (_.indexOf([13, 38, 40], event.keyCode) == -1 || 
 					v.quick.is(':hidden'))
 				{
@@ -293,7 +296,7 @@ class Citypikcer{
 				this : $(this)
 			};
 			_v.city = cp_a[_v.this.index()];
-			that._current(_v.this);
+			addClassExc(_v.this, 'current');
 			that._formatData(v.body, _v.city);
 		}).
 		// 选择城市
@@ -312,7 +315,7 @@ class Citypikcer{
 				that._setVal(_v.val);
 				return;
 			}
-			that._current(_v.this);
+			addClassExc(_v.this, 'current');
 			_v.parent  = _v.this.parent();
 			that.level = _v.parent.index() + 1;
 			if (that.level == that.param.level)
@@ -454,16 +457,6 @@ class Citypikcer{
 		if (this.param.change != null && 
 			_.isFunction(this.param.change))
 			this.param.change(val);
-	}
-
-	/**
-	 * 选中
-	 */
-	_current(dom){
-		dom.
-			addClass('current').
-			siblings().
-			removeClass('current');
 	}
 	
 }

@@ -10,7 +10,7 @@
             <div class="font-h3">
                 默认上传
             </div>
-            <div id="p1" class="mt20"></div>
+            <div id="u1" class="mt20"></div>
         </div>
     </div>
     <div class="col-md-4">
@@ -18,7 +18,7 @@
             <div class="font-h3">
                 自动上传
             </div>
-            <div id="p2" class="mt20"></div>
+            <div id="u2" class="mt20"></div>
         </div>
     </div>
     <div class="col-md-4">
@@ -26,7 +26,7 @@
             <div class="font-h3">
                 指定文件最大尺寸
             </div>
-            <div id="p3" class="mt20"></div>
+            <div id="u3" class="mt20"></div>
         </div>
     </div>
     <div class="col-md-4">
@@ -34,26 +34,38 @@
             <div class="font-h3">
                 指定文件格式
             </div>
-            <div id="p4" class="mt20"></div>
+            <div id="u4" class="mt20"></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="block">
+            <div class="font-h3">
+                限制最大文件数
+            </div>
+            <div id="u5" class="mt20"></div>
         </div>
     </div>
 </div>
 <script>
     (() => {
-        Eadmin.upload.run('#p1', {
-            api : '/upload.php',
+        Eadmin.upload('#u1', {
+            api : 'upload.php',
             autoupload : false
         });
-        Eadmin.upload.run('#p2', {
-            api : '/upload.php'
+        Eadmin.upload('#u2', {
+            api : 'upload.php'
         });
-        Eadmin.upload.run('#p3', {
-            api : '/upload.php',
-            maxsize : 500
+        Eadmin.upload('#u3', {
+            api : 'upload.php',
+            maxsize : 100
         });
-        Eadmin.upload.run('#p4', {
-            api : '/upload.php',
+        Eadmin.upload('#u4', {
+            api : 'upload.php',
             doc : '.jpg'
+        });
+        Eadmin.upload('#u5', {
+            api : 'upload.php',
+            maxfile : 1
         });
     })();
 </script>

@@ -193,11 +193,11 @@ class Transfer{
 	_event(){
 		let dom = [
 			// 全选反选
-			this.dom + ' .transfer-header :checkbox',
+			'.transfer-header :checkbox',
 			// 单选
-			this.dom + ' .transfer-body :checkbox',
+			'.transfer-body :checkbox',
 			// 左右移动
-			this.dom + ' .transfer-operation button'
+			'.transfer-operation button'
 		];
 		let that = this;
 		// 私有变量
@@ -206,7 +206,7 @@ class Transfer{
 			header    : this.domCache.find('.transfer-header'),
 			operation : this.domCache.find('.transfer-operation')
 		};
-		box.
+		this.domCache.
 		// 全选反选
 		on('click', dom[0], function(){
 			let _v = {

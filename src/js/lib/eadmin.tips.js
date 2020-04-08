@@ -14,7 +14,7 @@ class Tips{
 		let dom = [
 			'[data-tips]:not(.tips-disabled)'
 		];
-		$('body').
+		body.
 		// 移入
 		on('mouseenter', dom[0], function(){
 			clearTimeout(timer);

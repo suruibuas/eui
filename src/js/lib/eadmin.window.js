@@ -218,11 +218,12 @@ class Window{
 						Button.run(that.window);
 						v.scroll = Eadmin.scroll(that.windowDom + ' .body');
 						// 滚动条处理
-						let scroll = v.body.find('.iscroll');
+						let scroll = body.find('.iscroll');
 						if(scroll.length > 0)
 						{
 							scroll.
 							each(function(){
+								if ($(this).hasClass('ps')) return true;
 								Eadmin.scroll($(this)[0]);
 							});
 						}

@@ -61,10 +61,7 @@ class Colorpicker{
 			that.domCache.
 				children('input').
 				val(v.this.data('color'));
-			v.this.
-				addClass('active').
-				siblings('div').
-				removeClass('active');
+			addClassExc(v.this, 'active');
 			v.this.
 				children('i').
 				show();

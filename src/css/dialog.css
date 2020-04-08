@@ -28,7 +28,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 9998;
   text-align: center;
   font-size: 14px;
   display: flex;
@@ -292,7 +292,7 @@
   position: absolute;
   border: 1px #30375B solid;
   background: #232B4C;
-  z-index: 999;
+  z-index: 9999;
   padding: 5px 10px;
   outline: none;
 }
@@ -385,7 +385,7 @@
   position: fixed;
   border: 1px #30375B solid;
   background: #1C2340;
-  z-index: 9999;
+  z-index: 9998;
   padding: 5px 0px 20px 20px;
   top: 50%;
   left: 50%;
@@ -503,12 +503,12 @@
   position: fixed;
   right: 10px;
   width: 300px;
+  z-index: 9999;
 }
 .notice {
   border-radius: 4px;
   box-shadow: #000000 0px 0px 15px;
   background: #000000;
-  z-index: 9999;
   padding: 15px;
   width: 100%;
   position: relative;

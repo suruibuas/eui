@@ -89,8 +89,10 @@ class Notice{
 		{
 			for (let _i in param.href)
 			{
+				let native = param.href[_i].native != undefined ? ' data-native="1"' : '';
+				let target = param.href[_i].target != undefined ? ' target="' + param.href[_i].target + '"' : '';
 				_var.html += `<div class="href">
-					<a href="${param.href[_i].href}">${param.href[_i].txt}</a>
+					<a href="${param.href[_i].href}"${native}${target}>${param.href[_i].txt}</a>
 				</div>`;
 			}
 		}
@@ -101,7 +103,9 @@ class Notice{
 		let _duration = (param.duration != undefined) ? 
 							param.duration : 
 							module.conf.notice_duration;
-		_box.children('.close').on('click', function(){
+		_box.
+		children('.close').
+		on('click', function(){
 			_func.close(_box);
 		});
 		if (_duration == 0) return;

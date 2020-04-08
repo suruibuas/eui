@@ -17,7 +17,7 @@
                 覆盖90%的使用场景，极简调用
             </div>
             <div class="mt20">
-                <button id="p1" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
+                <button id="w1" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
                 不允许被拖动
             </div>
             <div class="mt20">
-                <button id="p2" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
+                <button id="w2" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
             </div>
         </div>
     </div>
@@ -47,7 +47,7 @@
                 每次打开都刷新窗口内的页面
             </div>
             <div class="mt20">
-                <button id="p3" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
+                <button id="w3" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
             </div>
         </div>
     </div>
@@ -62,7 +62,7 @@
                 支持 px和百分比
             </div>
             <div class="mt20">
-                <button id="p4" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
+                <button id="w4" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@
                 支持按钮栏
             </div>
             <div class="mt20">
-                <button id="p5" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
+                <button id="w5" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
             </div>
         </div>
     </div>
@@ -92,25 +92,26 @@
                 窗口关闭后会调用close函数
             </div>
             <div class="mt20">
-                <button id="p6" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
+                <button id="w6" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
             </div>
         </div>
     </div>
 </div>
 <script>
     (function(){
-        Eadmin.window('#p1');
-        Eadmin.window('#p2', {
+        Eadmin.window('#w1');
+        Eadmin.window('#w2', {
             drag : false
         });
-        Eadmin.window('#p3', {
+        Eadmin.window('#w3', {
             refresh  : true
         });
-        Eadmin.window('#p4', {
+        Eadmin.window('#w4', {
+            refresh  : true,
             width  : '90%',
             height : '90%'
         });
-        Eadmin.window('#p5', {
+        Eadmin.window('#w5', {
             // 按钮栏
             btn : [
                 {
@@ -129,7 +130,7 @@
                 }
             ]
         });
-        Eadmin.window('#p6', {
+        Eadmin.window('#w6', {
             close : () => {
                 Eadmin.message.info({
                     content : '窗口关闭了'

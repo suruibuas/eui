@@ -72,6 +72,8 @@ class Datepikcer{
 		// 过滤选择器中的符号
 		let _dom = _.replace(this.input, '#', '');
 		_dom = _.replace(_dom, '.', '');
+		if ($('#datepicker-' + _dom).length > 0)
+			$('#datepicker-' + _dom).remove();
 		// 组装HTML结构
 		let _html = '<div id="datepicker-' + _dom + '" class="datepicker animated faster dn">';
 		_html += `<div class="quick dn">
@@ -587,29 +589,29 @@ class Datepikcer{
 		// 定义需要响应事件的DOM
 		let _dom = [
 			// 上下年、上下月
-			' .prev-year, .prev-month, .next-year, .next-month',
+			'.prev-year, .prev-month, .next-year, .next-month',
 			// 年面板、月面板
-			' .show-ym .year, .show-ym .month',
+			'.show-ym .year, .show-ym .month',
 			// 选择年月
-			' .y-m div',
+			'.y-m div',
 			// 选择日期
-			' .day span',
+			'.day span',
 			// 清除
-			' .footer .clear',
+			'.footer .clear',
 			// 确认
-			' .footer .sure',
+			'.footer .sure',
 			// 选择时间
-			' .footer .choose-time',
+			'.footer .choose-time',
 			// 选择具体时间
-			' .picker-time li',
+			'.picker-time li',
 			// 快捷选择
-			' .quick span'
+			'.quick span'
 		];
 		let _that = this;
 		// 开始监听事件
-		box.
+		$(this.input).
 		// 显示日期面板
-		on('focus', this.input, function(){
+		on('focus', function(){
 			let v = {
 				this : $(this)
 			};
@@ -618,7 +620,7 @@ class Datepikcer{
 			clear = true;
 		}).
 		// 隐藏日期面板
-		on('blur', this.input, function(){
+		on('blur', function(){
 			fadeOut(_that.picker);
 			_that.focusInput = null;
 			clear = false;

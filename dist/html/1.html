@@ -4,17 +4,12 @@
     <div class="col-lg-12 col-md-12">
         <!-- 容器盒子，具体布局使用 -->
         <div class="block">
-            <form action="submit.php">
+            <form>
                 <div class="title-bar">表单验证</div>
                 <!-- 表单组盒子 -->
                 <div class="form-group">
                     <span class="title">文本框</span>
-                    <input name="t1" 
-                        type="text" 
-                        placeholder="请输入你需要的内容"
-                        data-validate="require|len=0-2|val=0-10"
-                        data-validate-msg="请输入内容|长度只能在0-2之间|取值只能在0-10之间"
-                    >
+                    <div id="p11" class="mt20"></div>
                 </div>
                 <div class="form-group mt20">
                     <span class="title">文本域</span>
@@ -64,3 +59,14 @@
         </div>
     </div>
 </div>
+<script>
+    (() => {
+        Eadmin.upload('#p11', {
+            api : 'http://api.eadmin.com.cn/upload.php',
+            autoupload : false,
+            success : (data) => {
+                console.log(data);
+            }
+        });
+    })();
+</script>

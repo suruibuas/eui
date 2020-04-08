@@ -21,6 +21,10 @@ let body;
 let clear  = false;
 // 全局动作
 let Method = {};
+// 挂载点
+let Mount  = {
+	dropzone : []
+};
 
 // 默认执行异步加载过程
 (function(){

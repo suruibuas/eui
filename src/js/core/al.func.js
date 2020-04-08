@@ -203,3 +203,11 @@ function repairZero(num)
 {
 	return (num < 10) ? '0' + num : num;
 }
+
+/**
+ * 同级别排他增加class
+ */
+function addClassExc(dom, classname)
+{
+	dom.addClass(classname).siblings().removeClass(classname);
+}

@@ -26,7 +26,9 @@ let eadmin = class Eadmin{
         {
             disabledRight();
         }
+        // 当前链接
         this.href = '';
+        // 大盒子的滚动条对象
         this.boxScroll = null;
         // 默认响应链接跳转
         this.jumpHref();
@@ -74,7 +76,6 @@ let eadmin = class Eadmin{
      */
     loadingHide(){
         this.maskHide();
-        $('.mask').empty();
     }
 
     /**
@@ -83,7 +84,7 @@ let eadmin = class Eadmin{
     mask(){
         if ($('.mask').length == 0)
             $('body').append('<div class="mask"></div>');
-        $('.mask').show();
+        $('.mask').empty().show();
     }
 
     /**
@@ -140,22 +141,17 @@ let eadmin = class Eadmin{
             return false;
         }
         let that = this;
-        $('body').on('click', 'a', function(){
+        $('body').on('click', 'a:not(.active)', function(){
             let v = {
                 this : $(this),
-                subnav  : $('.sub-nav')
+                subnav : $('.sub-nav')
             };
             that.href = v.this.attr('href');
             // 一级导航
             if (v.this.hasClass('nav'))
             {
-                if (v.this.hasClass('active')) 
-                    return false;
                 // 切换样式
-                v.this.
-                    addClass('active').
-                    siblings().
-                    removeClass('active');
+                addClassExc(v.this, 'active');
                 // 判断是否有子导航
                 v.id  = v.this.data('id'),
                 v.sub = window.nav[v.id].sub;
@@ -203,7 +199,7 @@ let eadmin = class Eadmin{
                         module.conf.auto_click_sub_nav)
                     {
                         // 如果第一个链接是原生跳转则返回
-                        if(v.sub[0].native != undefined) return false;
+                        if(v.sub[0].native != undefined) return;
                         v.subnav.find('a:first').trigger('click');
                         return false;
                     }
@@ -212,42 +208,13 @@ let eadmin = class Eadmin{
             // 二级导航
             else if(v.this.hasClass('nav-sub'))
             {
-                if(v.this.hasClass('active')) 
-                    return false;
-                // 移除高亮
-                v.subnav.
-                    find('.active').
-                    removeClass('active');
-                // 添加高亮
-                v.this.addClass('active');
+                addClassExc(v.this, 'active');
             }
             // 阻止框架内跳转
             if (that.href == 'javascript:;' || 
-                v.this.data('native') == 1) return;
+                v.this.data('native') == 1) return false;
             // 重载
-            that.refresh(false);
-            // 延迟
-            if (module.conf.load_page_timeout != undefined && 
-                module.conf.load_page_timeout > 0)
-            {
-                box.empty();
-                setTimeout(() => {
-                    // 加载
-                    box.
-                        off().
-                        load(that.href, () => {
-                            that.load();
-                        });
-                }, module.conf.load_page_timeout);
-                return false;
-            }
-            // 加载
-            box.
-                empty().
-                off().
-                load(that.href, () => {
-                    that.load();
-                });
+            that.refresh();
             return false;
         });
     }
@@ -255,22 +222,27 @@ let eadmin = class Eadmin{
     /**
      * 刷新当前页面
      */
-    refresh(refresh = true){
+    refresh(){
         let that = this;
         // loading
         that.loading();
         let destroy = [
             '.window',
             '.datepicker',
-            '.citypicker'
+            '.citypicker',
+            '.dz-hidden-input'
         ];
         for (let i in destroy)
         {
-            $(destroy[i]).
-                off().
-                remove();
+            $(destroy[i]).remove();
         }
-        if ( ! refresh) return;
+        if (Mount.dropzone.length > 0)
+        {
+            _.each(Mount.dropzone, (d) => {
+                d.disable();
+            });
+            Mount.dropzone = [];
+        }
         // 加载
         setTimeout(() => {
             Method = {};
@@ -289,37 +261,35 @@ let eadmin = class Eadmin{
      */
     nav(){
         // 私有函数
-        let func = {
-            create : (data) => {
-                let navHtml = '<ul>';
-                // 遍历主导航数据
-                let i = 0;
-                for (let id in data)
+        let create = (data) => {
+            let navHtml = '<ul>';
+            // 遍历主导航数据
+            let i = 0;
+            for (let id in data)
+            {
+                let href = (data[id].sub == undefined) ? data[id].href : 'javascript:;',
+                    act  = (i == 0) ? ' active' : '';
+                navHtml += `<a href="${href}"`
+                if (data[id].native == undefined)
                 {
-                    let href = (data[id].sub == undefined) ? data[id].href : 'javascript:;',
-                        act  = (i == 0) ? ' active' : '';
-                    navHtml += `<a href="${href}"`
-                    if (data[id].native == undefined)
-                    {
-                        navHtml += `class="nav${act}" data-id="${id}">`;
-                    }
-                    else
-                    {
-                        navHtml += ` data-native="1" target="_blank">`;
-                    }
-                    navHtml += `<li>${data[id].name}</li></a>`;
-                    i++;
+                    navHtml += `class="nav${act}" data-id="${id}">`;
                 }
-                navHtml += '</ul>';
-                // 主导航交互
-                $('.nav').html(navHtml);
+                else
+                {
+                    navHtml += ` data-native="1" target="_blank">`;
+                }
+                navHtml += `<li>${data[id].name}</li></a>`;
+                i++;
             }
-        };
+            navHtml += '</ul>';
+            // 主导航交互
+            $('.nav').html(navHtml);
+        }
         // 实体文件数据源
         if (module.conf.nav_data_source == 'local')
         {
             loader.load(_ROOTPATH + 'data/nav.js', () => {
-                func.create(window.nav);
+                create(window.nav);
             });
             return;
         }
@@ -332,7 +302,7 @@ let eadmin = class Eadmin{
         axios.get(module.conf.nav_api_url).
         then((response) => {
             window.nav = response.data;
-            func.create(response.data);
+            create(response.data);
         }).
         catch((error) => {
             console.log(error);
@@ -351,18 +321,18 @@ let eadmin = class Eadmin{
         this.loadingHide();
         // 表单渲染
         this.form();
-        // 监听滚动
-        this.onscroll();
         // 按钮渲染
         Button.run(box);
+        // 监听滚动
+        this.onscroll();
         // 滚动条处理
         let scroll = $('body').find('.iscroll');
         if(scroll.length > 0)
         {
-            let _that = this;
+            let that = this;
             scroll.
             each(function(){
-                _that.scroll($(this)[0]);
+                that.scroll($(this)[0]);
             });
         }
         this.boxScroll = this.scroll(box[0]);
@@ -459,6 +429,14 @@ let eadmin = class Eadmin{
     }
 
     /**
+     * 上传
+     */
+    upload(dom, param){
+        new Upload(dom, param);
+        return this;
+    }
+
+    /**
      * 图表
      */
     chart(dom, param){
@@ -517,7 +495,7 @@ let eadmin = class Eadmin{
         ];
         box.on('scroll', () => {
             if ( ! clear) return;
-            for (let i in  hide)
+            for (let i in hide)
                 $(hide[i]).hide();
             $(':focus').blur();
             clear = false;
@@ -543,8 +521,8 @@ loader.ready(() => {
             axios.defaults[key] = val;
         });
     }
-    // 上传
-    if (module.plugin.indexOf('dropzone') != -1)
+    // 上传处理
+    if(module.plugin.indexOf('dropzone') != -1)
     {
         Dropzone.autoDiscover = false;
     }
@@ -557,9 +535,6 @@ loader.ready(() => {
     // TIPS
     if(module.lib.indexOf('tips') != -1)
         Eadmin.tips = Tips;
-    // 上传
-    if(module.lib.indexOf('upload') != -1)
-        Eadmin.upload = Upload;
     // POPUP
     if(module.lib.indexOf('popup') != -1)
         Eadmin.popup = Popup;

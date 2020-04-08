@@ -46,6 +46,10 @@ class Validate{
 			let v = {
 				this : $(this)
 			};
+			if (v.this.is(':hidden'))
+			{
+				return true;
+			}
 			if (v.this.data('validate-error') != undefined)
 			{
 				return true;

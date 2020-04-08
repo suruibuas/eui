@@ -210,26 +210,26 @@ class Form{
 							<ul class="iscroll">`;
 			// 遍历下拉选项
 			v.this.
-				children('option').
-				each(function(){
-					let that = $(this),
-						val  = that.val(),
-						txt  = that.text(),
-						c    = '';
-					if (val == module.conf.select_default_val) 
-						return true;
-					if (that.is(':disabled'))
-					{
-						c = 'disabled';
-					}
-					else if (that.is(':selected'))
-					{
-						c = 'active';
-					}
-					v.li += `<li class="${c}" data-val="${val}">
-								${txt}
-							</li>`;
-				});
+			children('option').
+			each(function(){
+				let that = $(this),
+					val  = that.val(),
+					txt  = that.text(),
+					c    = '';
+				if (val == module.conf.select_default_val) 
+					return true;
+				if (that.is(':disabled'))
+				{
+					c = 'disabled';
+				}
+				else if (that.is(':selected'))
+				{
+					c = 'active';
+				}
+				v.li += `<li class="${c}" data-val="${val}">
+							${txt}
+						</li>`;
+			});
 			v.html += v.li + `</ul></div>`;
 			v.this.after(v.html);
 		});

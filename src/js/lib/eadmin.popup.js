@@ -19,7 +19,6 @@ class Popup{
 			txt   : param.content,
 			btn   : '<button id="close" class="highlight middle">确定 (<em>3</em>)</button>'
 		});
-		Eadmin.mask();
 		let _popup = $('.popup');
 		fadeIn(_popup);
 		this._countdown(_popup, param);
@@ -36,7 +35,6 @@ class Popup{
 			txt   : param.content,
 			btn   : '<button id="close" class="highlight middle">确定 (<em>3</em>)</button>'
 		});
-		Eadmin.mask();
 		let _popup = $('.popup');
 		fadeIn(_popup);
 		this._countdown(_popup, param);
@@ -53,7 +51,6 @@ class Popup{
 			txt   : param.content,
 			btn   : '<button id="close" class="highlight middle">确定 (<em>3</em>)</button>'
 		});
-		Eadmin.mask();
 		let _popup = $('.popup');
 		fadeIn(_popup);
 		this._countdown(_popup, param);
@@ -71,14 +68,34 @@ class Popup{
 			btn   : `<button id="sure" class="highlight middle" style="margin-right:5px;">确定</button>
 					<button id="close" class="middle">取消</button>`
 		});
-		Eadmin.mask();
+		let window = $('.window:visible'),
+			length = window.length;
+		if (length > 0)
+		{
+			window.hide();
+		}
+		else
+		{
+			Eadmin.mask();
+		}
 		let popup = $('.popup');
 		fadeIn(popup);
-		popup.find('#close').on('click', function(){
-			Eadmin.maskHide();
+		popup.
+		find('#close').
+		on('click', function(){
+			if (length > 0)
+			{
+				window.show();
+			}
+			else
+			{
+				Eadmin.maskHide();
+			}
 			fadeOut(popup);
 		});
-		popup.find('#sure').on('click', function(){
+		popup.
+		find('#sure').
+		on('click', function(){
 			$(this).
 				html('执行中...').
 				attr('disabled', true);
@@ -125,19 +142,34 @@ class Popup{
 	 * 倒计时
 	 */
 	static _countdown(popup, param){
+		let window = $('.window:visible'),
+			length = window.length;
 		let func = {
 			close : () => {
-				Eadmin.maskHide();
+				if (length == 0)
+				{
+					Eadmin.maskHide();
+				}
+				else
+				{
+					window.show();
+				}
 				fadeOut(popup);
 				clearInterval(this.Timer);
 				this.Timer = null;
-				if (param.callback != undefined && 
-					_.isFunction(param.callback))
+				if (_.isFunction(param.callback))
 					param.callback();
-				if (param.refresh != undefined && 
-					param.refresh)
+				if (param.refresh === true)
 					Eadmin.refresh();
 			}
+		}
+		if (length > 0)
+		{
+			window.hide();
+		}
+		else
+		{
+			Eadmin.mask();
 		}
 		let second = 3;
 		this.Timer = setInterval(() => {
@@ -151,7 +183,9 @@ class Popup{
 				find('em').
 				html(second);
 		}, 1000);
-		popup.find('#close').on('click', () => {
+		popup.
+		find('#close').
+		on('click', () => {
 			func.close();
 		});
 	}
