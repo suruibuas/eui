@@ -48,8 +48,22 @@
                     text-overflow:ellipsis;
                 }
                 &:hover{
-                    background-color: @border-color-5;
+                    background-color: @color-4;
                 }
+            }
+            img{
+                height: 38px;
+                .border-radius();
+            }
+            a{
+                font-size: @font-size-2;
+                color: #43B4E4;
+            }
+            .table-img-head{
+                border: 2px @color-3 solid;
+                width: 32px;
+                height: 32px;
+                .border-radius(50px);
             }
         }
         td:not(.td-checkbox){
@@ -78,7 +92,7 @@
             border-top:1px @border-color-3 solid;
         }
         .tr-hover{
-            background-color: @border-color-5;
+            background-color: @color-4;
         }
     }
     .fixed-left, .fixed-right{

@@ -8,7 +8,7 @@ class Slider{
 		// 原始DOM名称
 		this.dom = dom;
 		// DOM缓存
-		this.domCache = $(this.dom);
+		this.domCache = scope(this.dom);
 		if (this.domCache.length == 0)
 		{
 			console.log('没有' + this.dom + '元素，滑块不再创建');

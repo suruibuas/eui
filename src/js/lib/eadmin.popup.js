@@ -68,29 +68,13 @@ class Popup{
 			btn   : `<button id="sure" class="highlight middle" style="margin-right:5px;">确定</button>
 					<button id="close" class="middle">取消</button>`
 		});
-		let window = $('.window:visible'),
-			length = window.length;
-		if (length > 0)
-		{
-			window.hide();
-		}
-		else
-		{
-			Eadmin.mask();
-		}
+		Eadmin.mask();
 		let popup = $('.popup');
 		fadeIn(popup);
 		popup.
 		find('#close').
 		on('click', function(){
-			if (length > 0)
-			{
-				window.show();
-			}
-			else
-			{
-				Eadmin.maskHide();
-			}
+			Eadmin.maskHide();
 			fadeOut(popup);
 		});
 		popup.
@@ -99,9 +83,10 @@ class Popup{
 			$(this).
 				html('执行中...').
 				attr('disabled', true);
-			if (param.callback != undefined && 
-				_.isFunction(param.callback))
+			if (_.isFunction(param.callback))
+			{
 				param.callback();
+			}
 		});
 	}
 
@@ -136,24 +121,18 @@ class Popup{
 			</div>`;
 			$('body').append(_html);
 		}
+		let window = $('.window:visible').length;
+		if (window > 0)
+			$('.popup').css('z-index', 9999 + window);
 	}
 
 	/**
 	 * 倒计时
 	 */
 	static _countdown(popup, param){
-		let window = $('.window:visible'),
-			length = window.length;
 		let func = {
 			close : () => {
-				if (length == 0)
-				{
-					Eadmin.maskHide();
-				}
-				else
-				{
-					window.show();
-				}
+				Eadmin.maskHide();
 				fadeOut(popup);
 				clearInterval(this.Timer);
 				this.Timer = null;
@@ -163,14 +142,7 @@ class Popup{
 					Eadmin.refresh();
 			}
 		}
-		if (length > 0)
-		{
-			window.hide();
-		}
-		else
-		{
-			Eadmin.mask();
-		}
+		Eadmin.mask();
 		let second = 3;
 		this.Timer = setInterval(() => {
 			second--;

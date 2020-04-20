@@ -9,7 +9,7 @@
                 <!-- 表单组盒子 -->
                 <div class="form-group">
                     <span class="title">文本框</span>
-                    <div id="p11" class="mt20"></div>
+                    <input type="text" data-validate="require" data-validate-msg="请输入内容">
                 </div>
                 <div class="form-group mt20">
                     <span class="title">文本域</span>
@@ -22,7 +22,7 @@
                 </div>
                 <div class="form-group mt20">
                     <span class="title">下拉菜单</span>
-                    <select name="t3" data-validate="require" data-validate-msg="此项必须选择">
+                    <select name="t3" data-width="100%" data-validate="require" data-validate-msg="此项必须选择">
                         <option value="-999">请选择</option>
                         <option value="1">苹果</option>
                         <option value="2">香蕉</option>
@@ -59,14 +59,3 @@
         </div>
     </div>
 </div>
-<script>
-    (() => {
-        Eadmin.upload('#p11', {
-            api : 'http://api.eadmin.com.cn/upload.php',
-            autoupload : false,
-            success : (data) => {
-                console.log(data);
-            }
-        });
-    })();
-</script>

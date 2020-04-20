@@ -5,7 +5,7 @@
 class Colorpicker{
 
 	constructor(dom, param){
-		this.domCache = $(dom);
+		this.domCache = scope(dom);
 		if (this.domCache.length == 0)
 		{
 			console.log('没有找到' + dom + '元素，颜色选择器创建失败');

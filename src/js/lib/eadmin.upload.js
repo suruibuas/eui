@@ -6,10 +6,9 @@ class Upload{
 
 	constructor(dom, param){
 		this.dom = dom;
-		this.domCache = $(dom);
-		this.dom += Date.parse(new Date());
+		this.domCache = scope(this.dom);
+		this.dom += (new Date()).valueOf();
 		this.domCache.attr('id', this.dom.replace('#', ''));
-		this.domCache = $(this.dom);
 		this.upload = null;
 		// 默认参数
 		let _param   = {

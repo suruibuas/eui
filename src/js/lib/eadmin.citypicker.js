@@ -12,6 +12,8 @@ class Citypikcer{
 		}
 		// INPUT DOM，用来给表单赋值和focus，blur事件处理
 		this.input  = dom;
+		// INPUT选择器
+		this.inputDom = scope(this.input);
 		// PICKER DOM缓存
 		this.picker = null;
 		// 当前快速选择的序号
@@ -38,7 +40,7 @@ class Citypikcer{
 		// 配置参数
 		this.param = $.extend(_param, param);
 		// 校验
-		if ($(this.input).length == 0)
+		if (this.inputDom.length == 0)
 		{
 			console.log('当前页面中不包含' + this.input + '元素，创建失败');
 			return false;
@@ -60,13 +62,9 @@ class Citypikcer{
 	 * 创建结构
 	 */
 	_create(){
-		// 过滤选择器中的符号
-		let _dom = _.replace(this.input, '#', '');
-		_dom = _.replace(_dom, '.', '');
-		if ($('#citypicker-' + _dom).length > 0)
-			$('#citypicker-' + _dom).remove();
+		let _dom = createId();
 		// 组装HTML结构
-		let _html = '<div id="citypicker-' + _dom + '" class="citypicker animated faster dn"';
+		let _html = `<div id="citypicker-${_dom}" class="citypicker animated faster${(Mount.window) == null ? '' : ' ' + Mount.window} dn"`;
 		if (this.param.type == 1)
 		{
 			_html += ' style="width:472px;">';
@@ -129,7 +127,7 @@ class Citypikcer{
 			};
 		}
 		// 开始监听事件
-		$(this.input).
+		this.inputDom.
 		// 显示面板
 		on('focus', function(){
 			if( ! that.init)
@@ -146,7 +144,7 @@ class Citypikcer{
 			fadeOut(that.picker);
 			clear = false;
 		});
-		keyup(that.input, (dom, e) => {
+		keyup(this.inputDom, (dom, e) => {
 			let _v = {
 				val : dom.val(),
 				key : e.keyCode
@@ -223,7 +221,7 @@ class Citypikcer{
 		});
 		if (that.param.type == 1)
 		{
-			$(that.input).
+			that.inputDom.
 			on('keydown', function(event){
 				if (_.indexOf([13, 38, 40], event.keyCode) == -1 || 
 					v.quick.is(':hidden'))
@@ -286,7 +284,7 @@ class Citypikcer{
 		that.picker.
 		// 收起面板
 		on('blur', function(){
-			$(that.input).blur();
+			that.inputDom.blur();
 			fadeOut(that.picker);
 			clear = false;
 		}).
@@ -411,7 +409,7 @@ class Citypikcer{
 	 */
 	_setVal(val = '')
 	{
-		$(this.input).val(val);
+		this.inputDom.val(val);
 		this.focus = false;
 		this.picker.trigger('blur');
 		// 回调

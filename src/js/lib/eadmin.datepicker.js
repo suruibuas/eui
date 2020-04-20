@@ -10,17 +10,19 @@ class Datepikcer{
 		// 日期数组，用来存放日期数据
 		this._reset();
 		// 今天的日期（年月日），用来加样式判断使用
-		this.today 	 = parseInt(this.arr[0].y + '' + this.arr[0].m + '' + this.arr[0].d);
+		this.today 	  = parseInt(this.arr[0].y + '' + this.arr[0].m + '' + this.arr[0].d);
 		// 是否需要时间（时分秒，根据param.format来确定）
-		this.time    = false;
+		this.time     = false;
 		// PICKER DOM缓存
-		this.picker  = null;
+		this.picker   = null;
 		// INPUT DOM，用来给表单赋值和focus，blur事件处理
-		this.input   = dom;
+		this.input    = dom;
+		// INPUT的选择器
+		this.inputDom = scope(this.input);
 		// 当前所在的日历的序号，左0右1
-		this.index   = 0;
+		this.index    = 0;
 		// 上次所在的index，用来判断双日历写值的位置
-		this.pindex  = null;
+		this.pindex   = null;
 		// 已经选中的日期数量，用来判断是否需要清除所有日期选中状态，双日历会用到
 		this.currentNum = 0;
 		// 当前获取焦点的文本框，用来赋值
@@ -45,7 +47,7 @@ class Datepikcer{
 		// 配置参数
 		this.param = $.extend(_param, param);
 		// 校验
-		if ($(this.input).length == 0)
+		if (this.inputDom.length == 0)
 		{
 			console.log('当前页面中不包含' + this.input + '元素，创建日历失败');
 			return false;
@@ -69,13 +71,9 @@ class Datepikcer{
 	 * 创建结构
 	 */
 	_create(){
-		// 过滤选择器中的符号
-		let _dom = _.replace(this.input, '#', '');
-		_dom = _.replace(_dom, '.', '');
-		if ($('#datepicker-' + _dom).length > 0)
-			$('#datepicker-' + _dom).remove();
+		let _dom = createId();
 		// 组装HTML结构
-		let _html = '<div id="datepicker-' + _dom + '" class="datepicker animated faster dn">';
+		let _html = `<div id="datepicker-${_dom}" class="datepicker animated faster${(Mount.window) == null ? '' : ' ' + Mount.window} dn">`;
 		_html += `<div class="quick dn">
 			<span class="title">快捷选择</span>
 			<span>3天内</span>
@@ -189,7 +187,7 @@ class Datepikcer{
 		// 局部变量统一定义
 		let _var = {
 			// 文本框的内容取值
-			val    : $(this.input).val(),
+			val    : this.inputDom.val(),
 			// 主日历（左侧日历，默认显示的）
 			picker : this.picker.children('div').eq(1),
 		};
@@ -609,7 +607,7 @@ class Datepikcer{
 		];
 		let _that = this;
 		// 开始监听事件
-		$(this.input).
+		_that.inputDom.
 		// 显示日期面板
 		on('focus', function(){
 			let v = {
@@ -829,7 +827,7 @@ class Datepikcer{
 		}).
 		// 底部工具栏清除
 		on('click', _dom[4], function(){
-			$(_that.input).val('');
+			_that.inputDom.val('');
 			_that.picker.
 				find('.current').
 				removeClass('current');
@@ -1111,7 +1109,7 @@ class Datepikcer{
 		this.focusInput.val(_val);
 		// 失去焦点
 		this.picker.trigger('blur');
-		if($(this.input).length > 1)
+		if(this.inputDom.length > 1)
 			this._reset(true);
 		// 回调处理
 		if (this.param.change != null && 

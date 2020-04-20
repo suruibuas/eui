@@ -84,12 +84,15 @@ select{
 .success-input,
 .error-input,
 .notice-input{
-    i{
+    i:not(.add):not(.cut){
         position: absolute;
         top: 2px;
     }
 }
-.icon-input{
+.icon-input
+:not(.error-input)
+:not(.success-input)
+:not(.notice-input){
     input{
         padding-left: 24px;
     }
@@ -108,13 +111,13 @@ select{
 .success-input,
 .error-input,
 .notice-input{
-    .fa{
+    .fa:not(.add):not(.cut){
         font-size: @font-size-3;
     }
     input{
         padding-right: 24px;
     }
-    i{
+    i:not(.add):not(.cut){
         right: 10px;
         top: 0;
     }
@@ -127,7 +130,7 @@ select{
     input:focus,textarea:focus{
         background: #234824;
     }
-    i{
+    i:not(.add):not(.cut){
         color: @other-color-1;
     }
 }
@@ -139,7 +142,7 @@ select{
     input:focus,textarea:focus{
         background: #482323;
     }
-    i{
+    i:not(.add):not(.cut){
         color: @other-color-2;
     }
 }
@@ -151,7 +154,7 @@ select{
     input:focus,textarea:focus{
         background: #4c4728;
     }
-    i{
+    i:not(.add):not(.cut){
         color: @other-color-3;
     }
 }

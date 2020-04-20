@@ -24,9 +24,9 @@
                 // 固定首尾列
                 fixed : {
                     // 首列
-                    first : false,
+                    first : true,
                     // 尾列
-                    last  : false
+                    last  : true
                 },
                 // 按钮工具
                 button : [
@@ -34,16 +34,16 @@
                         name : '新建数据',
                         icon : 'fa-plus-circle',
                         open : {
-                            title  : '新建数据',
-                            width  : '30%',
-                            height : '80%',
-                            url    : './html/1.html',
+                            title   : '新建数据',
+                            width   : '30%',
+                            height  : '80%',
+                            url     : './html/1.html',
                             btn : [
                                 {
                                     // 按钮名称
                                     name : '确定',
                                     // 执行的动作
-                                    action  : 'submit',
+                                    action : 'submit',
                                     // 按钮是否高亮
                                     highlight : true
                                 }
@@ -91,12 +91,53 @@
                 {
                     name   : '服务名称',
                     field  : 'name',
-                    search : true
+                    search : true,
+                    link   : (row) => {
+                        return {
+                            href : 'http://www.baidu.com',
+                            native : true,
+                            target : '_blank'
+                        }
+                    }
+                },
+                {
+                    name   : '头像',
+                    field  : 'icon',
+                    img    : true,
+                    head   : true
+                },
+                {
+                    name   : '封面图',
+                    field  : 'pic',
+                    img    : true
                 },
                 {
                     name   : '接口地址',
                     field  : 'api',
                     search : true
+                },
+                {
+                    name   : '进度',
+                    field  : 'plan',
+                    status : (row) => {
+                        let status = {};
+                        switch (row.plan)
+                        {
+                            case 0:
+                                status.code = 2;
+                                status.name = '开发中';
+                            break;
+                            case 1:
+                                status.code = 0;
+                                status.name = '已上线';
+                            break;
+                            case 2:
+                                status.code = 7;
+                                status.name = '离线';
+                            break;
+                        }
+                        return status;
+                    }
                 },
                 {
                     name   : '创建人',
@@ -169,18 +210,6 @@
                             refresh : true,
                             api  : 'del.php?id=' + row.id
                         };
-                        if (row.state == 0)
-                        {
-                            btns[0] = {
-                                name : '查看',
-                                open : {
-                                    title : '查看详情',
-                                    width : '30%',
-                                    height : '80%',
-                                    url : './html/1.html?id=' + row.id
-                                }
-                            };
-                        }
                         return btns;
                     }
                 }

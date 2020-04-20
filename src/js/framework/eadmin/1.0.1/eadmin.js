@@ -32,29 +32,6 @@ let eadmin = class Eadmin{
         this.boxScroll = null;
         // 默认响应链接跳转
         this.jumpHref();
-        // 如果有弹窗组件则监听ESC
-        if(module.lib.indexOf('window') != -1)
-        {
-            $(document).on('keyup', (event) => {
-                if (event.keyCode != 27)
-                {
-                    return;
-                }
-                if ($('.window:visible').length == 0)
-                {
-                    return;
-                }
-                this.maskHide();
-                let _window = $('.window:visible:first');
-                _window.
-                    removeClass('zoomIn').
-                    hide();
-                if (_window.data('refresh') == true)
-                {
-                    _window.children('.body').empty();
-                }
-            });
-        }
         // 如果有通知消息则设置默认顶部距离
         if (module.lib.indexOf('notice') != -1)
         {
@@ -84,14 +61,36 @@ let eadmin = class Eadmin{
     mask(){
         if ($('.mask').length == 0)
             $('body').append('<div class="mask"></div>');
-        $('.mask').empty().show();
+        let mask = $('.mask');
+        mask.empty();
+        if (mask.is(':hidden'))
+        {
+            mask.show();
+            return false;
+        }
+        let window = $('.window:visible').length;
+        if (window > 0)
+        {
+            let zindex = 9998 + window;
+            mask.css('z-index', zindex);
+            return zindex;
+        }
+        return false;
     }
 
     /**
      * 隐藏遮罩层
      */
     maskHide(){
-        $('.mask').hide();
+        let mask = $('.mask');
+        if ($('.window:visible').length > 0)
+        {
+            mask.css('z-index', '-=1');
+        }
+        else
+        {
+            mask.hide();   
+        }
     }
 
     /**
@@ -141,11 +140,12 @@ let eadmin = class Eadmin{
             return false;
         }
         let that = this;
-        $('body').on('click', 'a:not(.active)', function(){
+        $('body').on('click', 'a', function(){
             let v = {
                 this : $(this),
                 subnav : $('.sub-nav')
             };
+            if (v.this.hasClass('active')) return false;
             that.href = v.this.attr('href');
             // 一级导航
             if (v.this.hasClass('nav'))
@@ -212,7 +212,7 @@ let eadmin = class Eadmin{
             }
             // 阻止框架内跳转
             if (that.href == 'javascript:;' || 
-                v.this.data('native') == 1) return false;
+                v.this.data('native') == 1) return true;
             // 重载
             that.refresh();
             return false;
@@ -243,6 +243,7 @@ let eadmin = class Eadmin{
             });
             Mount.dropzone = [];
         }
+        Mount.window = null;
         // 加载
         setTimeout(() => {
             Method = {};
@@ -323,6 +324,8 @@ let eadmin = class Eadmin{
         this.form();
         // 按钮渲染
         Button.run(box);
+        // 状态
+        Status.run(box);
         // 监听滚动
         this.onscroll();
         // 滚动条处理
@@ -559,4 +562,7 @@ loader.ready(() => {
     // TIPS
     if(module.lib.indexOf('tips') != -1)
         Tips.run();
+    // 状态
+    if (module.lib.indexOf('status') != -1)
+        Eadmin.status = Status;
 });

@@ -5,15 +5,14 @@
 class Table{
 
 	constructor(dom, param){
-		// 容器缓存
-		this.domCache = $(dom);
+		this.domCache = scope(dom);
 		if (this.domCache.length == 0)
 		{
 			console.log('没有找到表格容器' + dom + '，创建失败');
 			return;
 		}
 		// 真实DOM
-		this.dom  = dom;
+		this.dom  = Mount.window != null ? '#' + Mount.window + ' ' + dom : dom;
 		// 当前页数
 		this.page = 1;
 		// 每页条数
@@ -232,7 +231,7 @@ class Table{
 								<i class="fa fa-search"></i>
 								搜索
 							</button>
-							<button class="search-refresh" data-for="${this.dom}">
+							<button class="search-refresh">
 								<i class="fa fa-refresh"></i>
 								重置
 							</button>
@@ -264,7 +263,8 @@ class Table{
 				}
 				v.tools = `<div class="table-tools">`;
 				_.each(this.param.config.button, (row, k) => {
-					v.tools += (k == 0) ? `<button class="highlight">` : `<button>`;
+					v.tools += `<button id="table-btn-${k}" `;
+					v.tools += (k == 0) ? `class="highlight">` : `>`;
 					if (row.icon != undefined)
 						v.tools += `<i class="fa ${row.icon}"></i>`;
 					v.tools += row.name + `</button>`;
@@ -379,11 +379,11 @@ class Table{
 	_event(){
 		let dom = [
 			// 全选
-			this.dom + ' thead .checkall',
+			'thead .checkall',
 			// 单选
-			this.dom + ' tbody .checkall',
+			'tbody .checkall',
 			// 行
-			this.dom + ' tbody tr',
+			'tbody tr',
 			// 搜索
 			'.search-do',
 			// 重置搜索
@@ -401,11 +401,12 @@ class Table{
 			// 按钮
 			'.table-tools button',
 			// 排序
-			this.dom + ' .order i:not(.active)',
+			'.order i:not(.active)',
 			// 开关
-			this.dom + ' .checkbox-switch'
+			'.checkbox-switch'
 		];
 		let that = this;
+		let sbox = that.domCache.parent();
 		let func = {
 			jumpError : (msg) => {
 				Eadmin.message.error({
@@ -449,7 +450,7 @@ class Table{
 		if (that.param.config.checkbox)
 		{
 			// 全选
-			box.
+			sbox.
 			on('click', dom[0], function(){
 				let _v = {
 					this : $(this)
@@ -484,7 +485,7 @@ class Table{
 			that.param.config.fixed.last)
 		{
 			let index = 0;
-			box.
+			sbox.
 			on('mouseenter', dom[2], function(){
 				index = $(this).index();
 				that.table.c.
@@ -518,7 +519,7 @@ class Table{
 		// 搜索
 		if (that.searchBox != null)
 		{
-			box.
+			sbox.
 			// 执行搜索
 			on('click', dom[3], () => {
 				that.page = 1;
@@ -548,21 +549,16 @@ class Table{
 		if (that.toolsBox != null)
 		{
 			_.each(that.param.config.button, (row, k) => {
-				// 打开窗口
+				let button = that.toolsBox.find('button').eq(k);
 				if (row.open != undefined)
 				{
-					// 生成ID
-					let id = 'table-btn-open-window-' + k;
-					that.toolsBox.
-						find('button').
-						eq(k).
-						attr('id', id).
-						data('window-url', row.open.url);
+					button.data('window-url', row.open.url);
+					let id = button.attr('id');
 					Eadmin.window('#' + id, row.open);
-					return true;
+					return;
 				}
-				that.toolsBox.find('button').eq(k).
-				on('click', () => {
+				button.
+				on('click', function(){
 					if (row.check_checked === true && 
 						that.checked == 0)
 					{
@@ -631,11 +627,12 @@ class Table{
 		// 分页
 		if ( ! _.isBoolean(this.param.config.page))
 		{
-			box.
+			sbox.
 			// 切换每页条数
 			on('change', dom[5], function(){
 				that.page = 1;
 				that.size = parseInt($(this).val());
+				that.get[that.param.config.page.page_field] = that.page;
 				that.get[that.param.config.page.size_field] = that.size;
 				that._loadData(true);
 			}).
@@ -691,7 +688,7 @@ class Table{
 			});
 		}
 		// 排序
-		box.
+		sbox.
 		on('click', dom[11], function(){
 			let v = {
 				this : $(this)
@@ -724,9 +721,8 @@ class Table{
 			}).catch((e) => {
 				console.log(e);
 			});
-		});
+		}).
 		// 列按钮
-		box.
 		on('click', '.column-btn', function(){
 			let _v = {
 				this : $(this)
@@ -737,7 +733,7 @@ class Table{
 			// 打开弹窗
 			if (_v.btn.open != undefined)
 			{
-				Eadmin.window('.table-column-btn-open-window', _v.btn.open, false);
+				Eadmin.window(false, _v.btn.open);
 				return;
 			}
 			// 调用接口
@@ -811,7 +807,14 @@ class Table{
 			console.log('数据源中未包含数据总条数count字段，创建分页失败');
 			return;
 		}
-		box[0].scrollTop = 0;
+		if (Mount.window != null)
+		{
+			$('#' + Mount.window + ' .body')[0].scrollTop = 0;
+		}
+		else
+		{
+			box[0].scrollTop = 0;
+		}
 		if ( ! this.init)
 		{
 			this.pageBox.data('size', this.size);
@@ -952,11 +955,13 @@ class Table{
 							if (b.icon != undefined) 
 								icon = `<i class="fa ${b.icon}"></i>`;
 							let url = '';
+							let id  = `table-column-btn-${row_key}-${btn_key}`;
 							if (b.open != undefined)
 							{
 								url = b.open.url;
 							}
 							_html += `<button 
+										id="${id}" 
 										data-row="${row_key}" 
 										data-key="${btn_key}" 
 										data-window-url="${url}" 
@@ -969,7 +974,47 @@ class Table{
 					}
 					else
 					{
-						_html += row[c.field];
+						let __html = '';
+						// 图片
+						if (c.img === true)
+						{
+							__html += `<img src="${row[c.field]}"`;
+							if (c.head === true) __html += ' class="table-img-head"';
+							__html += '>';
+						}
+						else
+						{
+							// 状态
+							if (_.isFunction(c.status))
+							{
+								let status = c.status(row);
+								__html += `<span data-status="${status.code}">${status.name}</span>`;
+							}
+							else
+							{
+								__html += row[c.field];
+							}
+						}
+						// 判断链接
+						if (_.isFunction(c.link))
+						{
+							let _link = c.link(row);
+							_html += `<a href="${_link.href}"`;
+							if (_link.native === true)
+							{
+								_html += ` data-native="1"`;
+							}
+							if (_link.target != undefined)
+							{
+								_html += ` target="${_link.target}"`;
+							}
+							_html += '>';
+						}
+						_html += __html;
+						if (c.link != undefined)
+						{
+							_html += '</a>';
+						}
 					}
 					_html += `</td>`;
 					// 首列
@@ -990,17 +1035,20 @@ class Table{
 			});
 			this.table.c.html(v.html);
 			Eadmin.form(this.table.c);
+			Status.run(this.table.c);
 			// 首列
 			if (this.param.config.fixed.first === true)
 			{
 				this.table.l.html(v.fl);
 				Eadmin.form(this.table.l);
+				Status.run(this.table.l);
 			}
 			// 尾列
 			if (this.param.config.fixed.last === true)
 			{
 				this.table.r.html(v.fr);
 				Eadmin.form(this.table.r);
+				Status.run(this.table.r);
 			}
 			// 分页
 			this._page(v.data, page);

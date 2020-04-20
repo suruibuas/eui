@@ -101,7 +101,7 @@ function disabledRight()
 function keyup(dom, callback)
 {
 	var T = null;
-	body.on('keyup', dom, function(e){
+	dom.on('keyup', function(e){
 		var _this = $(this);
 		clearTimeout(T);
 		T = setTimeout(function(){
@@ -209,5 +209,32 @@ function repairZero(num)
  */
 function addClassExc(dom, classname)
 {
-	dom.addClass(classname).siblings().removeClass(classname);
+	dom.
+		addClass(classname).
+		siblings().
+		removeClass(classname);
+}
+
+/**
+ * 作用域
+ */
+function scope(dom)
+{
+	if (dom === false) return false;
+	if (Mount.window == null)
+	{
+		return $(dom);
+	}
+	else
+	{
+		return $('#' + Mount.window).find(dom);
+	}
+}
+
+/**
+ * 生成唯一ID
+ */
+function createId()
+{
+	return (new Date()).valueOf() + Math.random().toString().slice(-6);
 }

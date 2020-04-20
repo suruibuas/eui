@@ -138,6 +138,11 @@ window.nav = [
                 'name' : '文字提示',
                 'href' : './html/tips.html',
                 'icon' : 'commenting'
+            },
+            {
+                'name' : '状态',
+                'href' : './html/status.html',
+                'icon' : 'circle'
             }
         ]
     },

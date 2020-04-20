@@ -8,7 +8,7 @@ class Transfer{
 		// 原始DOM名称
 		this.dom = dom;
 		// DOM缓存
-		this.domCache = $(dom);
+		this.domCache = scope(this.dom);
 		if (this.domCache.length == 0)
 		{
 			console.log('没有找到' + this.dom + '穿梭框容器，创建失败');
@@ -336,7 +336,7 @@ class Transfer{
 		});
 		if ( ! that.param.search) return;
 		// 搜索
-		keyup(that.dom + ' .search-input', (_this) => {
+		keyup(that.domCache.find('.search-input'), (_this) => {
 			let _v = {
 				eq   : parseInt(_this.data('num')),
 				val  : _this.val(),

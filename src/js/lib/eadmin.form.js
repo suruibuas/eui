@@ -23,9 +23,10 @@ class Form{
 				// 带图标的input的默认class
 				class : 'icon-input'
 			}
-			// 是否需要图标
+			// 是否需要图标，数字加减不支持图标
 			v.icon = v.this.data('icon');
-			if (v.icon != undefined)
+			if (v.icon != undefined && 
+				! v.this.hasClass('num-input'))
 			{
 				// 判断是否是右侧图标
 				if (v.icon.indexOf('|') != -1)
@@ -80,7 +81,15 @@ class Form{
 			// 带数字加减功能的文本框
 			if (v.this.hasClass('num-input'))
 			{
-				v.val  = parseInt(v.this.val()),
+				if (v.this.val() == '')
+				{
+					v.this.val(0);
+					v.val = 0;
+				}
+				else
+				{
+					v.val = parseInt(v.this.val());
+				}
 				// 最小值
 				v.min  = v.this.data('min') == undefined ? 0 : parseInt(v.this.data('min')),
 				// 最大值
@@ -564,7 +573,7 @@ class Form{
 			return false;
 		});
 		// 限制字数的文本域
-		keyup('.textarea-max', (_this) => {
+		keyup($('.textarea-max'), (_this) => {
 			let max = _this.attr('maxlength'),
 				len = _this.val().length;
 			if (len > max) return;
@@ -645,14 +654,38 @@ class Form{
 			return;
 		if (model == null)
 		{
-			dom.
-				removeData('model').
-				removeClass('color-input').
-				prev('i').
-				remove();
-			dom.
-				parent().
-				removeAttr('class');
+			if (dom.hasClass('num-input'))
+			{
+				dom.
+					removeData('model').
+					removeClass('color-input');
+				dom.
+					parent().
+					attr('class', 'input-group');
+			}
+			else
+			{
+				model = dom.data('model');
+				dom.
+					removeData('model').
+					removeClass('color-input').
+					prev('i').
+					remove();
+				if (dom.prev('i').length == 0)
+				{
+					dom.
+						parent().
+						removeAttr('class');
+				}
+				else
+				{
+					dom.
+						prev('i').
+						show().
+						parent().
+						removeClass(model + '-input');
+				}
+			}
 			return;
 		}
 		if (dom.data('model') == undefined)
@@ -661,6 +694,7 @@ class Form{
 		}
 		else
 		{
+			dom.parent().removeClass(dom.data('model') + '-input');
 			dom.prev('i').remove();
 		}
 		dom.data('model', model);
@@ -677,7 +711,8 @@ class Form{
 				icon = 'fa-exclamation-circle';
 			break;
 		}
-		if( ! dom.parent().is('label'))
+		if( ! dom.parent().is('label') && 
+			! dom.hasClass('num-input'))
 		{
 			dom.before(`<label class="${model + '-input'}"></label>`);
 			let label = dom.prev('label');
@@ -686,10 +721,12 @@ class Form{
 		}
 		else
 		{
-			dom.before(`<i class="fa ${icon}"></i>`);
-			dom.
-				parent().
-				attr('class', model + '-input')
+			dom.parent().addClass(model + '-input');
+			if ( ! dom.hasClass('num-input'))
+			{
+				dom.prev('i').hide();
+				dom.before(`<i class="fa ${icon}"></i>`);
+			}
 		}
 	}
 

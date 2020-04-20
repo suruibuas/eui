@@ -23,7 +23,8 @@ let clear  = false;
 let Method = {};
 // 挂载点
 let Mount  = {
-	dropzone : []
+	dropzone : [],
+	window : null
 };
 
 // 默认执行异步加载过程

@@ -41,28 +41,13 @@
         <!-- 容器盒子，具体布局使用 -->
         <div class="block">
             <div class="font-h3">
-                每次打开都刷新
-            </div>
-            <div class="font-h6 mt20">
-                每次打开都刷新窗口内的页面
-            </div>
-            <div class="mt20">
-                <button id="w3" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
-            </div>
-        </div>
-    </div>
-    <!-- 响应盒子，bootstrap -->
-    <div class="col-lg-3 col-md-3">
-        <!-- 容器盒子，具体布局使用 -->
-        <div class="block">
-            <div class="font-h3">
                 自定义宽高
             </div>
             <div class="font-h6 mt20">
                 支持 px和百分比
             </div>
             <div class="mt20">
-                <button id="w4" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
+                <button id="w3" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
             </div>
         </div>
     </div>
@@ -77,7 +62,7 @@
                 支持按钮栏
             </div>
             <div class="mt20">
-                <button id="w5" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
+                <button id="w4" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
             </div>
         </div>
     </div>
@@ -92,7 +77,7 @@
                 窗口关闭后会调用close函数
             </div>
             <div class="mt20">
-                <button id="w6" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
+                <button id="w5" class="highlight middle" data-window-url="./html/1.html">打开窗口</button>
             </div>
         </div>
     </div>
@@ -104,14 +89,11 @@
             drag : false
         });
         Eadmin.window('#w3', {
-            refresh  : true
-        });
-        Eadmin.window('#w4', {
             refresh  : true,
             width  : '90%',
             height : '90%'
         });
-        Eadmin.window('#w5', {
+        Eadmin.window('#w4', {
             // 按钮栏
             btn : [
                 {
@@ -130,7 +112,7 @@
                 }
             ]
         });
-        Eadmin.window('#w6', {
+        Eadmin.window('#w5', {
             close : () => {
                 Eadmin.message.info({
                     content : '窗口关闭了'

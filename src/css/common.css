@@ -436,3 +436,45 @@ td {
 .clear {
   clear: both;
 }
+/**
+ * ================= 状态 ==================
+ */
+.status i {
+  border-radius: 50px;
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  margin-right: 5px;
+}
+.status .status-0 {
+  background: #36D144;
+  box-shadow: 0 0 4px #36D144;
+}
+.status .status-1 {
+  background: #ff2727;
+  box-shadow: 0 0 4px #ff2727;
+}
+.status .status-2 {
+  background: #D1C31D;
+  box-shadow: 0 0 4px #D1C31D;
+}
+.status .status-3 {
+  background: #8368ee;
+  box-shadow: 0 0 4px #8368ee;
+}
+.status .status-4 {
+  background: #1dd0d7;
+  box-shadow: 0 0 4px #1dd0d7;
+}
+.status .status-5 {
+  background: #f67f1b;
+  box-shadow: 0 0 4px #f67f1b;
+}
+.status .status-6 {
+  background: #ff6384;
+  box-shadow: 0 0 4px #ff6384;
+}
+.status .status-7 {
+  background: #BBC5D8;
+  box-shadow: 0 0 4px #BBC5D8;
+}

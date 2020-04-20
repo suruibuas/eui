@@ -96,18 +96,18 @@ select {
 .no-resize {
   resize: none;
 }
-.icon-input i,
-.icon-input-right i,
-.success-input i,
-.error-input i,
-.notice-input i {
+.icon-input i:not(.add):not(.cut),
+.icon-input-right i:not(.add):not(.cut),
+.success-input i:not(.add):not(.cut),
+.error-input i:not(.add):not(.cut),
+.notice-input i:not(.add):not(.cut) {
   position: absolute;
   top: 2px;
 }
-.icon-input input {
+.icon-input :not(.error-input) :not(.success-input) :not(.notice-input) input {
   padding-left: 24px;
 }
-.icon-input i {
+.icon-input :not(.error-input) :not(.success-input) :not(.notice-input) i {
   left: 10px;
 }
 .icon-input-right input {
@@ -116,9 +116,9 @@ select {
 .icon-input-right i {
   right: 10px;
 }
-.success-input .fa,
-.error-input .fa,
-.notice-input .fa {
+.success-input .fa:not(.add):not(.cut),
+.error-input .fa:not(.add):not(.cut),
+.notice-input .fa:not(.add):not(.cut) {
   font-size: 16px;
 }
 .success-input input,
@@ -126,9 +126,9 @@ select {
 .notice-input input {
   padding-right: 24px;
 }
-.success-input i,
-.error-input i,
-.notice-input i {
+.success-input i:not(.add):not(.cut),
+.error-input i:not(.add):not(.cut),
+.notice-input i:not(.add):not(.cut) {
   right: 10px;
   top: 0;
 }
@@ -141,7 +141,7 @@ select {
 .success-input textarea:focus {
   background: #234824;
 }
-.success-input i {
+.success-input i:not(.add):not(.cut) {
   color: #36D144;
 }
 .error-input input,
@@ -153,7 +153,7 @@ select {
 .error-input textarea:focus {
   background: #482323;
 }
-.error-input i {
+.error-input i:not(.add):not(.cut) {
   color: #ff2727;
 }
 .notice-input input,
@@ -165,7 +165,7 @@ select {
 .notice-input textarea:focus {
   background: #4c4728;
 }
-.notice-input i {
+.notice-input i:not(.add):not(.cut) {
   color: #D1C31D;
 }
 .form-group {

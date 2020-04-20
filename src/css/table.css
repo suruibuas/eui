@@ -74,7 +74,27 @@
 .table .table-box tbody tr:hover,
 .table .fixed-left tbody tr:hover,
 .table .fixed-right tbody tr:hover {
-  background-color: #4E5675;
+  background-color: #2D3C5C;
+}
+.table .table-box tbody img,
+.table .fixed-left tbody img,
+.table .fixed-right tbody img {
+  height: 38px;
+  border-radius: 2px;
+}
+.table .table-box tbody a,
+.table .fixed-left tbody a,
+.table .fixed-right tbody a {
+  font-size: 14px;
+  color: #43B4E4;
+}
+.table .table-box tbody .table-img-head,
+.table .fixed-left tbody .table-img-head,
+.table .fixed-right tbody .table-img-head {
+  border: 2px #0084FF solid;
+  width: 32px;
+  height: 32px;
+  border-radius: 50px;
 }
 .table .table-box td:not(.td-checkbox),
 .table .fixed-left td:not(.td-checkbox),
@@ -118,7 +138,7 @@
 .table .table-box .tr-hover,
 .table .fixed-left .tr-hover,
 .table .fixed-right .tr-hover {
-  background-color: #4E5675;
+  background-color: #2D3C5C;
 }
 .table .fixed-left,
 .table .fixed-right {
