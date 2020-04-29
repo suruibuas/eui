@@ -104,10 +104,10 @@ select {
   position: absolute;
   top: 2px;
 }
-.icon-input :not(.error-input) :not(.success-input) :not(.notice-input) input {
+.icon-input:not(.error-input):not(.success-input):not(.notice-input) input {
   padding-left: 24px;
 }
-.icon-input :not(.error-input) :not(.success-input) :not(.notice-input) i {
+.icon-input:not(.error-input):not(.success-input):not(.notice-input) i {
   left: 10px;
 }
 .icon-input-right input {

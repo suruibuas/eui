@@ -143,6 +143,11 @@ window.nav = [
                 'name' : '状态',
                 'href' : './html/status.html',
                 'icon' : 'circle'
+            },
+            {
+                'name' : '标签',
+                'href' : './html/tag.html',
+                'icon' : 'tag'
             }
         ]
     },

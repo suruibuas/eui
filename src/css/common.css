@@ -439,6 +439,9 @@ td {
 /**
  * ================= 状态 ==================
  */
+.status {
+  margin-right: 10px;
+}
 .status i {
   border-radius: 50px;
   width: 8px;
@@ -448,33 +451,68 @@ td {
 }
 .status .status-0 {
   background: #36D144;
-  box-shadow: 0 0 4px #36D144;
+  box-shadow: 0 0 3px #36D144;
 }
 .status .status-1 {
   background: #ff2727;
-  box-shadow: 0 0 4px #ff2727;
+  box-shadow: 0 0 3px #ff2727;
 }
 .status .status-2 {
   background: #D1C31D;
-  box-shadow: 0 0 4px #D1C31D;
+  box-shadow: 0 0 3px #D1C31D;
 }
 .status .status-3 {
   background: #8368ee;
-  box-shadow: 0 0 4px #8368ee;
+  box-shadow: 0 0 3px #8368ee;
 }
 .status .status-4 {
   background: #1dd0d7;
-  box-shadow: 0 0 4px #1dd0d7;
+  box-shadow: 0 0 3px #1dd0d7;
 }
 .status .status-5 {
   background: #f67f1b;
-  box-shadow: 0 0 4px #f67f1b;
+  box-shadow: 0 0 3px #f67f1b;
 }
 .status .status-6 {
   background: #ff6384;
-  box-shadow: 0 0 4px #ff6384;
+  box-shadow: 0 0 3px #ff6384;
 }
 .status .status-7 {
   background: #BBC5D8;
-  box-shadow: 0 0 4px #BBC5D8;
+  box-shadow: 0 0 3px #BBC5D8;
+}
+.tag {
+  border-radius: 6px;
+  display: inline-block;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #FFF;
+  outline: none;
+  font-family: inherit;
+  line-height: 1.15;
+  margin: 5px 6px 5px 0;
+}
+.tag-0 {
+  background: #36D144;
+}
+.tag-1 {
+  background: #ff2727;
+}
+.tag-2 {
+  background: #D1C31D;
+}
+.tag-3 {
+  background: #8368ee;
+}
+.tag-4 {
+  background: #1dd0d7;
+}
+.tag-5 {
+  background: #f67f1b;
+}
+.tag-6 {
+  background: #ff6384;
+}
+.tag-7 {
+  background: #BBC5D8;
 }

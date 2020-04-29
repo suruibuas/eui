@@ -185,6 +185,8 @@ class Window{
 						Button.run(that.windowDom);
 						// 状态
 						Status.run(v.body);
+						// 标签
+						Tag.run(v.body);
 						v.scroll = Eadmin.scroll('#' + that.window + ' .body');
 						// 滚动条处理
 						let scroll = body.find('.iscroll');

@@ -11,8 +11,9 @@ class Table{
 			console.log('没有找到表格容器' + dom + '，创建失败');
 			return;
 		}
+		this.window = Mount.window != null ? '#' + Mount.window : null;
 		// 真实DOM
-		this.dom  = Mount.window != null ? '#' + Mount.window + ' ' + dom : dom;
+		this.dom  = this.window != null ? this.window + ' ' + dom : dom;
 		// 当前页数
 		this.page = 1;
 		// 每页条数
@@ -807,9 +808,9 @@ class Table{
 			console.log('数据源中未包含数据总条数count字段，创建分页失败');
 			return;
 		}
-		if (Mount.window != null)
+		if (this.window != null)
 		{
-			$('#' + Mount.window + ' .body')[0].scrollTop = 0;
+			$(this.window + ' .body')[0].scrollTop = 0;
 		}
 		else
 		{
@@ -930,7 +931,12 @@ class Table{
 				v.html += this._checkbox(row);
 				v.fl += this._checkbox(row, true);
 				_.each(this.param.column, (c, k) => {
-					let _html = `<td>`;
+					let _html = `<td`;
+					if (c.tag === true)
+					{
+						_html += ` data-tag="${row[c.field]}"`;
+					}
+					_html += '>';
 					if (c.switch === true)
 					{
 						let api = '';
@@ -1036,12 +1042,14 @@ class Table{
 			this.table.c.html(v.html);
 			Eadmin.form(this.table.c);
 			Status.run(this.table.c);
+			Tag.run(this.table.c);
 			// 首列
 			if (this.param.config.fixed.first === true)
 			{
 				this.table.l.html(v.fl);
 				Eadmin.form(this.table.l);
 				Status.run(this.table.l);
+				Tag.run(this.table.l);
 			}
 			// 尾列
 			if (this.param.config.fixed.last === true)
@@ -1049,6 +1057,7 @@ class Table{
 				this.table.r.html(v.fr);
 				Eadmin.form(this.table.r);
 				Status.run(this.table.r);
+				Tag.run(this.table.r);
 			}
 			// 分页
 			this._page(v.data, page);

@@ -34,10 +34,10 @@
                         name : '新建数据',
                         icon : 'fa-plus-circle',
                         open : {
-                            title   : '新建数据',
-                            width   : '30%',
-                            height  : '80%',
-                            url     : './html/1.html',
+                            title  : '新建数据',
+                            width  : '30%',
+                            height : '80%',
+                            url    : './html/1.html',
                             btn : [
                                 {
                                     // 按钮名称
@@ -140,6 +140,11 @@
                     }
                 },
                 {
+                    name  : '标签',
+                    field : 'tag',
+                    tag   : true
+                },
+                {
                     name   : '创建人',
                     field  : 'create'
                 },
@@ -186,17 +191,16 @@
                             name : '编辑',
                             icon : 'fa-pencil',
                             open : {
-                                title : '编辑数据',
-                                width : '30%',
-                                height  : '80%',
-                                refresh : true,
-                                url : './html/1.html?id=' + row.id,
-                                btn : [
+                                title  : '编辑数据',
+                                width  : '30%',
+                                height : '80%',
+                                url    : './html/1.html?id=' + row.id,
+                                btn    : [
                                     {
                                         // 按钮名称
-                                        name : '确定',
+                                        name   : '确定',
                                         // 执行的动作
-                                        action  : 'submit',
+                                        action : 'submit',
                                         // 按钮是否高亮
                                         highlight : true
                                     }
@@ -204,11 +208,11 @@
                             }
                         };
                         btns[1] = {
-                            name : '删除',
-                            icon : 'fa-times',
+                            name    : '删除',
+                            icon    : 'fa-times',
                             confirm : true,
                             refresh : true,
-                            api  : 'del.php?id=' + row.id
+                            api     : 'del.php?id=' + row.id
                         };
                         return btns;
                     }

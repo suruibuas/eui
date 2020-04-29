@@ -326,6 +326,8 @@ let eadmin = class Eadmin{
         Button.run(box);
         // 状态
         Status.run(box);
+        // 标签
+        Tag.run(box);
         // 监听滚动
         this.onscroll();
         // 滚动条处理
@@ -537,7 +539,9 @@ loader.ready(() => {
     Eadmin.resize();
     // TIPS
     if(module.lib.indexOf('tips') != -1)
-        Eadmin.tips = Tips;
+    {
+        Tips.run();
+    }
     // POPUP
     if(module.lib.indexOf('popup') != -1)
         Eadmin.popup = Popup;
@@ -559,10 +563,4 @@ loader.ready(() => {
     // 表单验证
     if(module.lib.indexOf('validate') != -1)
         Validate.run();
-    // TIPS
-    if(module.lib.indexOf('tips') != -1)
-        Tips.run();
-    // 状态
-    if (module.lib.indexOf('status') != -1)
-        Eadmin.status = Status;
 });

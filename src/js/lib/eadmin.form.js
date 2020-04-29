@@ -539,20 +539,18 @@ class Form{
 					Eadmin.message.success({
 						content : msg,
 						callback : () => {
-							if (v.callback != undefined)
-							{
-								try{
-									Method != undefined;
-									if ( ! _.isFunction(Method[v.callback]))
-									{
-										console.log('指定的' + v.callback + '不是一个可被调用的函数');
-										return;
-									}
-									Method[v.callback](v.submit);
+							if (v.callback == undefined) return;
+							try{
+								Method != undefined;
+								if ( ! _.isFunction(Method[v.callback]))
+								{
+									console.log('指定的' + v.callback + '不是一个可被调用的函数');
+									return;
 								}
-								catch(e){
-									console.log(e);
-								}
+								Method[v.callback](v.submit);
+							}
+							catch(e){
+								console.log(e);
 							}
 						}
 					});
