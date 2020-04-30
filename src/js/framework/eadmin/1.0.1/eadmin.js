@@ -457,6 +457,13 @@ let eadmin = class Eadmin{
     }
 
     /**
+     * 选项卡
+     */
+    tab(dom, param){
+        return new Tab(dom, param);
+    }
+
+    /**
      * 模版
      */
     template(dom, data){

@@ -107,7 +107,7 @@
 .datepicker .header span:hover,
 .datepicker .footer span:hover {
   transition: color 0.2s linear;
-  color: #0084FF;
+  color: #2E98FE;
 }
 .datepicker .header i,
 .datepicker .footer i {
@@ -121,7 +121,7 @@
 }
 .datepicker .header .font:hover,
 .datepicker .footer .font:hover {
-  color: #0084FF;
+  color: #2E98FE;
 }
 .datepicker .header .confirm,
 .datepicker .footer .confirm {
@@ -184,19 +184,19 @@
   width: 5px;
   height: 5px;
   position: absolute;
-  background: #0084FF;
+  background: #2E98FE;
   right: 2px;
   top: 2px;
 }
 .datepicker .day span.current {
   box-shadow: #131630 0px 0px 10px;
-  background: #0084FF;
+  background: #2E98FE;
 }
 .datepicker .day span.current div {
   background: #FFF;
 }
 .datepicker .day span.current:hover {
-  background: #0084FF;
+  background: #2E98FE;
 }
 .datepicker .y-m {
   display: flex;
@@ -270,7 +270,7 @@
 }
 .datepicker .quick span.current {
   box-shadow: #131630 0px 0px 10px;
-  background: #0084FF;
+  background: #2E98FE;
 }
 .datepicker .footer {
   height: 30px;
@@ -374,7 +374,7 @@
 }
 .citypicker .current {
   color: #FFF;
-  background: #0084FF;
+  background: #2E98FE;
 }
 .citypicker .dn {
   display: none;
@@ -535,6 +535,6 @@
   margin: 10px 0 5px 0;
 }
 .notice .href a {
-  color: #0084FF;
+  color: #2E98FE;
   font-weight: bold;
 }

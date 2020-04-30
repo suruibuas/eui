@@ -50,7 +50,7 @@ textarea:focus {
   transition: border-color 0.2s linear, background-color 0.2s linear, box-shadow 0.2s linear;
   box-shadow: #131630 0px 0px 10px;
   outline: none;
-  border-color: #0084FF;
+  border-color: #2E98FE;
   background: #2a3560;
 }
 input:disabled,
@@ -293,7 +293,7 @@ select {
 .radio-checked i,
 .checkbox-checked i {
   transition: color 0.2s linear;
-  color: #0084FF;
+  color: #2E98FE;
 }
 .select {
   border-radius: 4px;
@@ -386,7 +386,7 @@ select {
 }
 .switch-open {
   transition: background 0.2s linear;
-  background: #0084FF;
+  background: #2E98FE;
 }
 .switch-open span {
   box-shadow: #131630 0px 0px 10px;
@@ -407,9 +407,9 @@ select {
 }
 .slider .slider-bar {
   border-radius: 4px;
-  background: -moz-linear-gradient(left, #66b5ff, #0084FF);
-  background: -webkit-linear-gradient(left, #66b5ff, #0084FF);
-  background: -o-linear-gradient(left, #66b5ff, #0084FF);
+  background: -moz-linear-gradient(left, #94cafe, #2E98FE);
+  background: -webkit-linear-gradient(left, #94cafe, #2E98FE);
+  background: -o-linear-gradient(left, #94cafe, #2E98FE);
   position: absolute;
   width: 0;
   height: 4px;
@@ -422,7 +422,7 @@ select {
   cursor: grab;
   position: absolute;
   background: #FFF;
-  border: 3px #0084FF solid;
+  border: 3px #2E98FE solid;
   z-index: 999;
   left: 0;
   top: -6px;

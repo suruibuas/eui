@@ -27,7 +27,7 @@
   position: relative;
 }
 .title-bar {
-  border-left: 5px solid #0084FF;
+  border-left: 5px solid #2E98FE;
   padding-left: 10px;
   width: 100%;
   color: #B1b1b1;
@@ -54,7 +54,7 @@
 }
 .block-box .hover:hover {
   transition: background-color 0.2s linear;
-  background: #0084FF;
+  background: #2E98FE;
 }
 .ps {
   overflow: hidden;

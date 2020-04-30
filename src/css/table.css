@@ -91,7 +91,7 @@
 .table .table-box tbody .table-img-head,
 .table .fixed-left tbody .table-img-head,
 .table .fixed-right tbody .table-img-head {
-  border: 2px #0084FF solid;
+  border: 2px #2E98FE solid;
   width: 32px;
   height: 32px;
   border-radius: 50px;
@@ -172,11 +172,11 @@
   background: #4E5675;
 }
 .table-page .current {
-  background: #0084FF;
+  background: #2E98FE;
 }
 .table-page .current:hover {
   transition: background 0.2s linear;
-  background: #0084FF;
+  background: #2E98FE;
 }
 .table-page .info {
   text-align: left;

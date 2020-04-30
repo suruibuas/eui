@@ -36,7 +36,7 @@ button {
 button:hover:not(:disabled) {
   box-shadow: #131630 0px 0px 10px;
   transition: border-color 0.2s linear, background-color 0.2s linear, box-shadow 0.2s linear;
-  border-color: #0084FF;
+  border-color: #2E98FE;
 }
 button:disabled {
   color: #BBC5D8;
@@ -52,16 +52,16 @@ button:disabled {
   font-size: 12px;
 }
 .highlight {
-  background: #0084FF;
-  border-color: #0084FF;
+  background: #2E98FE;
+  border-color: #2E98FE;
 }
 .highlight:hover:not(:disabled) {
-  background: #339dff;
-  border-color: #339dff;
+  background: #61b1fe;
+  border-color: #61b1fe;
 }
 .highlight:disabled {
   color: #FFF;
-  background: #66b5ff;
+  background: #94cafe;
   cursor: not-allowed;
-  border-color: #66b5ff;
+  border-color: #94cafe;
 }

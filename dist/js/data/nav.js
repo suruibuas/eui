@@ -148,6 +148,11 @@ window.nav = [
                 'name' : '标签',
                 'href' : './html/tag.html',
                 'icon' : 'tag'
+            },
+            {
+                'name' : '选项卡',
+                'href' : './html/tab.html',
+                'icon' : 'ellipsis-h'
             }
         ]
     },

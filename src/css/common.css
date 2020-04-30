@@ -359,7 +359,7 @@ td {
  */
 .icon {
   border-radius: 50px;
-  border: 2px #0084FF solid;
+  border: 2px #2E98FE solid;
 }
 .r2 {
   border-radius: 2px;
@@ -515,4 +515,72 @@ td {
 }
 .tag-7 {
   background: #BBC5D8;
+}
+/**
+ * ================= 选项卡 ==================
+ */
+.tab {
+  margin-top: 30px;
+}
+.tab-module-1 span,
+.tab-module-2 span {
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  margin-right: 40px;
+  font-size: 14px;
+  cursor: pointer;
+  position: relative;
+}
+.tab-module-1 span i,
+.tab-module-2 span i {
+  margin-right: 6px;
+}
+.tab-module-1 {
+  padding-left: 10px;
+  border-bottom: 1px #000000 solid;
+}
+.tab-module-1 span {
+  color: #B1b1b1;
+}
+.tab-module-1 .active {
+  transition: color 0.2s linear;
+  color: #FFF;
+}
+.tab-module-1 .active div {
+  border-radius: 50px;
+  transition: background 0.2s linear;
+  width: 14px;
+  height: 2px;
+  background-color: #2E98FE;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -7px;
+}
+.tab-module-2 {
+  text-align: center;
+}
+.tab-module-2 .tab-box {
+  border-radius: 50px;
+  box-shadow: #131630 0px 0px 10px;
+  background: #131630;
+  display: inline-block;
+  padding: 4px;
+}
+.tab-module-2 .tab-box span {
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  margin: 0;
+  padding: 0 25px;
+}
+.tab-module-2 .tab-box .active {
+  border-radius: 50px;
+  transition: background 0.2s linear;
+  background: #2E98FE;
+}
+.tab-panel {
+  margin-top: 20px;
+  display: none;
 }

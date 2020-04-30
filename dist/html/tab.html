@@ -1,0 +1,175 @@
+<div class="font-h2">
+    选项卡
+</div>
+<div class="font-h6 mt10 mb20">
+    EAdmin提供了日常开发常用的选项卡模块，分为页面级的和组件级的
+</div>
+<div class="block-box">
+    <div class="col-md-6">
+        <div class="block">
+            <div class="font-h3">
+                横向选项卡模式一
+            </div>
+            <div id="p1" class="mt10">
+                <div class="tab-panel">
+                    tab-1
+                </div>
+                <div class="tab-panel">
+                    tab-2
+                </div>
+                <div class="tab-panel">
+                    tab-3
+                </div>
+                <div class="tab-panel">
+                    tab-4
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="block">
+            <div class="font-h3">
+                横向选项卡模式二
+            </div>
+            <div id="p2" class="mt10">
+                <div class="tab-panel">
+                    tab-1
+                </div>
+                <div class="tab-panel">
+                    tab-2
+                </div>
+                <div class="tab-panel">
+                    tab-3
+                </div>
+                <div class="tab-panel">
+                    tab-4
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="block">
+            <div class="font-h3">
+                嵌套选项卡
+            </div>
+            <div id="p3" class="mt10">
+                <div class="tab-panel">
+                    <div id="p4" class="mt10">
+                        <div class="tab-panel">
+                            tab-1
+                        </div>
+                        <div class="tab-panel">
+                            tab-2
+                        </div>
+                        <div class="tab-panel">
+                            tab-3
+                        </div>
+                        <div class="tab-panel">
+                            tab-4
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-panel">
+                    tab-2
+                </div>
+                <div class="tab-panel">
+                    tab-3
+                </div>
+                <div class="tab-panel">
+                    tab-4
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (() => {
+        Eadmin.tab('#p1', {
+            tabs : [
+                {
+                    name : '声音',
+                    icon : 'volume-up',
+                    active : true
+                },
+                {
+                    name : '显示',
+                    icon : 'tv'
+                },
+                {
+                    name : '通用',
+                    icon : 'cube'
+                },
+                {
+                    name : '通知',
+                    icon : 'bell-o'
+                }
+            ]
+        });
+        Eadmin.tab('#p2', {
+            module : 2,
+            tabs : [
+                {
+                    name : '声音',
+                    icon : 'volume-up',
+                    active : true
+                },
+                {
+                    name : '显示',
+                    icon : 'tv'
+                },
+                {
+                    name : '通用',
+                    icon : 'cube'
+                },
+                {
+                    name : '通知',
+                    icon : 'bell-o'
+                }
+            ]
+        });
+        Eadmin.tab('#p3', {
+            module : 1,
+            tabs : [
+                {
+                    name : '声音',
+                    icon : 'volume-up',
+                    active : true
+                },
+                {
+                    name : '显示',
+                    icon : 'tv'
+                },
+                {
+                    name : '通用',
+                    icon : 'cube'
+                },
+                {
+                    name : '通知',
+                    icon : 'bell-o'
+                }
+            ]
+        });
+        Eadmin.tab('#p4', {
+            module : 2,
+            tabs : [
+                {
+                    name : '声音',
+                    icon : 'volume-up',
+                    active : true
+                },
+                {
+                    name : '显示',
+                    icon : 'tv'
+                },
+                {
+                    name : '通用',
+                    icon : 'cube'
+                },
+                {
+                    name : '通知',
+                    icon : 'bell-o'
+                }
+            ]
+        });
+    })();
+</script>

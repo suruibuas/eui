@@ -1,115 +1,119 @@
 /**
- * eadmin 按钮组件
+ * eadmin 选项卡组件
  */
 
-class Button{	
+class Tab{
+
+	constructor(dom, param){
+		this.dom = scope(dom);
+		// 选项卡面板
+		this.panel  = this.dom.children('.tab-panel');
+		// 当前活动面板的index
+		this.active = null;
+		if (this.panel.length == 0)
+		{
+			console.log('容器内没有找到.tab-panel元素，构建选项卡失败');
+			return;
+		}
+		let _param = {
+			// 模式
+			module : 1,
+			// 配置
+			tabs : []
+		};
+		this.param = $.extend(_param, param);
+		this.run();
+	}
+
+	run(){
+		this._create();
+		this._init();
+		this._event();
+	}
 
 	/**
-	 * 按钮
+	 * 构建结构
 	 */
-	static run(dom){
+	_create()
+	{
+		if (this.param.tabs.length == 0)
+		{
+			console.log('请至少指定1个选项卡');
+			return;
+		}
 		let v = {
-			// 延迟按钮
-			delay : dom.find('button[data-delay]'),
-			// 图标按钮
-			icon  : dom.find('button[data-icon]')
+			html : ''
 		};
-		// 延迟按钮处理
-		v.delay.each(function(){
-			// 私有变量组
-			let _var = {
-				this : $(this)
-			};
-			_var.html  = _var.this.html();
-			_var.delay = _var.this.data('delay');
-			// 按钮状态与赋值
-			_var.this.
-				attr('disabled', true).
-				html(`倒计时（${_var.delay}）秒后可操作`);
-			_var.time = setInterval(() => {
-				_var.delay--;
-				_var.this.html(`倒计时（${_var.delay}）秒后可操作`);
-				if (_var.delay == 0)
+		// 模式一
+		if (this.param.module == 1)
+		{
+			v.html += `<div class="tab tab-module-1">`;
+			_.each(this.param.tabs, (row, key) => {
+				v.html += `<span`;
+				if (row.active === true)
 				{
-					clearInterval(_var.time);
-					_var.this.
-						attr('disabled', false).
-						html(_var.html);
+					v.html += ` class="active"`;
+					this.active = key;
 				}
-			}, 1000);
-		});
-		// 图标按钮处理
-		v.icon.each(function(){
-			let _var = {
-				this : $(this)
-			};
-			_var.class = 'fa';
-			if ( ! _var.this.is(':empty'))
-				_var.class += ' mr10';
-			_var.html = `<i class="${_var.class} ${_var.this.data('icon')}"></i>`;
-			_var.this.prepend(_var.html);
-		});
+				v.html += `>`;
+				if (row.icon != undefined)
+				{
+					v.html += `<i class="fa fa-${row.icon}"></i>`;
+				}
+				v.html += row.name;
+				v.html += `<div></div>`;
+				v.html += `</span>`;
+			});
+			v.html += `</div>`;
+		}
+		else
+		{
+			v.html += `<div class="tab tab-module-2"><div class="tab-box">`;
+			_.each(this.param.tabs, (row, key) => {
+				v.html += `<span`;
+				if (row.active === true)
+				{
+					v.html += ' class="active"';
+					this.active = key;
+				}
+				v.html += `>`;
+				v.html += row.name;
+				v.html += `</span>`;
+			});
+			v.html += `</div></div>`;
+		}
+		this.dom.prepend(v.html);
+		this.tab = this.dom.children('.tab');
+	}
+
+	/**
+	 * 初始化
+	 */
+	_init()
+	{
+		if (this.active == null)
+		{
+			this.active = 0;
+		}
+		this.panel.eq(this.active).show();
 	}
 
 	/**
 	 * 事件
 	 */
-	static event(){
+	_event()
+	{
 		let that = this;
-		// 加载按钮点击事件
-		body.
-		on('click', 'button[data-loading]', function(){
+		this.tab.
+		on('click', 'span:not(.active)', function(){
 			let v = {
 				this : $(this)
 			};
-			// 如果是提交表单的按钮则不进行后续处理
-			if (v.this.data('submit') != undefined)
-			{
-				return;
-			}
-			that.loading(v.this);
-			// 回调
-			v.do = v.this.data('do');
-			if (v.do == undefined)
-			{
-				return;
-			}
-			try{
-				Method != undefined;
-				if ( ! _.isFunction(Method[v.do]))
-				{
-					console.log('指定的' + v.do + '不是一个可被调用的函数');
-					return;
-				}
-				Method[v.do](v.this);
-			}
-			catch(e){
-				console.log(e);
-			}
+			v.index = v.this.index();
+			addClassExc(v.this, 'active');
+			that.panel.hide();
+			that.panel.eq(v.index).show();
 		});
-	}
-
-	/**
-	 * 重置
-	 */
-	static reset(btn){
-		btn.
-			attr('disabled', false).
-			html(btn.data('source'));
-	}
-
-	/**
-	 * 加载中
-	 */
-	static loading(btn){
-		let v = {
-			this : btn,
-			icon : `<i class="fa fa-spinner fa-pulse mr5"></i>`
-		};
-		v.this.
-			attr('disabled', true).
-			data('source', v.this.html()).
-			html(v.icon + v.this.data('loading'));
 	}
 	
 }

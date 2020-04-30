@@ -525,3 +525,72 @@ td{
 .tag-7{
     background: @other-color-4;
 }
+
+/**
+ * ================= 选项卡 ==================
+ */
+.tab{
+    margin-top: 30px;
+}
+.tab-module-1, .tab-module-2{
+    span{
+        display: inline-block;
+        height: 40px;
+        line-height: 40px;
+        margin-right: 40px;
+        font-size: @font-size-2;
+        cursor: pointer;
+        position: relative;
+        i{
+            margin-right: 6px;
+        }
+    }
+}
+.tab-module-1{
+    padding-left: 10px;
+    border-bottom: 1px @border-color-3 solid;
+    span{
+        color: @font-color-1;
+    }
+    .active{
+        .animate(color);
+        color: @font-color-2;
+        div{
+            .border-radius(50px);
+            .animate(background);
+            width: 14px;
+            height: 2px;
+            background-color: @color-3;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            margin-left: -7px;
+        }
+    }
+}
+.tab-module-2{
+    text-align: center;
+    .tab-box{
+        .border-radius(50px);
+        .box-shadow();
+        background: @shadow-color;
+        display: inline-block;
+        padding: 4px;
+        span{
+            height: 32px;
+            line-height: 32px;
+            text-align: center;
+            margin: 0;
+            padding: 0 25px;
+        }
+        .active{
+            .border-radius(50px);
+            .animate(background);
+            background: @color-3;
+        }
+    }
+}
+.tab-panel{
+    margin-top: 20px;
+    display: none;
+}

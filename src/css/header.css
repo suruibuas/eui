@@ -64,7 +64,7 @@ header .main-nav .logo {
   color: #FFF;
 }
 header .main-nav .logo em {
-  color: #0084FF;
+  color: #2E98FE;
   font-style: normal;
   font-size: 32px;
 }
@@ -87,6 +87,6 @@ header .sub-nav li {
   font-weight: bold;
 }
 header .sub-nav .active li {
-  background: #0084FF;
+  background: #2E98FE;
   color: #FFF;
 }
