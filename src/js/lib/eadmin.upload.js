@@ -25,7 +25,9 @@ class Upload{
 			// 最大文件数量
 			maxfile : null,
 			// 成功回调
-			success : null
+			success : null,
+			// 默认值
+			default : ''
 		}
 		// 配置参数
 		this.param = $.extend(_param, param);
@@ -105,6 +107,21 @@ class Upload{
 			dictResponseError : '上传文件失败，返回码：{{statusCode}}',
 			dictMaxFilesExceeded : '上传的文件数量超出限制'
 		});
+		// 默认值
+		if (this.param.default != '')
+		{
+			v.default = this.param.default.split(',');
+			_.each(v.default, (val) => {
+				let thumb = {
+					name : val, 
+					accepted : true
+				};
+				this.upload.emit('addedfile', thumb);
+				this.upload.emit('thumbnail', thumb, val);
+				this.upload.emit('success', thumb);
+				this.upload.emit('complete', thumb);
+			});
+		}
 		Mount.dropzone.push(this.upload);
 	}
 

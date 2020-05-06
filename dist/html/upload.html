@@ -45,6 +45,14 @@
             <div id="u5" class="mt20"></div>
         </div>
     </div>
+    <div class="col-md-4">
+        <div class="block">
+            <div class="font-h3">
+                有默认值
+            </div>
+            <div id="u6" class="mt20"></div>
+        </div>
+    </div>
 </div>
 <script>
     (() => {
@@ -57,7 +65,7 @@
         });
         Eadmin.upload('#u3', {
             api : 'upload.php',
-            maxsize : 100
+            maxsize : 1000
         });
         Eadmin.upload('#u4', {
             api : 'upload.php',
@@ -66,6 +74,10 @@
         Eadmin.upload('#u5', {
             api : 'upload.php',
             maxfile : 1
+        });
+        Eadmin.upload('#u6', {
+            api : 'upload.php',
+            default : 'http://api.eadmin.com.cn/upload/1.jpg'
         });
     })();
 </script>

@@ -6,6 +6,11 @@
 	padding:10px;
     border-radius: 4px;
     position: relative;
+    transition:border-color 0.2s linear;
+}
+.dropzone:hover{
+    border-color: #2E98FE;
+    transition:border-color 0.2s linear;
 }
 .dropzone .dz-message{
     font-size: 14px;
