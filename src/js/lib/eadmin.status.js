@@ -18,14 +18,14 @@ class Status{
 				this : $(this)
 			};
 			v.status = v.this.data('status');
-			if ( ! _.isInteger(v.status) || v.status > 7)
+			if ( ! _.isInteger(v.status) || v.status > 8)
 			{
-				console.log('状态码必须在0-7之间');
+				console.log('状态码必须在1-8之间');
 				return true;
 			}
 			v.this.
 				addClass('status').
-				prepend(`<i class="status-${v.status}"></i>`);
+				prepend(`<i class="status-dot status-${v.status}"></i>`);
 		});
 	}
 	

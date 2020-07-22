@@ -17,7 +17,7 @@ class Upload{
 			// header
 			headers  : {},
 			// 允许的格式
-			doc : '.jpg, .gif, .png, .jpeg',
+			doc : ['.jpg', '.gif', '.png', '.jpeg'],
 			// 自动上传
 			autoupload : true,
 			// 最大尺寸
@@ -61,7 +61,7 @@ class Upload{
 	{
 		// 说明html
 		let msg = `<div class="dz-message">
-					<i class="fa fa-cloud-upload"></i>
+					<i class="ri-upload-cloud-2-line"></i>
 					将文件拖至此处或点击上传
 				</div>
 				<div class="dz-button">
@@ -88,23 +88,23 @@ class Upload{
 							<div class="dz-progress">
 								<span class="dz-upload" data-dz-uploadprogress></span>
 							</div>
-							<i class="fa fa-check-circle dz-success-i"></i>
-							<i class="fa fa-times-circle dz-error-i"></i>
-							<i class="fa fa-times dz-remove-i" data-dz-remove></i>
+							<i class="ri-checkbox-circle-fill dz-success-i"></i>
+							<i class="ri-close-circle-fill dz-error-i"></i>
+							<i class="ri-close-line dz-remove-i" data-dz-remove></i>
 						</div>`;
 		this.upload = new Dropzone(this.dom, {
 			url 		     : this.param.api,
 			paramName        : this.param.filename,
 			maxFilesize      : this.param.maxsize,
 			headers          : this.param.headers,
-			acceptedFiles    : this.param.doc,
+			acceptedFiles    : _.join(this.param.doc, ','),
 			autoProcessQueue : this.param.autoupload,
 			parallelUploads  : 1000,
 			previewTemplate  : v.uploadTmp,
 			maxFiles 		 : this.param.maxfile,
 			dictFileTooBig   : '允许上传文件的最大限制为：{{maxFilesize}}MB',
-			dictInvalidFileType : '上传的文件格式不被允许',
-			dictResponseError : '上传文件失败，返回码：{{statusCode}}',
+			dictInvalidFileType  : '上传的文件格式不被允许',
+			dictResponseError    : '上传文件失败，返回码：{{statusCode}}',
 			dictMaxFilesExceeded : '上传的文件数量超出限制'
 		});
 		// 默认值
@@ -146,7 +146,7 @@ class Upload{
 			let fileCount = that.domCache.find('.dz-preview:not(.dz-complete)').length;
 			v.button.find('em').html(fileCount);
 		}).
-		on('removedfile', () => {
+		on('removedfile', (file) => {
 			// 上传文件总数
 			let fileCount = that.domCache.find('.dz-preview:not(.dz-complete)').length;
 			v.button.find('em').html(fileCount);
@@ -155,6 +155,8 @@ class Upload{
 				that.domCache.css('padding-bottom', 10);
 				v.button.hide();
 			}
+			if (_.isFunction(that.param.delete))
+				that.param.delete(file.name);
 		}).
 		on('success', (file, response) => {
 			if (_.isFunction(that.param.success))

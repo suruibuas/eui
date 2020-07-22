@@ -1,115 +1,197 @@
 /**
- * eadmin 按钮组件
+ * eadmin 编辑器
  */
 
-class Button{	
+class Editor{	
 
-	/**
-	 * 按钮
-	 */
-	static run(dom){
-		let v = {
-			// 延迟按钮
-			delay : dom.find('button[data-delay]'),
-			// 图标按钮
-			icon  : dom.find('button[data-icon]')
-		};
-		// 延迟按钮处理
-		v.delay.each(function(){
-			// 私有变量组
-			let _var = {
-				this : $(this)
-			};
-			_var.html  = _var.this.html();
-			_var.delay = _var.this.data('delay');
-			// 按钮状态与赋值
-			_var.this.
-				attr('disabled', true).
-				html(`倒计时（${_var.delay}）秒后可操作`);
-			_var.time = setInterval(() => {
-				_var.delay--;
-				_var.this.html(`倒计时（${_var.delay}）秒后可操作`);
-				if (_var.delay == 0)
-				{
-					clearInterval(_var.time);
-					_var.this.
-						attr('disabled', false).
-						html(_var.html);
-				}
-			}, 1000);
-		});
-		// 图标按钮处理
-		v.icon.each(function(){
-			let _var = {
-				this : $(this)
-			};
-			_var.class = 'fa';
-			if ( ! _var.this.is(':empty'))
-				_var.class += ' mr10';
-			_var.html = `<i class="${_var.class} ${_var.this.data('icon')}"></i>`;
-			_var.this.prepend(_var.html);
-		});
-	}
+	constructor(dom, param){
+        this.storeKey = md5(Eadmin.currentHref + dom);
+        this.dom = dom;
+        this.domCache = scope(this.dom);
+        this.dom += (new Date()).valueOf();
+        this.domCache.
+            attr('id', this.dom.replace('#', '')).
+            data('store', this.storeKey).
+            addClass('editor');
+		// 默认参数
+		let _param   = {
+            // 编辑器名称，后端取值保存数据库使用
+            name : 'editor',
+			// 编辑器高度
+            height   : 300,
+            // 编辑器默认内容
+            default  : '',
+            // 是否只读
+            readonly : false,
+            // 设置默认显示文案
+            placeholder : '请输入内容...',
+            // 允许的图片格式
+            doc : ['.jpg', '.png', '.jpeg', '.gif'],
+            // 允许的图片大小，单位KB
+            size : 1000,
+            // 文件上传接口地址
+            api : 'upload.php',
+            // 文件域名称，上传文件后端取值用
+            filename  : 'file',
+            // 是否自动保存输入内容
+            autosave  : false,
+            // 同请求一起发送的header头
+            header : {
+                'Content-Type' : 'multipart/form-data'
+            }
+		}
+		// 配置参数
+        this.param = $.extend(true, _param, param);
+		if (this.param.api == '')
+		{
+			console.log('请指定后端接收上传数据的API地址');
+			return;
+		}
+		// 拼接接口
+        if ( ! _.startsWith(this.param.api, 'http'))
+		{
+            if ( ! _.startsWith(module.conf.http.baseURL, 'http'))
+            {
+                console.log('上传文件接收接口地址不完整');
+                return false;
+            }
+			this.param.api = module.conf.http.baseURL + this.param.api;
+        }
+        this.domCache.
+            css('min-height', this.param.height).
+            after(`<input class="dn" type="file" accept="image/*">`);
+        if (this.param.default != '')
+        {
+            this.domCache.html(this.param.default);
+        }
+        else
+        {
+            let content = store(this.storeKey);
+            if (content != undefined)
+                this.domCache.html(content);
+        }
+        this.quill = null;
+		this.run();
+    }
+    
+    run()
+    {
+        this.create();
+    }
 
-	/**
-	 * 事件
-	 */
-	static event(){
-		let that = this;
-		// 加载按钮点击事件
-		body.
-		on('click', 'button[data-loading]', function(){
-			let v = {
-				this : $(this)
-			};
-			// 如果是提交表单的按钮则不进行后续处理
-			if (v.this.data('submit') != undefined)
-			{
-				return;
-			}
-			that.loading(v.this);
-			// 回调
-			v.do = v.this.data('do');
-			if (v.do == undefined)
-			{
-				return;
-			}
-			try{
-				Method != undefined;
-				if ( ! _.isFunction(Method[v.do]))
+    /**
+     * 创建编辑器
+     */
+    create()
+    {
+        let options = [
+            [
+                'bold', 'italic', 'underline', 'strike',
+                {'header' : [1, 2, 3, 4, 5, 6, false]}
+            ],
+            [
+                {'size' : ['small', false, 'large', 'huge']}
+            ],
+            [
+                {'color' : []},
+                {'background' : []}
+            ],
+            [
+                'blockquote', 'code-block'
+            ],
+            [
+                {'list' : 'ordered'},
+                {'list' : 'bullet'}
+            ],
+            [
+                {'indent' : '-1'},
+                {'indent' : '+1'}
+            ],
+            [
+                {'align' : []}
+            ],        
+            [
+                {'direction' : 'rtl'}
+            ],
+            [
+                'clean', 'link', 'image', 'video'
+            ]
+        ];
+        this.quill = new Quill(this.dom, {
+            theme : 'snow',
+            modules : {
+                toolbar : options
+            },
+            placeholder : this.param.placeholder,
+            readonly : this.param.readonly
+        });
+        let file = this.domCache.next("input[type='file']");
+        this.quill.
+            getModule('toolbar').
+            addHandler('image', () => {
+                file.val('').trigger('click');
+            });
+        let that = this;
+        file.on('change', function(e){
+            let file = e.target.files[0];
+            // 校验格式
+            let type = file.type.replace(/image\//, '.');
+            if (that.param.doc.indexOf(type) == -1)
+            {
+                Eadmin.message.error({
+                    content : '图片大小不允许，上传失败'
+                });
+                return;
+            }
+            // 校验大小
+            that.param.size *= 1000;
+            if (file.size > that.param.size)
+            {
+                Eadmin.message.error({
+                    content : '图片大小超出限制，上传失败'
+                });
+                return;
+            }
+            let form = new FormData();
+            form.append(that.param.filename, file, file.name);
+            axios.post(that.param.api, form, that.param.header).
+            then((response) => {
+                let data = response.data;
+				if (data[module.conf.http.code_field] == undefined)
 				{
-					console.log('指定的' + v.do + '不是一个可被调用的函数');
+					console.log('接口返回结果中没有找到定义的code码字段');
 					return;
 				}
-				Method[v.do](v.this);
-			}
-			catch(e){
-				console.log(e);
-			}
-		});
-	}
-
-	/**
-	 * 重置
-	 */
-	static reset(btn){
-		btn.
-			attr('disabled', false).
-			html(btn.data('source'));
-	}
-
-	/**
-	 * 加载中
-	 */
-	static loading(btn){
-		let v = {
-			this : btn,
-			icon : `<i class="fa fa-spinner fa-pulse mr5"></i>`
-		};
-		v.this.
-			attr('disabled', true).
-			data('source', v.this.html()).
-			html(v.icon + v.this.data('loading'));
-	}
+                // 执行成功
+				if (data[module.conf.http.code_field] == module.conf.http.code_success)
+				{
+                    let range = that.quill.getSelection();
+                    let newRange = 0 + (range !== null ? range.index : 0);
+                    that.quill.insertEmbed(newRange, 'image', data.pic);
+                    that.quill.setSelection(1 + newRange);
+					return;
+				}
+				let msg = '图片上传失败';
+				if (data[module.conf.http.msg_field] != undefined)
+					msg = data[module.conf.http.msg_field];
+				Eadmin.message.error({
+					content : msg
+				});
+            }).
+			catch((error) => {
+				Eadmin.message.error({
+					content : error
+				});
+			});
+        });
+        if ( ! this.param.autosave)
+            return;
+        this.quill.on('text-change', _.debounce(() => {
+            store(this.storeKey, this.quill.root.innerHTML);
+            Eadmin.message.info({
+                content : '编辑内容已实时保存至本地'
+            });
+        }, 1000));
+    }
 	
 }

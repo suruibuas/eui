@@ -15,7 +15,7 @@ class Popup{
 	{
 		this._createHtml({
 			title : '消息提示',
-			icon  : 'exclamation-circle color-warning',
+			icon  : 'ri-error-warning-fill alert',
 			txt   : param.content,
 			btn   : '<button id="close" class="highlight middle">确定 (<em>3</em>)</button>'
 		});
@@ -31,7 +31,7 @@ class Popup{
 	{
 		this._createHtml({
 			title : '操作成功',
-			icon  : 'check-circle color-success',
+			icon  : 'ri-checkbox-circle-fill success',
 			txt   : param.content,
 			btn   : '<button id="close" class="highlight middle">确定 (<em>3</em>)</button>'
 		});
@@ -47,7 +47,7 @@ class Popup{
 	{
 		this._createHtml({
 			title : '操作失败',
-			icon  : 'times-circle color-error',
+			icon  : 'ri-close-circle-fill error',
 			txt   : param.content,
 			btn   : '<button id="close" class="highlight middle">确定 (<em>3</em>)</button>'
 		});
@@ -63,7 +63,7 @@ class Popup{
 	{
 		this._createHtml({
 			title : '操作确认',
-			icon  : 'question-circle color-warning',
+			icon  : 'ri-question-fill confirm',
 			txt   : param.content,
 			btn   : `<button id="sure" class="highlight middle" style="margin-right:5px;">确定</button>
 					<button id="close" class="middle">取消</button>`
@@ -94,7 +94,6 @@ class Popup{
 	 * 初始化
 	 */
 	static _createHtml(param = {}){
-		param.icon = 'fa fa-' + param.icon;
 		if ($('.popup').length == 1)
 		{
 			let _popup = $('.popup');

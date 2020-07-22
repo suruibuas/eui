@@ -111,7 +111,7 @@ class Transfer{
 		if (this.param.height > 0)
 		{
 			v.style += 'height:' + this.param.height + 'px;';
-			v.height = this.param.height - 34;
+			v.height = this.param.height - 40;
 		}
 		v.style += `"`;
 		// 搜索
@@ -136,7 +136,7 @@ class Transfer{
 			let d = (v.from[i].disabled == true) ? 'disabled' : '';
 			v.html += `<li class="${d}">
 							<label>
-								<input name="${v.from[i].name}" data-num="0" value="${v.from[i].val}" type="checkbox" ${d}> ${v.from[i].txt}
+								<input data-num="0" value="${v.from[i].val}" type="checkbox" ${d}> ${v.from[i].txt}
 							</label>
 						</li>`;
 		}
@@ -145,16 +145,16 @@ class Transfer{
 		{
 			v.html += `<div class="transfer-search">
 							<label>
-								<input data-num="0" class="search-input" type="text" placeholder="请输入搜索内容" data-icon="search|right">
+								<input data-num="0" class="search-input" type="text" placeholder="请输入搜索内容" data-icon="ri-search-line|right">
 							</label>
 						</div>`;
 		}
 		v.html += `</div><div class="transfer-operation">
 						<button disabled class="highlight" data-num="0">
-							<i class="fa fa-angle-left"></i>
+							<i class="ri-arrow-left-s-line"></i>
 						</button>
 						<button disabled class="highlight" data-num="1">
-							<i class="fa fa-angle-right"></i>
+							<i class="ri-arrow-right-s-line"></i>
 						</button>
 					</div>`;
 		v.html += `<div class="transfer-box-list"${v.style}>
@@ -170,7 +170,7 @@ class Transfer{
 			let d = (v.to[i].disabled == true) ? 'disabled' : '';
 			v.html += `<li class="${d}">
 							<label>
-								<input name="${v.to[i].name}" data-num="1" value="${v.to[i].val}" type="checkbox" ${d}> ${v.to[i].txt}
+								<input data-num="1" value="${v.to[i].val}" type="checkbox" ${d}> ${v.to[i].txt}
 							</label>
 						</li>`;
 		}
@@ -179,7 +179,7 @@ class Transfer{
 		{
 			v.html += `<div class="transfer-search">
 							<label>
-								<input data-num="1" class="search-input" type="text" placeholder="请输入搜索内容" data-icon="search|right">
+								<input data-num="1" class="search-input" type="text" placeholder="请输入搜索内容" data-icon="ri-search-line|right">
 							</label>
 						</div>`;
 		}

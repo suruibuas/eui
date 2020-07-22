@@ -206,7 +206,7 @@ class Citypikcer{
 			if (that.param.type == 2 && 
 				that.param.level > 1)
 			{
-				_v.icon = `<i class="fa fa-angle-right"></i>`;
+				_v.icon = `<i class="ri-arrow-right-s-line"></i>`;
 			}
 			$.each(cp_d, function(i, item){
 				if (item.indexOf(_v.val) != -1)
@@ -338,7 +338,7 @@ class Citypikcer{
 			if (_v.next.length == 0)
 			{
 				that.level += 1;
-				that.picker.append(`<div class="vert ml5"></div>`);
+				that.picker.append(`<div class="vert"></div>`);
 				_v.next = that.picker.children('.vert:last');
 				Eadmin.scroll(_v.next[0]);
 			}
@@ -395,7 +395,7 @@ class Citypikcer{
 		if (this.param.type == 2 && 
 			this.level < this.param.level)
 		{
-			_icon = `<i class="fa fa-angle-right"></i>`;
+			_icon = `<i class="ri-arrow-right-s-line"></i>`;
 		}
 		for (let _i in _source)
 		{

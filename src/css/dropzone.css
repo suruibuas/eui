@@ -2,14 +2,13 @@
 	min-height: 120px;
 	border:2px dashed #30375B;
 	background:#232B4C;
-	color:#B1b1b1;
 	padding:10px;
     border-radius: 4px;
     position: relative;
     transition:border-color 0.2s linear;
 }
 .dropzone:hover{
-    border-color: #2E98FE;
+    border-color: #0084FF;
     transition:border-color 0.2s linear;
 }
 .dropzone .dz-message{
@@ -43,7 +42,7 @@
     display: inline-block;
     vertical-align: top;
     margin: 10px;
-    min-height: 100px;
+    min-height: 110px;
 }
 .dropzone .dz-preview .dz-success-i,
 .dropzone .dz-preview .dz-error-i,
@@ -53,14 +52,15 @@
 	position: absolute;
 	display: block;
 	bottom:6px;
-	right:6px;
+    right:6px;
+    margin-right: 0;
 	font-size:18px;
 }
 .dropzone .dz-preview .dz-success-i{
-	color:#36D144;
+	color:#06C270;
 }
 .dropzone .dz-preview .dz-error-i{
-	color:#ff2727;
+	color:#FF3B3B;
 }
 .dropzone .dz-preview .dz-remove-i{
 	opacity: 1;
@@ -78,8 +78,8 @@
 }
 .dropzone .dz-preview .dz-image{
     overflow: hidden;
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
     position: relative;
     display: block;
     z-index: 10;
@@ -88,6 +88,7 @@
     display: block;
     width: 100%;
     height: 100%;
+    border-radius:5px;
 }
 .dropzone .dz-button{
     position: absolute;

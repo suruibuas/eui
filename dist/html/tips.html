@@ -1,21 +1,15 @@
-<div class="font-h2">
-    Tips提示
-</div>
-<div class="font-h6 mt10 mb20">
+<h2>Tips提示</h2>
+<h6>
     EAdmin提供后台开发中常用的文字提示模块，可用在各种需要提示的场景
-</div>
+</h6>
 <!-- 大盒子 -->
 <div class="block-box">
     <!-- 响应盒子，bootstrap -->
     <div class="col-lg-3 col-md-3">
         <!-- 容器盒子，具体布局使用 -->
         <div class="block">
-            <div class="font-h3">
-                默认文字提示
-            </div>
-            <div class="font-h6 mt20">
-                Tips会自动识别应该显示的位置，无需额外操作
-            </div>
+            <h3>默认文字提示</h3>
+            <h6>Tips会自动识别应该显示的位置，无需额外操作</h6>
             <div class="mt20">
                 <button data-tips="默认显示在顶部的Tips">默认文字提示</button>
             </div>
@@ -25,14 +19,14 @@
     <div class="col-lg-3 col-md-3">
         <!-- 容器盒子，具体布局使用 -->
         <div class="block">
-            <div class="font-h3">
-                自定义显示位置的文字提示
-            </div>
-            <div class="font-h6 mt20">
-                支持top、down、left、right四个方向的自定义位置
-            </div>
+            <h3>自定义显示位置</h3>
+            <h6>支持top、down、left、right四个方向的自定义位置</h6>
             <div class="mt20">
-                <button data-tips="自定义显示位置的文字提示" data-tips-position="right">在右侧显示</button>
+                <button 
+                    data-tips="自定义显示位置的文字提示" 
+                    data-tips-position="right">
+                    在右侧显示
+                </button>
             </div>
         </div>
     </div>
@@ -40,16 +34,21 @@
     <div class="col-lg-3 col-md-3">
         <!-- 容器盒子，具体布局使用 -->
         <div class="block">
-            <div class="font-h3">
-                自动居中的TIPS
-            </div>
-            <div class="font-h6 mt20">
-                Tips会自动根据环境居中
-            </div>
-            <div class="mt20 fs16">
-                <button class="mr10">默认文字提示</button>
-                <i class="fa fa-question-circle mr10" data-tips="我水平居中显示啦~" data-tips-offset="middle"></i>
-                <i class="fa fa-question-circle" data-tips="我垂直居中显示啦~" data-tips-offset="middle" data-tips-position="right"></i>
+            <h3>自动居中</h3>
+            <h6>Tips会自动根据环境居中</h6>
+            <div class="mt20">
+                <button>默认文字提示</button>
+                <i 
+                    class="ri-question-line va-m fs18" 
+                    data-tips="我水平居中显示啦~" 
+                    data-tips-offset="middle">
+                </i>
+                <i 
+                    class="ri-question-line va-m fs18" 
+                    data-tips="我垂直居中显示啦~" 
+                    data-tips-offset="middle" 
+                    data-tips-position="right">
+                </i>
             </div>
         </div>
     </div>
@@ -57,14 +56,15 @@
     <div class="col-lg-3 col-md-3">
         <!-- 容器盒子，具体布局使用 -->
         <div class="block">
-            <div class="font-h3">
-                根据环境自动判断位置
-            </div>
-            <div class="font-h6 mt20">
-                Tips会判断左右空间是否足够
-            </div>
+            <h3>自动判断位置</h3>
+            <h6>Tips会判断左右空间是否足够</h6>
             <div class="mt20">
-                <button data-tips="这是一段很长的Tips文案，设定的右侧显示，但是右侧空间不足，则自动显示在左侧，无需手工指定" data-tips-position="right" data-tips-offset="middle">在右侧显示</button>
+                <button 
+                    data-tips="这是一段很长的Tips文案，设定的右侧显示，但是右侧空间不足，则自动显示在左侧，无需手工指定" 
+                    data-tips-position="right" 
+                    data-tips-offset="middle">
+                    在右侧显示
+                </button>
             </div>
         </div>
     </div>

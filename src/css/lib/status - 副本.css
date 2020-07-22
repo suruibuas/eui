@@ -1,0 +1,72 @@
+/**
+ * eadmin / www.eadmin.net
+ * 
+ * 状态
+ */
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 全局配置
+ */
+/**
+ * ================= 颜色设置 ==================
+ */
+/**
+ * ================= 字体设置 ==================
+ */
+/**
+ * ================= 通用方法 ==================
+ */
+.status {
+  padding-left: 14px;
+  position: relative;
+  margin-right: 10px;
+}
+.status i {
+  border-radius: 50px;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 5px;
+  left: 0;
+}
+.status .status-0 {
+  background: -moz-linear-gradient(top, #a3db87, #67C23A);
+  background: -webkit-linear-gradient(top, #a3db87, #67C23A);
+  background: -o-linear-gradient(top, #a3db87, #67C23A);
+}
+.status .status-1 {
+  background: -moz-linear-gradient(top, #ff9191, #FF2B2B);
+  background: -webkit-linear-gradient(top, #ff9191, #FF2B2B);
+  background: -o-linear-gradient(top, #ff9191, #FF2B2B);
+}
+.status .status-2 {
+  background: -moz-linear-gradient(top, #eae06a, #D1C31D);
+  background: -webkit-linear-gradient(top, #eae06a, #D1C31D);
+  background: -o-linear-gradient(top, #eae06a, #D1C31D);
+}
+.status .status-3 {
+  background: -moz-linear-gradient(top, #9933ff, #6600CC);
+  background: -webkit-linear-gradient(top, #9933ff, #6600CC);
+  background: -o-linear-gradient(top, #9933ff, #6600CC);
+}
+.status .status-4 {
+  background: -moz-linear-gradient(top, #ffb866, #FF8800);
+  background: -webkit-linear-gradient(top, #ffb866, #FF8800);
+  background: -o-linear-gradient(top, #ffb866, #FF8800);
+}
+.status .status-5 {
+  background: -moz-linear-gradient(top, #45f2ff, #00CFDE);
+  background: -webkit-linear-gradient(top, #45f2ff, #00CFDE);
+  background: -o-linear-gradient(top, #45f2ff, #00CFDE);
+}
+.status .status-6 {
+  background: -moz-linear-gradient(top, #8789a4, #555770);
+  background: -webkit-linear-gradient(top, #8789a4, #555770);
+  background: -o-linear-gradient(top, #8789a4, #555770);
+}
+.status .status-7 {
+  background: -moz-linear-gradient(top, #ffffff, #E9EBF0);
+  background: -webkit-linear-gradient(top, #ffffff, #E9EBF0);
+  background: -o-linear-gradient(top, #ffffff, #E9EBF0);
+}

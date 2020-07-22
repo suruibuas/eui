@@ -15,16 +15,13 @@ class Tab{
 			console.log('容器内没有找到.tab-panel元素，构建选项卡失败');
 			return;
 		}
-		let _param = {
-			// 模式
-			module : 1,
-			// 配置
-			tabs : []
-		};
-		this.param = $.extend(_param, param);
+		this.param = param;
 		this.run();
 	}
 
+	/**
+	 * 运行
+	 */
 	run(){
 		this._create();
 		this._init();
@@ -36,7 +33,7 @@ class Tab{
 	 */
 	_create()
 	{
-		if (this.param.tabs.length == 0)
+		if (this.param.length == 0)
 		{
 			console.log('请至少指定1个选项卡');
 			return;
@@ -44,44 +41,23 @@ class Tab{
 		let v = {
 			html : ''
 		};
-		// 模式一
-		if (this.param.module == 1)
-		{
-			v.html += `<div class="tab tab-module-1">`;
-			_.each(this.param.tabs, (row, key) => {
-				v.html += `<span`;
-				if (row.active === true)
-				{
-					v.html += ` class="active"`;
-					this.active = key;
-				}
-				v.html += `>`;
-				if (row.icon != undefined)
-				{
-					v.html += `<i class="fa fa-${row.icon}"></i>`;
-				}
-				v.html += row.name;
-				v.html += `<div></div>`;
-				v.html += `</span>`;
-			});
-			v.html += `</div>`;
-		}
-		else
-		{
-			v.html += `<div class="tab tab-module-2"><div class="tab-box">`;
-			_.each(this.param.tabs, (row, key) => {
-				v.html += `<span`;
-				if (row.active === true)
-				{
-					v.html += ' class="active"';
-					this.active = key;
-				}
-				v.html += `>`;
-				v.html += row.name;
-				v.html += `</span>`;
-			});
-			v.html += `</div></div>`;
-		}
+		v.html += `<div class="tab">`;
+		_.each(this.param, (row, key) => {
+			v.html += `<span`;
+			if (row.active === true)
+			{
+				v.html += ` class="active"`;
+				this.active = key;
+			}
+			v.html += `>`;
+			if (row.icon != undefined)
+			{
+				v.html += `<i class="${row.icon}"></i>`;
+			}
+			v.html += row.name;
+			v.html += `</span>`;
+		});
+		v.html += `</div>`;
 		this.dom.prepend(v.html);
 		this.tab = this.dom.children('.tab');
 	}
@@ -92,10 +68,12 @@ class Tab{
 	_init()
 	{
 		if (this.active == null)
-		{
 			this.active = 0;
-		}
-		this.panel.eq(this.active).show();
+		this.panel.
+			eq(this.active).
+			show();
+		// 加载页面
+		this._load();
 	}
 
 	/**
@@ -111,9 +89,49 @@ class Tab{
 			};
 			v.index = v.this.index();
 			addClassExc(v.this, 'active');
-			that.panel.hide();
-			that.panel.eq(v.index).show();
+			that.active = v.index;
+			that.panel.
+				hide().
+				eq(v.index).
+				show();
+			that._load();
 		});
+	}
+
+	/**
+	 * 加载
+	 */
+	_load()
+	{
+		let load = this.param[this.active].load;
+		if (load == undefined)
+			return;
+		if (this.param[this.active].loaded != undefined)
+			return;
+		this.param[this.active].loaded = true;
+		let panel = this.panel.eq(this.active);
+		panel.html(`
+			<div class="panel-loading">
+				<i class="ri-loader-4-line rotate"></i>页面加载中，请稍候...
+			</div>
+		`);
+		Eadmin.currentHref = load;
+		panel.
+			empty().
+			load(load, () => {
+				// 表单处理
+				Eadmin.form(panel);
+				// 延迟按钮
+				Button.run(panel);
+				// 状态
+				Status.run(panel);
+				// 标签
+				Tag.run(panel);
+				// 进度条
+				Progress.run(panel);
+				// 块
+				block(panel);
+			});
 	}
 	
 }

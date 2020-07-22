@@ -1,9 +1,7 @@
-<div class="font-h2">
-    下拉菜单
-</div>
-<div class="font-h6 mt10 mb20">
+<h2>下拉菜单</h2>
+<h6>
     EAdmin提供后台开发中常用的下拉菜单组件
-</div>
+</h6>
 <!-- 大盒子 -->
 <div class="block-box">
     <!-- 响应盒子，bootstrap -->
@@ -85,7 +83,7 @@
             <!-- 表单组盒子 -->
             <div class="form-group">
                 <span class="title">指定宽度的下拉菜单</span>
-                <select name="fruit" data-width="80">
+                <select name="fruit" data-width="100">
                     <option value="-999">请选择</option>
                     <option value="1">苹果</option>
                     <option value="2">香蕉</option>
@@ -103,12 +101,12 @@
             <!-- 表单组盒子 -->
             <div class="form-group">
                 <span class="title">联动菜单</span>
-                <select id="a" name="one" data-width="80" data-bind="child" data-api="fruit.php?type=">
+                <select name="one" data-width="100" data-bind="child" data-api="fruit.php?type=">
                     <option value="-999">请选择</option>
                     <option value="1">水果</option>
                     <option value="2">运动</option>
                 </select>
-                <select id="child" name="two" data-width="80">
+                <select id="child" name="two" data-width="100">
                     <option value="-999">请选择</option>
                 </select>
             </div>

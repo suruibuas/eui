@@ -10,7 +10,7 @@ class Message{
 	static info(param = {}){
 		this._createHtml({
 			content  : param.content,
-			icon     : 'exclamation-circle color-warning',
+			icon     : 'ri-error-warning-fill info',
 			duration : param.duration
 		});
 	}
@@ -21,7 +21,7 @@ class Message{
 	static success(param = {}){
 		this._createHtml({
 			content  : param.content,
-			icon     : 'check-circle color-success',
+			icon     : 'ri-checkbox-circle-fill success',
 			duration : param.duration
 		});
 	}
@@ -32,7 +32,7 @@ class Message{
 	static error(param = {}){
 		this._createHtml({
 			content  : param.content,
-			icon     : 'times-circle color-error',
+			icon     : 'ri-close-circle-fill error',
 			duration : param.duration
 		});
 	}
@@ -46,7 +46,7 @@ class Message{
 		};
 		v.top += $('.message').length * 40;
 		v.html = `<div class="message animated faster fadeInDown">
-			<i class="fa fa-${param.icon}"></i>${param.content}
+			<i class="${param.icon}"></i>${param.content}
 		</div>`;
 		body.append(v.html);
 		v.box = $('.message:last');

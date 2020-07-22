@@ -1,56 +1,42 @@
-<div class="font-h2">
-    上传组件
-</div>
-<div class="font-h6 mt10 mb20">
+<h2>上传组件</h2>
+<h6>
     EAdmin内置了统一的上传组件，适用于各种需要上传的场景
-</div>
+</h6>
 <div class="block-box">
     <div class="col-md-4">
         <div class="block">
-            <div class="font-h3">
-                默认上传
-            </div>
-            <div id="u1" class="mt20"></div>
+            <h3>默认上传</h3>
+            <div id="u1"></div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="block">
-            <div class="font-h3">
-                自动上传
-            </div>
-            <div id="u2" class="mt20"></div>
+            <h3>自动上传</h3>
+            <div id="u2"></div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="block">
-            <div class="font-h3">
-                指定文件最大尺寸
-            </div>
-            <div id="u3" class="mt20"></div>
+            <h3>指定文件最大尺寸</h3>
+            <div id="u3"></div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="block">
-            <div class="font-h3">
-                指定文件格式
-            </div>
-            <div id="u4" class="mt20"></div>
+            <h3>指定文件格式</h3>
+            <div id="u4"></div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="block">
-            <div class="font-h3">
-                限制最大文件数
-            </div>
-            <div id="u5" class="mt20"></div>
+            <h3>限制最大文件数</h3>
+            <div id="u5"></div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="block">
-            <div class="font-h3">
-                有默认值
-            </div>
-            <div id="u6" class="mt20"></div>
+            <h3>有默认值</h3>
+            <div id="u6"></div>
         </div>
     </div>
 </div>
@@ -69,7 +55,7 @@
         });
         Eadmin.upload('#u4', {
             api : 'upload.php',
-            doc : '.jpg'
+            doc : ['.jpg']
         });
         Eadmin.upload('#u5', {
             api : 'upload.php',
@@ -77,7 +63,11 @@
         });
         Eadmin.upload('#u6', {
             api : 'upload.php',
-            default : 'http://api.eadmin.com.cn/upload/1.jpg'
+            default : 'http://api.eadmin.com.cn/upload/1.jpg',
+            // 删除文件回调
+            delete : (file) => {
+                console.log(file);
+            }
         });
     })();
 </script>

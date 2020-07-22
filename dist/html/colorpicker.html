@@ -1,9 +1,7 @@
-<div class="font-h2">
-    颜色选择器
-</div>
-<div class="font-h6 mt10 mb20">
+<h2>颜色选择器</h2>
+<h6>
     EAdmin提供后台开发中常用的颜色选择器组件，摈弃了复杂的颜色选择，提供了日常最常使用到的色值
-</div>
+</h6>
 <!-- 大盒子 -->
 <div class="block-box">
     <!-- 响应盒子，bootstrap -->
@@ -50,6 +48,17 @@
             </div>
         </div>
     </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <span class="title">有默认值</span>
+                <div id="p5"></div>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
     (function(){
@@ -69,6 +78,9 @@
         });
         Eadmin.colorpicker('#p4', {
             bind : 'color'
+        });
+        Eadmin.colorpicker('#p5', {
+            default : '#FE9644'
         });
     })();
 </script>

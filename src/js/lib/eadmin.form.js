@@ -39,12 +39,12 @@ class Form{
 				{
 					v.this.before(`<label class="${v.class}"></label>`);
 					v.label = v.this.prev('label');
-					$(`<i class="fa ${v.icon}"></i>`).appendTo(v.label);
+					$(`<i class="${v.icon}"></i>`).appendTo(v.label);
 					v.this.appendTo(v.label);
 				}
 				else
 				{
-					v.this.before(`<i class="fa ${v.icon}"></i>`);
+					v.this.before(`<i class="${v.icon}"></i>`);
 					v.this.
 						parent().
 						addClass(v.class);	
@@ -99,8 +99,8 @@ class Form{
 				// 减
 				v.cut  = (v.val <= v.min) ? 'disabled' : '',
 				v.html = `<span class="num-add-cut">
-							<i class="fa fa-angle-up add ${v.add}"></i>
-							<i class="fa fa-angle-down cut ${v.cut}"></i>
+							<i class="ri-arrow-up-s-line add ${v.add}"></i>
+							<i class="ri-arrow-down-s-line cut ${v.cut}"></i>
 						</span>`;
 				v.this.before(`<div class="input-group"></div>`);
 				let group = v.this.prev('.input-group');
@@ -133,8 +133,8 @@ class Form{
 			v.this.
 				parent().
 				addClass(v.class);
-			v.icon = (v.this.is(':checked')) ? 'dot-' : '',
-			v.html = `<i class="fa fa-${v.icon}circle-o"></i>`;
+			v.icon = (v.this.is(':checked')) ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line',
+			v.html = `<i class="${v.icon}"></i>`;
 			v.this.before(v.html);
 		});
 		// 复选框
@@ -167,13 +167,13 @@ class Form{
 				v.class += v.this.is(':disabled') ? '-disabled' : '';
 				v.class += v.this.is(':checked') ? '-checked' : '';
 				v.this.parent().addClass(v.class);
-				v.icon = v.this.is(':checked') ? 'check-' : '',
-				v.html = `<i class="fa fa-${v.icon}square-o"></i>`;
+				v.icon = v.this.is(':checked') ? 'ri-checkbox-circle-line' : 'ri-checkbox-blank-circle-line',
+				v.html = `<i class="${v.icon}"></i>`;
 				v.this.before(v.html);
 			}
 		});
 		// 下拉菜单
-		form.find('select').each(function(){
+		form.find("select:not([class^='ql-'])").each(function(){
 			let v = {
 				this : $(this),
 				li   : ''
@@ -213,7 +213,7 @@ class Form{
 			v.class = v.this.val() == module.conf.select_default_val || v.disabled != '' ? '' : 'selected';
 			v.html  = `<div style="width:${v.width};" class="select${v.disabled}" data-open="0">
 							<span class="${v.class}">${v.txt}</span>
-							<i class="fa fa-angle-down rotate"></i>
+							<i class="ri-arrow-down-s-line rotate-0"></i>
 						</div>
 						<div style="width:${v.width};" class="select-option animated faster">
 							<ul class="iscroll">`;
@@ -290,13 +290,13 @@ class Form{
 			if (v.open == 0)
 			{
 				// 下拉按钮处理
-				v.i.removeClass('rotate-180').addClass('rotate');
+				v.i.removeClass('rotate-180').addClass('rotate-0');
 				// 选项处理
 				fadeOut(v.o);
 				return;
 			}
 			// 箭头旋转
-			v.i.removeClass('rotate').addClass('rotate-180');
+			v.i.removeClass('rotate-0').addClass('rotate-180');
 			// 选项处理
 			fadeIn(v.o);
 			v.o.attr('tabindex', 0).focus();
@@ -320,7 +320,7 @@ class Form{
 				data('open', 0).
 				children('i').
 				removeClass('rotate-180').
-				addClass('rotate');
+				addClass('rotate-0');
 			// 选项处理
 			fadeOut(that);
 		}).
@@ -370,7 +370,7 @@ class Form{
 			v.child.
 				next('.select').
 				children('span').
-				html('<i class="fa fa-spinner fa-pulse"></i>');
+				html('<i class="ri-loader-4-line rotate"></i>');
 			axios.get(v.api += v.val).
 			then((response) => {
 				let option = `<option value="${module.conf.select_default_val}"></option>`;
@@ -441,13 +441,13 @@ class Form{
 				removeClass('radio').
 				addClass('radio-checked').
 				children('i').
-				attr('class', 'fa fa-dot-circle-o');
+				attr('class', 'ri-radio-button-line');
 			v.radio.
 				siblings('.radio-checked').
 				addClass('radio').
 				removeClass('radio-checked').
 				children('i').
-				attr('class', 'fa fa-circle-o');
+				attr('class', 'ri-checkbox-blank-circle-line');
 		}).
 		// 复选按钮
 		on('click', dom[5], function(){
@@ -460,14 +460,14 @@ class Form{
 				v.checkbox.
 					attr('class', 'checkbox-checked').
 					children('i').
-					attr('class', 'fa fa-check-square-o');
+					attr('class', 'ri-checkbox-circle-line');
 			}
 			else
 			{
 				v.checkbox.
 					attr('class', 'checkbox').
 					children('i').
-					attr('class', 'fa fa-square-o');
+					attr('class', 'ri-checkbox-blank-circle-line');
 			}
 		}).
 		// 开关
@@ -536,6 +536,14 @@ class Form{
 				if (data[module.conf.http.code_field] == module.conf.http.code_success)
 				{
 					if (msg == '') msg = '操作执行成功';
+					// 清除编辑器的本地缓存
+					let editor = v.this.find('.editor');
+					if (editor.length > 0)
+					{
+						let storeKey = editor.data('store');
+						if (storeKey != undefined)
+							store.remove(storeKey);
+					}
 					Eadmin.message.success({
 						content : msg,
 						callback : () => {
@@ -569,9 +577,9 @@ class Form{
 				});
 			});
 			return false;
-		});
-		// 限制字数的文本域
-		keyup($('.textarea-max'), (_this) => {
+		}).
+		on('keyup', '.textarea-max', function(){
+			let _this = $(this);
 			let max = _this.attr('maxlength'),
 				len = _this.val().length;
 			if (len > max) return;
@@ -592,7 +600,7 @@ class Form{
 		{
 			param = {
 				checked : true,
-				i_class : 'fa fa-check-square-o',
+				i_class : 'ri-checkbox-circle-line',
 				class   : 'checkbox-checked'
 			};
 		}
@@ -600,7 +608,7 @@ class Form{
 		{
 			param = {
 				checked : false,
-				i_class : 'fa fa-square-o',
+				i_class : 'ri-checkbox-blank-circle-line',
 				class   : 'checkbox'
 			};
 		}
@@ -700,13 +708,13 @@ class Form{
 		switch (model)
 		{
 			case 'success':
-				icon = 'fa-check-circle';
+				icon = 'ri-checkbox-circle-fill';
 			break;
 			case 'error':
-				icon = 'fa-times-circle';
+				icon = 'ri-close-circle-fill';
 			break;
 			case 'notice':
-				icon = 'fa-exclamation-circle';
+				icon = 'ri-information-fill';
 			break;
 		}
 		if( ! dom.parent().is('label') && 
@@ -714,7 +722,7 @@ class Form{
 		{
 			dom.before(`<label class="${model + '-input'}"></label>`);
 			let label = dom.prev('label');
-			$(`<i class="fa ${icon}"></i>`).appendTo(label);
+			$(`<i class="${icon}"></i>`).appendTo(label);
 			dom.appendTo(label);
 		}
 		else
@@ -723,7 +731,7 @@ class Form{
 			if ( ! dom.hasClass('num-input'))
 			{
 				dom.prev('i').hide();
-				dom.before(`<i class="fa ${icon}"></i>`);
+				dom.before(`<i class="${icon}"></i>`);
 			}
 		}
 	}

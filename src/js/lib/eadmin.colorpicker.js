@@ -16,8 +16,9 @@ class Colorpicker{
 				'#5EBA00', '#7BD235', '#F1C40F', '#FE9644', '#CD2020',
 				'#F66D9B', '#A55EEA', '#6573CD', '#45AAF2'
 			],
-			change : null,
-			bind   : null
+			change  : null,
+			bind    : null,
+			default : ''
 		};
 		this.param = $.extend(_param, param);
 		this.domCache.addClass('colorpicker');
@@ -36,14 +37,22 @@ class Colorpicker{
 		};
 		for (let i in this.param.color)
 		{
+			let style = '';
+			if (this.param.color[i] == this.param.default)
+				style = 'style="display:inline-block;"';
 			v.html += `<div data-color="${this.param.color[i]}">
 				<div class="color" style="background:${this.param.color[i]}">
 				</div>
-				<i class="fa fa-check"></i>
+				<i class="ri-check-line"${style}></i>
 			</div>`;
 		}
 		if (this.param.bind != null)
-			v.html += `<input type="hidden" name="${this.param.bind}" id="colorpicker-input-${this.param.bind}">`;
+			v.html += `<input 
+							type="hidden" 
+							value="${this.param.default}" 
+							name="${this.param.bind}" 
+							id="colorpicker-input-${this.param.bind}"
+						>`;
 		this.domCache.html(v.html);
 	}
 

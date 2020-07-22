@@ -238,3 +238,94 @@ function createId()
 {
 	return (new Date()).valueOf() + Math.random().toString().slice(-6);
 }
+
+/**
+ * 缺省图加载
+ */
+function defaultImg(box)
+{
+	if (module.conf.error_default_img == '')
+		return;
+	box.
+		find('img').
+		each(function(){
+			let v = {
+				this : $(this)
+			}
+			v.this.on('error', () => {
+				v.this.attr('src', module.conf.error_default_img);
+			});
+	});
+}
+
+/**
+ * 块标题
+ */
+function block(dom)
+{
+	// 块标题
+	dom.find('.block-title').each(function(){
+		let v = {
+			this : $(this)
+		};
+		v.icon = v.this.data('icon');
+		if (v.icon == undefined)
+		{
+			v.this.prepend('<span></span>');
+		}
+		else
+		{
+			v.color = v.this.data('icon-color');
+			if (v.color != undefined)
+				v.icon += ' color-' + v.color;
+			v.this.
+				css('padding-left', 0).
+				prepend(`<i class="${v.icon}"></i>`);
+		}
+	});
+	// 块
+	dom.find('.block').each(function(){
+		let v = {this : $(this)};
+		if (v.this.data('block-data') != undefined)
+		{
+			v.this.addClass('block-data');
+			v.color = v.this.data('color');
+			if (v.color != undefined)
+			{
+				v.color = 'color-' + v.color;
+				v.this.
+					find('.num').
+					addClass(v.color);
+			}
+			else
+			{
+				v.color = '';
+			}
+			v.icon = v.this.data('icon');
+			if (v.icon != undefined)
+			{
+				v.this.
+					children('h5').
+					prepend(`<i class="${v.icon} ${v.color}"></i>`);
+			}
+		}
+		if (v.this.data('block-href') != undefined)
+		{
+			v.this.addClass('block-href');
+			v.color = v.this.data('color');
+			if (v.color != undefined)
+			{
+				v.color = 'color-' + v.color;
+			}
+			else
+			{
+				v.color = '';
+			}
+			v.icon = v.this.data('icon');
+			if (v.icon != undefined)
+			{
+				v.this.prepend(`<i class="${v.icon} ${v.color}"></i>`);
+			}
+		}
+	});
+}

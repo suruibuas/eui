@@ -28,6 +28,8 @@ let eadmin = class Eadmin{
         }
         // 当前链接
         this.href = '';
+        // 实时链接
+        this.currentHref = '';
         // 大盒子的滚动条对象
         this.boxScroll = null;
         // 默认响应链接跳转
@@ -45,7 +47,7 @@ let eadmin = class Eadmin{
      */
     loading(){
         this.mask();
-        $('.mask').html(`<i class="fa fa-spinner fa-pulse mr5"></i>页面加载中，请稍候...`);
+        $('.mask').html(`<i class="ri-loader-4-line rotate"></i>页面加载中，请稍候...`);
     }
 
     /**
@@ -99,7 +101,7 @@ let eadmin = class Eadmin{
     homepage(){
         let that = this;
         // 设置容器滚动区域高度
-        box.height(innerH() - 50 - $('header').outerHeight());
+        box.height(innerH() - $('header').outerHeight() - 40);
         // 如果配置了启动页，则默认加载启动页
         if(module.conf == undefined || 
             module.conf.homepage == undefined || 
@@ -140,16 +142,23 @@ let eadmin = class Eadmin{
             return false;
         }
         let that = this;
-        $('body').on('click', 'a', function(){
+        $('body').on('click', 'a:not(.ql-action)', function(){
             let v = {
-                this : $(this),
+                this   : $(this),
                 subnav : $('.sub-nav')
             };
             if (v.this.hasClass('active')) return false;
             that.href = v.this.attr('href');
+            that.currentHref = that.href;
             // 一级导航
             if (v.this.hasClass('nav'))
             {
+                // 滑块处理
+                let slider = $('.main-nav .nav-slider');
+                slider.animate({
+                    left  : v.this.offset().left,
+                    width : v.this.width()
+                }, 200);
                 // 切换样式
                 addClassExc(v.this, 'active');
                 // 判断是否有子导航
@@ -162,14 +171,12 @@ let eadmin = class Eadmin{
                         console.log('当前分类既没有子分类，也没有指定链接');
                         return false;
                     }
-                    if( ! v.subnav.is(':hidden'))
-                        box.css('height', '+=41');
-                    v.subnav.hide();
+                    $('.sub-nav div').
+                        eq(1).
+                        empty();
                 }
                 else
                 {
-                    if(v.subnav.is(':hidden'))
-                        box.css('height', '-=41');
                     // 子分类内容处理
                     v.subnav.show();
                     v.navHtml = '<ul>';
@@ -178,7 +185,7 @@ let eadmin = class Eadmin{
                         v.navHtml += '<a href="' + v.sub[id].href + '"';
                         if (v.sub[id].native != undefined)
                         {
-                            v.navHtml += ` data-native="1" target="_blank">`;
+                            v.navHtml += ` data-native target="_blank">`;
                         }
                         else
                         {
@@ -186,7 +193,7 @@ let eadmin = class Eadmin{
                         }
                         v.navHtml += `<li>`;
                         if (v.sub[id].icon != undefined && v.sub[id].icon != '')
-                            v.navHtml += '<i class="fa fa-' + v.sub[id].icon + ' mr5"></i>';
+                            v.navHtml += '<i class="' + v.sub[id].icon + '"></i>';
                         v.navHtml += v.sub[id].name;
                         v.navHtml += '</li></a>';
                     }
@@ -200,7 +207,9 @@ let eadmin = class Eadmin{
                     {
                         // 如果第一个链接是原生跳转则返回
                         if(v.sub[0].native != undefined) return;
-                        v.subnav.find('a:first').trigger('click');
+                        v.subnav.
+                            find('a:first').
+                            trigger('click');
                         return false;
                     }
                 }
@@ -212,7 +221,9 @@ let eadmin = class Eadmin{
             }
             // 阻止框架内跳转
             if (that.href == 'javascript:;' || 
-                v.this.data('native') == 1) return true;
+                v.this.data('native') != undefined) return true;
+            let storeKey = md5(that.href);
+            store.remove(storeKey + '_page');
             // 重载
             that.refresh();
             return false;
@@ -224,6 +235,7 @@ let eadmin = class Eadmin{
      */
     refresh(){
         let that = this;
+        box.empty();
         // loading
         that.loading();
         let destroy = [
@@ -249,7 +261,6 @@ let eadmin = class Eadmin{
             Method = {};
             that.href = that.href == '' ? module.conf.homepage : that.href;
             box.
-                empty().
                 off().
                 load(that.href, () => {
                     that.load();
@@ -283,8 +294,16 @@ let eadmin = class Eadmin{
                 i++;
             }
             navHtml += '</ul>';
+            let nav = $('.nav');
             // 主导航交互
-            $('.nav').html(navHtml);
+            nav.html(navHtml);
+            // 滑块处理
+            let slider = $('.main-nav .nav-slider');
+            let main = nav.find('a:first');
+            slider.
+                width(main.width()).
+                css('left', main.offset().left).
+                show();
         }
         // 实体文件数据源
         if (module.conf.nav_data_source == 'local')
@@ -328,6 +347,8 @@ let eadmin = class Eadmin{
         Status.run(box);
         // 标签
         Tag.run(box);
+        // 进度条
+        Progress.run(box);
         // 监听滚动
         this.onscroll();
         // 滚动条处理
@@ -341,6 +362,8 @@ let eadmin = class Eadmin{
             });
         }
         this.boxScroll = this.scroll(box[0]);
+        // 块
+        block(box);
     }
 
     /**
@@ -464,6 +487,13 @@ let eadmin = class Eadmin{
     }
 
     /**
+     * 编辑器
+     */
+    editor(dom, param){
+        return new Editor(dom, param);
+    }
+
+    /**
      * 模版
      */
     template(dom, data){
@@ -570,4 +600,15 @@ loader.ready(() => {
     // 表单验证
     if(module.lib.indexOf('validate') != -1)
         Validate.run();
+    // 点击遮罩关闭弹窗
+    if ( ! module.conf.window_close_by_shade) return;
+    $('.mask').
+        css('cursor', 'pointer').
+        on('click', () => {
+            if ($('.window').length == 0) return;
+            let window = $('.window:last');
+            window.
+                children('.window-close').
+                trigger('click');
+        });
 });

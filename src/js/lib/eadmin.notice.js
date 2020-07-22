@@ -11,7 +11,7 @@ class Notice{
 		this._createHtml({
 			title    : param.title,
 			desc     : param.desc,
-			icon     : param.icon === null ? null : 'exclamation-circle color-warning',
+			icon     : param.icon === null ? null : 'ri-error-warning-fill info',
 			href     : param.href,
 			duration : param.duration,
 			callback : param.close
@@ -25,7 +25,7 @@ class Notice{
 		this._createHtml({
 			title    : param.title,
 			desc     : param.desc,
-			icon     : 'check-circle color-success',
+			icon     : 'ri-checkbox-circle-fill success',
 			href     : param.href,
 			duration : param.duration,
 			callback : param.close
@@ -39,7 +39,7 @@ class Notice{
 		this._createHtml({
 			title    : param.title,
 			desc     : param.desc,
-			icon     : 'times-circle color-error',
+			icon     : 'ri-close-circle-fill error',
 			href     : param.href,
 			duration : param.duration,
 			callback : param.close
@@ -54,7 +54,6 @@ class Notice{
 		let _var = {
 			html : `<div class="notice animated faster fadeInRight">`,
 			ml   : '',
-			mb   : ' mb5px',
 			iconTop : ''
 		};
 		let _func = {
@@ -72,18 +71,17 @@ class Notice{
 		if (param.desc == undefined || param.desc == '')
 		{
 			_var.iconTop = ' style="top:12px;"';
-			_var.mb = '';
 		}
 		if (param.icon != null)
 		{
-			_var.html += `<i class="title-icon fa fa-${param.icon}"${_var.iconTop}></i>`;
-			_var.ml = ' style="margin-left:28px"';
+			_var.html += `<i class="title-icon ${param.icon}"${_var.iconTop}></i>`;
+			_var.ml = ' style="margin-left:32px"';
 		}
-		_var.html += `<i class="fa fa-close close"></i>
-			<div class="box${_var.mb}"${_var.ml}>
-				<div class="font-h3">${param.title}</div>`;
+		_var.html += `<i class="ri-close-line close"></i>
+			<div class="box"${_var.ml}>
+				<div class="notice-title">${param.title}</div>`;
 		if (param.desc != undefined)
-			_var.html += `<div class="font-h5 desc">${param.desc}</div>`;
+			_var.html += `<div class="desc">${param.desc}</div>`;
 		if (param.href != undefined && 
 			_.isArray(param.href))
 		{

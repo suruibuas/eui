@@ -47,7 +47,7 @@ class Rate{
 		for (let i = 1; i <= this.param.num; i++)
 		{
 			let full = (this.param.default >= i) ? ' full' : '';
-			html += `<div class="animated faster star fa fa-star
+			html += `<div class="animated faster star ri-star-line
 						${this.param.disabled ? ' disabled' : ''}
 						${full}" 
 						data-level="${i}">

@@ -106,10 +106,10 @@ class Window{
 		v.html = `<div id="window-${v.id}" 
 						class="window animated faster${(Mount.window) == null ? '' : ' ' + Mount.window} dn" ${v.style}>
 					<div class="window-loading dn">
-						<i class="fa fa-spinner fa-pulse mr5"></i>页面加载中，请稍候...
+						<i class="ri-loader-4-line rotate"></i>页面加载中，请稍候...
 					</div>
 					<div class="window-close">
-						<i class="fa fa-times-circle"></i>
+						<i class="ri-close-circle-fill"></i>
 					</div>
 					<div class="title"${v.drag}>
 						<span>${this.param.title}</span>
@@ -187,6 +187,8 @@ class Window{
 						Status.run(v.body);
 						// 标签
 						Tag.run(v.body);
+						// 进度条
+						Progress.run(v.body);
 						v.scroll = Eadmin.scroll('#' + that.window + ' .body');
 						// 滚动条处理
 						let scroll = body.find('.iscroll');
@@ -198,6 +200,8 @@ class Window{
 								Eadmin.scroll($(this)[0]);
 							});
 						}
+						// 块
+						block(v.body);
 					});
 				}, 100);
 			},
@@ -218,6 +222,7 @@ class Window{
 				};
 				if (dom != false)
 					that.param.url = v.this.data('window-url');
+				Eadmin.currentHref = that.param.url;
 				if (that.param.url == undefined || 
 					that.param.url == '')
 				{
@@ -342,6 +347,14 @@ class Window{
 										if (data[module.conf.http.code_field] == module.conf.http.code_success)
 										{
 											msg = msg == '' ? '操作执行成功' : msg;
+											// 清除编辑器的本地缓存
+											let editor = v.form.find('.editor');
+											if (editor.length > 0)
+											{
+												let storeKey = editor.data('store');
+												if (storeKey != undefined)
+													store.remove(storeKey);
+											}
 											// 加false参数表示不需要再调用窗口关闭的回调
 											func.close(false);
 											// 提示

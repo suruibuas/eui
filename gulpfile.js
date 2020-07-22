@@ -30,12 +30,13 @@ gulp.task('dev', [
     // 编辑less
     gulp.watch('src/less/**/*.less', ['less']);
     // 合并CSS
-    gulp.watch('src/css/*.css', ['css']).on('change', reload);
+    gulp.watch('src/css/**/*.css', ['css']).on('change', reload);
     // 重载
     gulp.watch([
         'dist/js/**/*.js',
         'dist/css/**/*.css',
-        'dist/html/**/*.html'
+        'dist/html/**/*.html',
+        'dist/demo/**/*.html'
     ]).on('change', reload);
 });
 
@@ -107,8 +108,7 @@ gulp.task('jsmin', function(){
 //编译less
 gulp.task('less', function(){
 	gulp.src([
-		'src/less/*.less', 
-		'src/less/layout/*.less', 
+		'src/less/**/*.less',
 		'!src/less/global.less'
 	]).
 	pipe(plumber()).
@@ -120,6 +120,8 @@ gulp.task('less', function(){
 gulp.task('css', function(){
 	return gulp.src([
         'src/css/*.css',
+        'src/css/common/*.css',
+        'src/css/lib/*.css',
 	]).
     pipe(plumber()).
     pipe(concat('eadmin.min.css')).

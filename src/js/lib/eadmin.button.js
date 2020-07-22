@@ -43,10 +43,10 @@ class Button{
 			let _var = {
 				this : $(this)
 			};
-			_var.class = 'fa';
-			if ( ! _var.this.is(':empty'))
-				_var.class += ' mr10';
-			_var.html = `<i class="${_var.class} ${_var.this.data('icon')}"></i>`;
+			_var.style = '';
+			if (_var.this.is(':empty'))
+				_var.style += ' style="margin-right:0;"';
+			_var.html = `<i${_var.style} class="${_var.this.data('icon')}"></i>`;
 			_var.this.prepend(_var.html);
 		});
 	}
@@ -104,7 +104,7 @@ class Button{
 	static loading(btn){
 		let v = {
 			this : btn,
-			icon : `<i class="fa fa-spinner fa-pulse mr5"></i>`
+			icon : `<i class="ri-loader-4-line rotate"></i>`
 		};
 		v.this.
 			attr('disabled', true).

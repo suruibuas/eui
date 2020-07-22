@@ -9,22 +9,22 @@ window.nav = [
             {
                 'name' : '色彩',
                 'href' : './html/color.html',
-                'icon' : 'eyedropper'
+                'icon' : 'ri-brush-2-line'
             },
             {
                 'name' : '字体',
                 'href' : './html/font.html',
-                'icon' : 'font'
+                'icon' : 'ri-font-color'
             },
             {
                 'name' : '按钮',
                 'href' : './html/button.html',
-                'icon' : 'youtube-play'
+                'icon' : 'ri-video-line'
             },
             {
                 'name' : '图标',
                 'href' : './html/icon.html',
-                'icon' : 'flag'
+                'icon' : 'ri-remixicon-line'
             }
         ]
     },
@@ -34,59 +34,63 @@ window.nav = [
             {
                 'name' : '文本框',
                 'href' : './html/input.html',
-                'icon' : 'edit'
+                'icon' : 'ri-input-cursor-move'
             },
             {
                 'name' : '文本域',
                 'href' : './html/textarea.html',
-                'icon' : 'font'
+                'icon' : 'ri-file-edit-line'
             },
             {
                 'name' : '单选框',
                 'href' : './html/radio.html',
-                'icon' : 'dot-circle-o'
+                'icon' : 'ri-radio-button-line'
             },
             {
                 'name' : '复选框',
                 'href' : './html/checkbox.html',
-                'icon' : 'check-square-o'
+                'icon' : 'ri-checkbox-circle-line'
             },
             {
                 'name' : '下拉菜单',
                 'href' : './html/select.html',
-                'icon' : 'angle-down'
+                'icon' : 'ri-arrow-down-s-line'
             },
             {
                 'name' : '上传',
                 'href' : './html/upload.html',
-                'icon' : 'cloud-upload'
+                'icon' : 'ri-upload-cloud-2-line'
             },
             {
                 'name' : '开关',
                 'href' : './html/switch.html',
-                'icon' : 'toggle-on'
+                'icon' : 'ri-toggle-line'
             },
             {
                 'name' : '滑块',
                 'href' : './html/slider.html',
-                'icon' : 'window-minimize'
+                'icon' : 'ri-equalizer-line'
             },
             {
                 'name' : '穿梭框',
                 'href' : './html/transfer.html',
-                'icon' : 'exchange'
+                'icon' : 'ri-arrow-left-right-line'
             },
             {
                 'name' : '评分',
                 'href' : './html/rate.html',
-                'icon' : 'star'
+                'icon' : 'ri-star-line'
             },
             {
                 'name' : '颜色选择器',
                 'href' : './html/colorpicker.html',
-                'icon' : 'tachometer'
+                'icon' : 'ri-paint-brush-line'
             }
         ]
+    },
+    {
+        'name' : '编辑器',
+        'href' : './html/editor.html'
     },
     {
         'name' : '弹窗',
@@ -114,12 +118,12 @@ window.nav = [
             {
                 'name' : '全局',
                 'href' : './html/message.html',
-                'icon' : 'bookmark'
+                'icon' : 'ri-bookmark-line'
             },
             {
                 'name' : '通知',
                 'href' : './html/notice.html',
-                'icon' : 'bell'
+                'icon' : 'ri-notification-3-line'
             }
         ]
     },
@@ -137,27 +141,54 @@ window.nav = [
             {
                 'name' : '文字提示',
                 'href' : './html/tips.html',
-                'icon' : 'commenting'
+                'icon' : 'ri-message-2-line'
             },
             {
                 'name' : '状态',
                 'href' : './html/status.html',
-                'icon' : 'circle'
+                'icon' : 'ri-bubble-chart-line'
             },
             {
                 'name' : '标签',
                 'href' : './html/tag.html',
-                'icon' : 'tag'
+                'icon' : 'ri-price-tag-3-line'
             },
             {
                 'name' : '选项卡',
                 'href' : './html/tab.html',
-                'icon' : 'ellipsis-h'
+                'icon' : 'ri-table-alt-line'
+            },
+            {
+                'name' : '进度条',
+                'href' : './html/progress.html',
+                'icon' : 'ri-subtract-line'
             }
         ]
     },
     {
-        'name' : '综合'
+        'name' : '场景',
+        'sub'  : [
+            {
+                'name' : '块',
+                'icon' : 'ri-stack-line',
+                'href' : './demo/block.html'
+            },
+            {
+                'name' : '文字',
+                'icon' : 'ri-font-color',
+                'href' : './demo/font.html'
+            },
+            {
+                'name' : '图片',
+                'icon' : 'ri-image-line',
+                'href' : './demo/pic.html'
+            },
+            {
+                'name' : '人员',
+                'icon' : 'ri-image-line',
+                'href' : './demo/person.html'
+            }
+        ]
     },
     {
         'name' : '文档',

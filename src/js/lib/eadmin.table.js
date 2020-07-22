@@ -14,8 +14,13 @@ class Table{
 		this.window = Mount.window != null ? '#' + Mount.window : null;
 		// 真实DOM
 		this.dom  = this.window != null ? this.window + ' ' + dom : dom;
+		// 缓存KEY
+		this.storeKey = md5(Eadmin.currentHref);
 		// 当前页数
 		this.page = 1;
+		let page = store(this.storeKey + '_page');
+		if (page != undefined) 
+			this.page = parseInt(page);
 		// 每页条数
 		this.size = 10;
 		// 总页数
@@ -86,13 +91,15 @@ class Table{
 		};
 		// 配置参数
 		this.param = $.extend(true, _param, param);
-		if (_.has(this.param.config.page, 'size'))
-			this.size = this.param.config.page.size;
+		let size = store(this.storeKey + '_size');
+		if (size != undefined) 
+			this.param.config.page.size = parseInt(size);
+		this.size = this.param.config.page.size;
 		// 赋值GET默认参数
 		this.get[this.param.config.page.page_field] = this.page;
 		this.get[this.param.config.page.size_field] = this.size;
 		let shade = `<div class="table-shade">
-						<i class="fa fa-spinner fa-pulse mr5"></i>数据加载中，请稍候...
+						<i class="ri-loader-4-line rotate"></i>数据加载中，请稍候...
 					</div>`;
 		this.domCache.
 			addClass('table').
@@ -141,8 +148,8 @@ class Table{
 				if (order === true)
 				{
 					_order = `<span class="order">
-								<i class="fa fa-caret-up asc" data-order="${field},asc"></i>
-								<i class="fa fa-caret-down desc" data-order="${field},desc"></i>
+								<i class="ri-arrow-up-s-line asc" data-order="${field},asc"></i>
+								<i class="ri-arrow-down-s-line desc" data-order="${field},desc"></i>
 							</span>`;
 				}
 				return _order;
@@ -228,13 +235,10 @@ class Table{
 					html += `</div></div>`;
 				});
 				html += `<div class="col-lg-3 col-md-3">
-							<button class="search-do highlight mr10">
-								<i class="fa fa-search"></i>
-								搜索
-							</button>
-							<button class="search-refresh">
-								<i class="fa fa-refresh"></i>
-								重置
+							<button class="search-do highlight">
+								<i class="ri-search-line"></i>搜索
+							</button><button class="search-refresh">
+								<i class="ri-refresh-line"></i>重置
 							</button>
 						</div>
 						</div></form></div>`;
@@ -267,7 +271,7 @@ class Table{
 					v.tools += `<button id="table-btn-${k}" `;
 					v.tools += (k == 0) ? `class="highlight">` : `>`;
 					if (row.icon != undefined)
-						v.tools += `<i class="fa ${row.icon}"></i>`;
+						v.tools += `<i class="${row.icon}"></i>`;
 					v.tools += row.name + `</button>`;
 				});
 				v.tools += '</div>';
@@ -281,7 +285,7 @@ class Table{
 				let html = `<div class="table-page">
 								<span class="info">
 									共<em></em>条，每页
-									<select name="pagesize" data-width="60">
+									<select name="pagesize" data-width="70">
 										<option value="10"${this.size == 10 ? ' selected' : ''}>10</option>
 										<option value="30"${this.size == 30 ? ' selected' : ''}>30</option>
 										<option value="50"${this.size == 50 ? ' selected' : ''}>50</option>
@@ -290,8 +294,8 @@ class Table{
 									条，
 									当前 <em>${this.page}</em>/<em>-</em> 页
 								</span>
-								<span class="prev-page"><i class="fa fa-angle-left"></i></span>
-								<span class="next-page"><i class="fa fa-angle-right"></i></span>
+								<span class="prev-page"><i class="ri-arrow-left-s-line"></i></span>
+								<span class="next-page"><i class="ri-arrow-right-s-line"></i></span>
 								<span class="jump">
 									跳转到第
 									<input name="page" type="text" placeholder="页数">
@@ -633,16 +637,16 @@ class Table{
 			on('change', dom[5], function(){
 				that.page = 1;
 				that.size = parseInt($(this).val());
+				store(that.storeKey + '_page', that.page.toString());
+				store(that.storeKey + '_size', that.size.toString());
 				that.get[that.param.config.page.page_field] = that.page;
 				that.get[that.param.config.page.size_field] = that.size;
 				that._loadData(true);
 			}).
 			// 数字分页
 			on('click', dom[6], function(){
-				let v = {
-					this : $(this)
-				};
 				that.page = parseInt($(this).html());
+				store(that.storeKey + '_page', that.page.toString());
 				that.get[that.param.config.page.page_field] = that.page;
 				that._loadData(true);
 			}).
@@ -650,6 +654,7 @@ class Table{
 			on('click', dom[7], () => {
 				if (that.page == 1) return;
 				that.page -= 1;
+				store(that.storeKey + '_page', that.page.toString());
 				that.get[that.param.config.page.page_field] = that.page;
 				that._loadData(true);
 			}).
@@ -657,6 +662,7 @@ class Table{
 			on('click', dom[8], () => {
 				if (that.page == that.pageCount) return;
 				that.page += 1;
+				store(that.storeKey + '_page', that.page.toString());
 				that.get[that.param.config.page.page_field] = that.page;
 				that._loadData(true);
 			}).
@@ -683,6 +689,7 @@ class Table{
 					func.jumpError('已经在待跳转的页面了');
 					return;
 				}
+				store(that.storeKey + '_page', page);
 				that.page = parseInt(page);
 				that.get[that.param.config.page.page_field] = that.page;
 				that._loadData(true);
@@ -959,7 +966,7 @@ class Table{
 						_.each(_btn, (b, btn_key) => {
 							let icon = '';
 							if (b.icon != undefined) 
-								icon = `<i class="fa ${b.icon}"></i>`;
+								icon = `<i class="${b.icon}"></i>`;
 							let url = '';
 							let id  = `table-column-btn-${row_key}-${btn_key}`;
 							if (b.open != undefined)
@@ -971,8 +978,8 @@ class Table{
 										data-row="${row_key}" 
 										data-key="${btn_key}" 
 										data-window-url="${url}" 
-										class="small mr5 column-btn" 
-										style="background:${this.color[btn_key]};"
+										class="small column-btn" 
+										style="background:${this.color[btn_key]}; border-color:${this.color[btn_key]};"
 										>
 										${icon} ${b.name}
 									</button>`;
@@ -1040,24 +1047,27 @@ class Table{
 				v.fr += `</tr>`;
 			});
 			this.table.c.html(v.html);
+			// 缺省图处理
+			defaultImg(this.table.c);
+			// 表单
 			Eadmin.form(this.table.c);
+			// 状态
 			Status.run(this.table.c);
+			// 标签
 			Tag.run(this.table.c);
+			// 进度条
+			Progress.run(this.table.c);
 			// 首列
 			if (this.param.config.fixed.first === true)
 			{
 				this.table.l.html(v.fl);
 				Eadmin.form(this.table.l);
-				Status.run(this.table.l);
-				Tag.run(this.table.l);
 			}
 			// 尾列
 			if (this.param.config.fixed.last === true)
 			{
 				this.table.r.html(v.fr);
 				Eadmin.form(this.table.r);
-				Status.run(this.table.r);
-				Tag.run(this.table.r);
 			}
 			// 分页
 			this._page(v.data, page);

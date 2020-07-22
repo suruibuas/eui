@@ -6,8 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>EAdmin - 开箱即用的后台中台</title>
     <link href="./css/eadmin.min.css" rel="stylesheet">
-    <link href="./css/font-awesome.min.css" rel="stylesheet">
-    <link href="./css/animate.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -19,12 +17,13 @@
             <!-- 主导航容器 -->
             <div class="col-md-9 nav"></div>
             <!-- 个人信息容器 -->
-            <div class="col-md-1">
+            <div class="col-md-1 member">
                 <img src="./img/icon.jpg" class="icon">
                 <a href="#">
-                    退出 <i class="fa fa-sign-out ml5px"></i>
+                    注销<i class="ri-logout-circle-r-line"></i>
                 </a>
             </div>
+            <div class="nav-slider"></div>
         </div>
         <!-- 二级导航 -->
         <div class="sub-nav">
@@ -42,25 +41,27 @@
         // 框架全局配置
         conf : {
             // 启动页
-            'homepage'           : './html/upload.html',
+            'homepage'           : './demo/pic.html',
             // 关闭input的autocomplete
             'close_autocomplete' : true,
             // 加载页面默认延迟时长，避免页面过快刷新
-            'load_page_timeout'  : 0,
+            'load_page_timeout'  : 100,
             // 自动点击子分类第一个项目
             'auto_click_sub_nav' : true,
             // 下拉菜单默认值
             'select_default_val' : -999,
             // 页面内文本可选
-            'allow_select_text'  : false,
+            'allow_select_text'  : true,
             // 允许右键
             'allow_right_click'  : true,
             // 弹窗默认宽度
-            'window_width'       : 400,
+            'window_width'       : 350,
             // 弹窗默认高度
-            'window_height'      : 400,
+            'window_height'      : 500,
             // 弹窗默认标题
             'window_title'       : 'EAdmin - 默认弹窗',
+            // 是否允许点击遮罩关闭弹窗
+            'window_close_by_shade' : true,
             // 导航分类的数据源类型 local、api
             'nav_data_source'    : 'local',
             // 导航分类API地址
@@ -75,6 +76,12 @@
             'notice_duration'    : 5,
             // 表单验证正确时是否需要高亮提示效果，如果为false，则在表单验证通过时还原成默认效果
             'validate_success'   : false,
+            // 缺省图片地址
+            'error_default_img'  : 'http://www.eadmin.com.cn/img/default.jpg',
+            // 是否自动识别时间切换主题
+            'auto_theme'         : true,
+            // 默认主题，light、dark
+            'default_theme'      : 'dark',
             // 发送HTTP请求时的通用参数
             'http' : {
                 // 通用接口地址
@@ -101,14 +108,14 @@
             'eadmin' : '1.0.1',
             'lodash' : '4.17.11',
             'axios'  : '0.19.0',
-            'art-template' : '4.12.2',
-            'chart'  : '3.0.0'
+            'chart'  : '3.0.0',
+            'art-template' : '4.12.2'
         },
         // 数据
         data : [
             // 城市数据
             'city.js',
-            // 模版过滤器
+            // 模版数据过滤器
             'template-filter.js'
         ],
         // 默认加载的类库，如果用不到可以在此删除
@@ -156,7 +163,9 @@
             // 选项卡
             'tab',
             // 富文本编辑器
-            'editor'
+            'editor',
+            // 进度条
+            'progress'
         ],
         // 插件
         plugin : [
@@ -167,7 +176,13 @@
             // 不需要树形菜单可删除
             'ztree',
             // 不需要上传可删除
-            'dropzone'
+            'dropzone',
+            // 不需要表格和本地存储可删除
+            'store',
+            // 不需要表格和MD5加密可删除
+            'md5',
+            // 不需要富文本编辑器可删除
+            'quill'
         ],
         // 全部加载完成回调
         ready : function(){

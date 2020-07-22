@@ -73,8 +73,8 @@ class Datepikcer{
 	_create(){
 		let _dom = createId();
 		// 组装HTML结构
-		let _html = `<div id="datepicker-${_dom}" class="datepicker animated faster${(Mount.window) == null ? '' : ' ' + Mount.window} dn">`;
-		_html += `<div class="quick dn">
+		let _html = `<div id="datepicker-${_dom}" class="datepicker animated faster${(Mount.window) == null ? '' : ' ' + Mount.window}">`;
+		_html += `<div class="quick">
 			<span class="title">快捷选择</span>
 			<span>3天内</span>
 			<span>一周内</span>
@@ -83,23 +83,23 @@ class Datepikcer{
 			<span>三月内</span>
 			<span>一年内</span>
 		</div>
-		<div class="fl" data-index="0">
+		<div class="datepicker-panel" data-index="0">
 		<div class="header">
-			<span class="fl prev-year">
-				<i class="fa fa-angle-double-left"></i>
+			<span class="prev-year">
+				<i class="ri-arrow-left-s-line"></i>
 			</span>
-			<span class="fl prev-month">
-				<i class="fa fa-angle-left"></i>
+			<span class="prev-month">
+				<i class="ri-arrow-drop-left-line"></i>
 			</span>
 			<span class="show-ym">
-				<span class="font mr5 year"></span>
+				<span class="font year" style="margin-right:5px;"></span>
 				<span class="font month"></span>
 			</span>
-			<span class="fr next-year">
-				<i class="fa fa-angle-double-right"></i>
+			<span class="next-year">
+				<i class="ri-arrow-right-s-line"></i>
 			</span>
-			<span class="fr next-month">
-				<i class="fa fa-angle-right"></i>
+			<span class="next-month">
+				<i class="ri-arrow-drop-right-line"></i>
 			</span>
 		</div>
 		<div class="body">
@@ -107,36 +107,36 @@ class Datepikcer{
 				${this._week()}
 			</div>
 			<div class="day"></div>`;
-		_html += `<div class="y-m dn">
+		_html += `<div class="y-m">
 			${this._year()}
 		</div>
-		<div class="y-m dn">
+		<div class="y-m">
 			${this._month()}
 		</div>`;
 		if(this.param.format.indexOf(' ') != -1)
 		{
-			_html += `<div class="picker-time dn">
+			_html += `<div class="picker-time">
 						${this._time()}
 					</div>`;
 		}
 		_html += `</div></div>`;
-		_html += `<div class="fl ml10px dn" data-index="1">
+		_html += `<div class="datepicker-panel right" data-index="1">
 		<div class="header">
-			<span class="fl prev-year">
-				<i class="fa fa-angle-double-left"></i>
+			<span class="prev-year">
+				<i class="ri-arrow-left-s-line"></i>
 			</span>
-			<span class="fl prev-month">
-				<i class="fa fa-angle-left"></i>
+			<span class="prev-month">
+				<i class="ri-arrow-drop-left-line"></i>
 			</span>
 			<span class="show-ym">
-				<span class="font mr5 year"></span>
+				<span class="font year" style="margin-right:5px;"></span>
 				<span class="font month"></span>
 			</span>
-			<span class="fr next-year">
-				<i class="fa fa-angle-double-right"></i>
+			<span class="next-year">
+				<i class="ri-arrow-right-s-line"></i>
 			</span>
-			<span class="fr next-month">
-				<i class="fa fa-angle-right"></i>
+			<span class="next-month">
+				<i class="ri-arrow-drop-right-line"></i>
 			</span>
 		</div>
 		<div class="body">
@@ -144,25 +144,25 @@ class Datepikcer{
 				${this._week()}
 			</div>
 			<div class="day"></div>`;
-		_html += `<div class="y-m dn">
+		_html += `<div class="y-m">
 			${this._year(this.arr[0].m + 1)}
 		</div>
-		<div class="y-m dn">
+		<div class="y-m">
 			${this._month(this.arr[0].m + 1)}
 		</div>`;
 		if(this.param.format.indexOf(' ') != -1)
 		{
-			_html += `<div class="picker-time dn">
+			_html += `<div class="picker-time">
 						${this._time()}
 					</div>`;
 		}
 		_html += `</div></div>`;
 		_html += `<div class="clear"></div>`;
-		_html += `<div class="footer dn">
-			<span class="fl pl5 font choose-time dn">
+		_html += `<div class="footer">
+			<span class="font choose-time">
 				选择时间
 			</span>
-			<span class="fr confirm">
+			<span class="confirm">
 				<button class="clear">清空</button>
 				<button class="highlight sure">确定</button>
 			</span>
@@ -632,7 +632,7 @@ class Datepikcer{
 			clear = false;
 		}).
 		// 日历索引
-		on('mouseenter', '>.fl', function(){
+		on('mouseenter', '>.datepicker-panel', function(){
 			_that.index = $(this).data('index');
 		}).
 		// 上年、上月、下年、下月
@@ -644,7 +644,7 @@ class Datepikcer{
 				ym   : _this.siblings('.show-ym')
 			};
 			_var.y = _var.ym.children('.year').data('y');
-			_var.m = _var.ym.children('.month').data('m');
+			_var.m = parseInt(_var.ym.children('.month').data('m'));
 			// 私有方法
 			let _func = {
 				// 设置选中的年
@@ -664,7 +664,7 @@ class Datepikcer{
 			// 上一月
 			else if (_this.hasClass('prev-month'))
 			{
-				_var.m = parseInt(_var.m) - 1;
+				_var.m -= 1;
 				if (_var.m == 0)
 				{
 					_var.y -=1;
@@ -685,7 +685,7 @@ class Datepikcer{
 			// 下一月
 			else
 			{
-				_var.m = parseInt(_var.m) + 1;
+				_var.m += 1;
 				if (_var.m == 13)
 				{
 					_var.y += 1;
@@ -997,12 +997,14 @@ class Datepikcer{
 					addClass('current');
 				_that.arr[0].y = _fromY;
 				_that.arr[0].m = _m;
+				_fromD = repairZero(_fromD);
 				_that.arr[0].d = _fromD;
-				_that.arr[0].c = parseInt(_y + '' + _m + '' + repairZero(_fromD));
+				_that.arr[0].c = parseInt(_y + '' + _m + '' + _fromD);
 				_that.arr[1].y = _y;
 				_that.arr[1].m = _m;
+				_d = repairZero(_d);
 				_that.arr[1].d = _d;
-				_that.arr[1].c = parseInt(_y + '' + _m + '' + repairZero(_d));
+				_that.arr[1].c = parseInt(_y + '' + _m + '' + _d);
 				_that.arr[1].index = 0;
 				_that.pindex = 0;
 				// 重置日历
@@ -1027,7 +1029,8 @@ class Datepikcer{
 			}
 			_that.currentNum = 2;
 			// 如果没有确认按钮则直接赋值
-			if ( ! _that.param.confirm) _that._setVal();
+			if ( ! _that.param.confirm) 
+				_that._setVal();
 		}).
 		on('mousedown', (e) => {
 			e.preventDefault();
