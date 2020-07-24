@@ -9,10 +9,16 @@ class Editor{
         this.dom = dom;
         this.domCache = scope(this.dom);
         this.dom += (new Date()).valueOf();
+        if (this.domCache.data('name') == undefined)
+        {
+            console.log('请为富文本编辑框指定data-name属性，用来后端取值');
+            return false;
+        }
         this.domCache.
             attr('id', this.dom.replace('#', '')).
             data('store', this.storeKey).
-            addClass('editor');
+            addClass('editor').
+            after(`<input type="hidden" name="${this.domCache.data('name')}">`);
 		// 默认参数
 		let _param   = {
             // 编辑器名称，后端取值保存数据库使用
@@ -60,16 +66,9 @@ class Editor{
         this.domCache.
             css('min-height', this.param.height).
             after(`<input class="dn" type="file" accept="image/*">`);
-        if (this.param.default != '')
-        {
-            this.domCache.html(this.param.default);
-        }
-        else
-        {
-            let content = store(this.storeKey);
-            if (content != undefined)
-                this.domCache.html(content);
-        }
+        let content = store(this.storeKey);
+        if (content != undefined)
+            this.domCache.html(content);
         this.quill = null;
 		this.run();
     }
@@ -192,6 +191,12 @@ class Editor{
                 content : '编辑内容已实时保存至本地'
             });
         }, 1000));
+        this.quill.on('text-change', () => {
+            this.domCache.
+                next().
+                next("input[type='hidden']").
+                val(this.quill.root.innerHTML);
+        });
     }
 	
 }

@@ -8,7 +8,7 @@
             <h3>编辑器</h3>
             <h6>基于quill编辑器的封装，更易使用</h6>
             <div class="mt20">
-                <div id="editor"></div>
+                <div id="editor" data-name="content"></div>
             </div>
         </div>
     </div>
@@ -18,8 +18,6 @@
         Eadmin.editor('#editor', {
             // 编辑器高度
             height : 400,
-            // 编辑器默认内容
-            default : '',
             // 是否只读
             readonly : false,
             // 设置默认显示文案
@@ -30,7 +28,7 @@
             doc : ['.jpg', '.png', '.jpeg', '.gif'],
             // 允许的图片大小，单位KB
             size : 1000,
-            // 文件域名称，后端取值用
+            // 文件域名称，上传图片后端取值用
             filename  : 'file',
             // 是否自动保存输入内容到本地缓存
             autosave  : true,
