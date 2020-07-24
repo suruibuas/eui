@@ -14,11 +14,12 @@ class Editor{
             console.log('请为富文本编辑框指定data-name属性，用来后端取值');
             return false;
         }
+        let _default = this.domCache.html();
         this.domCache.
             attr('id', this.dom.replace('#', '')).
             data('store', this.storeKey).
             addClass('editor').
-            after(`<input type="hidden" name="${this.domCache.data('name')}">`);
+            after(`<input type="hidden" name="${this.domCache.data('name')}" value="${_default}">`);
 		// 默认参数
 		let _param   = {
             // 编辑器名称，后端取值保存数据库使用
@@ -66,9 +67,12 @@ class Editor{
         this.domCache.
             css('min-height', this.param.height).
             after(`<input class="dn" type="file" accept="image/*">`);
-        let content = store(this.storeKey);
-        if (content != undefined)
-            this.domCache.html(content);
+        if (_default == '')
+        {
+            let content = store(this.storeKey);
+            if (content != undefined)
+                this.domCache.html(content);
+        }
         this.quill = null;
 		this.run();
     }
