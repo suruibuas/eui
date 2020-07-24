@@ -285,6 +285,25 @@ header .sub-nav .active:hover {
   width: 32px;
   height: 32px;
 }
+.block-box .block .info {
+  margin-top: 15px;
+  border-top: 1px #171c3b solid;
+  overflow: hidden;
+  height: 30px;
+  line-height: 40px;
+}
+.block-box .block .info span:first-child {
+  float: left;
+  font-size: 12px;
+  color: #999;
+}
+.block-box .block .info span:last-child {
+  float: right;
+}
+.block-box .block .info i {
+  margin-right: 0;
+  margin-left: 6px;
+}
 .block-box .block .person {
   position: relative;
   text-align: center;
@@ -298,24 +317,6 @@ header .sub-nav .active:hover {
 .block-box .block .person h6 {
   margin-bottom: 0;
 }
-.block-box .block .person .info {
-  margin-top: 15px;
-  border-top: 1px #171c3b solid;
-  padding-top: 10px;
-  overflow: hidden;
-}
-.block-box .block .person .info span:first-child {
-  float: left;
-  font-size: 12px;
-  color: #999;
-}
-.block-box .block .person .info span:last-child {
-  float: right;
-}
-.block-box .block .person .info i {
-  margin-right: 0;
-  margin-left: 6px;
-}
 .block-box .block .corner {
   border-radius: 5px 0 0 5px;
   position: absolute;
@@ -324,7 +325,38 @@ header .sub-nav .active:hover {
   top: 8px;
   right: 0;
   padding: 0 6px;
-  background: #0084FF;
+  background-color: #0084FF;
+}
+.block-box .block .pic {
+  position: relative;
+}
+.block-box .block .pic .corner {
+  top: 5px;
+}
+.block-box .block .pic .icon {
+  margin-top: 20px;
+  color: #999;
+}
+.block-box .block .pic .icon span {
+  margin-right: 10px;
+}
+.block-box .block .pic .info {
+  height: 35px;
+  line-height: 40px;
+}
+.block-box .block .pic .info img {
+  border-radius: 50px;
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  border: 2px #0084FF solid;
+  margin-right: 5px;
+}
+.block-box .block .pic .cover {
+  border-radius: 5px;
+  width: 100%;
+  max-height: 360px;
+  margin-bottom: 10px;
 }
 .block-box .block-data .data {
   margin-top: 25px;
@@ -465,6 +497,7 @@ h5,
 h6 {
   font-weight: normal;
   margin-top: 0;
+  line-height: 22px;
 }
 h3,
 h4,
@@ -523,7 +556,7 @@ h6 i {
  * ================= 遮罩 ==================
  */
 .mask {
-  opacity: 0.6;
+  opacity: 0.8;
   width: 100%;
   height: 100%;
   background: #000;
@@ -666,4 +699,46 @@ h6 i {
 }
 .color-13 {
   color: #E9EBF0;
+}
+/**
+ * ================= 背景颜色 ==================
+ */
+.bg-color-1 {
+  background-color: #FF1844 !important;
+}
+.bg-color-2 {
+  background-color: #76FF02 !important;
+}
+.bg-color-3 {
+  background-color: #FFFF01 !important;
+}
+.bg-color-4 {
+  background-color: #FF8E01 !important;
+}
+.bg-color-5 {
+  background-color: #69F0AE !important;
+}
+.bg-color-6 {
+  background-color: #E040FC !important;
+}
+.bg-color-7 {
+  background-color: #4FC2F8 !important;
+}
+.bg-color-8 {
+  background-color: #90A4AE !important;
+}
+.bg-color-9 {
+  background-color: #2196F3 !important;
+}
+.bg-color-10 {
+  background-color: #FE5722 !important;
+}
+.bg-color-11 {
+  background-color: #FFC107 !important;
+}
+.bg-color-12 {
+  background-color: #FF4181 !important;
+}
+.bg-color-13 {
+  background-color: #E9EBF0 !important;
 }

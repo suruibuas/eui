@@ -185,7 +185,7 @@ window.nav = [
             },
             {
                 'name' : '人员',
-                'icon' : 'ri-image-line',
+                'icon' : 'ri-user-line',
                 'href' : './demo/person.html'
             }
         ]
