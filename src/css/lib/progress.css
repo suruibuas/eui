@@ -48,9 +48,9 @@
   text-align: center;
 }
 .progress .color-1 {
-  background: -moz-linear-gradient(left, #9deb89, #79E35E);
-  background: -webkit-linear-gradient(left, #9deb89, #79E35E);
-  background: -o-linear-gradient(left, #9deb89, #79E35E);
+  background: -moz-linear-gradient(left, #92ff35, #76FF02);
+  background: -webkit-linear-gradient(left, #92ff35, #76FF02);
+  background: -o-linear-gradient(left, #92ff35, #76FF02);
 }
 .progress .color-2 {
   background: -moz-linear-gradient(left, #ff4b6d, #FF1844);

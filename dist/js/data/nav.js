@@ -162,6 +162,11 @@ window.nav = [
                 'name' : '进度条',
                 'href' : './html/progress.html',
                 'icon' : 'ri-subtract-line'
+            },
+            {
+                'name' : '自定义分页',
+                'href' : './html/page.html',
+                'icon' : 'ri-pages-line'
             }
         ]
     },

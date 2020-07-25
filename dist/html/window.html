@@ -84,12 +84,33 @@
             </div>
         </div>
     </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-lg-3 col-md-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <h3>右侧弹出窗口</h3>
+            <h6>窗口从右侧弹出</h6>
+            <div class="mt20">
+                <button 
+                    id="w6" 
+                    class="highlight" 
+                    data-window-url="./demo/form.html">
+                    打开窗口
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
     (function(){
-        Eadmin.window('#w1');
+        Eadmin.window('#w1', {
+            width  : '60%',
+            height : '90%'
+        });
         Eadmin.window('#w2', {
-            drag : false
+            drag : false,
+            width  : '60%',
+            height : '90%'
         });
         Eadmin.window('#w3', {
             refresh  : true,
@@ -121,6 +142,10 @@
                     content : '窗口关闭了'
                 });
             }
+        });
+        Eadmin.window('#w6', {
+            width : '40%',
+            style : 'popup'
         });
     })();
 </script>

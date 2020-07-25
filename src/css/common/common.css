@@ -89,7 +89,7 @@ header .main-nav > div {
   padding: 0;
 }
 header .main-nav > div:first-child {
-  text-align: center;
+  padding-left: 100px;
 }
 header .main-nav .logo {
   font-size: 24px;
@@ -410,7 +410,7 @@ header .sub-nav .active:hover {
 }
 .block-box .form-group {
   position: relative;
-  min-height: 74px;
+  min-height: 64px;
 }
 .block-box .form-group > span {
   display: block;
@@ -677,7 +677,7 @@ h6 i {
   color: #FF1844;
 }
 .color-2 {
-  color: #79E35E;
+  color: #76FF02;
 }
 .color-3 {
   color: #FFFF01;
@@ -719,7 +719,7 @@ h6 i {
   background-color: #FF1844 !important;
 }
 .bg-color-2 {
-  background-color: #79E35E !important;
+  background-color: #76FF02 !important;
 }
 .bg-color-3 {
   background-color: #FFFF01 !important;

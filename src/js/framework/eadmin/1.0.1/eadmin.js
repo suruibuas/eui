@@ -457,6 +457,14 @@ let eadmin = class Eadmin{
     }
 
     /**
+     * 自定义分页
+     */
+    page(param){
+        new Page(param);
+        return this;
+    }
+
+    /**
      * 上传
      */
     upload(dom, param){

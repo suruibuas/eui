@@ -39,7 +39,9 @@ class Window{
 			// 关闭回调
 			close   : null,
 			// 提交表单回调
-			submit  : null
+			submit  : null,
+			// 弹窗风格，window、popup
+			style   : 'window'
 		}
 		// 配置参数
 		this.param = $.extend(true, _param, param);
@@ -84,19 +86,35 @@ class Window{
 		{
 			v.width = innerW() * (parseInt(this.param.width.replace('%', '')) / 100);
 		}
-		if (_.isInteger(this.param.height) || 
-			this.param.height.indexOf('%') == -1)
+		// 如果是弹出
+		if (this.param.style == 'popup')
 		{
-			v.height = this.param.height;
+			v.height = innerH();
 		}
 		else
 		{
-			v.height = innerH() * (parseInt(this.param.height.replace('%', '')) / 100);
+			if (_.isInteger(this.param.height) || 
+			this.param.height.indexOf('%') == -1)
+			{
+				v.height = this.param.height;
+			}
+			else
+			{
+				v.height = innerH() * (parseInt(this.param.height.replace('%', '')) / 100);
+			}
 		}
 		// 制定样式
-		v.style = `style="width:${v.width}px;height:${v.height}px;margin-left:-${v.width / 2}px;margin-top:-${v.height / 2}px;"`;
+		if (this.param.style == 'popup')
+		{
+			v.style = `style="width:${v.width}px;height:${v.height}px;top:0;right:0;left:unset;border-radius:5px 0 0 5px;"`;
+		}
+		else
+		{
+			v.style = `style="width:${v.width}px;height:${v.height}px;margin-left:-${v.width / 2}px;margin-top:-${v.height / 2}px;"`;
+		}
 		// 是否可以拖动
-		if (this.param.drag)
+		if (this.param.drag && 
+			this.param.style == 'window')
 			v.drag = ' style="cursor: move;"';
 		// 窗口主体高度
 		v.height -= 55;
@@ -235,7 +253,7 @@ class Window{
 				that.windowDom.
 					off('animationend').
 					show().
-					addClass('zoomIn');
+					addClass(that.param.style == 'window' ? 'zoomIn' : 'fadeInRight');
 				// 加载页面
 				func.load();
 				// 关闭弹窗
