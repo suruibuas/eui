@@ -1,61 +1,282 @@
+<h2>综合表单</h2>
 <!-- 大盒子 -->
 <div class="block-box">
     <!-- 响应盒子，bootstrap -->
     <div class="col-lg-12 col-md-12">
         <!-- 容器盒子，具体布局使用 -->
         <div class="block">
+            <div class="block-title">复杂表单</div>
             <form action="submit.php">
-                <div class="block-title">表单验证</div>
-                <!-- 表单组盒子 -->
-                <div class="form-group">
-                    <span class="title">文本框</span>
-                    <input type="text" placeholder="请输入内容" data-validate="require" data-validate-msg="请输入内容">
+                <div class="col-lg-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">标题</span>
+                        <input 
+                            type="text" 
+                            placeholder="请输入内容" 
+                            data-validate="require" 
+                            data-validate-msg="请输入内容">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <span class="title">文本域</span>
-                    <textarea name="t2"
-                        rows="6" 
-                        placeholder="请输入内容..."
-                        data-validate="require|len=0-10|val=0-100"
-                        data-validate-msg="请输入内容|长度只能在0-10之间|取值只能在0-100之间"
-                    ></textarea>
+                <div class="col-lg-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">网址</span>
+                        <input 
+                            type="text" 
+                            placeholder="请输入网址" 
+                            data-prepend="http://">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <span class="title">下拉菜单</span>
-                    <select name="t3" data-width="100%" data-validate="require" data-validate-msg="此项必须选择">
-                        <option value="-999">请选择</option>
-                        <option value="1">苹果</option>
-                        <option value="2">香蕉</option>
-                        <option value="3">梨</option>
-                        <option value="4">橘子</option>
-                        <option value="5">西瓜</option>
-                    </select>
+                <div class="col-lg-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">金额</span>
+                        <input 
+                            class="num-input" 
+                            type="text" 
+                            value="0" 
+                            data-min="0" 
+                            data-max="10" 
+                            data-step="1">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <span class="title">复选框</span>
-                    <label>
-                        <input name="t4" type="checkbox" value="1" data-validate="require" data-validate-msg="此项必须选择"> 香蕉
-                    </label>
-                    <label>
-                        <input name="t4" type="checkbox" value="2"> 橘子
-                    </label>
-                    <label>
-                        <input name="t4" type="checkbox" value="3"> 西瓜
-                    </label>
+                <div class="col-lg-6">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">简介</span>
+                        <textarea name="t2"
+                            rows="6" 
+                            placeholder="请输入内容..."
+                            data-validate="require|len=0-10|val=0-100"
+                            data-validate-msg="请输入内容|长度只能在0-10之间|取值只能在0-100之间"
+                        ></textarea>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <span class="title">单选框</span>
-                    <label>
-                        <input name="t5" type="radio" value="1" data-validate="require" data-validate-msg="此项必须选择"> 香蕉
-                    </label>
-                    <label>
-                        <input name="t5" type="radio" value="2"> 橘子
-                    </label>
-                    <label>
-                        <input name="t5" type="radio" value="3"> 西瓜
-                    </label>
+                <div class="col-lg-6">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">描述</span>
+                        <textarea 
+                            name="t2" 
+                            maxlength="200" 
+                            rows="6" 
+                            placeholder="最多可输入200个字..."></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">金额</span>
+                        <input 
+                            type="text" 
+                            placeholder="请输入金额" 
+                            data-prepend="$" 
+                            data-append=".00">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">类型</span>
+                        <select 
+                            name="t3" 
+                            data-width="100%" 
+                            data-validate="require" 
+                            data-validate-msg="此项必须选择">
+                            <option value="-999">请选择</option>
+                            <option value="1">苹果</option>
+                            <option value="2">香蕉</option>
+                            <option value="3">梨</option>
+                            <option value="4">橘子</option>
+                            <option value="5">西瓜</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">复选框</span>
+                        <label>
+                            <input 
+                                name="t4" 
+                                type="checkbox" 
+                                value="1" 
+                                data-validate="require" 
+                                data-validate-msg="此项必须选择"> 香蕉
+                        </label>
+                        <label>
+                            <input name="t4" type="checkbox" value="2"> 橘子
+                        </label>
+                        <label>
+                            <input name="t4" type="checkbox" value="3"> 西瓜
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">选择日期</span>
+                        <input 
+                            id="p1" 
+                            type="text" 
+                            placeholder="请选择日期" 
+                            data-icon="ri-calendar-2-line|right">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">选择日期</span>
+                        <input 
+                            id="p2" 
+                            type="text" 
+                            placeholder="请选择日期" 
+                            data-icon="ri-calendar-2-line|right">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">选择日期</span>
+                        <input 
+                            id="p3" 
+                            type="text" 
+                            placeholder="请选择日期" 
+                            data-icon="ri-calendar-2-line|right">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">选择城市</span>
+                        <input 
+                            id="p4" 
+                            type="text" 
+                            placeholder="请选择城市" 
+                            data-icon="ri-building-line|right">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">选择城市</span>
+                        <input 
+                            id="p5" 
+                            type="text" 
+                            placeholder="请选择城市" 
+                            data-icon="ri-building-line|right">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">选择城市</span>
+                        <input 
+                            id="p6" 
+                            type="text" 
+                            placeholder="请选择城市" 
+                            data-icon="ri-building-line|right">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">选择数量</span>
+                        <div id="p7"></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">选择颜色</span>
+                        <div id="p8"></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">打分</span>
+                        <div id="p9"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">上传图片</span>
+                        <div id="p10"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">手动上传</span>
+                        <div id="p11"></div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <span class="title">详细内容</span>
+                        <div id="p12" data-name="content"></div>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<script>
+    (function(){
+        Eadmin.datepicker('#p1');
+        Eadmin.datepicker('#p2', {
+            confirm : true
+        });
+        Eadmin.datepicker('#p3', {
+            type : 'date-range',
+            confirm : true
+        });
+        Eadmin.citypicker('#p4');
+        Eadmin.citypicker('#p5',{
+            type  : 2
+        });
+        Eadmin.citypicker('#p6', {
+            type   : 2,
+            format : ' - '
+        });
+        // 默认滑块
+        Eadmin.slider('#p7');
+        // 颜色选择
+        Eadmin.colorpicker('#p8');
+        // 打分
+        Eadmin.rate('#p9');
+        // 上传图片
+        Eadmin.upload('#p10', {
+            api : 'upload.php'
+        });
+        Eadmin.upload('#p11', {
+            api : 'upload.php',
+            autoupload : false
+        });
+        // 编辑器
+        Eadmin.editor('#p12', {
+            // 编辑器高度
+            height : 400,
+            // 是否只读
+            readonly : false,
+            // 设置默认显示文案
+            placeholder : '请输入内容...',
+            // 图片上传接口地址
+            api : 'upload.php',
+            // 允许的图片格式
+            doc : ['.jpg', '.png', '.jpeg', '.gif'],
+            // 允许的图片大小，单位KB
+            size : 1000,
+            // 文件域名称，上传图片后端取值用
+            filename  : 'file',
+            // 是否自动保存输入内容到本地缓存
+            autosave  : true,
+            // 同请求一起发送的header头，有些接口需要验证
+            header : {}
+        });
+    })();
+</script>

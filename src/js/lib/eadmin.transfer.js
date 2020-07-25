@@ -30,7 +30,9 @@ class Transfer{
 			// 自定义宽度
 			width  : 0,
 			// 自定义高度
-			height : 0
+			height : 0,
+			// 用来取值的表单的name值
+			inputname : 'transfer'
 		}
 		// 数据源
 		if (_.isString(param.data))
@@ -133,8 +135,8 @@ class Transfer{
 				<ul>`;
 		for (let i in v.from)
 		{
-			let d = (v.from[i].disabled == true) ? 'disabled' : '';
-			v.html += `<li class="${d}">
+			let d = (v.from[i].disabled == true) ? ' class="disabled"' : '';
+			v.html += `<li${d}>
 							<label>
 								<input data-num="0" value="${v.from[i].val}" type="checkbox" ${d}> ${v.from[i].txt}
 							</label>
@@ -183,7 +185,7 @@ class Transfer{
 							</label>
 						</div>`;
 		}
-		v.html += `</div>`;
+		v.html += `</div><input type="hidden" name="${this.param.inputname}">`;
 		this.domCache.html(v.html);
 	}
 
@@ -321,6 +323,17 @@ class Transfer{
 								eq(_v.eq == 1 ? 0 : 1).
 								find(':checkbox');
 			Form.checkbox(_v.checkbox, 0);
+			// 赋值
+			v.checkedval = [];
+			v.body.
+				eq(1).
+				find(':checkbox').
+				each(function(){
+					v.checkedval.push($(this).val());
+				});
+			that.domCache.
+				children("input[type='hidden']").
+				val(_.join(v.checkedval, ','));
 			// 复位搜索结果
 			if(that.param.search)
 			{

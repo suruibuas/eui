@@ -53,12 +53,16 @@
         }
         Eadmin.transfer('#p1', {
             // 数据源
-            data : data
+            data  : data,
+            // 用来取值的表单的name值，选中的项目的值会以“,”分割的形式写入该隐藏域中
+            inputname : 'p1'
         }).transfer('#p2', {
             // 数据源
             data   : data,
             // 支持搜索
-            search : true
+            search : true,
+            // 用来取值的表单的name值，选中的项目的值会以“,”分割的形式写入该隐藏域中
+            inputname : 'p2'
         }).transfer('#p3', {
             // 数据源
             data   : data,
@@ -67,7 +71,9 @@
             // 宽度
             width  : 260,
             // 高度
-            height : 300
+            height : 300,
+            // 用来取值的表单的name值，选中的项目的值会以“,”分割的形式写入该隐藏域中
+            inputname : 'p3'
         });
     })();
 </script>

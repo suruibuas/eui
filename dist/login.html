@@ -6,8 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>EAdmin - 开箱即用的后台中台</title>
     <link href="./css/eadmin.min.css" rel="stylesheet">
-    <link href="./css/font-awesome.min.css" rel="stylesheet">
-    <link href="./css/animate.min.css" rel="stylesheet">
     <link href="./css/login.min.css" rel="stylesheet">
 </head>
 
@@ -20,10 +18,10 @@
                     EAdmin
                 </div>
                 <div class="sub-title">
-                    致力于打造开箱即用的后台UI框架
+                    致力于打造开箱即用的后台UI组件框架
                 </div>
                 <!-- 表单组盒子 -->
-                <div class="form-group mb10">
+                <div class="form-group">
                     <input 
                         name="uname" 
                         type="text" 
@@ -33,7 +31,7 @@
                     >
                 </div>
                 <!-- 表单组盒子 -->
-                <div class="form-group mb10">
+                <div class="form-group">
                     <input 
                         name="pword" 
                         type="password" 
@@ -43,7 +41,7 @@
                     >
                 </div>
                 <!-- 表单组盒子 -->
-                <div class="form-group mb10">
+                <div class="form-group">
                     <input 
                         name="yzcode" 
                         type="text" 
@@ -60,7 +58,6 @@
     </div>
     <div class="bq">Copyright © 2020 EAdmin / 官网：<a href="http://www.eadmin.com.cn" target="_blank">http://www.eadmin.com.cn</a></div>
     <div id="star"></div>
-    <div id="notice" style="top: 50px;"></div>
 </body>
 <script src="./js/core/al.load.min.js" init="./js/core/al.init.min.js"></script>
 <script>
@@ -82,9 +79,7 @@
             // 表单验证
             'validate',
             // 按钮
-            'button',
-            // 通知消息
-            'notice'
+            'button'
         ],
         // 插件
         plugin : [
@@ -96,17 +91,6 @@
             Form.event();
             Button.event();
             Validate.run();
-            Notice.info({
-                title : '版本更新',
-                desc  : 'EAdmin版本更新至1.0.1，文档同步更新',
-                href  : [
-                    {
-                        href : 'http://doc.eadmin.com.cn',
-                        txt  : '查看详情'
-                    }
-                ],
-                duration : 5
-            });
         }
     }
 </script>

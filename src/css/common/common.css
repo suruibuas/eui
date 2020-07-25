@@ -285,22 +285,26 @@ header .sub-nav .active:hover {
   width: 32px;
   height: 32px;
 }
-.block-box .block .info {
+.block-box .block .person > .info,
+.block-box .block .pic > .info {
   margin-top: 15px;
   border-top: 1px #171c3b solid;
   overflow: hidden;
   height: 30px;
   line-height: 40px;
 }
-.block-box .block .info span:first-child {
+.block-box .block .person > .info span:first-child,
+.block-box .block .pic > .info span:first-child {
   float: left;
   font-size: 12px;
   color: #999;
 }
-.block-box .block .info span:last-child {
+.block-box .block .person > .info span:last-child,
+.block-box .block .pic > .info span:last-child {
   float: right;
 }
-.block-box .block .info i {
+.block-box .block .person > .info i,
+.block-box .block .pic > .info i {
   margin-right: 0;
   margin-left: 6px;
 }
@@ -358,6 +362,11 @@ header .sub-nav .active:hover {
   max-height: 360px;
   margin-bottom: 10px;
 }
+.block-box .block:after {
+  content: "";
+  clear: both;
+  display: table;
+}
 .block-box .block-data .data {
   margin-top: 25px;
 }
@@ -401,6 +410,7 @@ header .sub-nav .active:hover {
 }
 .block-box .form-group {
   position: relative;
+  min-height: 74px;
 }
 .block-box .form-group > span {
   display: block;
@@ -414,6 +424,8 @@ header .sub-nav .active:hover {
 }
 .block-box .form-group .error {
   color: #FF1844;
+  position: absolute;
+  margin-top: 4px;
 }
 .block-box .form-group .font-num {
   bottom: 10px;
@@ -665,7 +677,7 @@ h6 i {
   color: #FF1844;
 }
 .color-2 {
-  color: #76FF02;
+  color: #79E35E;
 }
 .color-3 {
   color: #FFFF01;
@@ -707,7 +719,7 @@ h6 i {
   background-color: #FF1844 !important;
 }
 .bg-color-2 {
-  background-color: #76FF02 !important;
+  background-color: #79E35E !important;
 }
 .bg-color-3 {
   background-color: #FFFF01 !important;

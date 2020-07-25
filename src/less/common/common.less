@@ -327,7 +327,8 @@ header{
                 height: 32px;
             }
         }
-        .info
+        .person>.info,
+        .pic>.info
         {
             margin-top: 15px;
             border-top: 1px darken(@color-2, 2%) solid;
@@ -415,6 +416,11 @@ header{
                 margin-bottom: 10px;
             }
         }
+        &:after{
+            content: "";
+            clear: both;
+            display: table;
+        }
     }
     .block-data
     {
@@ -473,6 +479,7 @@ header{
     .form-group
     {
         position: relative;
+        min-height: 74px;
         >span
         {
             display: block;
@@ -489,6 +496,8 @@ header{
         .error
         {
             color: @mcolor-1;
+            position: absolute;
+            margin-top: 4px;
         }
         .font-num
         {

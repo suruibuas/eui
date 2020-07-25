@@ -187,6 +187,11 @@ window.nav = [
                 'name' : '人员',
                 'icon' : 'ri-user-line',
                 'href' : './demo/person.html'
+            },
+            {
+                'name' : '表单',
+                'icon' : 'ri-draft-line',
+                'href' : './demo/form.html'
             }
         ]
     },

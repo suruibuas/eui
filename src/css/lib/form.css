@@ -119,7 +119,7 @@ textarea {
 }
 .success-input input,
 .success-input textarea {
-  border-color: #76FF02;
+  border-color: #79E35E;
   background-color: #234824;
 }
 .success-input input:focus,
@@ -127,7 +127,7 @@ textarea {
   background: #234824;
 }
 .success-input i:not(.add):not(.cut) {
-  color: #76FF02;
+  color: #79E35E;
 }
 .error-input input,
 .error-input textarea {

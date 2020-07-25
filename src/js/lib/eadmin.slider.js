@@ -14,37 +14,39 @@ class Slider{
 			console.log('没有' + this.dom + '元素，滑块不再创建');
 			return;
 		}
-		// 外层容器真实宽度
-		this.width     = this.domCache.width();
-		// 滑块按钮宽度
-		this.btnWidth  = 16;
-		// 最大偏移值，用来控制滑块的真实可移动范围，避免移除滑动条
-		this.maxLeft   = this.width - this.btnWidth;
-		// 盒子的X轴偏移值
-		this.offsetX   = this.domCache.offset().left;
-		// 步长宽度
-		this.stepWidth = 0;
-		// 默认参数
-		let _param = {
-			// 默认值
-			value    : 0,
-			// 禁用
-			disabled : false,
-			// 步长
-			step 	 : 0,
-			// 最小值
-			min 	 : 0,
-			// 最大值
-			max 	 : 100,
-			// 是否需要提示
-			tips 	 : '',
-			// 回调
-			change 	 : null
-		};
-		// 配置参数
-		this.param = $.extend(_param, param);
-		// 运行
-		this.run();
+		setTimeout(() => {
+			// 外层容器真实宽度
+			this.width     = this.domCache.width();
+			// 滑块按钮宽度
+			this.btnWidth  = 16;
+			// 最大偏移值，用来控制滑块的真实可移动范围，避免移出滑动条
+			this.maxLeft   = this.width - this.btnWidth;
+			// 盒子的X轴偏移值
+			this.offsetX   = this.domCache.offset().left;
+			// 步长宽度
+			this.stepWidth = 0;
+			// 默认参数
+			let _param = {
+				// 默认值
+				value    : 0,
+				// 禁用
+				disabled : false,
+				// 步长
+				step 	 : 0,
+				// 最小值
+				min 	 : 0,
+				// 最大值
+				max 	 : 100,
+				// 是否需要提示
+				tips 	 : '',
+				// 回调
+				change 	 : null
+			};
+			// 配置参数
+			this.param = $.extend(_param, param);
+			// 运行
+			this.run();
+		}, 50);
 	}
 
 	/**
@@ -76,6 +78,7 @@ class Slider{
 			// 如果固定步长，则增加步长点
 			if (this.param.step > 0)
 			{
+				console.log(this.width);
 				// 设置步长点的左偏移值
 				this.stepWidth = _.round(this.width / this.param.step);
 				for (let i = 1; i < this.param.step; i++)
