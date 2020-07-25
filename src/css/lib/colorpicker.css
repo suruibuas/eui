@@ -18,6 +18,7 @@
  * ================= 通用方法 ==================
  */
 .colorpicker {
+  min-height: 38px;
   overflow: hidden;
 }
 .colorpicker > div {

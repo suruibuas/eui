@@ -284,7 +284,7 @@ class Page{
 			}).
 			// 跳转
 			on('click', dom[6], () => {
-				let page = that.pageBox.find('input').val();
+				let page = that.pageBoxCache.find('input').val();
 				if (page == '')
 				{
 					func.jumpError('跳转的页数不能为空');

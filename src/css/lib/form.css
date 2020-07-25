@@ -172,7 +172,7 @@ select {
 .checkbox-checked,
 .checkbox-disabled-checked {
   margin-right: 10px;
-  line-height: 36px;
+  line-height: 40px;
   display: inline-block;
 }
 .radio i,

@@ -17,6 +17,9 @@
 /**
  * ================= 通用方法 ==================
  */
+.rate {
+  min-height: 38px;
+}
 .rate .star {
   transition: color 0.2s linear;
   display: inline-block;
