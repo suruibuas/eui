@@ -288,7 +288,7 @@ header .sub-nav .active:hover {
 .block-box .block .person > .info,
 .block-box .block .pic > .info {
   margin-top: 15px;
-  border-top: 1px #171c3b solid;
+  border-top: 1px #141933 solid;
   overflow: hidden;
   height: 30px;
   line-height: 40px;
@@ -361,6 +361,24 @@ header .sub-nav .active:hover {
   width: 100%;
   max-height: 360px;
   margin-bottom: 10px;
+}
+.block-box .block .user-profile .main {
+  text-align: center;
+}
+.block-box .block .user-profile .note {
+  margin-bottom: 10px;
+}
+.block-box .block .user-profile img {
+  border-radius: 50px;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+  border: 4px #0084FF solid;
+}
+.block-box .block .user-profile hr {
+  border: 0;
+  border-top: 1px #141933 solid;
+  margin: 15px 0;
 }
 .block-box .block:after {
   content: "";

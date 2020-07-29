@@ -32,8 +32,8 @@ textarea
     width: 100%;
     color: @font-color-1;
 }
-input:not(.color-input),
-textarea:not(.color-input)
+input,
+textarea
 {
     .animate-form();
 }
@@ -126,6 +126,7 @@ textarea
 .error-input,
 .notice-input
 {
+    .animate-form();
     input
     {
         padding-right: 24px;

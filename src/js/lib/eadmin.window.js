@@ -121,7 +121,7 @@ class Window{
 		if (this.param.btn.length > 0)
 			v.height -= 50;
 		// 窗口骨架
-		v.html = `<div id="window-${v.id}" 
+		v.html = `<div id="${this.window}" 
 						class="window animated faster${(Mount.window) == null ? '' : ' ' + Mount.window} dn" ${v.style}>
 					<div class="window-loading dn">
 						<i class="ri-loader-4-line rotate"></i>页面加载中，请稍候...
@@ -184,6 +184,8 @@ class Window{
 					return;
 				}
 				v.loading.show();
+				let timeout = 100;
+				if (that.param.style == 'popup') timeout = 200;
 				// 延迟避免窗口加载过快
 				setTimeout(() => {
 					if (v.scroll != null)
@@ -221,7 +223,7 @@ class Window{
 						// 块
 						block(v.body);
 					});
-				}, 100);
+				}, timeout);
 			},
 			init : (dom) => {
 				// 创建窗体

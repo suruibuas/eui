@@ -1003,6 +1003,10 @@ class Table{
 								let status = c.status(row);
 								__html += `<span data-status="${status.code}">${status.name}</span>`;
 							}
+							else if (_.isFunction(c.callback))
+							{
+								__html += c.callback(row);
+							}
 							else
 							{
 								__html += row[c.field];

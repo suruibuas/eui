@@ -110,6 +110,9 @@ class Tab{
 			return;
 		this.param[this.active].loaded = true;
 		let panel = this.panel.eq(this.active);
+		let id = 'tab-window-' + createId();
+		panel.attr('id', id);
+		Mount.window = id;
 		panel.html(`
 			<div class="panel-loading">
 				<i class="ri-loader-4-line rotate"></i>页面加载中，请稍候...
@@ -117,7 +120,6 @@ class Tab{
 		`);
 		Eadmin.currentHref = load;
 		panel.
-			empty().
 			load(load, () => {
 				// 表单处理
 				Eadmin.form(panel);
@@ -129,6 +131,16 @@ class Tab{
 				Tag.run(panel);
 				// 进度条
 				Progress.run(panel);
+				// 滚动条处理
+				let scroll = body.find('.iscroll');
+				if(scroll.length > 0)
+				{
+					scroll.
+					each(function(){
+						if ($(this).hasClass('ps')) return true;
+						Eadmin.scroll($(this)[0]);
+					});
+				}
 				// 块
 				block(panel);
 			});

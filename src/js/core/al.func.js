@@ -323,9 +323,7 @@ function block(dom)
 			}
 			v.icon = v.this.data('icon');
 			if (v.icon != undefined)
-			{
 				v.this.prepend(`<i class="${v.icon} ${v.color}"></i>`);
-			}
 		}
 	});
 }

@@ -94,8 +94,13 @@ header{
         }
         .logo
         {
-            font-size: 24px;
+            font-size: @font-size-3;
             font-weight: bold;
+            img
+            {
+                vertical-align: middle;
+                margin-right: 10px;
+            }
         }
         .nav
         {
@@ -327,11 +332,19 @@ header{
                 height: 32px;
             }
         }
+        .btnbar
+        {
+            text-align: right;
+            button
+            {
+                margin-right: 0;
+            }
+        }
         .person>.info,
         .pic>.info
         {
             margin-top: 15px;
-            border-top: 1px darken(@color-2, 2%) solid;
+            border-top: 1px darken(@color-2, 4%) solid;
             overflow: hidden;
             height: 30px;
             line-height: 40px;
@@ -416,7 +429,38 @@ header{
                 margin-bottom: 10px;
             }
         }
-        &:after{
+        .user-profile
+        {
+            .main,
+            .id
+            {
+                text-align: center;
+            }
+            .note
+            {
+                margin-bottom: 10px;
+            }
+            .info
+            {
+                margin-bottom: 20px;
+            }
+            img
+            {
+                .border-radius(50px);
+                width: 80px;
+                height: 80px;
+                margin-bottom: 10px;
+                border: 4px @color-3 solid;
+            }
+            hr
+            {
+                border: 0;
+                border-top: 1px darken(@color-2, 4%) solid;
+                margin: 15px 0;
+            }
+        }
+        &:after
+        {
             content: "";
             clear: both;
             display: table;
