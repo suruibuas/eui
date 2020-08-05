@@ -90,7 +90,7 @@ header{
         }
         >div:first-child
         {
-            padding-left: 100px;
+            padding-left: 60px;
         }
         .logo
         {
@@ -112,6 +112,13 @@ header{
                     padding: 0 15px;
                 }  
             }
+            .active
+            {
+                .nav-slider
+                {
+                    display: block;
+                }
+            }
         }
         .member
         {
@@ -123,7 +130,7 @@ header{
                 width: 28px;
                 height: 28px;
                 top: 10px;
-                left: 0;
+                right: 60px;
                 border: 2px @color-3 solid;
             }
             i
@@ -132,14 +139,12 @@ header{
                 margin-left: 5px;
             }
         }
-        >.nav-slider
+        .nav-slider
         {
             .border-radius(50px);
             .linear();
-            position: absolute;
-            top: 0;
-            width: 50px;
             height: 4px;
+            margin-top: -50px;
             display: none;
         }
     }
@@ -234,7 +239,7 @@ header{
 {
     margin: 0 auto;
     width: 100%;
-    padding: 20px 100px;
+    padding: 20px 60px;
     position: relative;
 }
 .block-title
@@ -344,7 +349,6 @@ header{
         .pic>.info
         {
             margin-top: 15px;
-            border-top: 1px darken(@color-2, 4%) solid;
             overflow: hidden;
             height: 30px;
             line-height: 40px;
@@ -427,6 +431,22 @@ header{
                 width: 100%;
                 max-height: 360px;
                 margin-bottom: 10px;
+            }
+        }
+        .pic-font
+        {
+            padding-left: 140px;
+            min-height: 128px;
+            >div:first-child
+            {
+                position: absolute;
+                left: 0;
+                img
+                {
+                    .border-radius();
+                    max-width: 128px;
+                    max-height: 128px;
+                }
             }
         }
         .user-profile

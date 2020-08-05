@@ -38,8 +38,8 @@ textarea {
   width: 100%;
   color: #FFF;
 }
-input:not(.color-input),
-textarea:not(.color-input) {
+input,
+textarea {
   transition: border-color 0.2s linear, background-color 0.2s linear, box-shadow 0.2s linear;
 }
 input:focus,
@@ -103,6 +103,11 @@ textarea {
 .icon-input-right i {
   margin-right: 0;
   right: 10px;
+}
+.success-input,
+.error-input,
+.notice-input {
+  transition: border-color 0.2s linear, background-color 0.2s linear, box-shadow 0.2s linear;
 }
 .success-input input,
 .error-input input,

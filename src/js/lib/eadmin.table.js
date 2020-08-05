@@ -105,6 +105,10 @@ class Table{
 			addClass('table').
 			before(shade);
 		this.shade = this.domCache.prev('.table-shade');
+		if (this.param.config.button.length == 0)
+		{
+			this.domCache.css('margin-top', 10);
+		}
 		this.run();
 	}
 
@@ -175,7 +179,7 @@ class Table{
 				let html = `<div class="table-search"><form><div class="block-box">`;
 				let param = [];
 				_.each(v.search, (v, k) => {
-					html += `<div class="col-lg-3 col-md-3"><div class="form-group">`;
+					html += `<div class="col-3"><div class="form-group">`;
 					let column = this.param.column[v];
 					// 默认文本框搜索
 					if (this.param.search[column.field] == undefined)
@@ -234,7 +238,7 @@ class Table{
 					}
 					html += `</div></div>`;
 				});
-				html += `<div class="col-lg-3 col-md-3">
+				html += `<div class="col-3">
 							<button class="search-do highlight">
 								<i class="ri-search-line"></i>搜索
 							</button><button class="search-refresh">
@@ -817,7 +821,8 @@ class Table{
 		}
 		if (this.window != null)
 		{
-			$(this.window + ' .body')[0].scrollTop = 0;
+			if ( ! _.startsWith(this.window, '#tab'))
+				$(this.window + ' .body')[0].scrollTop = 0;
 		}
 		else
 		{
@@ -1003,9 +1008,9 @@ class Table{
 								let status = c.status(row);
 								__html += `<span data-status="${status.code}">${status.name}</span>`;
 							}
-							else if (_.isFunction(c.callback))
+							else if (_.isFunction(c.format))
 							{
-								__html += c.callback(row);
+								__html += c.format(row);
 							}
 							else
 							{

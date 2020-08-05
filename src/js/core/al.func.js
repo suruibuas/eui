@@ -326,4 +326,56 @@ function block(dom)
 				v.this.prepend(`<i class="${v.icon} ${v.color}"></i>`);
 		}
 	});
+	// 自适应
+	dom.find("[class*='col-']").each(function(){
+		let v = {
+			this : $(this)
+		};
+		v.class = v.this.attr('class');
+		v.class.replace(/col-([\d]+)/g, function(){
+			v.col = parseInt(arguments[1]);
+			switch (v.col)
+			{
+				case 1:
+					v.class = 'col-xl-1 col-lg-1 col-md-2 col-sm-3';
+				break;
+				case 2:
+					v.class = 'col-xl-2 col-lg-2 col-md-3 col-sm-4';
+				break;
+				case 3:
+					v.class = 'col-xl-3 col-lg-3 col-md-4 col-sm-6';
+				break;
+				case 4:
+					v.class = 'col-xl-4 col-lg-4 col-md-6 col-sm-6';
+				break;
+				case 5:
+					v.class = 'col-xl-5 col-lg-5 col-md-5 col-sm-5';
+				break;
+				case 6:
+					v.class = 'col-xl-6 col-lg-6 col-md-6 col-sm-12';
+				break;
+				case 7:
+					v.class = 'col-xl-7 col-lg-7 col-md-7 col-sm-7';
+				break;
+				case 8:
+					v.class = 'col-xl-8 col-lg-8 col-md-8 col-sm-8';
+				break;
+				case 9:
+					v.class = 'col-xl-9 col-lg-9 col-md-9 col-sm-9';
+				break;
+				case 10:
+					v.class = 'col-xl-10 col-lg-10 col-md-10 col-sm-10';
+				break;
+				case 11:
+					v.class = 'col-xl-11 col-lg-11 col-md-11 col-sm-11';
+				break;
+				case 12:
+					v.class = 'col-xl-12 col-lg-12 col-md-12 col-sm-12';
+				break;
+			}
+			v.this.
+				removeClass('col-' + v.col).
+				addClass(v.class);
+		});
+	});
 }

@@ -2,8 +2,10 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="msapplication-tap-highlight" content="no"> 
     <title>EAdmin - 开箱即用的后台中台</title>
     <link href="./css/eadmin.min.css" rel="stylesheet">
 </head>
@@ -13,23 +15,19 @@
         <!-- 主导航 -->
         <div class="main-nav">
             <!-- Logo -->
-            <div class="col-md-2 logo">EAdmin</div>
+            <div class="col-2 logo">EAdmin</div>
             <!-- 主导航容器 -->
-            <div class="col-md-9 nav"></div>
+            <div class="col-9 nav"></div>
             <!-- 个人信息容器 -->
-            <div class="col-md-1 member">
+            <div class="col-1 member">
                 <img src="./img/icon.jpg" class="icon">
-                <a href="#">
-                    注销<i class="ri-logout-circle-r-line"></i>
-                </a>
             </div>
-            <div class="nav-slider"></div>
         </div>
         <!-- 二级导航 -->
         <div class="sub-nav">
-            <div class="col-md-2"></div>
+            <div class="col-2"></div>
             <!-- 二级导航容器 -->
-            <div class="col-md-10"></div>
+            <div class="col-10"></div>
         </div>
     </header>
     <!-- 主体内容容器 -->
@@ -41,7 +39,7 @@
         // 框架全局配置
         conf : {
             // 启动页
-            'homepage'           : './demo/block.html',
+            'homepage'           : './html/table.html',
             // 关闭input的autocomplete
             'close_autocomplete' : true,
             // 加载页面默认延迟时长，避免页面过快刷新

@@ -59,6 +59,11 @@
 .table .fixed-right thead tr .order .active {
   color: #0084FF;
 }
+.table .table-box tbody tr:hover,
+.table .fixed-left tbody tr:hover,
+.table .fixed-right tbody tr:hover {
+  background-color: #283267;
+}
 .table .table-box tbody td,
 .table .fixed-left tbody td,
 .table .fixed-right tbody td {

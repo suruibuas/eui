@@ -73,7 +73,7 @@ class Page{
 								<form>
 									<div class="block-box">`;
 				_.each(this.param.search.field, (v, k) => {
-					html += `<div class="col-lg-3 col-md-3">
+					html += `<div class="col-3">
 								<div class="form-group">`;
 					switch (v.type)
 					{
@@ -121,7 +121,7 @@ class Page{
 					}
 					html += `</div></div>`;
 				});
-				html += `<div class="col-lg-3 col-md-3">
+				html += `<div class="col-3">
 							<button class="search-do highlight">
 								<i class="ri-search-line"></i>搜索
 							</button><button class="search-refresh">

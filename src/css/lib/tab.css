@@ -18,7 +18,6 @@
  * ================= 通用方法 ==================
  */
 .tab {
-  margin-top: 30px;
   border-bottom: 2px #30375B solid;
 }
 .tab span {
@@ -42,9 +41,9 @@
 }
 .tab-panel {
   min-height: 200px;
-  margin-top: 20px;
   display: none;
   position: relative;
+  padding-top: 10px;
 }
 .tab-panel .block {
   padding: 0;

@@ -89,17 +89,24 @@ header .main-nav > div {
   padding: 0;
 }
 header .main-nav > div:first-child {
-  padding-left: 100px;
+  padding-left: 60px;
 }
 header .main-nav .logo {
-  font-size: 24px;
+  font-size: 16px;
   font-weight: bold;
+}
+header .main-nav .logo img {
+  vertical-align: middle;
+  margin-right: 10px;
 }
 header .main-nav .nav a {
   float: left;
 }
 header .main-nav .nav a li {
   padding: 0 15px;
+}
+header .main-nav .nav .active .nav-slider {
+  display: block;
 }
 header .main-nav .member {
   text-align: center;
@@ -110,22 +117,20 @@ header .main-nav .member img {
   width: 28px;
   height: 28px;
   top: 10px;
-  left: 0;
+  right: 60px;
   border: 2px #0084FF solid;
 }
 header .main-nav .member i {
   margin-right: 0;
   margin-left: 5px;
 }
-header .main-nav > .nav-slider {
+header .main-nav .nav-slider {
   border-radius: 50px;
   background: -moz-linear-gradient(left, #66b5ff, #0084FF);
   background: -webkit-linear-gradient(left, #66b5ff, #0084FF);
   background: -o-linear-gradient(left, #66b5ff, #0084FF);
-  position: absolute;
-  top: 0;
-  width: 50px;
   height: 4px;
+  margin-top: -50px;
   display: none;
 }
 header .sub-nav {
@@ -199,7 +204,7 @@ header .sub-nav .active:hover {
 #container {
   margin: 0 auto;
   width: 100%;
-  padding: 20px 100px;
+  padding: 20px 60px;
   position: relative;
 }
 .block-title {
@@ -285,10 +290,15 @@ header .sub-nav .active:hover {
   width: 32px;
   height: 32px;
 }
+.block-box .block .btnbar {
+  text-align: right;
+}
+.block-box .block .btnbar button {
+  margin-right: 0;
+}
 .block-box .block .person > .info,
 .block-box .block .pic > .info {
   margin-top: 15px;
-  border-top: 1px #141933 solid;
   overflow: hidden;
   height: 30px;
   line-height: 40px;
@@ -362,11 +372,28 @@ header .sub-nav .active:hover {
   max-height: 360px;
   margin-bottom: 10px;
 }
-.block-box .block .user-profile .main {
+.block-box .block .pic-font {
+  padding-left: 140px;
+  min-height: 128px;
+}
+.block-box .block .pic-font > div:first-child {
+  position: absolute;
+  left: 0;
+}
+.block-box .block .pic-font > div:first-child img {
+  border-radius: 5px;
+  max-width: 128px;
+  max-height: 128px;
+}
+.block-box .block .user-profile .main,
+.block-box .block .user-profile .id {
   text-align: center;
 }
 .block-box .block .user-profile .note {
   margin-bottom: 10px;
+}
+.block-box .block .user-profile .info {
+  margin-bottom: 20px;
 }
 .block-box .block .user-profile img {
   border-radius: 50px;

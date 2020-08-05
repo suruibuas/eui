@@ -153,12 +153,6 @@ let eadmin = class Eadmin{
             // 一级导航
             if (v.this.hasClass('nav'))
             {
-                // 滑块处理
-                let slider = $('.main-nav .nav-slider');
-                slider.animate({
-                    left  : v.this.offset().left,
-                    width : v.this.width()
-                }, 200);
                 // 切换样式
                 addClassExc(v.this, 'active');
                 // 判断是否有子导航
@@ -290,20 +284,13 @@ let eadmin = class Eadmin{
                 {
                     navHtml += ` data-native="1" target="_blank">`;
                 }
-                navHtml += `<li>${data[id].name}</li></a>`;
+                navHtml += `<li>${data[id].name}<div class="nav-slider"></div></li></a>`;
                 i++;
             }
             navHtml += '</ul>';
             let nav = $('.nav');
             // 主导航交互
             nav.html(navHtml);
-            // 滑块处理
-            let slider = $('.main-nav .nav-slider');
-            let main = nav.find('a:first');
-            slider.
-                width(main.width()).
-                css('left', main.offset().left).
-                show();
         }
         // 实体文件数据源
         if (module.conf.nav_data_source == 'local')
