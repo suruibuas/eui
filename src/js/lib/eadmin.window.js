@@ -117,7 +117,7 @@ class Window{
 			this.param.style == 'window')
 			v.drag = ' style="cursor: move;"';
 		// 窗口主体高度
-		v.height -= 55;
+		v.height -= 60;
 		if (this.param.btn.length > 0)
 			v.height -= 50;
 		// 窗口骨架

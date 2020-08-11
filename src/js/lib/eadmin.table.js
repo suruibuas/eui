@@ -91,13 +91,16 @@ class Table{
 		};
 		// 配置参数
 		this.param = $.extend(true, _param, param);
-		let size = store(this.storeKey + '_size');
-		if (size != undefined) 
-			this.param.config.page.size = parseInt(size);
-		this.size = this.param.config.page.size;
-		// 赋值GET默认参数
-		this.get[this.param.config.page.page_field] = this.page;
-		this.get[this.param.config.page.size_field] = this.size;
+		if ( ! _.isBoolean(this.param.config.page))
+		{
+			let size = store(this.storeKey + '_size');
+			if (size != undefined) 
+				this.param.config.page.size = parseInt(size);
+			this.size = this.param.config.page.size;
+			// 赋值GET默认参数
+			this.get[this.param.config.page.page_field] = this.page;
+			this.get[this.param.config.page.size_field] = this.size;
+		}
 		let shade = `<div class="table-shade">
 						<i class="ri-loader-4-line rotate"></i>数据加载中，请稍候...
 					</div>`;
@@ -106,9 +109,7 @@ class Table{
 			before(shade);
 		this.shade = this.domCache.prev('.table-shade');
 		if (this.param.config.button.length == 0)
-		{
 			this.domCache.css('margin-top', 10);
-		}
 		this.run();
 	}
 
@@ -364,12 +365,14 @@ class Table{
 				this.table = {
 					head : this.domCache.find('thead'),
 					body : this.domCache.find('tbody'),
-					l    : this.domCache.find('.fixed-left').find('tbody'),
-					r    : this.domCache.find('.fixed-right').find('tbody'),
+					lbox : this.domCache.find('.fixed-left'),
+					rbox : this.domCache.find('.fixed-right'),
 					box  : this.domCache.find('.table-box')
 				};
 				this.table.t = this.table.box.children('table');
 				this.table.c = this.table.t.children('tbody');
+				this.table.l = this.table.lbox.find('tbody');
+				this.table.r = this.table.rbox.find('tbody');
 			}
 		};
 		this.shade.css('display', 'flex');
@@ -412,7 +415,7 @@ class Table{
 			// 排序
 			'.order i:not(.active)',
 			// 开关
-			'.checkbox-switch'
+			'[data-model="switch"]'
 		];
 		let that = this;
 		let sbox = that.domCache.parent();
@@ -717,10 +720,10 @@ class Table{
 			let v = {
 				this : $(this)
 			};
-			v.label = v.this.prev('label');
+			v.label = v.this.parent('label');
 			v.api   = v.label.data('api');
 			v.field = v.label.data('field');
-			v.val   = v.label.children().val() == 1 ? 0 : 1;
+			v.val   = v.this.val();
 			v.param = {};
 			v.param[v.field] = v.val;
 			// 请求数据
@@ -934,161 +937,174 @@ class Table{
 				console.log('数据源中没有包含list字段，创建表格失败');
 				return;
 			}
-			// 构建表格
-			_.each(v.data.list, (row, row_key) => {
-				v.fl += `<tr>`;
-				v.fr += `<tr>`;
-				v.html += `<tr>`;
-				// 全选
-				v.html += this._checkbox(row);
-				v.fl += this._checkbox(row, true);
-				_.each(this.param.column, (c, k) => {
-					let _html = `<td`;
-					if (c.tag === true)
-					{
-						_html += ` data-tag="${row[c.field]}"`;
-					}
-					_html += '>';
-					if (c.switch === true)
-					{
-						let api = '';
-						if ( ! _.isFunction(c.api))
+			if (v.data.count > 0 && 
+				v.data.list.length > 0)
+			{
+				// 构建表格
+				_.each(v.data.list, (row, row_key) => {
+					v.fl += `<tr>`;
+					v.fr += `<tr>`;
+					v.html += `<tr>`;
+					// 全选
+					v.html += this._checkbox(row);
+					v.fl += this._checkbox(row, true);
+					_.each(this.param.column, (c, k) => {
+						let _html = `<td`;
+						if (c.tag === true)
 						{
-							console.log('没有指定保存开关状态的API地址');
+							_html += ` data-tag="${row[c.field]}"`;
 						}
-						else
+						_html += '>';
+						if (c.switch === true)
 						{
-							api = c.api(row);
-						}
-						_html += `<label class="no-padding" data-api="${api}" data-field="${c.field}">
-									<input type="checkbox" data-model="switch"${row[c.field] == 1 ? ' checked' : ''}>
-								</label>`;
-					}
-					else if(_.isFunction(c.button))
-					{
-						let _btn = c.button(row);
-						this.btns.push(_btn);
-						_.each(_btn, (b, btn_key) => {
-							let icon = '';
-							if (b.icon != undefined) 
-								icon = `<i class="${b.icon}"></i>`;
-							let url = '';
-							let id  = `table-column-btn-${row_key}-${btn_key}`;
-							if (b.open != undefined)
+							let api = '';
+							if ( ! _.isFunction(c.api))
 							{
-								url = b.open.url;
-							}
-							_html += `<button 
-										id="${id}" 
-										data-row="${row_key}" 
-										data-key="${btn_key}" 
-										data-window-url="${url}" 
-										class="small column-btn" 
-										style="background:${this.color[btn_key]}; border-color:${this.color[btn_key]};"
-										>
-										${icon} ${b.name}
-									</button>`;
-						});
-					}
-					else
-					{
-						let __html = '';
-						// 图片
-						if (c.img === true)
-						{
-							__html += `<img src="${row[c.field]}"`;
-							if (c.head === true) __html += ' class="table-img-head"';
-							__html += '>';
-						}
-						else
-						{
-							// 状态
-							if (_.isFunction(c.status))
-							{
-								let status = c.status(row);
-								__html += `<span data-status="${status.code}">${status.name}</span>`;
-							}
-							else if (_.isFunction(c.format))
-							{
-								__html += c.format(row);
+								console.log('没有指定保存开关状态的API地址');
 							}
 							else
 							{
-								__html += row[c.field];
+								api = c.api(row);
 							}
+							_html += `<label class="no-padding" data-api="${api}" data-field="${c.field}">
+										<input type="checkbox" data-model="switch"${row[c.field] == 1 ? ' checked' : ''}>
+									</label>`;
 						}
-						// 判断链接
-						if (_.isFunction(c.link))
+						else if(_.isFunction(c.button))
 						{
-							let _link = c.link(row);
-							_html += `<a href="${_link.href}"`;
-							if (_link.native === true)
-							{
-								_html += ` data-native="1"`;
-							}
-							if (_link.target != undefined)
-							{
-								_html += ` target="${_link.target}"`;
-							}
-							_html += '>';
+							let _btn = c.button(row);
+							this.btns.push(_btn);
+							_.each(_btn, (b, btn_key) => {
+								let icon = '';
+								if (b.icon != undefined) 
+									icon = `<i class="${b.icon}"></i>`;
+								let url = '';
+								let id  = `table-column-btn-${row_key}-${btn_key}`;
+								if (b.open != undefined)
+								{
+									url = b.open.url;
+								}
+								_html += `<button 
+											id="${id}" 
+											data-row="${row_key}" 
+											data-key="${btn_key}" 
+											data-window-url="${url}" 
+											class="small column-btn" 
+											style="background:${this.color[btn_key]}; border-color:${this.color[btn_key]};"
+											>
+											${icon} ${b.name}
+										</button>`;
+							});
 						}
-						_html += __html;
-						if (c.link != undefined)
+						else
 						{
-							_html += '</a>';
+							let __html = '';
+							// 图片
+							if (c.img === true)
+							{
+								__html += `<img src="${row[c.field]}"`;
+								if (c.head === true) __html += ' class="table-img-head"';
+								__html += '>';
+							}
+							else
+							{
+								// 状态
+								if (_.isFunction(c.status))
+								{
+									let status = c.status(row);
+									__html += `<span data-status="${status.code}">${status.name}</span>`;
+								}
+								else if (_.isFunction(c.format))
+								{
+									__html += c.format(row);
+								}
+								else
+								{
+									__html += row[c.field];
+								}
+							}
+							// 判断链接
+							if (_.isFunction(c.link))
+							{
+								let _link = c.link(row);
+								_html += `<a href="${_link.href}"`;
+								if (_link.native === true)
+								{
+									_html += ` data-native="1"`;
+								}
+								if (_link.target != undefined)
+								{
+									_html += ` target="${_link.target}"`;
+								}
+								_html += '>';
+							}
+							_html += __html;
+							if (c.link != undefined)
+							{
+								_html += '</a>';
+							}
 						}
-					}
-					_html += `</td>`;
-					// 首列
-					if (k == 0)
-					{
-						v.fl += _html;
-					}
-					v.html += _html;
-					// 尾列
-					if (k + 1 == this.param.column.length)
-					{
-						v.fr += _html;
-					}
+						_html += `</td>`;
+						// 首列
+						if (k == 0)
+						{
+							v.fl += _html;
+						}
+						v.html += _html;
+						// 尾列
+						if (k + 1 == this.param.column.length)
+						{
+							v.fr += _html;
+						}
+					});
+					v.fl += `</tr>`;
+					v.html += `</tr>`;
+					v.fr += `</tr>`;
 				});
-				v.fl += `</tr>`;
-				v.html += `</tr>`;
-				v.fr += `</tr>`;
-			});
-			this.table.c.html(v.html);
-			// 缺省图处理
-			defaultImg(this.table.c);
-			// 表单
-			Eadmin.form(this.table.c);
-			// 状态
-			Status.run(this.table.c);
-			// 标签
-			Tag.run(this.table.c);
-			// 进度条
-			Progress.run(this.table.c);
-			// 首列
-			if (this.param.config.fixed.first === true)
-			{
-				this.table.l.html(v.fl);
-				Eadmin.form(this.table.l);
+				this.table.c.html(v.html);
+				// 缺省图处理
+				defaultImg(this.table.c);
+				// 表单
+				Eadmin.form(this.table.c);
+				// 状态
+				Status.run(this.table.c);
+				// 标签
+				Tag.run(this.table.c);
+				// 进度条
+				Progress.run(this.table.c);
+				if (this.table.t.width() <= this.width)
+				{
+					this.table.lbox.remove();
+					this.table.rbox.remove();
+				}
+				else
+				{
+					// 首列
+					if (this.param.config.fixed.first === true)
+					{
+						this.table.l.html(v.fl);
+						Eadmin.form(this.table.l);
+					}
+					// 尾列
+					if (this.param.config.fixed.last === true)
+					{
+						this.table.r.html(v.fr);
+						Eadmin.form(this.table.r);
+					}
+				}
+				// 分页
+				this._page(v.data, page);
+				let checkall = this.table.head.find(':checkbox');
+				if (checkall.is(':checked'))
+					Form.checkbox(checkall, false);
 			}
-			// 尾列
-			if (this.param.config.fixed.last === true)
+			else
 			{
-				this.table.r.html(v.fr);
-				Eadmin.form(this.table.r);
+				this.domCache.append('<div class="empty">该列表暂无更多数据~</div>');
 			}
-			// 分页
-			this._page(v.data, page);
-			let checkall = this.table.head.find(':checkbox');
-			if (checkall.is(':checked'))
-				Form.checkbox(checkall, false);
 			// 隐藏遮罩
 			this.shade.hide();
-			if (this.init)
-			{
-				return;
-			}
+			if (this.init) return;
 			// 校验最小宽度
 			if (this.table.t.width() <= this.width)
 			{

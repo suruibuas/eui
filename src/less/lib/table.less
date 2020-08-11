@@ -56,15 +56,8 @@
                     background-color: lighten(@color-2, 10%);
                 }
             }
-            td
-            {
-                white-space:nowrap;
-                overflow:hidden;
-                text-overflow:ellipsis;
-            }
             img
             {
-                .border-radius();
                 height: 40px;
                 vertical-align: middle;
             }
@@ -90,6 +83,9 @@
             max-width: 500px;
             padding: 0 10px;
             height: 46px;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
         }
         label:not(.no-padding)
         {
@@ -130,6 +126,13 @@
         right: 0;
         box-shadow: -4px 0 10px 0px lighten(@shadow-color, 5%);
     }
+    .empty
+    {
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        color: @color-7;
+    }
 }
 .table-page
 {
@@ -147,6 +150,11 @@
             .animate(background);
             background: @color-5;
         }
+    }
+    .prev-page,
+    .next-page
+    {
+        padding: 5px 6px !important;
     }
     .prev-page > i,
     .next-page > i

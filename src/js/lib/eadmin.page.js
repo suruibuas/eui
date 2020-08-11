@@ -326,7 +326,8 @@ class Page{
 		}
 		if (this.window != null)
 		{
-			$(this.window + ' .body')[0].scrollTop = 0;
+			if ( ! _.startsWith(this.window, '#tab'))
+				$(this.window + ' .body')[0].scrollTop = 0;
 		}
 		else
 		{
@@ -433,7 +434,10 @@ class Page{
 				return;
 			}
 			// 模版赋值
-			Eadmin.template(this.param.tmp, v.data);
+			Eadmin.template(this.param.tmp, v.data, () => {
+				if (_.isFunction(this.param.callback))
+					this.param.callback();
+			});
 			// 分页
 			this._page(v.data, page);
 			this.init = true;

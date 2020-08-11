@@ -146,21 +146,15 @@ class Form{
 			// 判断是不是switch
 			if (v.this.data('model') == 'switch')
 			{
+				v.this.attr('checked', true);
 				v.checked = '';
-				if (v.this.is(':checked'))
-				{
+				if (v.this.val() == 1)
 					v.checked = ' switch-open';
-					v.this.val(1);
-				}
-				else
-				{
-					v.this.val(0);
-				}
 				v.disabled = v.this.is(':disabled') ? ' switch-disabled' : '',
 				v.html = `<div class="checkbox-switch${v.checked}${v.disabled}">
 							<span></span>
 						</div>`;
-				v.this.parent().after(v.html);
+				v.this.parent().append(v.html);
 			}
 			else
 			{
@@ -454,6 +448,8 @@ class Form{
 			let v = {
 				this : $(this)
 			};
+			if(v.this.data('model') === 'switch')
+				return;
 			v.checkbox = v.this.parent();
 			if(v.this.is(':checked'))
 			{
@@ -475,20 +471,16 @@ class Form{
 			let v = {
 				this : $(this)
 			};
-			v.checkbox = v.this.prev().children(':checkbox');
-			if(v.checkbox.is(':checked'))
+			v.checkbox = v.this.prev(':checkbox');
+			if(v.checkbox.val() == 1)
 			{
 				v.this.removeClass('switch-open');
-				v.checkbox.
-					attr('checked', false).
-					val(0);
+				v.checkbox.val(0);
 			}
 			else
 			{
 				v.this.addClass('switch-open');
-				v.checkbox.
-					attr('checked', true).
-					val(1);
+				v.checkbox.val(1);
 			}
 		}).
 		// 表单提交

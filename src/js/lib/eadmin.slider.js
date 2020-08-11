@@ -78,7 +78,6 @@ class Slider{
 			// 如果固定步长，则增加步长点
 			if (this.param.step > 0)
 			{
-				console.log(this.width);
 				// 设置步长点的左偏移值
 				this.stepWidth = _.round(this.width / this.param.step);
 				for (let i = 1; i < this.param.step; i++)

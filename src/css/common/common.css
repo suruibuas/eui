@@ -68,6 +68,10 @@ i {
   margin-right: 5px;
   font-size: 16px;
 }
+img,
+video {
+  border-radius: 5px;
+}
 @-moz-document url-prefix() {
   i {
     vertical-align: middle;
@@ -208,9 +212,10 @@ header .sub-nav .active:hover {
   position: relative;
 }
 .block-title {
-  padding-left: 14px;
+  padding-left: 10px;
   width: 100%;
   height: 18px;
+  line-height: 18px;
   margin-bottom: 20px;
   position: relative;
 }
@@ -222,8 +227,8 @@ header .sub-nav .active:hover {
   width: 5px;
   height: 18px;
   display: inline-block;
-  position: absolute;
-  left: 0;
+  vertical-align: top;
+  margin-right: 10px;
 }
 .block-box {
   display: flex;
@@ -280,7 +285,6 @@ header .sub-nav .active:hover {
   color: #999;
 }
 .block-box .block .font-list img {
-  border-radius: 5px;
   height: 40px;
   vertical-align: middle;
 }
@@ -381,19 +385,8 @@ header .sub-nav .active:hover {
   left: 0;
 }
 .block-box .block .pic-font > div:first-child img {
-  border-radius: 5px;
   max-width: 128px;
   max-height: 128px;
-}
-.block-box .block .user-profile .main,
-.block-box .block .user-profile .id {
-  text-align: center;
-}
-.block-box .block .user-profile .note {
-  margin-bottom: 10px;
-}
-.block-box .block .user-profile .info {
-  margin-bottom: 20px;
 }
 .block-box .block .user-profile img {
   border-radius: 50px;
@@ -406,11 +399,6 @@ header .sub-nav .active:hover {
   border: 0;
   border-top: 1px #141933 solid;
   margin: 15px 0;
-}
-.block-box .block:after {
-  content: "";
-  clear: both;
-  display: table;
 }
 .block-box .block-data .data {
   margin-top: 25px;
@@ -448,6 +436,10 @@ header .sub-nav .active:hover {
   margin-right: 0;
   font-size: 24px;
 }
+.block-box .title {
+  font-size: 14px;
+  color: #d9d9d9;
+}
 .block-box .note {
   margin-top: 10px;
   color: #999;
@@ -462,10 +454,6 @@ header .sub-nav .active:hover {
 }
 .block-box .form-group textarea {
   line-height: 1.5;
-}
-.block-box .form-group .title {
-  font-size: 14px;
-  margin-bottom: 10px;
 }
 .block-box .form-group .error {
   color: #FF1844;
@@ -535,6 +523,15 @@ header .sub-nav .active:hover {
 .block-box .input-group .num-add-cut .disabled {
   color: #BBC5D8;
   cursor: not-allowed;
+}
+.block-box .empty {
+  width: 100%;
+  text-align: center;
+  color: #999;
+  margin: 40% 0 50% 0;
+}
+.block-box .empty img {
+  width: 70%;
 }
 .demo-color {
   border-radius: 5px;
@@ -609,6 +606,9 @@ h6 i {
 .fwb {
   font-weight: bold;
 }
+.tac {
+  text-align: center;
+}
 /**
  * ================= 遮罩 ==================
  */
@@ -632,8 +632,32 @@ h6 i {
 /**
  * ================= 边距 ==================
  */
+.mt10 {
+  margin-top: 10px;
+}
 .mt20 {
   margin-top: 20px;
+}
+.mb20 {
+  margin-bottom: 20px;
+}
+.ml10 {
+  margin-left: 10px;
+}
+.p0 {
+  padding: 0;
+}
+.pl0 {
+  padding-left: 0;
+}
+.pt0 {
+  padding-top: 0;
+}
+.pb0 {
+  padding-bottom: 0;
+}
+.pr0 {
+  padding-right: 0;
 }
 /**
  * ================= 滚动条 ==================

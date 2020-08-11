@@ -67,6 +67,10 @@ i
     margin-right: 5px;
     font-size: @font-size-3;
 }
+img, video
+{
+    .border-radius();
+}
 @-moz-document url-prefix()
 {
     i{vertical-align: middle;}
@@ -244,9 +248,10 @@ header{
 }
 .block-title
 {
-    padding-left: 14px;
+    padding-left:10px;
     width: 100%;
     height: 18px;
+    line-height: 18px;
     margin-bottom: 20px;
     position: relative;
     span
@@ -256,8 +261,8 @@ header{
         width: 5px;
         height: 18px;
         display: inline-block;
-        position: absolute;
-        left: 0;
+        vertical-align: top;
+        margin-right: 10px;
     }
 }
 .block-box
@@ -325,7 +330,6 @@ header{
             }
             img
             {
-                .border-radius();
                 height: 40px;
                 vertical-align: middle;
             }
@@ -443,7 +447,6 @@ header{
                 left: 0;
                 img
                 {
-                    .border-radius();
                     max-width: 128px;
                     max-height: 128px;
                 }
@@ -451,19 +454,6 @@ header{
         }
         .user-profile
         {
-            .main,
-            .id
-            {
-                text-align: center;
-            }
-            .note
-            {
-                margin-bottom: 10px;
-            }
-            .info
-            {
-                margin-bottom: 20px;
-            }
             img
             {
                 .border-radius(50px);
@@ -478,12 +468,6 @@ header{
                 border-top: 1px darken(@color-2, 4%) solid;
                 margin: 15px 0;
             }
-        }
-        &:after
-        {
-            content: "";
-            clear: both;
-            display: table;
         }
     }
     .block-data
@@ -534,6 +518,11 @@ header{
             font-size: 24px;
         }
     }
+    .title
+    {
+        font-size: @font-size-2;
+        color: @font-color-3;
+    }
     .note
     {
         margin-top: 10px;
@@ -551,11 +540,6 @@ header{
         textarea
         {
             line-height: 1.5;
-        }
-        .title
-        {
-            font-size: @font-size-2;
-            margin-bottom: 10px;
         }
         .error
         {
@@ -640,6 +624,17 @@ header{
                 color: @color-6;
                 cursor: not-allowed;
             }
+        }
+    }
+    .empty
+    {
+        width: 100%;
+        text-align: center;
+        color: @color-7;
+        margin: 40% 0 50% 0;
+        img
+        {
+            width: 70%;
         }
     }
 }
@@ -728,6 +723,10 @@ h6
 {
     font-weight: bold;
 }
+.tac
+{
+    text-align: center;
+}
 
 /**
  * ================= 遮罩 ==================
@@ -755,9 +754,41 @@ h6
 /**
  * ================= 边距 ==================
  */
-.mt20
+.mt10
+{
+    margin-top: 10px;
+}
+ .mt20
 {
     margin-top: 20px;
+}
+.mb20
+{
+    margin-bottom: 20px;
+}
+.ml10
+{
+    margin-left: 10px;
+}
+.p0
+{
+    padding: 0;
+}
+.pl0
+{
+    padding-left: 0;
+}
+.pt0
+{
+    padding-top: 0;
+}
+.pb0
+{
+    padding-bottom: 0;
+}
+.pr0
+{
+    padding-right: 0;
 }
 
 /**

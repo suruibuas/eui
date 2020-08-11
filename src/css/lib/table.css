@@ -64,17 +64,9 @@
 .table .fixed-right tbody tr:hover {
   background-color: #283267;
 }
-.table .table-box tbody td,
-.table .fixed-left tbody td,
-.table .fixed-right tbody td {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 .table .table-box tbody img,
 .table .fixed-left tbody img,
 .table .fixed-right tbody img {
-  border-radius: 5px;
   height: 40px;
   vertical-align: middle;
 }
@@ -103,6 +95,9 @@
   max-width: 500px;
   padding: 0 10px;
   height: 46px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .table .table-box label:not(.no-padding),
 .table .fixed-left label:not(.no-padding),
@@ -144,6 +139,12 @@
   right: 0;
   box-shadow: -4px 0 10px 0px #0c112a;
 }
+.table .empty {
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  color: #999;
+}
 .table-page {
   text-align: right;
   margin-top: 10px;
@@ -158,6 +159,10 @@
 .table-page > span:not(.jump):not(.info):hover:not(.current) {
   transition: background 0.2s linear;
   background: #4E5675;
+}
+.table-page .prev-page,
+.table-page .next-page {
+  padding: 5px 6px !important;
 }
 .table-page .prev-page > i,
 .table-page .next-page > i {

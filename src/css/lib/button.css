@@ -52,7 +52,9 @@ button:disabled {
 }
 .small {
   font-size: 14px;
-  padding: 4px 10px;
+  padding: 0 8px;
+  height: 25px;
+  line-height: 23px;
 }
 .small i {
   font-size: 12px;

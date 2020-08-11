@@ -128,6 +128,8 @@ class Validate{
 				{
 					return;
 				}
+				// 创建表单验证消息容器
+				v.note = this._note(v.this);
 				if (v.this.data('note') == false)
 				{
 					v.note.remove();
@@ -142,6 +144,8 @@ class Validate{
 			},
 			// 失败
 			error : (msg) => {
+				// 创建表单验证消息容器
+				v.note = this._note(v.this);
 				// 验证失败
 				v.this.data('validate-error', 1);
 				// 显示提示信息
@@ -154,8 +158,6 @@ class Validate{
 		let v = {
 			this : dom
 		};
-		// 创建表单验证消息容器
-		v.note = this._note(v.this);
 		// 验证规则
 		v.rule = v.this.data('validate');
 		// 消息
