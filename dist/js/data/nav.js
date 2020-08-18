@@ -49,7 +49,7 @@ window.nav = [
             {
                 'name' : '复选框',
                 'href' : './html/checkbox.html',
-                'icon' : 'ri-checkbox-circle-line'
+                'icon' : 'ri-checkbox-line'
             },
             {
                 'name' : '下拉菜单',

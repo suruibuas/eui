@@ -215,7 +215,6 @@ select {
 }
 .select {
   border-radius: 5px;
-  transition: border-color 0.2s linear, background-color 0.2s linear, box-shadow 0.2s linear;
   padding: 10px;
   border: 1px #30375B solid;
   background: #232B4C;

@@ -418,19 +418,23 @@ class Window{
 					}
 					else
 					{
+						let _btnReset = () => {
+							setTimeout(() => {
+								Eadmin.button.reset(_var.this);
+							}, 100);
+						};
 						_var.param.action({
 							close : () => {
-								setTimeout(() => {
-									Eadmin.button.reset(_var.this);
-								}, 100);
+								_btnReset();
 								func.close();
 							},
 							refresh : () => {
-								setTimeout(() => {
-									Eadmin.button.reset(_var.this);
-								}, 100);
+								_btnReset();
 								v.body.empty();
 								func.load();
+							},
+							btnReset : () => {
+								_btnReset();
 							}
 						});
 					}

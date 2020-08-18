@@ -24,8 +24,60 @@ let Method = {};
 // 挂载点
 let Mount  = {
 	dropzone : [],
-	window : null
+	window : null,
+	data   : null
 };
+Mount.observer = new MutationObserver((m) => {
+	if(m[0].attributeName != 'disabled') return;
+	let dom = m[0].target;
+	dom = $(dom);
+	// 单选
+	if (dom.is(':radio'))
+	{
+		// 是不是开关
+		if (dom.data('model') == 'switch')
+		{
+			dom.is(':disabled') ? 
+				dom.next().addClass('switch-disabled') : 
+				dom.next().removeClass('switch-disabled');
+			return;
+		}
+		let _class = 'radio';
+		if(dom.is(':checked'))
+		{
+			_class += dom.is(':disabled') ? '-disabled-checked' : '-checked';
+		}
+		else
+		{
+			_class += dom.is(':disabled') ? '-disabled' : '';
+		}
+		dom.parent().prop('class', _class);
+		return;
+	}
+	// 复选
+	if (dom.is(':checkbox'))
+	{
+		let _class = 'checkbox';
+		if(dom.is(':checked'))
+		{
+			_class += dom.is(':disabled') ? '-disabled-checked' : '-checked';
+		}
+		else
+		{
+			_class += dom.is(':disabled') ? '-disabled' : '';
+		}
+		dom.parent().prop('class', _class);
+		return;
+	}
+	// 下拉
+	if(dom.is('select'))
+	{
+		dom.is(':disabled') ? 
+			dom.next().addClass('select-disabled') : 
+			dom.next().removeClass('select-disabled');
+		return;
+	}
+});
 
 // 默认执行异步加载过程
 (function(){

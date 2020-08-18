@@ -1,16 +1,14 @@
 <h2>综合表单</h2>
 <!-- 大盒子 -->
-<div class="block-box">
-    <!-- 响应盒子，bootstrap -->
-    <div class="col-12">
-        <!-- 容器盒子，具体布局使用 -->
-        <div class="block">
-            <div class="block-title">复杂表单</div>
-            <form action="submit.php">
+<form action="submit.php">
+    <div class="block-box">
+        <div class="col-12">
+            <div class="block flex">
+                <div class="block-title">复杂表单</div>
                 <div class="col-4">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">标题</span>
+                        <h4 class="title">标题</h4>
                         <input 
                             type="text" 
                             placeholder="请输入内容" 
@@ -21,7 +19,7 @@
                 <div class="col-4">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">网址</span>
+                        <h4 class="title">网址</h4>
                         <input 
                             type="text" 
                             placeholder="请输入网址" 
@@ -31,7 +29,7 @@
                 <div class="col-4">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">金额</span>
+                        <h4 class="title">金额</h4>
                         <input 
                             class="num-input" 
                             type="text" 
@@ -44,7 +42,7 @@
                 <div class="col-6">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">简介</span>
+                        <h4 class="title">简介</h4>
                         <textarea name="t2"
                             rows="6" 
                             placeholder="请输入内容..."
@@ -56,7 +54,7 @@
                 <div class="col-6">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">描述</span>
+                        <h4 class="title">描述</h4>
                         <textarea 
                             name="t2" 
                             maxlength="200" 
@@ -67,7 +65,7 @@
                 <div class="col-4">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">金额</span>
+                        <h4 class="title">金额</h4>
                         <input 
                             type="text" 
                             placeholder="请输入金额" 
@@ -78,7 +76,7 @@
                 <div class="col-4">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">类型</span>
+                        <h4 class="title">类型</h4>
                         <select 
                             name="t3" 
                             data-width="100%" 
@@ -96,7 +94,7 @@
                 <div class="col-4">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">复选框</span>
+                        <h4 class="title">复选框</h4>
                         <label>
                             <input 
                                 name="t4" 
@@ -116,7 +114,7 @@
                 <div class="col-4">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">选择日期</span>
+                        <h4 class="title">选择日期</h4>
                         <input 
                             id="p1" 
                             type="text" 
@@ -127,7 +125,7 @@
                 <div class="col-4">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">选择日期</span>
+                        <h4 class="title">选择日期</h4>
                         <input 
                             id="p2" 
                             type="text" 
@@ -138,7 +136,7 @@
                 <div class="col-4">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">选择日期</span>
+                        <h4 class="title">选择日期</h4>
                         <input 
                             id="p3" 
                             type="text" 
@@ -149,7 +147,7 @@
                 <div class="col-4">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">选择城市</span>
+                        <h4 class="title">选择城市</h4>
                         <input 
                             id="p4" 
                             type="text" 
@@ -160,7 +158,7 @@
                 <div class="col-4">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">选择城市</span>
+                        <h4 class="title">选择城市</h4>
                         <input 
                             id="p5" 
                             type="text" 
@@ -171,7 +169,7 @@
                 <div class="col-4">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">选择城市</span>
+                        <h4 class="title">选择城市</h4>
                         <input 
                             id="p6" 
                             type="text" 
@@ -182,51 +180,51 @@
                 <div class="col-4">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">选择数量</span>
+                        <h4 class="title">选择数量</h4>
                         <div id="p7"></div>
                     </div>
                 </div>
                 <div class="col-4">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">选择颜色</span>
+                        <h4 class="title">选择颜色</h4>
                         <div id="p8"></div>
                     </div>
                 </div>
                 <div class="col-4">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">打分</span>
+                        <h4 class="title">打分</h4>
                         <div id="p9"></div>
                     </div>
                 </div>
                 <div class="col-6">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">上传图片</span>
+                        <h4 class="title">上传图片</h4>
                         <div id="p10"></div>
                     </div>
                 </div>
                 <div class="col-6">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">手动上传</span>
+                        <h4 class="title">手动上传</h4>
                         <div id="p11"></div>
                     </div>
                 </div>
                 <div class="col-12">
                     <!-- 表单组盒子 -->
                     <div class="form-group">
-                        <span class="title">详细内容</span>
+                        <h4 class="title">详细内容</h4>
                         <div id="p12" data-name="content"></div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
+</form>
 <script>
-    (function(){
+    (() => {
         Eadmin.datepicker('#p1');
         Eadmin.datepicker('#p2', {
             confirm : true

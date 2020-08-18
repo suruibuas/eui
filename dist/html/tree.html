@@ -1,24 +1,12 @@
 <h2>树形</h2>
 <h6>
-    EAdmin集成了ztree.js，提供了日常开发最常用的树形功能
+    EAdmin提供了日常开发最常用的树形功能，包括支持多选的树形菜单
 </h6>
 <div class="block-box">
     <div class="col-4">
         <div class="block">
-            <h3>树形菜单</h3>
-            <div id="p1" class="mt10"></div>
-        </div>
-    </div>
-    <div class="col-4">
-        <div class="block">
-            <h3>没有图标的菜单</h3>
-            <div id="p2" class="mt10"></div>
-        </div>
-    </div>
-    <div class="col-4">
-        <div class="block">
-            <h3>有复选框的菜单</h3>
-            <div id="p3" class="mt10"></div>
+            <h4>树形菜单</h4>
+            <div id="p1"></div>
         </div>
     </div>
 </div>
@@ -30,8 +18,19 @@
                 open : false, 
                 children : [
                     {
-                        name : '子菜单'
-                    }, 
+                        name : '子菜单',
+                        children : [
+                            {
+                                name : '子子菜单'
+                            },
+                            {
+                                name : '子子菜单'
+                            },
+                            {
+                                name : '子子菜单'
+                            }
+                        ]
+                    },
                     {
                         name : '子菜单'
                     }
@@ -51,13 +50,6 @@
             }
         ];
         Eadmin.tree('#p1', {
-            data : data
-        });
-        Eadmin.tree('#p2', {
-            data : data,
-            icon : false
-        });
-        let obj = Eadmin.tree('#p3', {
             data : data,
             checkbox : true
         });

@@ -6,61 +6,85 @@ class Tree{
 
 	constructor(dom, param){
 		this.dom = $(dom);
-		this.domName = dom;
 		let _param = {
 			// 复选框
 			checkbox : false,
-			// 半选
-			halfcheck : false,
-			// 显示图标
-			icon : true,
 			// 数据
-			data : {}
+			data : []
 		};
 		// 配置参数
 		this.param = $.extend(_param, param);
-		this.dom.addClass('ztree');
+		this.dom.addClass('tree');
+		if (this.param.data.length == 0)
+		{
+			this.dom.html('<span class="note mt20">没有树形菜单数据</span>');
+			return;
+		}
 		this.run();
 	}
 
-	run(){
-		let option = {
-			view : {
-				showIcon: this.param.icon
-			},
-			check : {
-				enable : this.param.checkbox,
-				chkDisabledInherit: true
-			},
-			data : {
-				simpleData : {
-					enable : true
-				}
-			}
+	/**
+	 * 执行
+	 */
+	run()
+	{
+		this._create();
+		this._event();
+	}
+
+	/**
+	 * 创建
+	 */
+	_create()
+	{
+		let v = {
+			html : ''
 		};
-		if (this.param.checkbox)
-		{
-			if ( ! this.param.halfcheck)
-			{
-				option.check.chkboxType = {'Y' : 'ps', 'N' : 'ps'};
-			}
-			else
-			{
-				option.check.chkboxType = {'Y' : 's', 'N' : 's'};
-			}
-		}
-		$.fn.zTree.init(this.dom, option, this.param.data);
+		let create = (level, data) => {
+			_.each(data, (row, key) => {
+				let ul = '';
+				// 第一级
+				if (level == 0)
+				{
+					if (row.children == undefined)
+						ul = ' style="margin-left:0;"';
+				}
+				else
+				{
+					if (this.param.checkbox)
+						ul = ' class="tree-checkbox"';
+					if (row.children == undefined)
+						ul += ' style="padding-left:45px;"';
+				}
+				v.html += `<ul${ul}><li data-level="${level}" data-key="${key}">`;
+				if (row.children != undefined)
+					v.html += `<i class="ri-arrow-right-s-line"></i>`;
+				// 判断是否有复选
+				if (this.param.checkbox)
+				{
+					v.html += `<label>
+									<input name="fruit" type="checkbox"> ${row.name}
+								</label>`;
+				}
+				else
+				{
+					v.html += `<span>${row.name}</span>`;
+				}
+				if (row.children != undefined)
+					create(level + 1, row.children);
+				v.html += `</li></ul>`;
+			});
+		};
+		create(0, this.param.data);
+		this.dom.html(v.html);
 	}
 
-	getChecked(){
-		let obj = this.getZtree();
-        return obj.getCheckedNodes(true);
-	}
+	/**
+	 * 事件
+	 */
+	_event()
+	{
 
-	getZtree(){
-		let dom = this.domName.replace('#', '', this.domName);
-		dom = dom.replace('.', '', dom);
-		return $.fn.zTree.getZTreeObj(dom);
 	}
 	
 }

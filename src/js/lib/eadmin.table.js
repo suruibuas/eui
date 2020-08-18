@@ -937,8 +937,7 @@ class Table{
 				console.log('数据源中没有包含list字段，创建表格失败');
 				return;
 			}
-			if (v.data.count > 0 && 
-				v.data.list.length > 0)
+			if (v.data.list.length > 0)
 			{
 				// 构建表格
 				_.each(v.data.list, (row, row_key) => {
@@ -967,7 +966,7 @@ class Table{
 								api = c.api(row);
 							}
 							_html += `<label class="no-padding" data-api="${api}" data-field="${c.field}">
-										<input type="checkbox" data-model="switch"${row[c.field] == 1 ? ' checked' : ''}>
+										<input type="radio" data-model="switch" value="${row[c.field]}">
 									</label>`;
 						}
 						else if(_.isFunction(c.button))
@@ -1097,10 +1096,29 @@ class Table{
 				let checkall = this.table.head.find(':checkbox');
 				if (checkall.is(':checked'))
 					Form.checkbox(checkall, false);
+				if (this.param.config.page !== false)
+					this.pageBox.show();
+				this.table.lbox.show();
+				this.table.rbox.show();
+				let empty = this.domCache.find('.empty');
+				if (empty.length > 0) empty.hide();
 			}
 			else
 			{
-				this.domCache.append('<div class="empty">该列表暂无更多数据~</div>');
+        		if (this.param.config.page !== false)
+					this.pageBox.hide();
+				this.table.lbox.hide();
+				this.table.rbox.hide();
+				this.table.c.empty();
+				let empty = this.domCache.find('.empty');
+				if (empty.length == 0)
+				{
+					this.domCache.append('<div class="empty">该列表暂无更多数据~</div>');
+				}
+				else
+				{
+					empty.show();
+				}
 			}
 			// 隐藏遮罩
 			this.shade.hide();
@@ -1115,8 +1133,9 @@ class Table{
 				this.domCache.
 					children('.table-box').
 					css('padding-bottom', '18px');
-				// 横向滚动条
-				Eadmin.scroll(this.dom + ' .table-box', 'x');
+				// 横向滚动条，如果没有数据则不需要创建横向滚动条
+				if (v.data.list.length > 0)
+					Eadmin.scroll(this.dom + ' .table-box', 'x');
 			}
 			this.init = true;
 		}).catch((e) => {

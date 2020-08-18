@@ -23,7 +23,6 @@
   position: relative;
   width: 100%;
   padding: 10px;
-  float: left;
 }
 .col {
   -ms-flex-preferred-size: 0;
@@ -535,5 +534,6 @@
   display: table;
 }
 #container:after{
+  content: " ";
   clear: both;
 }

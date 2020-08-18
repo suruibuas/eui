@@ -123,119 +123,137 @@ class Form{
 				after(v.html);
 		});
 		// 单选框
-		form.find(':radio').each(function(){
-			let v = {
-				this  : $(this),
-				class : 'radio'
-			}
-			v.class += (v.this.is(':disabled')) ? '-disabled' : '';
-			v.class += (v.this.is(':checked')) ? '-checked' : '';
-			v.this.
-				parent().
-				addClass(v.class);
-			v.icon = (v.this.is(':checked')) ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line',
-			v.html = `<i class="${v.icon}"></i>`;
-			v.this.before(v.html);
-		});
-		// 复选框
-		form.find(':checkbox').each(function(){
-			let v = {
-				this  : $(this),
-				class : 'checkbox'
-			}
-			// 判断是不是switch
-			if (v.this.data('model') == 'switch')
-			{
-				v.this.attr('checked', true);
-				v.checked = '';
-				if (v.this.val() == 1)
-					v.checked = ' switch-open';
-				v.disabled = v.this.is(':disabled') ? ' switch-disabled' : '',
-				v.html = `<div class="checkbox-switch${v.checked}${v.disabled}">
-							<span></span>
-						</div>`;
-				v.this.parent().append(v.html);
-			}
-			else
-			{
-				v.class += v.this.is(':disabled') ? '-disabled' : '';
-				v.class += v.this.is(':checked') ? '-checked' : '';
-				v.this.parent().addClass(v.class);
-				v.icon = v.this.is(':checked') ? 'ri-checkbox-circle-line' : 'ri-checkbox-blank-circle-line',
-				v.html = `<i class="${v.icon}"></i>`;
-				v.this.before(v.html);
-			}
-		});
-		// 下拉菜单
-		form.find("select:not([class^='ql-'])").each(function(){
-			let v = {
-				this : $(this),
-				li   : ''
-			};
-			v.disabled = '';
-			// 如果是子级菜单也禁用
-			if (v.this.is(':disabled'))
-			{
-				v.disabled = ' select-disabled';
-			}
-			// 判断是否有绑定的子菜单
-			v.bind = v.this.data('bind');
-			if (v.bind != undefined)
-			{
-				v.child = form.find('#' + v.bind);
-				if (v.child.length == 0)
+		let _radio = form.find(':radio');
+		if (_radio.length > 0)
+		{
+			_radio.each(function(){
+				let v = {
+					this  : $(this),
+					class : 'radio'
+				}
+				if (v.this.data('model') == 'switch')
 				{
-					console.log('没有找到绑定的ID为' + v.bind + '的子菜单');
+					v.this.prop('checked', true);
+					v.checked = '';
+					if (v.this.val() == 1)
+						v.checked = ' switch-open';
+					v.disabled = v.this.is(':disabled') ? ' switch-disabled' : '';
+					v.html = `<div class="checkbox-switch${v.checked}${v.disabled}">
+								<span></span>
+							</div>`;
+					v.this.parent().append(v.html);
 				}
 				else
 				{
-					v.child.attr('disabled', true);
+					v.class += (v.this.is(':disabled')) ? '-disabled' : '';
+					v.class += (v.this.is(':checked')) ? '-checked' : '';
+					v.this.
+						parent().
+						addClass(v.class);
+					v.icon = (v.this.is(':checked')) ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line',
+					v.html = `<i class="${v.icon}"></i>`;
+					v.this.before(v.html);
 				}
-			}
-			// 定义真实宽度
-			if (v.this.data('width') != undefined)
-			{
-				v.width = v.this.data('width');
-				if ( ! _.endsWith(v.width, '%'))
-					v.width += 'px';
-			}
-			else
-			{
-				v.width = v.this.outerWidth() + 'px';
-			}
-			v.txt   = v.this.find(':selected').text();
-			v.class = v.this.val() == module.conf.select_default_val || v.disabled != '' ? '' : 'selected';
-			v.html  = `<div style="width:${v.width};" class="select${v.disabled}" data-open="0">
-							<span class="${v.class}">${v.txt}</span>
-							<i class="ri-arrow-down-s-line rotate-0"></i>
-						</div>
-						<div style="width:${v.width};" class="select-option animated faster">
-							<ul class="iscroll">`;
-			// 遍历下拉选项
-			v.this.
-			children('option').
-			each(function(){
-				let that = $(this),
-					val  = that.val(),
-					txt  = that.text(),
-					c    = '';
-				if (val == module.conf.select_default_val) 
-					return true;
-				if (that.is(':disabled'))
-				{
-					c = 'disabled';
-				}
-				else if (that.is(':selected'))
-				{
-					c = 'active';
-				}
-				v.li += `<li class="${c}" data-val="${val}">
-							${txt}
-						</li>`;
+				Mount.observer.observe(v.this[0], {
+					attributeFilter : ['disabled']
+				});
 			});
-			v.html += v.li + `</ul></div>`;
-			v.this.after(v.html);
-		});
+		}
+		// 复选框
+		let _checkbox = form.find(':checkbox');
+		if (_checkbox.length > 0)
+		{
+			_checkbox.each(function(){
+				let v = {
+					this  : $(this),
+					class : 'checkbox'
+				}
+				v.class += v.this.is(':disabled') ? '-disabled' : '';
+				v.class += v.this.is(':checked') ? '-checked' : '';
+				v.this.parent().addClass(v.class);
+				v.icon = v.this.is(':checked') ? 'ri-checkbox-line' : 'ri-checkbox-blank-line';
+				v.html = `<i class="${v.icon}"></i>`;
+				v.this.before(v.html);
+				Mount.observer.observe(v.this[0], {
+					attributeFilter : ['disabled']
+				});
+			});
+		}
+		// 下拉菜单
+		let _select = form.find("select:not([class^='ql-'])");
+		if (_select.length > 0)
+		{
+			_select.each(function(){
+				let v = {
+					this : $(this),
+					li   : ''
+				};
+				v.disabled = '';
+				// 如果是子级菜单也禁用
+				if (v.this.is(':disabled'))
+					v.disabled = ' select-disabled';
+				// 判断是否有绑定的子菜单
+				v.bind = v.this.data('bind');
+				if (v.bind != undefined)
+				{
+					v.child = form.find('#' + v.bind);
+					if (v.child.length == 0)
+					{
+						console.log('没有找到绑定的ID为' + v.bind + '的子菜单');
+					}
+					else
+					{
+						v.child.attr('disabled', true);
+					}
+				}
+				// 定义真实宽度
+				if (v.this.data('width') != undefined)
+				{
+					v.width = v.this.data('width');
+					if ( ! _.endsWith(v.width, '%'))
+						v.width += 'px';
+				}
+				else
+				{
+					v.width = v.this.outerWidth() + 'px';
+				}
+				v.txt   = v.this.find(':selected').text();
+				v.class = v.this.val() == module.conf.select_default_val || v.disabled != '' ? '' : 'selected';
+				v.html  = `<div style="width:${v.width};" class="select${v.disabled}" data-open="0">
+								<span class="${v.class}">${v.txt}</span>
+								<i class="ri-arrow-down-s-line rotate-0"></i>
+							</div>
+							<div style="width:${v.width};" class="select-option animated faster">
+								<ul class="iscroll">`;
+				// 遍历下拉选项
+				v.this.
+				children('option').
+				each(function(){
+					let that = $(this),
+						val  = that.val(),
+						txt  = that.text(),
+						c    = '';
+					if (val == module.conf.select_default_val) 
+						return true;
+					if (that.is(':disabled'))
+					{
+						c = 'disabled';
+					}
+					else if (that.is(':selected'))
+					{
+						c = 'active';
+					}
+					v.li += `<li class="${c}" data-val="${val}">
+								${txt}
+							</li>`;
+				});
+				v.html += v.li + `</ul></div>`;
+				v.this.after(v.html);
+				Mount.observer.observe(v.this[0], {
+					attributeFilter : ['disabled']
+				});
+			});
+		}
 	}
 
 	/**
@@ -428,6 +446,8 @@ class Form{
 			let v = {
 				this : $(this)
 			};
+			if(v.this.data('model') === 'switch')
+				return;
 			v.radio = v.this.parent();
 			if (v.radio.hasClass('radio-checked'))
 				return;
@@ -448,22 +468,20 @@ class Form{
 			let v = {
 				this : $(this)
 			};
-			if(v.this.data('model') === 'switch')
-				return;
 			v.checkbox = v.this.parent();
 			if(v.this.is(':checked'))
 			{
 				v.checkbox.
 					attr('class', 'checkbox-checked').
 					children('i').
-					attr('class', 'ri-checkbox-circle-line');
+					attr('class', 'ri-checkbox-line');
 			}
 			else
 			{
 				v.checkbox.
 					attr('class', 'checkbox').
 					children('i').
-					attr('class', 'ri-checkbox-blank-circle-line');
+					attr('class', 'ri-checkbox-blank-line');
 			}
 		}).
 		// 开关
@@ -471,16 +489,16 @@ class Form{
 			let v = {
 				this : $(this)
 			};
-			v.checkbox = v.this.prev(':checkbox');
-			if(v.checkbox.val() == 1)
+			v.radio = v.this.prev(':radio');
+			if(v.radio.val() == 1)
 			{
 				v.this.removeClass('switch-open');
-				v.checkbox.val(0);
+				v.radio.val(0);
 			}
 			else
 			{
 				v.this.addClass('switch-open');
-				v.checkbox.val(1);
+				v.radio.val(1);
 			}
 		}).
 		// 表单提交
@@ -592,7 +610,7 @@ class Form{
 		{
 			param = {
 				checked : true,
-				i_class : 'ri-checkbox-circle-line',
+				i_class : 'ri-checkbox-line',
 				class   : 'checkbox-checked'
 			};
 		}
@@ -600,7 +618,7 @@ class Form{
 		{
 			param = {
 				checked : false,
-				i_class : 'ri-checkbox-blank-circle-line',
+				i_class : 'ri-checkbox-blank-line',
 				class   : 'checkbox'
 			};
 		}

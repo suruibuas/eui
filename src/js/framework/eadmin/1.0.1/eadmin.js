@@ -250,6 +250,7 @@ let eadmin = class Eadmin{
             Mount.dropzone = [];
         }
         Mount.window = null;
+        Mount.data   = null;
         // 加载
         setTimeout(() => {
             Method = {};
@@ -491,7 +492,7 @@ let eadmin = class Eadmin{
     /**
      * 模版
      */
-    template(dom, data){
+    template(dom, data, callback){
         try{
             template != undefined;
             let v = {
@@ -504,6 +505,8 @@ let eadmin = class Eadmin{
                 return;
             }
             v.box.html(v.html);
+            if (_.isFunction(callback))
+                callback();
         }
         catch(e){
             console.log(e);
@@ -560,9 +563,7 @@ loader.ready(() => {
     }
     // 上传处理
     if(module.plugin.indexOf('dropzone') != -1)
-    {
         Dropzone.autoDiscover = false;
-    }
     // 导航
     Eadmin.nav();
     // 主界面
@@ -597,13 +598,11 @@ loader.ready(() => {
         Validate.run();
     // 点击遮罩关闭弹窗
     if ( ! module.conf.window_close_by_shade) return;
-    $('.mask').
-        css('cursor', 'pointer').
-        on('click', () => {
-            if ($('.window').length == 0) return;
-            let window = $('.window:last');
-            window.
-                children('.window-close').
-                trigger('click');
-        });
+    $('.mask').on('click', () => {
+        if ($('.window').length == 0) return;
+        let window = $('.window:last');
+        window.
+            children('.window-close').
+            trigger('click');
+    });
 });
