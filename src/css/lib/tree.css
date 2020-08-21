@@ -33,8 +33,7 @@
   cursor: pointer;
 }
 .tree li {
-  margin: 8px 0;
-  line-height: 20px;
+  line-height: 28px;
 }
 .tree .tree-checkbox {
   padding-left: 25px;

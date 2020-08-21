@@ -472,21 +472,24 @@ let eadmin = class Eadmin{
      * 树形
      */
     tree(dom, param){
-        return new Tree(dom, param);
+        new Tree(dom, param);
+        return this;
     }
 
     /**
      * 选项卡
      */
     tab(dom, param){
-        return new Tab(dom, param);
+        new Tab(dom, param);
+        return this;
     }
 
     /**
      * 编辑器
      */
     editor(dom, param){
-        return new Editor(dom, param);
+        new Editor(dom, param);
+        return this;
     }
 
     /**

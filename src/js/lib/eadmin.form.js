@@ -172,6 +172,8 @@ class Form{
 				v.class += v.this.is(':checked') ? '-checked' : '';
 				v.this.parent().addClass(v.class);
 				v.icon = v.this.is(':checked') ? 'ri-checkbox-line' : 'ri-checkbox-blank-line';
+				if (v.this.hasClass('checkbox-half'))
+					v.icon = 'ri-checkbox-indeterminate-line';
 				v.html = `<i class="${v.icon}"></i>`;
 				v.this.before(v.html);
 				Mount.observer.observe(v.this[0], {
@@ -478,6 +480,7 @@ class Form{
 			}
 			else
 			{
+				v.this.removeClass('checkbox-half');
 				v.checkbox.
 					attr('class', 'checkbox').
 					children('i').
@@ -604,7 +607,7 @@ class Form{
 	 * @param {*} dom 
 	 * @param {*} action 
 	 */
-	static checkbox(dom, action) {
+	static checkbox(dom, action, half = false) {
 		let param = {};
 		if (action == 1)
 		{
@@ -613,6 +616,15 @@ class Form{
 				i_class : 'ri-checkbox-line',
 				class   : 'checkbox-checked'
 			};
+			if (half)
+			{
+				param.i_class = 'ri-checkbox-indeterminate-line';
+				dom.addClass('checkbox-half');
+			}
+			else
+			{
+				dom.removeClass('checkbox-half');
+			}
 		}
 		else
 		{
@@ -621,6 +633,7 @@ class Form{
 				i_class : 'ri-checkbox-blank-line',
 				class   : 'checkbox'
 			};
+			dom.removeClass('checkbox-half');
 		}
 		dom.
 			prop('checked', param.checked).

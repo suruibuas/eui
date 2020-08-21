@@ -355,22 +355,22 @@ function block(dom)
 					v.class = 'col-xl-6 col-lg-6 col-md-6 col-sm-12';
 				break;
 				case 7:
-					v.class = 'col-xl-7 col-lg-7 col-md-7 col-sm-7';
+					v.class = 'col-xl-7 col-lg-7';
 				break;
 				case 8:
-					v.class = 'col-xl-8 col-lg-8 col-md-8 col-sm-8';
+					v.class = 'col-xl-8 col-lg-8';
 				break;
 				case 9:
-					v.class = 'col-xl-9 col-lg-9 col-md-9 col-sm-9';
+					v.class = 'col-xl-9 col-lg-9';
 				break;
 				case 10:
-					v.class = 'col-xl-10 col-lg-10 col-md-10 col-sm-10';
+					v.class = 'col-xl-10 col-lg-10';
 				break;
 				case 11:
-					v.class = 'col-xl-11 col-lg-11 col-md-11 col-sm-11';
+					v.class = 'col-xl-11 col-lg-11';
 				break;
 				case 12:
-					v.class = 'col-xl-12 col-lg-12 col-md-12 col-sm-12';
+					v.class = 'col-xl-12 col-lg-12';
 				break;
 			}
 			v.this.
