@@ -1,6 +1,34 @@
 @media (max-width: 576px) {
-  #container{
+  #container
+  {
     padding: 20px !important;
+  }
+  header
+  {
+    box-shadow: 0px 5px 10px 0px #060916;
+    z-index: 9999;
+  }
+  header .main-nav>div:first-child
+  {
+    padding-left: 20px !important;
+  }
+  header .main-nav .member
+  {
+    display: none;
+  }
+  header .main-nav .nav
+  {
+    display: none;
+  }
+  header .sub-nav,
+  .table-page .info,
+  .table-page .jump
+  {
+    display: none !important;
+  }
+  .table-page
+  {
+    text-align: center !important;
   }
 }
 @media (max-width : 1280px)
@@ -9,10 +37,6 @@
   {
     padding: 0 10px !important;
   }
-}
-@media (max-width : 1024px)
-{
-  
 }
 .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col,
 .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm,

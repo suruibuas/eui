@@ -24,6 +24,12 @@
 /**
  * ================= 重置 ==================
  */
+* {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-user-select: none;
+  -moz-user-focus: none;
+  -moz-user-select: none;
+}
 body {
   background: #0C112A;
   font-size: 14px;
@@ -82,6 +88,7 @@ video {
  */
 header {
   width: 100%;
+  position: relative;
 }
 header .main-nav {
   height: 50px;
@@ -162,6 +169,35 @@ header .sub-nav .active li {
 }
 header .sub-nav .active:hover {
   color: #FFF;
+}
+header .mobile-menu {
+  position: absolute;
+  right: 18px;
+  top: 10px;
+  margin-right: 0;
+  font-size: 24px;
+}
+.mobile-nav {
+  width: 100%;
+  background: #0C112A;
+  position: absolute;
+  z-index: 9999;
+  top: 50px;
+  display: none;
+}
+.mobile-nav li {
+  padding: 14px 20px;
+  border-top: 1px #1A2042 solid;
+}
+.mobile-nav li i {
+  float: right;
+  margin-right: 0;
+}
+.mobile-nav .mobile-nav-sub {
+  background: #060916;
+}
+.mobile-nav .mobile-nav-sub li {
+  border-top-color: #0C112A;
 }
 /**
  * ================= 旋转 ==================

@@ -40,6 +40,32 @@ let eadmin = class Eadmin{
             $('body').append('<div id="notice"></div>');
             $('#notice').css('top', module.conf.notice_top);
         }
+        // 兼容手机
+        $('header').
+            after(`<div class="mobile-nav"></div>`).
+            append(`<i class="ri-menu-line mobile-menu"></i>`);
+        // 手机端展开事件
+        $('body').on('click', '.mobile-menu', function(){
+            let v = {
+                this : $(this)
+            };
+            if (v.this.data('open') == undefined)
+            {
+                v.this.
+                    addClass('ri-close-line').
+                    removeClass('ri-menu-line').
+                    data('open', 1);
+                $('.mobile-nav').show();
+            }
+            else
+            {
+                v.this.
+                    addClass('ri-menu-line').
+                    removeClass('ri-close-line').
+                    removeData('open');
+                $('.mobile-nav').hide();
+            }
+        });
     }
 
     /**
@@ -136,7 +162,8 @@ let eadmin = class Eadmin{
      */
     jumpHref(){
         // 判断容器是否正常
-        if (box.length == 0)
+        if (module.conf.homepage !== false && 
+            box.length == 0)
         {
             // 这里后面会替换成框架内的弹框
             console.log('没有找到id为container的容器div，请检查!');
@@ -268,31 +295,40 @@ let eadmin = class Eadmin{
      * 框架一、二级导航处理
      */
     nav(){
+        if (module.conf.homepage === false)
+            return;
         // 私有函数
         let create = (data) => {
             let navHtml = '<ul>';
+            let mobileNavHtml = '<ul>';
             // 遍历主导航数据
             let i = 0;
             for (let id in data)
             {
                 let href = (data[id].sub == undefined) ? data[id].href : 'javascript:;',
                     act  = (i == 0) ? ' active' : '';
-                navHtml += `<a href="${href}"`
+                navHtml += `<a href="${href}"`;
+                mobileNavHtml += `<a href="${href}"`;
                 if (data[id].native == undefined)
                 {
                     navHtml += `class="nav${act}" data-id="${id}">`;
+                    mobileNavHtml += `class="nav${act}" data-id="${id}">`;
                 }
                 else
                 {
                     navHtml += ` data-native="1" target="_blank">`;
+                    mobileNavHtml += ` data-native="1" target="_blank">`;
                 }
                 navHtml += `<li>${data[id].name}<div class="nav-slider"></div></li></a>`;
+                mobileNavHtml += `<li>${data[id].name}<i class="ri-arrow-down-s-line"></i></li></a>`;
                 i++;
             }
             navHtml += '</ul>';
-            let nav = $('.nav');
+            mobileNavHtml += '</ul>';
             // 主导航交互
-            nav.html(navHtml);
+            $('.nav').html(navHtml);
+            // 手机端
+            $('.mobile-nav').html(mobileNavHtml);
         }
         // 实体文件数据源
         if (module.conf.nav_data_source == 'local')
@@ -518,18 +554,6 @@ let eadmin = class Eadmin{
     }
 
     /**
-     * 改变窗口大小响应
-     */
-    resize(){
-        $(window).on('resize', _.debounce(() => {
-            if (innerW() < 1152)
-            {
-
-            }
-        }, 200));
-    }
-
-    /**
      * 滚动条滚动响应
      */
     onscroll(){
@@ -572,8 +596,6 @@ loader.ready(() => {
     Eadmin.nav();
     // 主界面
     Eadmin.homepage();
-    // 响应resize
-    Eadmin.resize();
     // TIPS
     if(module.lib.indexOf('tips') != -1)
     {
