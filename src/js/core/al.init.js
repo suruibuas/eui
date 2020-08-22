@@ -25,7 +25,8 @@ let Method = {};
 let Mount  = {
 	dropzone : [],
 	window : null,
-	data   : null
+	data   : null,
+	page   : false
 };
 Mount.observer = new MutationObserver((m) => {
 	if(m[0].attributeName != 'disabled') return;

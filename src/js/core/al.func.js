@@ -327,6 +327,15 @@ function block(dom)
 		}
 	});
 	// 自适应
+	col(dom);
+}
+
+/**
+ * 自适应
+ */
+function col(dom)
+{
+	// 自适应
 	dom.find("[class*='col-']").each(function(){
 		let v = {
 			this : $(this)

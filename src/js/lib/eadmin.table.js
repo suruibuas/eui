@@ -822,15 +822,6 @@ class Table{
 			console.log('数据源中未包含数据总条数count字段，创建分页失败');
 			return;
 		}
-		if (this.window != null)
-		{
-			if ( ! _.startsWith(this.window, '#tab'))
-				$(this.window + ' .body')[0].scrollTop = 0;
-		}
-		else
-		{
-			box[0].scrollTop = 0;
-		}
 		if ( ! this.init)
 		{
 			this.pageBox.data('size', this.size);
@@ -915,6 +906,21 @@ class Table{
 		this.checked = 0;
 		this.btns = [];
 		this.shade.css('display', 'flex');
+		if (page)
+		{
+			this.table.lbox.hide();
+			this.table.rbox.hide();
+			this.table.c.empty();
+			if (this.window != null)
+			{
+				if ( ! _.startsWith(this.window, '#tab'))
+					$(this.window + ' .body')[0].scrollTop = 0;
+			}
+			else
+			{
+				box[0].scrollTop = 0;
+			}
+		}
 		// 请求数据
 		axios.get(this.param.config.data, {
 			params : this.get
@@ -1107,9 +1113,6 @@ class Table{
 			{
         		if (this.param.config.page !== false)
 					this.pageBox.hide();
-				this.table.lbox.hide();
-				this.table.rbox.hide();
-				this.table.c.empty();
 				let empty = this.domCache.find('.empty');
 				if (empty.length == 0)
 				{

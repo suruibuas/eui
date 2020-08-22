@@ -45,15 +45,16 @@ let eadmin = class Eadmin{
     /**
      * 加载中
      */
-    loading(){
+    loading(msg = ''){
         this.mask();
-        $('.mask').html(`<i class="ri-loader-4-line rotate"></i>页面加载中，请稍候...`);
+        $('.mask').html(`<i class="ri-loader-4-line rotate"></i>${msg == '' ? '页面加载中，请稍候...' : msg}`);
     }
 
     /**
      * 关闭加载中
      */
     loadingHide(){
+        if(Mount.page) return;
         this.maskHide();
     }
 
@@ -500,7 +501,7 @@ let eadmin = class Eadmin{
             template != undefined;
             let v = {
                 html : template(dom, data),
-                box  : $('[data-template="' + dom + '"]')
+                box  : scope('[data-template="' + dom + '"]')
             };
             if (v.box.length == 0)
             {

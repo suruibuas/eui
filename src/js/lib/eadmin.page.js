@@ -10,7 +10,10 @@ class Page{
 			console.log('自定义分页必须指定数据接口');
 			return;
 		}
+		Mount.page  = true;
 		this.window = Mount.window != null ? '#' + Mount.window : null;
+		// 配置参数
+		this.param = param;
 		// 搜索盒子
 		if (param.search != undefined)
 		{
@@ -22,29 +25,28 @@ class Page{
 		{
 			this.pageBox = this.window != null ? this.window + ' ' + param.page.boxid : param.page.boxid;
 			this.pageBoxCache = $(this.pageBox);
+			// 缓存KEY
+			this.storeKey = md5(Eadmin.currentHref);
+			// 当前页数
+			this.page = 1;
+			let page = store(this.storeKey + '_page');
+			if (page != undefined) 
+				this.page = parseInt(page);
+			// 每页条数
+			this.size = 10;
+			// 总页数
+			this.pageCount = null;
+			// GET参数
+			this.get = {};
+			let size = store(this.storeKey + '_size');
+			if (size != undefined) 
+				this.param.page.size = parseInt(size);
+			this.size = this.param.page.size;
+			// 赋值GET默认参数
+			this.get[this.param.page.page_field] = this.page;
+			this.get[this.param.page.size_field] = this.size;
 		}
-		// 缓存KEY
-		this.storeKey = md5(Eadmin.currentHref);
-		// 当前页数
-		this.page = 1;
-		let page = store(this.storeKey + '_page');
-		if (page != undefined) 
-			this.page = parseInt(page);
-		// 每页条数
-		this.size = 10;
-		// 总页数
-		this.pageCount = null;
-		// GET参数
-		this.get = {};
-		// 配置参数
-		this.param = param;
-		let size = store(this.storeKey + '_size');
-		if (size != undefined) 
-			this.param.page.size = parseInt(size);
-		this.size = this.param.page.size;
-		// 赋值GET默认参数
-		this.get[this.param.page.page_field] = this.page;
-		this.get[this.param.page.size_field] = this.size;
+		this.tmpBox = scope('[data-template="' + this.param.tmp + '"]');
 		this.init = false;
 		this.run();
 	}
@@ -324,15 +326,6 @@ class Page{
 			console.log('数据源中未包含数据总条数count字段，创建分页失败');
 			return;
 		}
-		if (this.window != null)
-		{
-			if ( ! _.startsWith(this.window, '#tab'))
-				$(this.window + ' .body')[0].scrollTop = 0;
-		}
-		else
-		{
-			box[0].scrollTop = 0;
-		}
 		if ( ! this.init)
 		{
 			this.pageBoxCache.data('size', this.size);
@@ -414,6 +407,20 @@ class Page{
 	 * 加载数据
 	 */
 	_loadData(page = false){
+		Eadmin.loading('数据加载中，请稍候...');
+		if (page)
+		{
+			this.tmpBox.empty();
+			if (this.window != null)
+			{
+				if ( ! _.startsWith(this.window, '#tab'))
+					$(this.window + ' .body')[0].scrollTop = 0;
+			}
+			else
+			{
+				box[0].scrollTop = 0;
+			}
+		}
 		// 请求数据
 		axios.get(this.param.data, {
 			params : this.get
@@ -435,11 +442,15 @@ class Page{
 			}
 			// 模版赋值
 			Eadmin.template(this.param.tmp, v.data, () => {
+				// 自适应
+				col(this.tmpBox);
 				if (_.isFunction(this.param.callback))
 					this.param.callback();
 			});
 			// 分页
 			this._page(v.data, page);
+			Mount.page = false;
+			Eadmin.loadingHide();
 			this.init = true;
 		}).catch((e) => {
 			console.log(e);

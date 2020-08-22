@@ -226,8 +226,8 @@ header .sub-nav .active:hover {
 .block-title {
   padding-left: 10px;
   width: 100%;
-  height: 18px;
-  line-height: 18px;
+  height: 20px;
+  line-height: 20px;
   margin-bottom: 20px;
   position: relative;
 }
@@ -237,7 +237,7 @@ header .sub-nav .active:hover {
   background: -o-linear-gradient(top, #66b5ff, #0084FF);
   border-radius: 5px;
   width: 5px;
-  height: 18px;
+  height: 20px;
   display: inline-block;
   vertical-align: top;
   margin-right: 10px;
