@@ -13,7 +13,7 @@
     <!-- 大盒子 -->
     <div class="block-box">
         <div class="block">
-            <form action="submit.php" method="POST" data-native>
+            <form action="submit.php" method="POST" data-callback="loginCallback">
                 <div class="main-title">
                     EAdmin
                 </div>
@@ -66,10 +66,6 @@
         conf : {
             // 启动页
             'homepage'           : false,
-            // 关闭input的autocomplete
-            'close_autocomplete' : true,
-            // 加载页面默认延迟时长，避免页面过快刷新
-            'load_page_timeout'  : 100,
             // 页面内文本可选
             'allow_select_text'  : true,
             // 允许右键
@@ -137,7 +133,11 @@
         ],
         // 全部加载完成回调
         ready : function(){
-            
+            // 表单提交回调，response是提交表单接口的返回值
+            // 如果后额外的业务处理可以在此处完成
+            Method.loginCallback = (response) => {
+                console.log(response);
+            }
         }
     }
 </script>

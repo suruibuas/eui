@@ -64,9 +64,7 @@ class Button{
 			};
 			// 如果是提交表单的按钮则不进行后续处理
 			if (v.this.data('submit') != undefined)
-			{
 				return;
-			}
 			that.loading(v.this);
 			// 回调
 			v.do = v.this.data('do');

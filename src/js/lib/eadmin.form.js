@@ -527,9 +527,7 @@ class Form{
 				v.submit.data('loading') != undefined)
 				Button.loading(v.submit);
 			if (v.this.data('native') != undefined)
-			{
 				return true;
-			}
 			// 提交数据
 			v.formData = v.this.serialize();
 			v.callback = v.this.data('callback');
@@ -558,24 +556,25 @@ class Form{
 							store.remove(storeKey);
 					}
 					Eadmin.message.success({
-						content : msg,
-						callback : () => {
-							if (v.callback == undefined) return;
-							try{
-								Method != undefined;
-								if ( ! _.isFunction(Method[v.callback]))
-								{
-									console.log('指定的' + v.callback + '不是一个可被调用的函数');
-									return;
-								}
-								Method[v.callback](v.submit);
-							}
-							catch(e){
-								console.log(e);
-							}
-						}
+						content : msg
 					});
 					Eadmin.button.reset(v.submit);
+					// 回调
+					if (v.callback == undefined) return;
+					try
+					{
+						Method != undefined;
+						if ( ! _.isFunction(Method[v.callback]))
+						{
+							console.log('指定的' + v.callback + '不是一个可被调用的函数');
+							return;
+						}
+						Method[v.callback](data);
+					}
+					catch(e)
+					{
+						console.log(e);
+					}
 					return;
 				}
 				if (msg == '') msg = '操作执行失败';
@@ -588,6 +587,7 @@ class Form{
 				Eadmin.message.error({
 					content : error
 				});
+				Eadmin.button.reset(v.submit);
 			});
 			return false;
 		}).
