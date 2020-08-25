@@ -138,6 +138,14 @@
             Method.loginCallback = (response) => {
                 console.log(response);
             }
+			Mount.innerH = innerH();
+			// 软键盘
+			let bq = $('.bq');
+			$(window).on('resize', () => {
+				(innerH() < Mount.innerH) ? 
+					bq.hide() : 
+					bq.show();;
+			});
         }
     }
 </script>
