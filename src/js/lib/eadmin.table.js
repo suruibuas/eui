@@ -43,6 +43,9 @@ class Table{
 		this.checked   = 0;
 		// GET参数
 		this.get = {};
+		// 搜索条件
+		this.query  = '';
+		this.search = 0;
 		// 容器宽度，用来做表格的宽度
 		this.width = parseInt(this.domCache.width());
 		// 按钮颜色
@@ -87,7 +90,9 @@ class Table{
 			// 表格列编排
 			column : [],
 			// 搜索配置
-			search : {}
+			search : {},
+			// 回调
+			callback : null
 		};
 		// 配置参数
 		this.param = $.extend(true, _param, param);
@@ -240,9 +245,9 @@ class Table{
 					html += `</div></div>`;
 				});
 				html += `<div class="col-3">
-							<button class="search-do highlight">
+							<button class="search-do highlight middle">
 								<i class="ri-search-line"></i>搜索
-							</button><button class="search-refresh">
+							</button><button class="search-refresh middle">
 								<i class="ri-refresh-line"></i>重置
 							</button>
 						</div>
@@ -274,7 +279,7 @@ class Table{
 				v.tools = `<div class="table-tools">`;
 				_.each(this.param.config.button, (row, k) => {
 					v.tools += `<button id="table-btn-${k}" `;
-					v.tools += (k == 0) ? `class="highlight">` : `>`;
+					v.tools += (k == 0) ? `class="highlight middle">` : `class="highlight">`;
 					if (row.icon != undefined)
 						v.tools += `<i class="${row.icon}"></i>`;
 					v.tools += row.name + `</button>`;
@@ -538,6 +543,11 @@ class Table{
 				that.get[that.param.config.page.page_field] = that.page;
 				// 搜索表单数据
 				let form = that.searchBox.children('form').serialize();
+				if (form != that.query)
+				{
+					that.get['_search'] = 1;
+					that.query = form;
+				}
 				let search = _.split(form, '&');
 				_.each(search, (val) => {
 					let param = _.split(val, '=');
@@ -1125,6 +1135,10 @@ class Table{
 			}
 			// 隐藏遮罩
 			this.shade.hide();
+			// 回调
+			if (this.param.callback != null)
+				this.param.callback(v.data);
+			this.get['_search'] = 0;
 			if (this.init) return;
 			// 校验最小宽度
 			if (this.table.t.width() <= this.width)

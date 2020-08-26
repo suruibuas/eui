@@ -29,7 +29,7 @@ button {
   font-size: 16px;
   margin-right: 5px;
   height: 46px;
-  line-height: 44px;
+  line-height: 1;
 }
 button:hover:not(:disabled) {
   box-shadow: #060916 0px 0px 10px;
@@ -48,7 +48,6 @@ button:disabled {
   font-size: 14px;
   padding: 0px 16px;
   height: 36px;
-  line-height: 34px;
 }
 .middle i {
   font-size: 14px;
@@ -57,7 +56,6 @@ button:disabled {
   font-size: 14px;
   padding: 0 8px;
   height: 26px;
-  line-height: 24px;
 }
 .small i {
   font-size: 12px;

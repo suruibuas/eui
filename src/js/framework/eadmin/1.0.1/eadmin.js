@@ -135,6 +135,14 @@ let eadmin = class Eadmin{
             module.conf.homepage == '') return;
         // 加载动画
         this.loading();
+        // 判断默认主页
+        let homepage = getRoute();
+        if ( ! homepage)
+        {
+            homepage = module.conf.homepage;
+            store.remove('main_nav_id');
+            store.remove('sub_nav_id');
+        }
         // 延迟
         if (module.conf.load_page_timeout != undefined && 
             module.conf.load_page_timeout > 0)
@@ -142,7 +150,7 @@ let eadmin = class Eadmin{
             setTimeout(() => {
                 // 加载
                 box.
-                load(module.conf.homepage, () => {
+                load(homepage, () => {
                     that.load();
                 });
             }, module.conf.load_page_timeout);
@@ -151,7 +159,7 @@ let eadmin = class Eadmin{
         {
             // 加载
             box.
-            load(module.conf.homepage, () => {
+            load(homepage, () => {
                 that.load();
             });
         }
@@ -175,7 +183,8 @@ let eadmin = class Eadmin{
                 this   : $(this),
                 subnav : $('.sub-nav')
             };
-            if (v.this.hasClass('active')) return false;
+            if (v.this.hasClass('active')) 
+                return false;
             that.href = v.this.attr('href');
             that.currentHref = that.href;
             // 一级导航
@@ -186,6 +195,7 @@ let eadmin = class Eadmin{
                 // 判断是否有子导航
                 v.id  = v.this.data('id'),
                 v.sub = window.nav[v.id].sub;
+                store('main_nav_id', v.id.toString());
                 if (v.sub == undefined)
                 {
                     if (window.nav[v.id].href == undefined)
@@ -200,11 +210,10 @@ let eadmin = class Eadmin{
                 else
                 {
                     // 子分类内容处理
-                    v.subnav.show();
                     v.navHtml = '<ul>';
                     for (let id in v.sub)
                     {
-                        v.navHtml += '<a href="' + v.sub[id].href + '"';
+                        v.navHtml += '<a href="' + v.sub[id].href + '" data-id="' + id + '"';
                         if (v.sub[id].native != undefined)
                         {
                             v.navHtml += ` data-native target="_blank">`;
@@ -220,7 +229,9 @@ let eadmin = class Eadmin{
                         v.navHtml += '</li></a>';
                     }
                     v.navHtml += '</ul>';
-                    $('.sub-nav div').
+                    v.subnav.
+                        show().
+                        children('div').
                         eq(1).
                         html(v.navHtml);
                     // 判断是否需要自动点击第一个子分类
@@ -229,9 +240,8 @@ let eadmin = class Eadmin{
                     {
                         // 如果第一个链接是原生跳转则返回
                         if(v.sub[0].native != undefined) return;
-                        v.subnav.
-                            find('a:first').
-                            trigger('click');
+                        v.subnav.find('a:first').trigger('click');
+                        store('sub_nav_id', '0');
                         return false;
                     }
                 }
@@ -240,10 +250,13 @@ let eadmin = class Eadmin{
             else if(v.this.hasClass('nav-sub'))
             {
                 addClassExc(v.this, 'active');
+                store('sub_nav_id', v.this.data('id').toString());
             }
             // 阻止框架内跳转
             if (that.href == 'javascript:;' || 
                 v.this.data('native') != undefined) return true;
+            // 设置URL
+            setRoute(that.href);
             let storeKey = md5(that.href);
             store.remove(storeKey + '_page');
             // 重载
@@ -303,10 +316,19 @@ let eadmin = class Eadmin{
             let mobileNavHtml = '<ul>';
             // 遍历主导航数据
             let i = 0;
+            let main_nav_id = store('main_nav_id');
             for (let id in data)
             {
-                let href = (data[id].sub == undefined) ? data[id].href : 'javascript:;',
-                    act  = (i == 0) ? ' active' : '';
+                let href = (data[id].sub == undefined) ? data[id].href : 'javascript:;';
+                let act  = '';
+                if (main_nav_id == undefined)
+                {
+                    if (i == 0) act = ' active';
+                }
+                else
+                {
+                    if (id == main_nav_id) act = ' active';
+                }
                 navHtml += `<a href="${href}"`;
                 mobileNavHtml += `<a href="${href}"`;
                 if (data[id].native == undefined)
@@ -320,7 +342,10 @@ let eadmin = class Eadmin{
                     mobileNavHtml += ` data-native="1" target="_blank">`;
                 }
                 navHtml += `<li>${data[id].name}<div class="nav-slider"></div></li></a>`;
-                mobileNavHtml += `<li>${data[id].name}<i class="ri-arrow-down-s-line"></i></li></a>`;
+                mobileNavHtml += `<li>${data[id].name}`;
+                if (data[id].sub != undefined)
+                    mobileNavHtml += `<i class="ri-arrow-down-s-line"></i>`;
+                mobileNavHtml += `</li></a>`;
                 i++;
             }
             navHtml += '</ul>';
@@ -329,6 +354,40 @@ let eadmin = class Eadmin{
             $('.nav').html(navHtml);
             // 手机端
             $('.mobile-nav').html(mobileNavHtml);
+            // 二级导航默认显示处理
+            if (main_nav_id == undefined) return;
+            let sub = window.nav[main_nav_id].sub;
+            if (sub == undefined) return;
+            // 子分类内容处理
+            navHtml = '<ul>';
+            let sub_nav_id = store('sub_nav_id');
+            for (let id in sub)
+            {
+                navHtml += '<a href="' + sub[id].href + '" data-id="' + id + '"';
+                if (sub[id].native != undefined)
+                {
+                    navHtml += ` data-native target="_blank">`;
+                }
+                else
+                {
+                    navHtml += ` class="nav-sub`;
+                    if (id == sub_nav_id)
+                        navHtml += ' active';
+                    navHtml += '">';
+                }
+                navHtml += `<li>`;
+                if (sub[id].icon != undefined && 
+                    sub[id].icon != '')
+                    navHtml += '<i class="' + sub[id].icon + '"></i>';
+                navHtml += sub[id].name;
+                navHtml += '</li></a>';
+            }
+            navHtml += '</ul>';
+            $('.sub-nav').
+                show().
+                children('div').
+                eq(1).
+                html(navHtml);
         }
         // 实体文件数据源
         if (module.conf.nav_data_source == 'local')

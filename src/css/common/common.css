@@ -172,10 +172,11 @@ header .sub-nav .active:hover {
 }
 header .mobile-menu {
   position: absolute;
-  right: 18px;
+  right: 13px;
   top: 10px;
   margin-right: 0;
   font-size: 24px;
+  display: none;
 }
 .mobile-nav {
   width: 100%;
@@ -186,7 +187,7 @@ header .mobile-menu {
   display: none;
 }
 .mobile-nav li {
-  padding: 14px 20px;
+  padding: 14px 15px 14px 20px;
   border-top: 1px #1A2042 solid;
 }
 .mobile-nav li i {

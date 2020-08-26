@@ -14,6 +14,11 @@ class Page{
 		this.window = Mount.window != null ? '#' + Mount.window : null;
 		// 配置参数
 		this.param = param;
+		// GET参数
+		this.get = {};
+		// 搜索条件
+		this.query  = '';
+		this.search = 0;
 		// 搜索盒子
 		if (param.search != undefined)
 		{
@@ -32,16 +37,12 @@ class Page{
 			let page = store(this.storeKey + '_page');
 			if (page != undefined) 
 				this.page = parseInt(page);
-			// 每页条数
-			this.size = 10;
 			// 总页数
-			this.pageCount = null;
-			// GET参数
-			this.get = {};
+			this.pageCount = null;	
+			this.size = this.param.page.size;		
 			let size = store(this.storeKey + '_size');
 			if (size != undefined) 
-				this.param.page.size = parseInt(size);
-			this.size = this.param.page.size;
+				this.size = parseInt(size);
 			// 赋值GET默认参数
 			this.get[this.param.page.page_field] = this.page;
 			this.get[this.param.page.size_field] = this.size;
@@ -124,9 +125,9 @@ class Page{
 					html += `</div></div>`;
 				});
 				html += `<div class="col-3">
-							<button class="search-do highlight">
+							<button class="search-do middle highlight">
 								<i class="ri-search-line"></i>搜索
-							</button><button class="search-refresh">
+							</button><button class="search-refresh middle">
 								<i class="ri-refresh-line"></i>重置
 							</button>
 						</div>
@@ -162,10 +163,10 @@ class Page{
 								<span class="info">
 									共<em></em>条，每页
 									<select name="pagesize" data-width="70">
-										<option value="10"${this.size == 10 ? ' selected' : ''}>10</option>
-										<option value="30"${this.size == 30 ? ' selected' : ''}>30</option>
-										<option value="50"${this.size == 50 ? ' selected' : ''}>50</option>
-										<option value="100"${this.size == 100 ? ' selected' : ''}>100</option>
+										<option value="${this.param.page.size}"${this.size == this.param.page.size ? ' selected' : ''}>${this.param.page.size}</option>
+										<option value="${this.param.page.size * 2}"${this.size == this.param.page.size * 2 ? ' selected' : ''}>${this.param.page.size * 2}</option>
+										<option value="${this.param.page.size * 3}"${this.size == this.param.page.size * 3 ? ' selected' : ''}>${this.param.page.size * 3}</option>
+										<option value="${this.param.page.size * 4}"${this.size == this.param.page.size * 4 ? ' selected' : ''}>${this.param.page.size * 4}</option>
 									</select>
 									条，
 									当前 <em>${this.page}</em>/<em>-</em> 页
@@ -228,6 +229,11 @@ class Page{
 				that.get[that.param.page.page_field] = that.page;
 				// 搜索表单数据
 				let form = that.searchBoxCache.find('form').serialize();
+				if (form != that.query)
+				{
+					that.get['_search'] = 1;
+					that.query = form;
+				}
 				let search = _.split(form, '&');
 				_.each(search, (val) => {
 					let param = _.split(val, '=');
@@ -445,13 +451,14 @@ class Page{
 				// 自适应
 				col(this.tmpBox);
 				if (_.isFunction(this.param.callback))
-					this.param.callback();
+					this.param.callback(v.data);
 			});
 			// 分页
 			this._page(v.data, page);
 			Mount.page = false;
 			Eadmin.loadingHide();
 			this.init = true;
+			this.get['_search'] = 0;
 		}).catch((e) => {
 			console.log(e);
 		});

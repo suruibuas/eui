@@ -44,7 +44,7 @@ class Message{
 		let v = {
 			top : module.conf.message_top
 		};
-		v.top += $('.message').length * 40;
+		v.top += $('.message').length * 42;
 		v.html = `<div class="message animated faster fadeInDown">
 			<i class="${param.icon}"></i>${param.content}
 		</div>`;
@@ -60,7 +60,7 @@ class Message{
 		setTimeout(() => {
 			fadeOut(v.box, () => {
 				v.box.nextAll('.message').animate({
-					'top': '-=40'
+					'top': '-=42'
 				}, 150);
 				v.box.remove();
 			});

@@ -289,6 +289,9 @@ function block(dom)
 		if (v.this.data('block-data') != undefined)
 		{
 			v.this.addClass('block-data');
+			v.size = v.this.data('size');
+			if (v.size != undefined)
+				v.this.addClass('block-data-small');
 			v.color = v.this.data('color');
 			if (v.color != undefined)
 			{
@@ -387,4 +390,26 @@ function col(dom)
 				addClass(v.class);
 		});
 	});
+}
+
+/**
+ * 设置路由
+ */
+function setRoute(url = '')
+{
+	window.history.pushState(null, null, '#' + url);
+}
+
+/**
+ * 获取路由
+ */
+function getRoute()
+{
+	let hash = window.location.hash;
+	if (hash == '')
+	{
+		return false;
+	}
+	let arr = hash.split('#');
+	return arr[1];
 }

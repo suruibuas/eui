@@ -163,8 +163,8 @@ class Datepikcer{
 				选择时间
 			</span>
 			<span class="confirm">
-				<button class="clear">清空</button>
-				<button class="highlight sure">确定</button>
+				<button class="clear small">清空</button>
+				<button class="highlight small sure">确定</button>
 			</span>
 		</div>`;
 		_html += `</div>`;
