@@ -1,7 +1,7 @@
 window.nav = [
     {
         'name' : '主面板',
-        'href' : './html/date.html'
+        'href' : './demo/block.html'
     },
     {
         'name' : '基础',
