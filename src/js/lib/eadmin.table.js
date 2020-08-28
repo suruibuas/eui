@@ -279,7 +279,7 @@ class Table{
 				v.tools = `<div class="table-tools">`;
 				_.each(this.param.config.button, (row, k) => {
 					v.tools += `<button id="table-btn-${k}" `;
-					v.tools += (k == 0) ? `class="highlight middle">` : `class="highlight">`;
+					v.tools += (k == 0) ? `class="highlight middle">` : `class="middle">`;
 					if (row.icon != undefined)
 						v.tools += `<i class="${row.icon}"></i>`;
 					v.tools += row.name + `</button>`;
@@ -420,7 +420,9 @@ class Table{
 			// 排序
 			'.order i:not(.active)',
 			// 开关
-			'[data-model="switch"]'
+			'[data-model="switch"]',
+			// 列按钮
+			'.column-btn'
 		];
 		let that = this;
 		let sbox = that.domCache.parent();
@@ -748,7 +750,7 @@ class Table{
 			});
 		}).
 		// 列按钮
-		on('click', '.column-btn', function(){
+		on('click', dom[13], function(){
 			let _v = {
 				this : $(this)
 			}

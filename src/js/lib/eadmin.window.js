@@ -130,7 +130,7 @@ class Window{
 						<i class="ri-close-circle-fill"></i>
 					</div>
 					<div class="title"${v.drag}>
-						<span>${this.param.title}</span>
+						<i class="ri-window-line" style="font-size: 18px;"></i><span>${this.param.title}</span>
 					</div>
 					<div class="body" style="height:${v.height}px;"></div>`;
 		// 按钮栏
@@ -330,7 +330,7 @@ class Window{
 							// 提交表单
 							case 'submit':
 								let _func = () => {
-									v.form = v.body.find('form');
+									v.form = v.body.find(_var.param.formid == undefined ? 'form' : _var.param.formid);
 									if (v.form.length == 0)
 									{
 										console.log('窗体内没有找到form表单元素，提交表单失败');
