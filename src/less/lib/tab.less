@@ -9,6 +9,7 @@
 .tab
 {
     border-bottom: 2px @input-color-1 solid;
+    white-space: nowrap;
     span
     {
         background: @input-color-3;
@@ -36,11 +37,16 @@
     min-height: 200px;
     display: none;
     position: relative;
-    padding-top: 10px;
     .block
     {
         padding: 0;
         box-shadow: none;
+    }
+    .block-pb
+    {
+        padding: 20px;
+        background: @input-color-3;
+        border: 2px @input-color-1 solid;
     }
     .panel-loading
     {

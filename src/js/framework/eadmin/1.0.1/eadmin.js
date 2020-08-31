@@ -143,6 +143,11 @@ let eadmin = class Eadmin{
             store.remove('main_nav_id');
             store.remove('sub_nav_id');
         }
+        else
+        {
+            that.href = homepage;
+            that.currentHref = homepage;
+        }
         // 延迟
         if (module.conf.load_page_timeout != undefined && 
             module.conf.load_page_timeout > 0)

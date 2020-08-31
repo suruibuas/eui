@@ -289,8 +289,8 @@ function block(dom)
 		if (v.this.data('block-data') != undefined)
 		{
 			v.this.addClass('block-data');
-			v.size = v.this.data('size');
-			if (v.size != undefined)
+			v.small = v.this.data('small');
+			if (v.small != undefined)
 				v.this.addClass('block-data-small');
 			v.color = v.this.data('color');
 			if (v.color != undefined)

@@ -273,9 +273,7 @@ class Table{
 			// 按钮栏
 			tools : () => {
 				if (this.param.config.button.length == 0)
-				{
 					return;
-				}
 				v.tools = `<div class="table-tools">`;
 				_.each(this.param.config.button, (row, k) => {
 					v.tools += `<button id="table-btn-${k}" `;
