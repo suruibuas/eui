@@ -47,7 +47,9 @@ class Table{
 		this.query  = '';
 		this.search = 0;
 		// 容器宽度，用来做表格的宽度
-		this.width = parseInt(this.domCache.width());
+		this.width  = parseInt(this.domCache.width());
+		// 滚动条类实例化，用来更新横向滚动条
+		this.scroll = null; 
 		// 按钮颜色
 		this.color = [
 			'#0084ff',
@@ -137,6 +139,8 @@ class Table{
 		this._create();
 		// 事件
 		this._event();
+		// 窗口resize
+		this._resize();
 	}
 
 	/**
@@ -1152,12 +1156,24 @@ class Table{
 					css('padding-bottom', '18px');
 				// 横向滚动条，如果没有数据则不需要创建横向滚动条
 				if (v.data.list.length > 0)
-					Eadmin.scroll(this.dom + ' .table-box', 'x');
+					this.scroll = Eadmin.scroll(this.dom + ' .table-box', 'x');
 			}
 			this.init = true;
 		}).catch((e) => {
 			console.log(e);
 		});
+	}
+
+	/**
+	 * 窗口resize操作
+	 */
+	_resize(){
+		$(window).on('resize', _.debounce(() => {
+			this.width = parseInt(this.domCache.width());
+			this.table.box.width(this.width);
+			if (this.scroll != null)
+				this.scroll.update();
+        }, 100));
 	}
 
 }
