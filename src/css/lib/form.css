@@ -55,6 +55,7 @@ textarea:disabled {
   cursor: not-allowed;
   background: #BBC5D8;
   border-color: #BBC5D8;
+  color: #586273;
 }
 input:disabled::-webkit-input-placeholder,
 textarea:disabled::-webkit-input-placeholder {

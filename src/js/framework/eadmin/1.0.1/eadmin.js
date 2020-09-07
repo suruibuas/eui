@@ -301,6 +301,7 @@ let eadmin = class Eadmin{
         setTimeout(() => {
             Method = {};
             that.href = that.href == '' ? module.conf.homepage : that.href;
+            $(window).off();
             box.
                 off().
                 load(that.href, () => {

@@ -166,8 +166,7 @@ class Window{
 				$('.' + that.window).remove();
 				Eadmin.maskHide();
 				// 关闭回调
-				if (that.param.close != null && 
-					_.isFunction(that.param.close)) 
+				if (_.isFunction(that.param.close)) 
 					that.param.close();
 			},
 			load : () => {

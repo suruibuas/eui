@@ -107,6 +107,22 @@ class Form{
 				v.this.appendTo(group);
 				$(v.html).appendTo(group);
 			}
+			v.date = v.this.data('default-date');
+			if (v.date != undefined && 
+				v.this.next('input').length == 0)
+			{
+				let name = v.this.attr('name');
+				if (name != undefined)
+				{
+					v.this.
+						removeAttr('name').
+						after(`<input type="hidden" name="${name}" value="${v.date}">`);
+				}
+				else
+				{
+					console.log('没有为日期文本框指定name属性，这将影响后端取值');
+				}
+			}
 		});
 		// 文本域
 		form.find('textarea[maxlength]').each(function(){
@@ -518,9 +534,7 @@ class Form{
 			// 验证提交表单
 			Validate.submit(v.this);
 			if(v.this.find('span.error').length > 0)
-			{
 				return false;
-			}
 			// 提交按钮处理
 			v.submit = v.this.find('[data-submit]');
 			if (v.submit.length > 0 && 

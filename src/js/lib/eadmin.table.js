@@ -45,7 +45,6 @@ class Table{
 		this.get = {};
 		// 搜索条件
 		this.query  = '';
-		this.search = 0;
 		// 容器宽度，用来做表格的宽度
 		this.width  = parseInt(this.domCache.width());
 		// 滚动条类实例化，用来更新横向滚动条
@@ -555,7 +554,7 @@ class Table{
 				let search = _.split(form, '&');
 				_.each(search, (val) => {
 					let param = _.split(val, '=');
-					that.get[param[0]] = param[1];
+					that.get[param[0]] = decodeURIComponent(param[1]);
 				});
 				that._loadData(true);
 				return false;
@@ -1055,6 +1054,14 @@ class Table{
 								{
 									_html += ` target="${_link.target}"`;
 								}
+								if (_link.windowUrl != undefined)
+								{
+									_html += ` data-window-url="${_link.windowUrl}"`;
+								}
+								if (_link.class != undefined)
+								{
+									_html += ` class="${_link.class}"`;
+								}
 								_html += '>';
 							}
 							_html += __html;
@@ -1145,6 +1152,7 @@ class Table{
 			this.get['_search'] = 0;
 			if (this.init) return;
 			// 校验最小宽度
+			this.scroll = Eadmin.scroll(this.dom + ' .table-box', 'x');
 			if (this.table.t.width() <= this.width)
 			{
 				this.table.t.width(this.width);
@@ -1154,9 +1162,6 @@ class Table{
 				this.domCache.
 					children('.table-box').
 					css('padding-bottom', '18px');
-				// 横向滚动条，如果没有数据则不需要创建横向滚动条
-				if (v.data.list.length > 0)
-					this.scroll = Eadmin.scroll(this.dom + ' .table-box', 'x');
 			}
 			this.init = true;
 		}).catch((e) => {
@@ -1171,6 +1176,19 @@ class Table{
 		$(window).on('resize', _.debounce(() => {
 			this.width = parseInt(this.domCache.width());
 			this.table.box.width(this.width);
+			if (this.table.t.width() <= this.width)
+			{
+				this.table.t.width(this.width);
+				this.domCache.
+					children('.table-box').
+					css('padding-bottom', 0);
+			}
+			else
+			{
+				this.domCache.
+					children('.table-box').
+					css('padding-bottom', '18px');
+			}
 			if (this.scroll != null)
 				this.scroll.update();
         }, 100));

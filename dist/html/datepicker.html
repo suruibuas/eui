@@ -133,6 +133,7 @@
                 <h4 class="title">选择日期范围</h4>
                 <input 
                     id="p9" 
+                    name="p9"
                     type="text" 
                     placeholder="选择时间范围" 
                     data-icon="ri-calendar-2-line|right">
@@ -148,6 +149,7 @@
                 <h4 class="title">选择日期范围带按钮栏</h4>
                 <input 
                     id="p10" 
+                    name="p10"
                     type="text" 
                     placeholder="选择时间范围" 
                     data-icon="ri-calendar-2-line|right">
@@ -163,6 +165,7 @@
                 <h4 class="title">选择日期范围带时分秒</h4>
                 <input 
                     id="p11" 
+                    name="p11"
                     type="text" 
                     placeholder="选择日期范围带时分秒" 
                     data-icon="ri-calendar-2-line|right">
@@ -178,6 +181,7 @@
                 <h4 class="title">选择范围并指定开始结束日期</h4>
                 <input 
                     id="p12" 
+                    name="p12"
                     type="text" 
                     placeholder="选择范围并指定开始结束日期" 
                     data-icon="ri-calendar-2-line|right">
@@ -193,6 +197,7 @@
                 <h4 class="title">双日历带快捷选择</h4>
                 <input 
                     id="p13" 
+                    name="p13"
                     type="text" 
                     placeholder="双日历带快捷选择" 
                     data-icon="ri-calendar-2-line|right">
@@ -208,8 +213,25 @@
                 <h4 class="title">带回调方法</h4>
                 <input 
                     id="p14" 
+                    name="p14"
                     type="text" 
                     placeholder="带回调方法" 
+                    data-icon="ri-calendar-2-line|right">
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-3">
+        <!-- 容器盒子，具体布局使用 -->
+        <div class="block">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <h4 class="title">有默认值</h4>
+                <input 
+                    id="p15" 
+                    name="p15"
+                    type="text" 
+                    placeholder="有默认值" 
                     data-icon="ri-calendar-2-line|right">
             </div>
         </div>
@@ -260,8 +282,8 @@
             end   : 20191231,
         });
         Eadmin.datepicker('#p13', {
-            type    : 'date-range',
-            quick   : true
+            type  : 'date-range',
+            quick : true
         });
         Eadmin.datepicker('#p14', {
             change : function(date){
@@ -269,6 +291,9 @@
                     content : '选择的日期是：' + date
                 });
             }
+        });
+        Eadmin.datepicker('#p15', {
+            default  : [1599235200]
         });
     })();
 </script>

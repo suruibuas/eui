@@ -18,7 +18,6 @@ class Page{
 		this.get = {};
 		// 搜索条件
 		this.query  = '';
-		this.search = 0;
 		// 搜索盒子
 		if (param.search != undefined)
 		{
@@ -237,7 +236,7 @@ class Page{
 				let search = _.split(form, '&');
 				_.each(search, (val) => {
 					let param = _.split(val, '=');
-					that.get[param[0]] = param[1];
+					that.get[param[0]] = decodeURIComponent(param[1]);
 				});
 				that._loadData(true);
 				return false;

@@ -72,11 +72,16 @@
   padding: 0;
   box-shadow: none;
 }
+.window .body .block-pb {
+  padding: 20px;
+  background: #232B4C;
+  border: 2px #30375B solid;
+}
 .window .body .form-group .title {
   margin-bottom: 2px;
 }
 .window .btnbar {
-  margin: 7px 15px 7px 0;
+  margin: 7px 15px 10px 0;
   text-align: right;
 }
 .window .btnbar button {

@@ -30,19 +30,23 @@ class Datepikcer{
 		// 默认参数
 		let _param   = {
 			// 类型
-			type    : 'date',
+			type     : 'date',
 			// 格式化
-			format  : 'Y-m-d',
+			format   : 'Y-m-d',
 			// 是否需要确认按钮
-			confirm : false,
+			confirm  : false,
 			// 回调
-			change  : null,
+			change   : null,
 			// 开始时间
-			start   : 0,
+			start    : 0,
 			// 结束时间
-			end     : 0,
+			end      : 0,
 			// 快捷选择
-			quick   : false
+			quick    : false,
+			// unixtime
+			unixtime : false,
+			// 默认日期
+			default  : []
 		}
 		// 配置参数
 		this.param = $.extend(_param, param);
@@ -100,13 +104,13 @@ class Datepikcer{
 			</span>
 			<span class="next-month">
 				<i class="ri-arrow-drop-right-line"></i>
-			</span>
-		</div>
-		<div class="body">
-			<div class="week">
-				${this._week()}
-			</div>
-			<div class="day"></div>`;
+			</span>`;
+		_html += `</div>
+			<div class="body">
+				<div class="week">
+					${this._week()}
+				</div>
+				<div class="day"></div>`;
 		_html += `<div class="y-m">
 			${this._year()}
 		</div>
@@ -145,10 +149,10 @@ class Datepikcer{
 			</div>
 			<div class="day"></div>`;
 		_html += `<div class="y-m">
-			${this._year(this.arr[0].m + 1)}
+			${this._year(parseInt(this.arr[0].m) + 1)}
 		</div>
 		<div class="y-m">
-			${this._month(this.arr[0].m + 1)}
+			${this._month(parseInt(this.arr[0].m) + 1)}
 		</div>`;
 		if(this.param.format.indexOf(' ') != -1)
 		{
@@ -184,24 +188,54 @@ class Datepikcer{
 		// 根据format的格式来确定，如果有空格则表示有时间
 		if(this.param.format.indexOf(' ') != -1)
 			this.time = true;
+		// 默认值
+		if (this.param.default.length > 0)
+		{
+			let trueVal = _.join(this.param.default, ',');
+			let format = '';
+			if (_.isNumber(this.param.default[0]) && 
+				(this.param.default[0] + '').length == 10)
+			{
+				format = _.replace(this.param.format, 'Y', '%y');
+				format = _.replace(format, 'm', '%M');
+				format = _.replace(format, 'd', '%d');
+				if (this.time)
+				{
+					format = _.replace(format, 'H', '%h');
+					format = _.replace(format, 'i', '%m');
+					format = _.replace(format, 's', '%s');
+				}
+			}
+			for (let i in this.param.default)
+			{
+				let _v = this.param.default[i];
+				if (format == '')
+					continue;
+				this.param.default[i] = Time(_v, format);
+			}
+			let showVal = _.join(this.param.default, ' - ');
+			this.inputDom.
+				val(showVal).
+				data('default-date', trueVal);
+		}
 		// 局部变量统一定义
-		let _var = {
+		let v = {
 			// 文本框的内容取值
 			val    : this.inputDom.val(),
 			// 主日历（左侧日历，默认显示的）
 			picker : this.picker.children('div').eq(1),
 		};
 		// 主日历头部
-		_var.header = _var.picker.children('.header');
+		v.header = v.picker.children('.header');
 		// 私有方法
-		let _func = {
-			setYear : (dom = _var.header, y = this.arr[0].y) => {
+		let func = {
+			setYear : (dom = v.header, y = this.arr[0].y) => {
 				dom.
 					find('.year').
 					data('y', y).
 					html(y + '年');
 			},
-			setMonth : (dom = _var.header, m = this.arr[0].m) => {
+			setMonth : (dom = v.header, m = this.arr[0].m) => {
 				dom.
 					find('.month').
 					data('m', m).
@@ -209,26 +243,26 @@ class Datepikcer{
 			}
 		};
 		// 年份显示
-		_func.setYear();
+		func.setYear();
 		// 月份显示
-		_func.setMonth();
+		func.setMonth();
 		// 显示日期
-		_var.picker.
+		v.picker.
 			find('.day').
 			html(this._createYmdHtml(this.arr[0].y, this.arr[0].m));
 		// 双日历处理
 		if(this.param.type == 'date-range')
 		{
 			// 副日历
-			_var.range = _var.picker.next();
-			_var.range.show();
-			_var.rangeHeader = _var.range.children('.header');
+			v.range = v.picker.next();
+			v.range.show();
+			v.rangeHeader = v.range.children('.header');
 			// 年份显示
-			_func.setYear(_var.rangeHeader, this.arr[1].y);
+			func.setYear(v.rangeHeader, this.arr[1].y);
 			// 月份显示
-			_func.setMonth(_var.rangeHeader, this.arr[1].m);
+			func.setMonth(v.rangeHeader, this.arr[1].m);
 			// 显示日期
-			_var.range.
+			v.range.
 				find('.day').
 				html(this._createYmdHtml(this.arr[1].y, this.arr[1].m));
 		}
@@ -241,37 +275,37 @@ class Datepikcer{
 		if ( ! this.time)
 			return;
 		// 选择时间按钮
-		_var.chooseTime = this.picker.find('.choose-time');
+		v.chooseTime = this.picker.find('.choose-time');
 		// 显示选择时间按钮
-		_var.chooseTime.show();
+		v.chooseTime.show();
 		// 判断是否需要显示完整的时分秒
-		_var.arr = _.words(this.param.format, /[His]/g);
-		if (_var.arr.length < 2)
+		v.arr = _.words(this.param.format, /[His]/g);
+		if (v.arr.length < 2)
 		{
 			console.log('日期如果包含时间的话则至少需要时和分两个参数');
 			return;
 		}
 		// 时分秒默认值赋值
-		if (_var.val != '')
+		if (v.val != '')
 		{
-			_var.picker.
+			v.picker.
 				find('.h' + this.h).
 				addClass('current');
-			_var.picker.
+			v.picker.
 				find('.i' + this.i).
 				addClass('current');
-			_var.picker.
+			v.picker.
 				find('.s' + this.s).
 				addClass('current');
 		}
 		// 如果不需要秒数则移除选择秒的那一栏
-		if (_var.arr.length == 2)
+		if (v.arr.length == 2)
 		{
-			_var.picker.
+			v.picker.
 				find('.picker-time ul:last').
 				remove();
 			if (this.param.type == 'date-range')
-			_var.range.
+			v.range.
 				find('.picker-time ul:last').
 				remove();
 		}
@@ -521,17 +555,10 @@ class Datepikcer{
 	 * 年份
 	 */
 	_year(m = ''){
-		let _y;
-		if (m == '')
-		{
-			_y = this.arr[0].y;
-		}
-		else
-		{
-			if (m == 12) _y = this.arr[0].y + 1;
-		}
+		let _y = parseInt(this.arr[0].y);
+		if (m === 12) _y += 1;
 		let _html = '';
-		for (let _i = this.arr[0].y + 1; _i > (this.arr[0].y - 11); _i--)
+		for (let _i = _y + 1; _i > (parseInt(this.arr[0].y) - 11); _i--)
 		{
 			let _active = (_y == _i) ? ' active' : '';
 			_html += `<div class="year${_active}" data-y="${_i}">${_i}</div>`;
@@ -1017,12 +1044,14 @@ class Datepikcer{
 			{
 				_that.arr[0].y = _fromY;
 				_that.arr[0].m = _fromM;
+				_fromD = repairZero(_fromD);
 				_that.arr[0].d = _fromD;
-				_that.arr[0].c = parseInt(_fromY + '' + _fromM + '' + repairZero(_fromD));
+				_that.arr[0].c = parseInt(_fromY + '' + _fromM + '' + _fromD);
 				_that.arr[1].y = _y;
 				_that.arr[1].m = _m;
+				_d = repairZero(_d);
 				_that.arr[1].d = _d;
-				_that.arr[1].c = parseInt(_y + '' + _m + '' + repairZero(_d));
+				_that.arr[1].c = parseInt(_y + '' + _m + '' + _d);
 				_that.arr[1].index = 1;
 				_that.pindex = 1;
 				_func.reset();
@@ -1084,6 +1113,32 @@ class Datepikcer{
 					find('span[data-d="' + parseInt(this.arr[0].d) + '"]:not(.next)').
 					addClass('current');
 			}
+			this.focusInput.val(_val);
+			// 文本框赋值
+			// 是否转成时间戳
+			if (this.param.unixtime)
+			{
+				if ( ! this.time) _val += ' 00:00:00';
+				_val = Date.parse(new Date(_val)) / 1000;
+			}
+			if (this.focusInput.next('input').length == 0)
+			{
+				let name = this.focusInput.attr('name');
+				if (name == undefined)
+				{
+					console.log('没有为日期文本框指定name属性，这将影响后端取值');
+				}
+				else
+				{
+					this.focusInput.
+						removeAttr('name').
+						after(`<input type="hidden" name="${name}" value="${_val}">`);
+				}
+			}
+			else
+			{
+				this.focusInput.next('input').val(_val);
+			}
 		}
 		// 双日历赋值
 		else
@@ -1103,13 +1158,43 @@ class Datepikcer{
 					addClass('current');
 				this.currentNum = 2;
 			}
-			_val += (this.arr[0].c > this.arr[1].c) ? _func.val(1) : _func.val();
-			_val += ' - ';
-			_val += (this.arr[0].c > this.arr[1].c) ? _func.val() : _func.val(1);
+			let from = this.arr[0].c > this.arr[1].c ? _func.val(1) : _func.val();
+			let to   = this.arr[0].c > this.arr[1].c ? _func.val() : _func.val(1);
+			_val += from + ' - ' + to;
+			// 文本框赋值
+			this.focusInput.val(_val);
+			// 是否转成时间戳
+			if (this.param.unixtime)
+			{
+				if ( ! this.time)
+				{
+					from += ' 00:00:00';
+					to   += ' 23:59:59';
+				}
+				from = Date.parse(new Date(from)) / 1000;
+				to   = Date.parse(new Date(to)) / 1000;
+			}
+			_val = from + ',' + to;
+			if (this.focusInput.next('input').length == 0)
+			{
+				let name = this.focusInput.attr('name');
+				if (name == undefined)
+				{
+					console.log('没有为日期文本框指定name属性，这将影响后端取值');
+				}
+				else
+				{
+					this.focusInput.
+						removeAttr('name').
+						after(`<input type="hidden" name="${name}" value="${_val}">`);
+				}
+			}
+			else
+			{
+				this.focusInput.next('input').val(_val);
+			}
 		}
 		this.focus = false;
-		// 文本框赋值
-		this.focusInput.val(_val);
 		// 失去焦点
 		this.picker.trigger('blur');
 		if(this.inputDom.length > 1)

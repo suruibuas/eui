@@ -505,7 +505,7 @@ header .mobile-menu {
   line-height: 1.5;
 }
 .block-box .form-group .error {
-  color: #FF1844;
+  color: #ff6582;
   position: absolute;
   margin-top: 4px;
 }
@@ -669,7 +669,7 @@ h6 i {
  * ================= 遮罩 ==================
  */
 .mask {
-  opacity: 0.8;
+  opacity: 0.6;
   width: 100%;
   height: 100%;
   background: #000;
