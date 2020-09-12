@@ -560,7 +560,8 @@ class Form{
 				// 执行成功
 				if (data[module.conf.http.code_field] == module.conf.http.code_success)
 				{
-					if (msg == '') msg = '操作执行成功';
+					if (msg == '') 
+						msg = '操作执行成功';
 					// 清除编辑器的本地缓存
 					let editor = v.this.find('.editor');
 					if (editor.length > 0)
@@ -572,30 +573,32 @@ class Form{
 					Eadmin.message.success({
 						content : msg
 					});
-					Eadmin.button.reset(v.submit);
-					// 回调
-					if (v.callback == undefined) return;
-					try
-					{
-						Method != undefined;
-						if ( ! _.isFunction(Method[v.callback]))
-						{
-							console.log('指定的' + v.callback + '不是一个可被调用的函数');
-							return;
-						}
-						Method[v.callback](data);
-					}
-					catch(e)
-					{
-						console.log(e);
-					}
-					return;
 				}
-				if (msg == '') msg = '操作执行失败';
-				Eadmin.message.error({
-					content : msg
-				});
+				else
+				{
+					if (msg == '') 
+						msg = '操作执行失败';
+					Eadmin.message.error({
+						content : msg
+					});
+				}
 				Eadmin.button.reset(v.submit);
+				// 回调
+				if (v.callback == undefined) return;
+				try
+				{
+					Method != undefined;
+					if ( ! _.isFunction(Method[v.callback]))
+					{
+						console.log('指定的' + v.callback + '不是一个可被调用的函数');
+						return;
+					}
+					Method[v.callback](data);
+				}
+				catch(e)
+				{
+					console.log(e);
+				}
 			}).
 			catch((error) => {
 				Eadmin.message.error({

@@ -36,7 +36,7 @@ class Tree{
 			});
 			return tmp;
 		};
-		formatTree(0, arr, param.data);
+		formatTree(0, arr, this.data);
 		// 格式化半选
 		let formatHalf = (data) => {
 			_.each(data, (row) => {
@@ -50,9 +50,10 @@ class Tree{
 			});
 		}
 		formatHalf(arr);
-		param.data = arr;
 		// 配置参数
 		this.param = $.extend(_param, param);
+		this.param.data = arr;
+		this.data  = param.data;
 		this.run();
 	}
 
@@ -71,8 +72,7 @@ class Tree{
 	_create()
 	{
 		let v = {
-			html : '',
-			key  : 0
+			html : ''
 		};
 		let create = (level, data, open = false, disabled = false) => {
 			if (level > 0)
@@ -90,7 +90,7 @@ class Tree{
 				if (level == 0)
 				{
 					if (child == 0)
-						ul = ' style="margin-left:0;"';
+						ul = ' style="padding-left:20px;"';
 					if (this.param.open || 
 						row.open === true) 
 						isopen = 1;
@@ -115,7 +115,8 @@ class Tree{
 				if (this.param.checkbox)
 				{
 					let param = '';
-					if (row.checked === true)
+					if (row.checked === true || 
+						row.half === true)
 						param += ' checked';
 					if (row.disabled === true || 
 						disabled === true)
@@ -125,8 +126,7 @@ class Tree{
 					v.html += `<label>
 									<input 
 										id="${row.id}" 
-										data-pid="${row.pid}" 
-										data-key="${v.key}" 
+										data-pid="${row.pid}"
 										type="checkbox" 
 										${param}> ${row.name}
 								</label>`;
@@ -134,11 +134,10 @@ class Tree{
 				else
 				{
 					v.html += `<span 
-									data-nav="${v.key}" 
+									data-tree-node="${row.id}" 
 									${this.param.checkbox ? '' : ' class="cp"'}>${row.name}
 								</span>`;
 				}
-				v.key++;
 				if (child > 0)
 				{
 					if (disabled === true)
@@ -166,7 +165,7 @@ class Tree{
 			// 复选
 			':checkbox',
 			// 菜单
-			'[data-nav]'
+			'[data-tree-node]'
 		];
 		let that = this;
 		that.dom.
@@ -238,7 +237,6 @@ class Tree{
 			v.check = v.this.is(':checked');
 			v.pid   = v.this.data('pid');
 			v.id 	= v.this.attr('id');
-			v.key   = v.this.data('key');
 			// 向下选择
 			func.checkChild(v.id);
 			// 向上选择
@@ -248,23 +246,22 @@ class Tree{
 			v.checked = that.dom.find(':checked');
 			let tmp = [];
 			v.checked.each(function(){
-				let _this = $(this);
-				let val = that.data[_this.data('key')];
-				val.half = (_this.hasClass('checkbox-half')) ? true : false;
-				tmp.push(val);
+				tmp.push(parseInt($(this).attr('id')));
 			});
-			that.param.oncheck(that.data[v.key], tmp);
+			// 取值
+			let node = that.data.filter(item => tmp.indexOf(item.id) != -1);
+			if (that.param.oncheck == null)
+				return;
+			that.param.oncheck(node);
 		});
 		if (that.param.checkbox || 
 			that.param.onclick == null)
 			return;
 		that.dom.on('click', dom[2], function(){
-			let v = {
-				this : $(this)
-			};
-			v.key = v.this.data('nav');
+			let node = $(this).data('tree-node');
+			let data = that.data.filter(item => item.id === node);
 			// 取值
-			that.param.onclick(that.data[v.key]);
+			that.param.onclick(data[0]);
 		});
 	}
 	

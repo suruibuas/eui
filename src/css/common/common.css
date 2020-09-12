@@ -351,7 +351,7 @@ header .mobile-menu {
 }
 .block-box .block .person > .info,
 .block-box .block .pic > .info {
-  margin-top: 15px;
+  margin-top: 10px;
   overflow: hidden;
   height: 30px;
   line-height: 40px;
@@ -401,7 +401,7 @@ header .mobile-menu {
   top: 5px;
 }
 .block-box .block .pic .icon {
-  margin-top: 20px;
+  margin-top: 15px;
   color: #999;
 }
 .block-box .block .pic .icon span {
@@ -409,7 +409,7 @@ header .mobile-menu {
 }
 .block-box .block .pic .info {
   height: 35px;
-  line-height: 40px;
+  line-height: 35px;
 }
 .block-box .block .pic .info img {
   border-radius: 50px;

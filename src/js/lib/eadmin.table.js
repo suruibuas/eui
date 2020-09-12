@@ -726,7 +726,7 @@ class Table{
 				removeClass('active');
 			v.this.addClass('active');
 			that.get.order = v.this.data('order');
-			that._loadData();
+			that._loadData(true);
 		}).
 		// 开关
 		on('click', dom[12], function(){
@@ -919,11 +919,11 @@ class Table{
 		this.checked = 0;
 		this.btns = [];
 		this.shade.css('display', 'flex');
+		this.table.lbox.hide();
+		this.table.rbox.hide();
+		this.table.c.empty();
 		if (page)
 		{
-			this.table.lbox.hide();
-			this.table.rbox.hide();
-			this.table.c.empty();
 			if (this.window != null)
 			{
 				if ( ! _.startsWith(this.window, '#tab'))
