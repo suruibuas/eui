@@ -1002,8 +1002,10 @@ class Table{
 								{
 									url = b.open.url;
 								}
+								let disabled = b.disabled === true ? ' disabled' : '';
 								_html += `<button 
 											id="${id}" 
+											${disabled}
 											data-row="${row_key}" 
 											data-key="${btn_key}" 
 											data-window-url="${url}" 

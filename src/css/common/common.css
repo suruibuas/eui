@@ -464,6 +464,12 @@ header .mobile-menu {
 .block-box .block-data i {
   font-size: 20px;
 }
+.block-box .block-data-small {
+  padding: 10px 20px;
+}
+.block-box .block-data-small .data {
+  margin-top: 0;
+}
 .block-box .block-href {
   transition: background-color 0.2s linear;
   text-align: center;
@@ -496,7 +502,6 @@ header .mobile-menu {
 }
 .block-box .form-group {
   position: relative;
-  min-height: 64px;
 }
 .block-box .form-group > span {
   display: block;
@@ -696,7 +701,10 @@ h6 i {
   margin-top: 20px;
 }
 .mb0 {
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
+}
+.mb10 {
+  margin-bottom: 10px;
 }
 .mb20 {
   margin-bottom: 20px;

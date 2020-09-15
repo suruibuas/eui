@@ -19,7 +19,7 @@ class Editor{
             attr('id', this.dom.replace('#', '')).
             data('store', this.storeKey).
             addClass('editor').
-            after(`<input type="hidden" name="${this.domCache.data('name')}" value="${_default}">`);
+            after(`<input type="hidden" name="${this.domCache.data('name')}">`);
 		// 默认参数
 		let _param   = {
             // 编辑器名称，后端取值保存数据库使用
@@ -128,6 +128,10 @@ class Editor{
             placeholder : this.param.placeholder,
             readonly : this.param.readonly
         });
+        this.domCache.
+            next().
+            next("input[type='hidden']").
+            val(this.quill.root.innerHTML);
         let file = this.domCache.next("input[type='file']");
         this.quill.
             getModule('toolbar').
