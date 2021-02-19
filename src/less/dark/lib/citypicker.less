@@ -1,0 +1,116 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 头部导航文件
+ */
+
+@import "../global";
+
+.citypicker
+{
+    .border-radius();
+    .box-shadow();
+    position: absolute;
+    border:1px @input-color-1 solid;
+    background: @color-10;
+    z-index: 9999;
+    padding: 5px 10px;
+    outline: none;
+    display: none;
+    span
+    {
+        .border-radius();
+        .animate(background);
+        text-align: center;
+        display: inline-block;
+        cursor: pointer;
+        text-align: center;
+        padding: 6px 0;
+        &:not(.current):not(.title):not(.not-allow):hover
+        {
+            .animate(background);
+            background: @color-5;
+        }
+    }
+    .title
+    {
+        color: @color-7;
+        padding-left: 5px;
+    }
+    .header,
+    .body
+    {
+        display: flex;
+        flex-wrap:wrap;
+        justify-content:space-around;
+        align-content:space-around;
+    }
+    .header
+    {
+        margin: 5px 0;
+        span
+        {
+            width: 40px;
+        }
+        .current{
+            color: @font-color-3;
+        }
+    }
+    .body
+    {
+        &:after
+        {
+            content: "";
+            flex: auto;
+        }
+        span
+        {
+            width: 60px;
+            margin: 2px 15px;
+        }
+    }
+    .quick, 
+    .vert
+    {
+        max-height: 240px;
+        position: relative;
+        span
+        {
+            width: 100%;
+            text-align: left;
+            padding-left: 6px;
+            margin-bottom: 5px;
+        }
+        .ps__rail-y
+        {
+            right: 0;
+        }
+        .current
+        {
+            background: @color-5;
+        }
+    }
+    .vert
+    {
+        height: 200px;
+        min-width: 120px;
+        float: left;
+        span
+        {
+            display: block;
+            i
+            {
+                float: right;
+                margin-right: 0;
+            }
+        }
+    }
+    .vert:not(:last-child)
+    {
+        margin-right: 5px;
+    }
+    .current
+    {
+        .linear(lighten(@color-3, 10%), @color-3, top);
+    }
+}

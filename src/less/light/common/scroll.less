@@ -1,0 +1,99 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 滚动条
+ */
+
+@import "../global";
+
+.ps
+{
+    overflow: hidden;
+    overflow-anchor: none;
+    touch-action: auto;
+}
+.ps__rail-x
+{
+    display: none;
+    opacity: 0.4;
+    transition: background-color .2s linear, opacity .2s linear;
+    height: 10px;
+    bottom: 4px;
+    position: absolute;
+}
+.ps__rail-y
+{
+    display: none;
+    opacity: 0;
+    transition: background-color .2s linear, opacity .2s linear;
+    width: 4px;
+    right: 4px;
+    position: absolute;
+}
+.ps--active-x > .ps__rail-x,
+.ps--active-y > .ps__rail-y
+{
+    display: block;
+    background-color: transparent;
+}
+.ps--focus > .ps__rail-x,
+.ps--focus > .ps__rail-y,
+.ps--scrolling-x > .ps__rail-x,
+.ps--scrolling-y > .ps__rail-y
+{
+    opacity: 0.6;
+}
+.ps .ps__rail-x:hover,
+.ps .ps__rail-y:hover,
+.ps .ps__rail-x:focus,
+.ps .ps__rail-y:focus,
+.ps .ps__rail-x.ps--clicking,
+.ps .ps__rail-y.ps--clicking
+{
+    opacity: 0.6;
+}
+.ps__thumb-x
+{
+    background-color: @color-9;
+    border-radius: 50px;
+    transition: background-color .2s linear, height .2s ease-in-out;
+    height: 10px;
+    bottom: 0px;
+    position: absolute;
+}
+.ps__thumb-y
+{
+    .box-shadow();
+    background-color: @color-9;
+    border-radius: 50px;
+    transition: background-color .2s linear, width .2s ease-in-out;
+    width: 4px;
+    right: 0px;
+    position: absolute;
+}
+.ps__rail-x:hover > .ps__thumb-x,
+.ps__rail-x:focus > .ps__thumb-x,
+.ps__rail-x.ps--clicking .ps__thumb-x
+{
+    background-color: @color-9;
+}
+.ps__rail-y:hover > .ps__thumb-y,
+.ps__rail-y:focus > .ps__thumb-y,
+.ps__rail-y.ps--clicking .ps__thumb-y
+{
+    background-color: @color-9;
+}
+@supports (-ms-overflow-style: none)
+{
+    .ps
+    {
+        overflow: auto !important;
+    }
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none)
+{
+    .ps
+    {
+        overflow: auto !important;
+    }
+}

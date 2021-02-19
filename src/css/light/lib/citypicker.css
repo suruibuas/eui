@@ -1,0 +1,110 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 头部导航文件
+ */
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 全局配置
+ */
+/**
+ * ================= 颜色设置 ==================
+ */
+/**
+ * ================= 字体设置 ==================
+ */
+/**
+ * ================= 通用方法 ==================
+ */
+.citypicker {
+  border-radius: 5px;
+  box-shadow: rgba(0, 64, 128, 0.2) 0px 0px 20px;
+  position: absolute;
+  border: 1px #DCE8F2 solid;
+  background: #FFF;
+  z-index: 9999;
+  padding: 5px 10px;
+  outline: none;
+  display: none;
+}
+.citypicker span {
+  border-radius: 5px;
+  transition: background 0.2s linear;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  padding: 6px 0;
+}
+.citypicker span:not(.current):not(.title):not(.not-allow):hover {
+  transition: background 0.2s linear;
+  background: #DCE8F2;
+}
+.citypicker .title {
+  color: #999;
+  padding-left: 5px;
+}
+.citypicker .header,
+.citypicker .body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+}
+.citypicker .header {
+  margin: 5px 0;
+}
+.citypicker .header span {
+  width: 40px;
+}
+.citypicker .header .current {
+  color: #FFF;
+}
+.citypicker .body:after {
+  content: "";
+  flex: auto;
+}
+.citypicker .body span {
+  width: 60px;
+  margin: 2px 15px;
+}
+.citypicker .quick,
+.citypicker .vert {
+  max-height: 240px;
+  position: relative;
+}
+.citypicker .quick span,
+.citypicker .vert span {
+  width: 100%;
+  text-align: left;
+  padding-left: 6px;
+  margin-bottom: 5px;
+}
+.citypicker .quick .ps__rail-y,
+.citypicker .vert .ps__rail-y {
+  right: 0;
+}
+.citypicker .quick .current,
+.citypicker .vert .current {
+  background: #DCE8F2;
+}
+.citypicker .vert {
+  height: 200px;
+  min-width: 120px;
+  float: left;
+}
+.citypicker .vert span {
+  display: block;
+}
+.citypicker .vert span i {
+  float: right;
+  margin-right: 0;
+}
+.citypicker .vert:not(:last-child) {
+  margin-right: 5px;
+}
+.citypicker .current {
+  background: -moz-linear-gradient(top, #339dff, #0084FF);
+  background: -webkit-linear-gradient(top, #339dff, #0084FF);
+  background: -o-linear-gradient(top, #339dff, #0084FF);
+}

@@ -1,0 +1,58 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * TIPS
+ */
+
+ @import "../global";
+
+.tips
+{
+    .box-shadow();
+    .border-radius();
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    background: @color-12;
+    padding: 10px 14px;
+    cursor: default;
+    max-width: 260px;
+    min-width: 44px;
+    line-height: 20px;
+    z-index: 9999;
+    .tips-arrow
+    {
+        position: absolute;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent;
+    }
+    .down
+    {
+        left: 50%;
+        margin-left: -5px;
+        bottom: -10px;
+        border-top-color:@color-12;
+    }
+    .top
+    {
+        left: 50%;
+        margin-left: -5px;
+        top: -10px;
+        border-bottom-color:@color-12;
+    }
+    .right
+    {
+        top: 50%;
+        margin-top: -5px;
+        right:-10px;
+        border-left-color:@color-12;
+    }
+    .left
+    {
+        top: 50%;
+        margin-top: -5px;
+        left:-10px;
+        border-right-color:@color-12;
+    }
+}

@@ -1,0 +1,51 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 进度条
+ */
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 全局配置
+ */
+/**
+ * ================= 颜色设置 ==================
+ */
+/**
+ * ================= 字体设置 ==================
+ */
+/**
+ * ================= 通用方法 ==================
+ */
+.progress {
+  height: 30px;
+  position: relative;
+}
+.progress .bg,
+.progress .percent,
+.progress .point {
+  border-radius: 50px;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  height: 12px;
+}
+.progress .bg {
+  width: 100%;
+  background: #4E5675;
+  font-size: 12px;
+}
+.progress .percent {
+  background: -moz-linear-gradient(left, #66b5ff, #0084FF);
+  background: -webkit-linear-gradient(left, #66b5ff, #0084FF);
+  background: -o-linear-gradient(left, #66b5ff, #0084FF);
+  box-shadow: #060916 0px 0px 10px;
+}
+.progress .point {
+  width: 100%;
+  line-height: 12px;
+  color: #FFF;
+  font-size: 12px;
+  text-align: center;
+  text-shadow: 1px 1px 1px #36495C;
+}

@@ -1,0 +1,72 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 重置
+ */
+
+ @import "../global";
+
+*{
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -moz-user-focus: none;
+}
+body
+{
+    background: @color-1;
+    font-size: @font-size-2;
+    font-family: "Microsoft YaHei";
+    color:@font-color-1;
+}
+ul,li,p
+{
+    margin: 0;
+    padding: 0;
+}
+li
+{
+    list-style: none;
+}
+a
+{
+    .animate(color);
+    color:@font-color-1;
+    text-decoration:none;
+    &:hover
+    {
+        .animate(color);
+        color: darken(@font-color-1, 20%);
+    }
+}
+em
+{
+    font-style: normal;
+}
+table
+{
+    border-collapse:collapse;
+    border-spacing:0
+}
+th
+{
+    font-weight: normal;
+    text-align: initial;
+}
+td
+{
+    padding: 0;
+}
+i
+{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 5px;
+    font-size: @font-size-3;
+}
+img, video
+{
+    .border-radius();
+}
+@-moz-document url-prefix()
+{
+    i{vertical-align: middle;}
+}

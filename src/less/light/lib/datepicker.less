@@ -1,0 +1,265 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 日期选择
+ */
+
+@import "../global";
+
+// 日期选择
+.datepicker
+{
+    .border-radius();
+    .box-shadow();
+    width: auto;
+    position: absolute;
+    border:1px @input-color-1 solid;
+    background: @color-10;
+    z-index: 9999;
+    padding: 0 10px 5px 10px;
+    outline: none;
+    display: none;
+    .header, 
+    .footer
+    {
+        height: 35px;
+        line-height: 35px;
+        text-align: center;
+        span
+        {
+            .animate(color);
+            text-align: center;
+        }
+        i
+        {
+            width: 24px;
+            height: 24px;
+            font-size: 18px;
+            margin-right: 0;
+        }
+        .font
+        {
+            float: left;
+            padding-left: 5px;
+            &:hover
+            {
+                color: @color-3;
+            }
+        }
+        .confirm
+        {
+            float: right;
+            position: relative;
+            button
+            {
+                padding: 5px 10px;
+                margin-right: 0;
+                margin-left: 2px;
+            }
+        }
+        .not-allow
+        {
+            color: @color-6;
+            cursor: not-allowed;
+            &:hover
+            {
+                color: @color-6;
+            }
+        }
+    }
+    .header{
+        .prev-year,
+        .prev-month
+        {
+            float: left;
+        }
+        .next-year,
+        .next-month
+        {
+            float: right;
+        }
+    }
+    .footer
+    {
+        display: none;
+        .choose-time
+        {
+            display: none;
+        }
+    }
+    .body
+    {
+        width: 260px;
+        span
+        {
+            width: 34px;
+            height: 34px;
+            line-height: 34px;
+        }
+        .next
+        {
+            color: @color-6;
+            margin-bottom: 3px;
+        }
+    }
+    .datepicker-panel
+    {
+        float: left;
+    }
+    .right
+    {
+        margin-left: 10px;
+        display: none;
+    }
+    .week, 
+    .day,
+    .y-m,
+    .picker-time
+    {
+        display: flex;
+        flex-wrap:wrap;
+        justify-content:space-around;
+        align-content:space-around;
+    }
+    .week
+    {
+        color: @color-6;
+        span
+        {
+            cursor: default;
+        }
+    }
+    .day
+    {
+        span:not(.next)
+        {
+            .border-radius();
+            .animate(background);
+            position: relative;
+            margin-bottom: 3px;
+            &:hover:not(.current)
+            {
+                .animate(background);
+                background: @color-5;
+            }
+            div
+            {
+                .border-radius(50px);
+                width: 5px;
+                height: 5px;
+                position: absolute;
+                background: @color-3;
+                right: 2px;
+                top: 2px;
+            }
+        }
+        span.current
+        {
+            .box-shadow();
+            .linear(lighten(@color-3, 10%), @color-3, top);
+            color: @font-color-3;
+            div{
+                background: @font-color-3;
+            }
+        }
+    }
+    .y-m
+    {
+        display: none;
+        div
+        {
+            .border-radius();
+            .animate(background);
+            text-align: center;
+            padding: 10px 0;
+            width: 62px;
+            cursor: pointer;
+            margin: 10px 5px;
+            &:hover
+            {
+                .animate(background);
+                background: @color-5;
+            }
+        }
+        .active
+        {
+            background: @color-5;
+        }
+    }
+    .picker-time
+    {
+        display: none;
+        ul
+        {
+            margin-right: 2%;
+            width: 31%;
+            height: 256px;
+            padding-bottom: 1px;
+            position: relative;
+            li
+            {
+                .border-radius();
+                .animate(background);
+                height: 24px;
+                line-height: 24px;
+                cursor: pointer;
+                text-align: center;
+                margin-top: 2px;
+            }
+            li:not(.current)
+            {
+                &:hover
+                {
+                    .animate(background);
+                    background: @color-5;
+                }
+            }
+            .current
+            {
+                background: @color-5;
+            }
+            .ps__rail-y
+            {
+                right: 0;
+            }
+        }
+    }
+    .quick
+    {
+        padding: 0 6px;
+        display: none;
+        margin-bottom: 5px;
+        span
+        {
+            .border-radius();
+            .animate(background);
+            padding: 5px 10px;
+            margin: 6px 0;
+        }
+        span.title
+        {
+            padding-left: 0;
+            color: @color-7;
+        }
+        span.current
+        {
+            .box-shadow();
+            background: @color-3;
+            color: @font-color-3;
+        }
+    }
+    .footer
+    {
+        height: 30px;
+    }
+    .clear
+    {
+        clear: both;
+    }
+    span
+    {
+        text-align: center;
+        display: inline-block;
+        cursor: pointer;
+    }
+}
