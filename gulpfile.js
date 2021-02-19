@@ -27,16 +27,17 @@ gulp.task('dev', [
     gulp.watch([
         'src/js/**/*.js'
     ], ['jsmin']);
-    // 编辑less
-    gulp.watch('src/less/**/*.less', ['less']);
+    // 编译less
+    gulp.watch('src/less/dark/**/*.less', ['less_dark']);
+    gulp.watch('src/less/light/**/*.less', ['less_light']);
     // 合并CSS
-    gulp.watch('src/css/**/*.css', ['css']).on('change', reload);
+    gulp.watch('src/css/dark/**/*.css', ['css_dark']);
+    gulp.watch('src/css/light/**/*.css', ['css_light']);
     // 重载
     gulp.watch([
-        'dist/js/**/*.js',
-        'dist/css/**/*.css',
-        'dist/html/**/*.html',
-        'dist/demo/**/*.html'
+        'dist/**/*.js',
+        'dist/**/*.css',
+        'dist/**/*.html'
     ]).on('change', reload);
 });
 
@@ -106,25 +107,46 @@ gulp.task('jsmin', function(){
 });
 
 //编译less
-gulp.task('less', function(){
+gulp.task('less_dark', function(){
 	gulp.src([
-		'src/less/**/*.less',
-		'!src/less/global.less'
+		'src/less/dark/**/*.less',
+		'!src/less/dark/global.less'
 	]).
 	pipe(plumber()).
 	pipe(less()).
-    pipe(gulp.dest('src/css'));
+    pipe(gulp.dest('src/css/dark'));
+});
+gulp.task('less_light', function(){
+	gulp.src([
+		'src/less/light/**/*.less',
+		'!src/less/light/global.less'
+	]).
+	pipe(plumber()).
+	pipe(less()).
+    pipe(gulp.dest('src/css/light'));
 });
 
 //合并css
-gulp.task('css', function(){
-	return gulp.src([
-        'src/css/*.css',
-        'src/css/common/*.css',
-        'src/css/lib/*.css',
+gulp.task('css_dark', function(){
+    return gulp.src([
+        'src/css/dark/*.css',
+        'src/css/dark/common/*.css',
+        'src/css/dark/lib/*.css',
 	]).
     pipe(plumber()).
     pipe(concat('eadmin.min.css')).
+    pipe(cssmin()).
+	pipe(gulp.dest('dist/css'));
+});
+
+gulp.task('css_light', function(){
+    return gulp.src([
+        'src/css/light/*.css',
+        'src/css/light/common/*.css',
+        'src/css/light/lib/*.css',
+	]).
+    pipe(plumber()).
+    pipe(concat('eadmin_light.min.css')).
     pipe(cssmin()).
 	pipe(gulp.dest('dist/css'));
 });
