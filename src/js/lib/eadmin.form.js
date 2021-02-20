@@ -340,7 +340,9 @@ class Form{
 			// 多选下拉复选框
 			'.select-multiple :checkbox',
 			// 清空下拉菜单
-			'.select-clear'
+			'.select-clear',
+			// 数字加减
+			'.num-input'
 		];
 		// 下拉菜单
 		body.
@@ -553,6 +555,8 @@ class Form{
 			let v = {
 				input : _this.parent().prev()
 			};
+			if (v.input.is(':disabled'))
+				return;
 			v.min  = v.input.data('min') || 0,
 			v.max  = v.input.data('max') || 0,
 			v.step = v.input.data('step') || 1,
@@ -568,14 +572,34 @@ class Form{
 			}
 			v.val -= +v.step;
 			if (v.val <= v.min)
-			{
 				_this.addClass('disabled');
-			}
 			v.input.val(v.val);
 			_this.prev().removeClass('disabled');
 		}).
 		on('mousedown', dom[3], (e) => {
 			e.preventDefault();
+		}).
+		on('blur', dom[10], function(){
+			let _this = $(this);
+			let v = {
+				val : _this.val(),
+				min : _this.data('min'),
+				max : _this.data('max'),
+				btn : _this.next().children('i')
+			};
+			if (v.min != undefined && v.val < v.min)
+			{
+				_this.val(v.min);
+				v.btn.eq(0).removeClass('disabled');
+				v.btn.eq(1).addClass('disabled');
+				return;
+			}
+			if (v.max != undefined && v.val > v.max)
+			{
+				_this.val(v.max);
+				v.btn.eq(0).addClass('disabled');
+				v.btn.eq(1).removeClass('disabled');
+			}
 		}).
 		// 单选按钮
 		on('click', dom[4], function(){
@@ -650,7 +674,7 @@ class Form{
 			v.submit = _this.find('[data-submit]');
 			if (v.submit.length > 0 && 
 				v.submit.data('loading') != undefined)
-				Button.loading(v.submit);
+				Eadmin.button.loading(v.submit);
 			if (_this.data('native') != undefined)
 				return true;
 			// 提交数据
@@ -682,6 +706,9 @@ class Form{
 						Method[v.callback](data);
 					}
 					catch(e){console.log(e);}
+				},
+				error : () => {
+					Eadmin.button.reset(v.submit);
 				}
 			});
 			return false;
