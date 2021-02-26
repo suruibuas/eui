@@ -29,7 +29,7 @@
 }
 .rate .full {
   transition: color 0.2s linear;
-  color: #FFFF01;
+  color: #ffee01;
 }
 .rate .disabled {
   cursor: not-allowed;

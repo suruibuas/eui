@@ -32,11 +32,11 @@
   font-size: 16px;
 }
 .message .info {
-  color: #ff7c00;
+  color: #ffee01;
 }
 .message .error {
   color: #FF1844;
 }
 .message .success {
-  color: #76FF02;
+  color: #6fee00;
 }

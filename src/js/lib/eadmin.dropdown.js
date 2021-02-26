@@ -13,6 +13,8 @@ class Dropdown{
 			width   : 0,
 			// 显示方式
 			trigger : 'click',
+			// 是否固定不被清除
+			fixed   : false,
 			// 标题栏
 			title   : '',
 			// 数据
@@ -46,7 +48,7 @@ class Dropdown{
 			'dropdown-' + createId(),
 			''
 		];
-		html  = `<div id="${id}" class="dropdown animated faster"`;
+		html = `<div id="${id}" class="dropdown animated faster${this.param.fixed ? ' fixed' : ''}"`;
 		if (this.param.width > 0)
 			html += ` style="width:${this.param.width}px;"`;
 		html += '>';
@@ -161,6 +163,7 @@ class Dropdown{
 			custom._index   = index;
 			custom._checked = data.checked == undefined ? null : data.checked;
 			data['click'](custom);
+			that.dropdown.hide();
 		});
 	}
 	

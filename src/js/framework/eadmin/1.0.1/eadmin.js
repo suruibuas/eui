@@ -48,7 +48,8 @@ let eadmin = class Eadmin{
             $('#notice').css('top', module.conf.notice_top);
         }
         // 预加载错误图片
-        if (module.conf.error_default_img != '')
+        if (module.conf.error_default_img != undefined && 
+            module.conf.error_default_img != '')
         {
             $('body').append(`<img id="error-default-img" src="${module.conf.error_default_img}" class="dn">`);
             $('#error-default-img').on('error', () => {
@@ -85,6 +86,27 @@ let eadmin = class Eadmin{
                 });
             });
         }
+        // 加载进度条
+        $('body').append(`<div id="loading-progress"></div>`);
+    }
+
+    /**
+     * 页面加载顶部进度条
+     * @type 类型，1：显示 0：隐藏
+     */
+    loadingProgress(type = 1)
+    {
+        let dom = $('#loading-progress');
+        if (type == 1)
+        {
+            dom.css('opacity', 1).animate({
+                width : innerW()
+            }, 10000);
+            return;
+        }
+        dom.stop().width(innerW()).animate({
+            opacity : 0
+        });
     }
 
     /**
@@ -99,7 +121,6 @@ let eadmin = class Eadmin{
      * 关闭加载中
      */
     loadingHide(){
-        if(Mount.page) return;
         this.maskHide();
     }
 
@@ -156,7 +177,7 @@ let eadmin = class Eadmin{
             module.conf.homepage == undefined || 
             module.conf.homepage == '') return;
         // 加载动画
-        this.loading();
+        this.loadingProgress();
         // 判断默认主页
         let homepage = getRoute();
         if ( ! homepage)
@@ -299,15 +320,15 @@ let eadmin = class Eadmin{
         let _this = this;
         let _box  = ! container ? box : $(container);
         _box.empty();
-        // loading
-        _this.loading();
+        // 加载动画
+        this.loadingProgress();
         // 需要销毁的元素
         let destroy = [
             '.window',
             '.datepicker',
             '.citypicker',
             '.dz-hidden-input',
-            '.dropdown'
+            '.dropdown:not(.fixed)'
         ];
         for (let i in destroy)
             $(destroy[i]).remove();
@@ -466,7 +487,7 @@ let eadmin = class Eadmin{
             this.boxScroll.destroy();
             this.boxScroll = null;
         }
-        this.loadingHide();
+        this.loadingProgress(0);
         // 默认图
         defaultImg(box);
         // 块
@@ -476,7 +497,7 @@ let eadmin = class Eadmin{
         // 按钮渲染
         Button.run(box);
         // 标签
-        Tag.run(box);
+        if (module.lib.indexOf('tag') != -1) Tag.run(box);
         // 监听滚动
         this.onscroll();
         // 滚动条处理
@@ -491,7 +512,7 @@ let eadmin = class Eadmin{
         }
         this.boxScroll = this.scroll(box[0]);
         // 进度条
-        Progress.run(box);
+        if (module.lib.indexOf('progress') != -1) Progress.run(box);
     }
 
     /**
@@ -524,6 +545,11 @@ let eadmin = class Eadmin{
      * 日期选择
      */
     datepicker(dom, param){
+        if (module.lib.indexOf('datepicker') == -1)
+        {
+            console.log('请先在lib中加载datepicker组件');
+            return;
+        }
         new Datepikcer(dom, param);
         return this;
     }
@@ -532,6 +558,11 @@ let eadmin = class Eadmin{
      * 城市选择
      */
     citypicker(dom, param){
+        if (module.lib.indexOf('citypicker') == -1)
+        {
+            console.log('请先在lib中加载citypicker组件');
+            return;
+        }
         new Citypikcer(dom, param);
         return this;
     }
@@ -540,6 +571,11 @@ let eadmin = class Eadmin{
      * 弹窗
      */
     window(dom, param){
+        if (module.lib.indexOf('window') == -1)
+        {
+            console.log('请先在lib中加载window组件');
+            return;
+        }
         new Window(dom, param);
         return this;
     }
@@ -548,6 +584,11 @@ let eadmin = class Eadmin{
      * 滑块
      */
     slider(dom, param){
+        if (module.lib.indexOf('slider') == -1)
+        {
+            console.log('请先在lib中加载slider组件');
+            return;
+        }
         new Slider(dom, param);
         return this;
     }
@@ -556,6 +597,11 @@ let eadmin = class Eadmin{
      * 穿梭框
      */
     transfer(dom, param){
+        if (module.lib.indexOf('transfer') == -1)
+        {
+            console.log('请先在lib中加载transfer组件');
+            return;
+        }
         new Transfer(dom, param);
         return this;
     }
@@ -564,6 +610,11 @@ let eadmin = class Eadmin{
      * 评分
      */
     rate(dom, param){
+        if (module.lib.indexOf('rate') == -1)
+        {
+            console.log('请先在lib中加载rate组件');
+            return;
+        }
         new Rate(dom, param);
         return this;
     }
@@ -572,6 +623,11 @@ let eadmin = class Eadmin{
      * 颜色选择
      */
     colorpicker(dom, param){
+        if (module.lib.indexOf('colorpicker') == -1)
+        {
+            console.log('请先在lib中加载colorpicker组件');
+            return;
+        }
         new Colorpicker(dom, param);
         return this;
     }
@@ -580,6 +636,11 @@ let eadmin = class Eadmin{
      * 表格
      */
     table(dom, param){
+        if (module.lib.indexOf('table') == -1)
+        {
+            console.log('请先在lib中加载table组件');
+            return;
+        }
         return new Table(dom, param);
     }
 
@@ -587,6 +648,11 @@ let eadmin = class Eadmin{
      * 自定义分页
      */
     page(param){
+        if (module.lib.indexOf('page') == -1)
+        {
+            console.log('请先在lib中加载page组件');
+            return;
+        }
         new Page(param);
         return this;
     }
@@ -595,6 +661,11 @@ let eadmin = class Eadmin{
      * 上传
      */
     upload(dom, param){
+        if (module.lib.indexOf('upload') == -1)
+        {
+            console.log('请先在lib中加载upload组件');
+            return;
+        }
         new Upload(dom, param);
         return this;
     }
@@ -603,6 +674,11 @@ let eadmin = class Eadmin{
      * 图表
      */
     chart(dom, param){
+        if (module.lib.indexOf('chart') == -1)
+        {
+            console.log('请先在lib中加载chart组件');
+            return;
+        }
         new EChart(dom, param);
         return this;
     }
@@ -611,6 +687,11 @@ let eadmin = class Eadmin{
      * 树形
      */
     tree(dom, param){
+        if (module.lib.indexOf('tree') == -1)
+        {
+            console.log('请先在lib中加载tree组件');
+            return;
+        }
         new Tree(dom, param);
         return this;
     }
@@ -619,6 +700,11 @@ let eadmin = class Eadmin{
      * 选项卡
      */
     tab(dom, param){
+        if (module.lib.indexOf('tab') == -1)
+        {
+            console.log('请先在lib中加载tab组件');
+            return;
+        }
         new Tab(dom, param);
         return this;
     }
@@ -627,6 +713,11 @@ let eadmin = class Eadmin{
      * 编辑器
      */
     editor(dom, param){
+        if (module.lib.indexOf('editor') == -1)
+        {
+            console.log('请先在lib中加载editor组件');
+            return;
+        }
         new Editor(dom, param);
         return this;
     }
@@ -637,6 +728,11 @@ let eadmin = class Eadmin{
      * @param {*} param 
      */
     dropdown(dom, param){
+        if (module.lib.indexOf('dropdown') == -1)
+        {
+            console.log('请先在lib中加载dropdown组件');
+            return;
+        }
         new Dropdown(dom, param);
         return this;
     }
@@ -746,7 +842,11 @@ let eadmin = class Eadmin{
             if (data[module.conf.http.code_field] != module.conf.http.code_success)
             {
                 if (msg == '') msg = '操作执行失败';
-                Message.error({content : msg});
+                Message.error({
+                    content : msg
+                });
+                if (_.isFunction(param.error))
+                    param.error();
                 return;
             }
             if (param.popup !== true)
@@ -761,7 +861,7 @@ let eadmin = class Eadmin{
             if (_.isFunction(param.then))
             {
                 conf.callback = () => {
-                    param.then(data[module.conf.http.data_field]);
+                    param.then(data);
                 };
             }
             Popup.success(conf);
@@ -807,7 +907,7 @@ let eadmin = class Eadmin{
                     content : msg
                 });
                 if (_.isFunction(param.error))
-                    param.error();
+                    param.error(data);
                 return;
             }
             if (_.isFunction(param.close))
@@ -818,7 +918,7 @@ let eadmin = class Eadmin{
             if (_.isFunction(param.then))
             {
                 conf.callback = () => {
-                    param.then(data[module.conf.http.data_field]);
+                    param.then(data);
                 };
             }
             Popup.success(conf);

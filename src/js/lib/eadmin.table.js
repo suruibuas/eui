@@ -1146,7 +1146,7 @@ class Table{
 					// 缺省图处理
 					defaultImg(this.table.c);
 					// 标签
-					Tag.run(this.table.c);
+					if (module.lib.indexOf('tag') != -1) Tag.run(this.table.c);
 					if (this.table.t.width() <= this.width)
 					{
 						this.table.lbox.remove();
@@ -1173,7 +1173,7 @@ class Table{
 					// 表单
 					Eadmin.form(this.table.c);
 					// 进度条
-					Progress.run(this.table.c);
+					if (module.lib.indexOf('progress') != -1) Progress.run(this.table.c);
 					// 分页
 					this._page(v.data, page);
 					let checkall = this.table.head.find(':checkbox');

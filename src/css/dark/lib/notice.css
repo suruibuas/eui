@@ -62,11 +62,11 @@
   font-weight: bold;
 }
 .notice .info {
-  color: #ff7c00;
+  color: #ffee01;
 }
 .notice .error {
   color: #FF1844;
 }
 .notice .success {
-  color: #76FF02;
+  color: #6fee00;
 }

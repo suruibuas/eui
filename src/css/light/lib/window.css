@@ -30,8 +30,8 @@
 }
 .window .title {
   position: relative;
-  height: 30px;
-  line-height: 30px;
+  height: 28px;
+  line-height: 28px;
   margin: 0 25px 10px 0;
 }
 .window .window-loading {
@@ -78,7 +78,7 @@
   border: 2px #DCE8F2 solid;
 }
 .window .body .form-group .title {
-  margin-bottom: 2px;
+  margin-bottom: 0px;
 }
 .window .btnbar {
   margin: 7px 15px 10px 0;

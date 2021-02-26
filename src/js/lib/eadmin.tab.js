@@ -116,7 +116,7 @@ class Tab{
 			// 延迟按钮
 			Button.run(panel);
 			// 标签
-			Tag.run(panel);
+			if (module.lib.indexOf('tag') != -1) Tag.run(panel);
 			// 滚动条处理
 			let scroll = body.find('.iscroll');
 			if(scroll.length > 0)
@@ -127,7 +127,7 @@ class Tab{
 				});
 			}
 			// 进度条
-			Progress.run(panel);
+			if (module.lib.indexOf('progress') != -1) Progress.run(panel);
 		});
 	}
 	

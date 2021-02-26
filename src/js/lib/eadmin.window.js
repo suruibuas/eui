@@ -170,7 +170,7 @@ class Window{
 				$('.' + that.window).remove();
 				Eadmin.maskHide();
 				// 关闭回调
-				if (onclose && _.isFunction(that.param.close)) 
+				if (onclose && _.isFunction(that.param.close))
 					that.param.close(change);
 			},
 			load : () => {
@@ -214,7 +214,7 @@ class Window{
 						// 延迟按钮
 						Button.run(that.windowDom);
 						// 标签
-						Tag.run(v.body);
+						if (module.lib.indexOf('tag') != -1) Tag.run(v.body);
 						v.scroll = Eadmin.scroll('#' + that.window + ' .body');
 						// 滚动条处理
 						let scroll = body.find('.iscroll');
@@ -227,7 +227,7 @@ class Window{
 							});
 						}
 						// 进度条
-						Progress.run(v.body);
+						if (module.lib.indexOf('progress') != -1) Progress.run(v.body);
 					});
 				}, timeout);
 			},
@@ -399,7 +399,8 @@ class Window{
 							}, 100);
 						};
 						_v.param.action({
-							close : () => {
+							window : that.windowDom,
+							close  : () => {
 								func.close();
 							},
 							refresh : () => {

@@ -197,10 +197,10 @@ h6 i {
   color: #FF1844 !important;
 }
 .font-color-2 {
-  color: #76FF02 !important;
+  color: #6fee00 !important;
 }
 .font-color-3 {
-  color: #FFFF01 !important;
+  color: #ffee01 !important;
 }
 .font-color-4 {
   color: #ff7c00 !important;
@@ -221,10 +221,10 @@ h6 i {
   background-color: #FF1844 !important;
 }
 .color-2 {
-  background-color: #76FF02 !important;
+  background-color: #6fee00 !important;
 }
 .color-3 {
-  background-color: #FFFF01 !important;
+  background-color: #ffee01 !important;
 }
 .color-4 {
   background-color: #ff7c00 !important;
@@ -247,14 +247,14 @@ h6 i {
   background: -o-linear-gradient(left, #ff7e97, #FF1844) !important;
 }
 .linear-2 {
-  background: -moz-linear-gradient(left, #adff68, #76FF02) !important;
-  background: -webkit-linear-gradient(left, #adff68, #76FF02) !important;
-  background: -o-linear-gradient(left, #adff68, #76FF02) !important;
+  background: -moz-linear-gradient(left, #a4ff55, #6fee00) !important;
+  background: -webkit-linear-gradient(left, #a4ff55, #6fee00) !important;
+  background: -o-linear-gradient(left, #a4ff55, #6fee00) !important;
 }
 .linear-3 {
-  background: -moz-linear-gradient(left, #ffff67, #FFFF01) !important;
-  background: -webkit-linear-gradient(left, #ffff67, #FFFF01) !important;
-  background: -o-linear-gradient(left, #ffff67, #FFFF01) !important;
+  background: -moz-linear-gradient(left, #fff567, #ffee01) !important;
+  background: -webkit-linear-gradient(left, #fff567, #ffee01) !important;
+  background: -o-linear-gradient(left, #fff567, #ffee01) !important;
 }
 .linear-4 {
   background: -moz-linear-gradient(left, #ffb066, #ff7c00) !important;

@@ -680,6 +680,22 @@ class Form{
 			// 提交数据
 			v.formData = _this.serialize();
 			v.callback = _this.data('callback');
+			// 表单提交回调函数抽离
+			let callback = (data) => {
+				// 回调
+				if (v.callback == undefined) return;
+				try
+				{
+					Method != undefined;
+					if ( ! _.isFunction(Method[v.callback]))
+					{
+						console.log('指定的' + v.callback + '不是一个可被调用的函数');
+						return;
+					}
+					Method[v.callback](data);
+				}
+				catch(e){console.log(e);}
+			}
 			Eadmin.post({
 				url  : v.action,
 				form : v.formData,
@@ -693,22 +709,11 @@ class Form{
 							store.remove(storeKey);
 					}
 					Eadmin.button.reset(v.submit);
-					// 回调
-					if (v.callback == undefined) return;
-					try
-					{
-						Method != undefined;
-						if ( ! _.isFunction(Method[v.callback]))
-						{
-							console.log('指定的' + v.callback + '不是一个可被调用的函数');
-							return;
-						}
-						Method[v.callback](data);
-					}
-					catch(e){console.log(e);}
+					callback(data);
 				},
-				error : () => {
+				error : (data) => {
 					Eadmin.button.reset(v.submit);
+					callback(data);
 				}
 			});
 			return false;

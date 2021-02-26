@@ -8,6 +8,7 @@
     <meta name="msapplication-tap-highlight" content="no"> 
     <title>EAdmin - 开箱即用的后台中台</title>
     <link href="./css/eadmin_light.min.css" rel="stylesheet">
+    <link href="https://highlightjs.org/static/demo/styles/monokai-sublime.css" rel="stylesheet">
     <link rel="shortcut icon" href=./img/favicon.ico>
 </head>
 
@@ -189,7 +190,11 @@
             // 不需要上传可删除
             'dropzone',
             // 不需要富文本编辑器可删除
-            'quill'
+            'quill',
+            // 代码高亮
+            'highlight',
+            // 代码显示行数
+            'highlightjs-line-numbers'
         ],
         // 全部加载完成回调
         ready : function(){

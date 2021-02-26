@@ -103,3 +103,13 @@ header .sub-nav .active li {
 header .sub-nav .active:hover {
   color: #FFF;
 }
+#loading-progress {
+  background: -moz-linear-gradient(left, #66b5ff, #0084FF);
+  background: -webkit-linear-gradient(left, #66b5ff, #0084FF);
+  background: -o-linear-gradient(left, #66b5ff, #0084FF);
+  height: 4px;
+  background-color: #0084FF;
+  position: fixed;
+  top: 0;
+  left: 0;
+}

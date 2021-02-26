@@ -208,8 +208,9 @@
   color: #cccccc;
 }
 .block-box .note {
-  margin-top: 20px;
+  margin-top: 10px;
   color: #999;
+  display: inline-block;
 }
 .block-box .form-group {
   position: relative;
@@ -223,7 +224,7 @@
 .block-box .form-group .error {
   color: #ff6582;
   position: absolute;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 .block-box .form-group .font-num {
   bottom: 10px;
@@ -436,7 +437,7 @@
   color: #36495C;
 }
 .quote-info {
-  border-left-color: #FFFF01;
+  border-left-color: #ffee01;
   background: #F8F7DE;
 }
 .quote-error {
@@ -444,6 +445,6 @@
   background: #fae1dd;
 }
 .quote-success {
-  border-left-color: #76FF02;
+  border-left-color: #6fee00;
   background: #D6EFC7;
 }

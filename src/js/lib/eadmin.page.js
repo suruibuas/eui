@@ -5,7 +5,6 @@
 class Page{
 
 	constructor(param){
-		Mount.page  = true;
 		this.window = Mount.window != null ? '#' + Mount.window : null;
 		// 配置参数
 		this.param  = param;
@@ -442,7 +441,6 @@ class Page{
 				{
 					this.searchBoxCache.append(`<div class="empty">该列表暂无更多数据~</div>`);
 				}
-				Mount.page = false;
 				Eadmin.loadingHide();
 				this.init = true;
 				this.get['_search'] = 0;
