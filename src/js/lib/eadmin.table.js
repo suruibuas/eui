@@ -131,7 +131,7 @@ class Table{
 		let shade = `<div class="table-shade">
 						<i class="ri-loader-4-line rotate"></i>数据加载中，请稍候...
 					</div>`;
-		this.domCache.addClass('table').before(shade);
+		this.domCache.addClass('table').hide().before(shade);
 		this.shade = this.domCache.prev('.table-shade');
 		// 是否显示左右固定浮动，用来确定表格全选是左浮动上的还是主体表格上的
 		this.haveFixed = this.param.config.fixed.first;
@@ -234,7 +234,7 @@ class Table{
 				if (search.length == 0) 
 					return;
 				let [html, param] = [
-					`<div class="table-search">
+					`<div class="table-search dn">
 						<form>
 							<div class="block-box table-search-box">`,
 					[]
@@ -326,9 +326,11 @@ class Table{
 			},
 			// 按钮栏
 			tools : () => {
-				if (this.param.button.length == 0)
+				if (this.param.button.length == 0 && 
+					! this.param.config.column_config && 
+					! this.param.config.export_excel)
 					return;
-				let html = `<div class="table-tools">`;
+				let html = `<div class="table-tools dn">`;
 				_.each(this.param.button, (row, k) => {
 					html += `<button id="table-btn-${k}" `;
 					html += (k == 0) ? `class="highlight middle">` : `class="middle">`;
@@ -356,7 +358,7 @@ class Table{
 			page : () => {
 				if (_.isBoolean(this.param.config.page))
 					return;
-				let html = `<div class="table-page">
+				let html = `<div class="table-page dn">
 								<span class="info">
 									共<em></em>条，每页
 									<select name="pagesize" data-width="70">
@@ -415,7 +417,9 @@ class Table{
 				// 固定列
 				func.fixed();
 				// 如果没有按钮栏则增加上划线
-				if (this.param.button.length == 0)
+				if (this.param.button.length == 0 && 
+					! this.param.config.column_config && 
+					! this.param.config.export_excel)
 					this.domCache.find('thead > tr').addClass('head-border-top');
 				this.table = {
 					head : this.domCache.find('thead'),
@@ -983,6 +987,13 @@ class Table{
 		this.shade.css('display', 'flex');
 		this.table.lbox.hide();
 		this.table.rbox.hide();
+		if (this.searchBox != null)
+			this.searchBox.hide();
+		if (this.toolsBox != null)
+		this.toolsBox.hide();
+		this.domCache.hide();
+		if (this.param.config.page !== false)
+			this.pageBox.hide();
 		this.table.c.empty();
 		if (page)
 		{
@@ -1179,6 +1190,11 @@ class Table{
 					let checkall = this.table.head.find(':checkbox');
 					if (checkall.is(':checked'))
 						Form.checkbox(checkall, false);
+					this.domCache.show();
+					if (this.searchBox != null)
+						this.searchBox.show();
+					if (this.toolsBox != null)
+						this.toolsBox.show();
 					if (this.param.config.page !== false)
 						this.pageBox.show();
 					this.table.lbox.show();

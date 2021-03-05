@@ -173,6 +173,7 @@ select {
 .select i:not(.rotate) {
   position: absolute;
   right: 0px;
+  top: 10px;
 }
 .select i.ri-loader-4-line {
   font-size: 14px;

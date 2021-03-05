@@ -86,6 +86,8 @@ let eadmin = class Eadmin{
                 });
             });
         }
+        // 遮罩
+        $('body').append('<div class="mask dn"></div>');
         // 加载进度条
         $('body').append(`<div id="loading-progress"></div>`);
     }
@@ -128,8 +130,6 @@ let eadmin = class Eadmin{
      * 打开遮罩层
      */
     mask(){
-        if ($('.mask').length == 0)
-            $('body').append('<div class="mask"></div>');
         let mask = $('.mask');
         mask.empty();
         if (mask.is(':hidden'))
