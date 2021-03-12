@@ -98,9 +98,7 @@ class Table{
 					// 传递给后端代表页数的字段名，用来后端取值
 					page_field : 'page',
 					// 传递给后端代表条数的字段名，用来后端取值
-					size_field : 'size',
-					// 翻页后是否显示提示信息
-					show_message : true
+					size_field : 'size'
 				},
 				// 数据源
 				data : ''
@@ -149,10 +147,7 @@ class Table{
 		}
 		// 数据源
 		if (this.param.config.data == '')
-		{
-			console.log('没有指定数据源地址，无法创建表格');
-			return;
-		}
+			console.log('没有指定数据源地址，无法创建表格实体');
 		// 创建
 		this._create();
 		// 事件
@@ -969,7 +964,7 @@ class Table{
 		this.pageBox.find('.prev-page').after(html);
 		if (this.init && 
 			page && 
-			this.param.config.page.show_message)
+			module.conf.page_show_message)
 		{
 			Eadmin.message.success({
 				content  : '当前第 ' + this.page + ' 页，共 ' + this.pageCount + ' 页'
@@ -1007,234 +1002,246 @@ class Table{
 				box[0].scrollTop = 0;
 			}
 		}
+		let run = (data) => {
+			let v = {
+				data : data,
+				html : '',
+				fl   : '',
+				fr   : ''
+			};
+			let func = {
+				// 标签
+				tag : (c, r) => {
+					return c.tag === true ? ` data-tag="${r[c.field]}"` : '';
+				},
+				// 开关
+				switch : (c, r) => {
+					let api = '';
+					if ( ! _.isFunction(c.api))
+						console.log('没有指定保存开关状态的API地址');
+					else
+						api = c.api(r);
+					return `<label class="no-padding" data-api="${api}" data-field="${c.field}">
+								<input type="radio" data-model="switch" value="${r[c.field]}">
+							</label>`;
+				},
+				// 按钮
+				button : (c, r, row_key) => {
+					let btn  = c.button(r);
+					that.btns.push(btn);
+					let html = '';
+					_.each(btn, (b, btn_key) => {
+						let [icon, id, url, _class] = [
+							b.icon != undefined ? `<i class="${b.icon}"></i>` : '',
+							`table-column-btn-${row_key}-${btn_key}`,
+							b.open != undefined ? b.open.url : '',
+							'', ''
+						];
+						let disabled = b.disabled === true ? ' disabled' : '';
+						html += `<button 
+									id="${id}" 
+									${disabled}
+									data-row="${row_key}" 
+									data-key="${btn_key}" 
+									data-window-url="${url}"
+									class="small column-btn${_class}" 
+									style="background:${that.color[btn_key]}; border-color:${that.color[btn_key]};"
+									>
+									${icon} ${b.name}
+								</button>`;
+					});
+					return html;
+				},
+				// 图片
+				img : (c, r) => {
+					let html = '';
+					html += `<img src="${_.isFunction(c.format) ? c.format(r) : r[c.field]}"`;
+					if (c.head === true) 
+						html += ' class="table-img-head"';
+					html += '>';
+					return html;
+				},
+				// 格式化
+				format : (c, r) => {
+					return _.isFunction(c.format) ? c.format(r) : r[c.field];
+				},
+				// 链接
+				href : (c, r) => {
+					if ( ! _.isFunction(c.link))
+						return '';
+					if (_.isBoolean(c) && c)
+						return '</a>';
+					let link = c.link(r);
+					let html = `<a href="${link.href}"`;
+					if (link.native === true)
+						html += ` data-native`;
+					if (link.target != undefined)
+						html += ` target="${link.target}"`;
+					if (link.windowUrl != undefined)
+						html += ` data-window-url="${link.windowUrl}"`;
+					if (link.class != undefined)
+						html += ` class="${link.class}"`;
+					html += '>';
+					return html;
+				}
+			};
+			if (v.data.count == undefined && 
+				this.param.config.page !== false)
+			{
+				console.log('返回的数据源中没有 count 字段，无法使用分页，请在配置中设置 page 为 false');
+				return;
+			}
+			if (v.data.list == undefined)
+			{
+				console.log('数据源中没有包含list字段，创建表格失败');
+				return;
+			}
+			this.domCache.show();
+			if (this.searchBox != null)
+				this.searchBox.show();
+			if (this.toolsBox != null)
+				this.toolsBox.show();
+			if (this.param.config.page !== false)
+				this.pageBox.show();
+			if (v.data.list.length > 0)
+			{
+				// 构建表格
+				_.each(v.data.list, (row, row_key) => {
+					v.fl   += `<tr>`;
+					v.fr   += `<tr>`;
+					v.html += `<tr>`;
+					// 全选
+					v.html += this._checkbox(row);
+					v.fl   += this._checkbox(row, true);
+					_.each(this.param.column, (c, k) => {
+						// 是否隐藏该列，用在只需要搜索，列表里没有的列
+						if (c.column === false)
+							return true;
+						let html = `<td`;
+						// 标签
+						html += func.tag(c, row);
+						// 判断该列是否需要显示
+						let checked = true;
+						if (this.columnConfig[c.field] != undefined)
+							checked = this.columnConfig[c.field];
+						html += ` class="td-${k}${checked ? '' : ' dn'}">`;
+						// 开关
+						if (c.switch === true)
+							html += func.switch(c, row);
+						// 按钮
+						else if (_.isFunction(c.button))
+							html += func.button(c, row, row_key);
+						else
+						{
+							// 链接
+							html += func.href(c, row);
+							html += c.img === true ? func.img(c, row) : func.format(c, row);
+							// 链接闭合
+							html += func.href(true);
+						}
+						html += `</td>`;
+						// 首列
+						if (k == 0) v.fl += html;
+						v.html += html;
+						// 尾列
+						if (k + 1 == this.param.column.length) 
+							v.fr += html;
+					});
+					v.fl   += `</tr>`;
+					v.html += `</tr>`;
+					v.fr   += `</tr>`;
+				});
+				this.table.c.html(v.html);
+				// 缺省图处理
+				defaultImg(this.table.c);
+				// 标签
+				if (module.lib.indexOf('tag') != -1) Tag.run(this.table.c);
+				if (this.table.t.width() <= this.width)
+				{
+					this.table.lbox.remove();
+					this.table.rbox.remove();
+					this.haveFixed = false;
+				}
+				else
+				{
+					// 首列
+					if (this.param.config.fixed.first === true)
+					{
+						this.table.head.eq(0).find('.checkall-box').remove();
+						this.table.c.find('.checkall-box').remove();
+						this.table.l.html(v.fl);
+						Eadmin.form(this.table.l);
+					}
+					// 尾列
+					if (this.param.config.fixed.last === true)
+					{
+						this.table.r.html(v.fr);
+						Eadmin.form(this.table.r);
+					}
+				}
+				// 表单
+				Eadmin.form(this.table.c);
+				// 进度条
+				if (module.lib.indexOf('progress') != -1) Progress.run(this.table.c);
+				// 分页
+				this._page(v.data, page);
+				let checkall = this.table.head.find(':checkbox');
+				if (checkall.is(':checked'))
+					Form.checkbox(checkall, false);
+				this.table.lbox.show();
+				this.table.rbox.show();
+				let empty = this.domCache.find('.empty');
+				if (empty.length > 0) 
+					empty.hide();
+			}
+			else
+			{
+				if (this.param.config.page !== false)
+					this.pageBox.hide();
+				let empty = this.domCache.find('.empty');
+				if (empty.length == 0)
+				{
+					this.domCache.append('<div class="empty">该列表暂无更多数据~</div>');
+				}
+				else
+				{
+					empty.show();
+				}
+			}
+			// 隐藏遮罩
+			this.shade.hide();
+			// 回调
+			if (this.param.callback != null)
+				this.param.callback(v.data);
+			this.get['_search'] = 0;
+			if (this.init) return;
+			// 校验最小宽度
+			this.scroll = Eadmin.scroll(this.dom + ' .table-box', 'x');
+			if (this.table.t.width() <= this.width)
+			{
+				this.table.t.width(this.width);
+			}
+			else
+			{
+				this.domCache.children('.table-box').css('padding-bottom', '18px');
+			}
+			this.init = true;
+		}
+		if (this.param.config.data == '')
+		{
+			let data = {
+				count : 0,
+				list  : []
+			};
+			run(data);
+			return;
+		}
 		// 请求数据
 		Eadmin.get({
 			url   : this.param.config.data,
 			param : this.get,
 			then  : (data) => {
-				let v = {
-					data : data,
-					html : '',
-					fl   : '',
-					fr   : ''
-				};
-				let func = {
-					// 标签
-					tag : (c, r) => {
-						return c.tag === true ? ` data-tag="${r[c.field]}"` : '';
-					},
-					// 开关
-					switch : (c, r) => {
-						let api = '';
-						if ( ! _.isFunction(c.api))
-							console.log('没有指定保存开关状态的API地址');
-						else
-							api = c.api(r);
-						return `<label class="no-padding" data-api="${api}" data-field="${c.field}">
-									<input type="radio" data-model="switch" value="${r[c.field]}">
-								</label>`;
-					},
-					// 按钮
-					button : (c, r, row_key) => {
-						let btn  = c.button(r);
-						that.btns.push(btn);
-						let html = '';
-						_.each(btn, (b, btn_key) => {
-							let [icon, id, url, _class] = [
-								b.icon != undefined ? `<i class="${b.icon}"></i>` : '',
-								`table-column-btn-${row_key}-${btn_key}`,
-								b.open != undefined ? b.open.url : '',
-								'', ''
-							];
-							let disabled = b.disabled === true ? ' disabled' : '';
-							html += `<button 
-										id="${id}" 
-										${disabled}
-										data-row="${row_key}" 
-										data-key="${btn_key}" 
-										data-window-url="${url}"
-										class="small column-btn${_class}" 
-										style="background:${that.color[btn_key]}; border-color:${that.color[btn_key]};"
-										>
-										${icon} ${b.name}
-									</button>`;
-						});
-						return html;
-					},
-					// 图片
-					img : (c, r) => {
-						let html = '';
-						html += `<img src="${_.isFunction(c.format) ? c.format(r) : r[c.field]}"`;
-						if (c.head === true) 
-							html += ' class="table-img-head"';
-						html += '>';
-						return html;
-					},
-					// 格式化
-					format : (c, r) => {
-						return _.isFunction(c.format) ? c.format(r) : r[c.field];
-					},
-					// 链接
-					href : (c, r) => {
-						if ( ! _.isFunction(c.link))
-							return '';
-						if (_.isBoolean(c) && c)
-							return '</a>';
-						let link = c.link(r);
-						let html = `<a href="${link.href}"`;
-						if (link.native === true)
-							html += ` data-native`;
-						if (link.target != undefined)
-							html += ` target="${link.target}"`;
-						if (link.windowUrl != undefined)
-							html += ` data-window-url="${link.windowUrl}"`;
-						if (link.class != undefined)
-							html += ` class="${link.class}"`;
-						html += '>';
-						return html;
-					}
-				};
-				if (v.data.count == undefined && 
-					this.param.config.page !== false)
-				{
-					console.log('返回的数据源中没有 count 字段，无法使用分页，请在配置中设置 page 为 false');
-					return;
-				}
-				if (v.data.list == undefined)
-				{
-					console.log('数据源中没有包含list字段，创建表格失败');
-					return;
-				}
-				if (v.data.list.length > 0)
-				{
-					// 构建表格
-					_.each(v.data.list, (row, row_key) => {
-						v.fl   += `<tr>`;
-						v.fr   += `<tr>`;
-						v.html += `<tr>`;
-						// 全选
-						v.html += this._checkbox(row);
-						v.fl   += this._checkbox(row, true);
-						_.each(this.param.column, (c, k) => {
-							// 是否隐藏该列，用在只需要搜索，列表里没有的列
-							if (c.column === false)
-								return true;
-							let html = `<td`;
-							// 标签
-							html += func.tag(c, row);
-							// 判断该列是否需要显示
-							let checked = true;
-							if (this.columnConfig[c.field] != undefined)
-								checked = this.columnConfig[c.field];
-							html += ` class="td-${k}${checked ? '' : ' dn'}">`;
-							// 开关
-							if (c.switch === true)
-								html += func.switch(c, row);
-							// 按钮
-							else if (_.isFunction(c.button))
-								html += func.button(c, row, row_key);
-							else
-							{
-								// 链接
-								html += func.href(c, row);
-								html += c.img === true ? func.img(c, row) : func.format(c, row);
-								// 链接闭合
-								html += func.href(true);
-							}
-							html += `</td>`;
-							// 首列
-							if (k == 0) v.fl += html;
-							v.html += html;
-							// 尾列
-							if (k + 1 == this.param.column.length) 
-								v.fr += html;
-						});
-						v.fl   += `</tr>`;
-						v.html += `</tr>`;
-						v.fr   += `</tr>`;
-					});
-					this.table.c.html(v.html);
-					// 缺省图处理
-					defaultImg(this.table.c);
-					// 标签
-					if (module.lib.indexOf('tag') != -1) Tag.run(this.table.c);
-					if (this.table.t.width() <= this.width)
-					{
-						this.table.lbox.remove();
-						this.table.rbox.remove();
-						this.haveFixed = false;
-					}
-					else
-					{
-						// 首列
-						if (this.param.config.fixed.first === true)
-						{
-							this.table.head.eq(0).find('.checkall-box').remove();
-							this.table.c.find('.checkall-box').remove();
-							this.table.l.html(v.fl);
-							Eadmin.form(this.table.l);
-						}
-						// 尾列
-						if (this.param.config.fixed.last === true)
-						{
-							this.table.r.html(v.fr);
-							Eadmin.form(this.table.r);
-						}
-					}
-					// 表单
-					Eadmin.form(this.table.c);
-					// 进度条
-					if (module.lib.indexOf('progress') != -1) Progress.run(this.table.c);
-					// 分页
-					this._page(v.data, page);
-					let checkall = this.table.head.find(':checkbox');
-					if (checkall.is(':checked'))
-						Form.checkbox(checkall, false);
-					this.domCache.show();
-					if (this.searchBox != null)
-						this.searchBox.show();
-					if (this.toolsBox != null)
-						this.toolsBox.show();
-					if (this.param.config.page !== false)
-						this.pageBox.show();
-					this.table.lbox.show();
-					this.table.rbox.show();
-					let empty = this.domCache.find('.empty');
-					if (empty.length > 0) 
-						empty.hide();
-				}
-				else
-				{
-					if (this.param.config.page !== false)
-						this.pageBox.hide();
-					let empty = this.domCache.find('.empty');
-					if (empty.length == 0)
-					{
-						this.domCache.append('<div class="empty">该列表暂无更多数据~</div>');
-					}
-					else
-					{
-						empty.show();
-					}
-				}
-				// 隐藏遮罩
-				this.shade.hide();
-				// 回调
-				if (this.param.callback != null)
-					this.param.callback(v.data);
-				this.get['_search'] = 0;
-				if (this.init) return;
-				// 校验最小宽度
-				this.scroll = Eadmin.scroll(this.dom + ' .table-box', 'x');
-				if (this.table.t.width() <= this.width)
-				{
-					this.table.t.width(this.width);
-				}
-				else
-				{
-					this.domCache.children('.table-box').css('padding-bottom', '18px');
-				}
-				this.init = true;
+				run(data);
 			}
 		});
 	}
