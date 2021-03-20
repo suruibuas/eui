@@ -112,21 +112,6 @@ let eadmin = class Eadmin{
     }
 
     /**
-     * 加载中
-     */
-    loading(msg = ''){
-        this.mask();
-        $('.mask').html(`<i class="ri-loader-4-line rotate"></i>${msg == '' ? '页面加载中，请稍候...' : msg}`);
-    }
-
-    /**
-     * 关闭加载中
-     */
-    loadingHide(){
-        this.maskHide();
-    }
-
-    /**
      * 打开遮罩层
      */
     mask(){

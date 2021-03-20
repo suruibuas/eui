@@ -72,6 +72,9 @@
   padding: 0;
   box-shadow: none;
 }
+.window .body .block-title {
+  padding: 0 10px;
+}
 .window .body .block-pb {
   padding: 20px;
   background: #F7F7F7;

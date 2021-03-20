@@ -163,7 +163,8 @@ class Dropdown{
 			custom._index   = index;
 			custom._checked = data.checked == undefined ? null : data.checked;
 			data['click'](custom);
-			that.dropdown.hide();
+			if (data.checked == undefined)
+				that.dropdown.hide();
 		});
 	}
 	

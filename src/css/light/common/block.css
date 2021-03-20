@@ -97,7 +97,7 @@
 }
 .block-box .block .person > .info,
 .block-box .block .pic > .info {
-  margin-top: 10px;
+  margin-top: 15px;
   overflow: hidden;
   height: 30px;
   line-height: 40px;
@@ -105,7 +105,6 @@
 .block-box .block .person > .info span:first-child,
 .block-box .block .pic > .info span:first-child {
   float: left;
-  font-size: 12px;
   color: #999;
 }
 .block-box .block .person > .info span:last-child,
@@ -153,13 +152,13 @@
   margin-right: 10px;
 }
 .block-box .block .pic .info {
-  height: 35px;
-  line-height: 35px;
+  height: 32px;
+  line-height: 30px;
 }
 .block-box .block .pic .info img {
   border-radius: 50px;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   vertical-align: middle;
   border: 2px #0084FF solid;
   margin-right: 5px;
@@ -208,7 +207,7 @@
   color: #10161c;
 }
 .block-box .note {
-  margin-top: 10px;
+  margin-top: 5px;
   color: #999;
   display: inline-block;
 }
@@ -223,8 +222,6 @@
 }
 .block-box .form-group .error {
   color: #ff6582;
-  position: absolute;
-  margin-top: 2px;
 }
 .block-box .form-group .font-num {
   bottom: 10px;
@@ -232,7 +229,7 @@
   position: absolute;
 }
 .block-box .form-group:not(:last-child) {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .block-box .input-group {
   display: flex;
@@ -439,12 +436,15 @@
 .quote-info {
   border-left-color: #ffee01;
   background: #F8F7DE;
+  color: #9c920e;
 }
 .quote-error {
   border-left-color: #FF1844;
   background: #fae1dd;
+  color: #FF1844;
 }
 .quote-success {
   border-left-color: #6fee00;
   background: #D6EFC7;
+  color: #3d8300;
 }

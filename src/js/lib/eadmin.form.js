@@ -623,6 +623,7 @@ class Form{
 		}).
 		// 复选按钮
 		on('click', dom[5], function(){
+			console.log(1);
 			let _this  = $(this);
 			let v = {
 				checkbox : _this.parent()

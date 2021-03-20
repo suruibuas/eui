@@ -27,10 +27,17 @@ class Upload{
 			// 默认值
 			default : '',
 			// 绑定的隐藏域，用来后端取值
-			bind : ''
+			bind : '',
+			// mini显示
+			mini : false
 		}
 		// 配置参数
 		this.param = $.extend(_param, param);
+		if (this.param.mini)
+		{
+			this.param.maxfile = 1;
+			this.param.autoupload = true;
+		}
 		if (this.param.api == undefined)
 		{
 			console.log('请指定后端接收上传数据的API地址');
@@ -60,17 +67,29 @@ class Upload{
 	 */
 	_create()
 	{
-		// 说明html
-		let msg = `<div class="dz-message">
-					<i class="ri-upload-cloud-2-line"></i>
-					将文件拖至此处或点击上传
-				</div>
-				<div class="dz-button">
-					<span>待上传：<em></em></span>
-					<button class="highlight small dz-upload-btn">开始上传</button>
-				</div>`;
+		let [msg, _class] = ['', ''];
+		if (this.param.mini)
+		{
+			// 说明html
+			msg = `<div class="dz-message dz-mini">
+						<i class="ri-image-add-line"></i>
+					</div>`;
+			_class = ' dropzone-mini';
+		}
+		else
+		{
+			// 说明html
+			msg = `<div class="dz-message">
+						<i class="ri-upload-cloud-2-line"></i>
+						将文件拖至此处或点击上传
+					</div>
+					<div class="dz-button">
+						<span>待上传：<em></em></span>
+						<button class="highlight small dz-upload-btn">开始上传</button>
+					</div>`;
+		}
 		this.domCache.
-			addClass('dropzone').
+			addClass('dropzone' + _class).
 			html(msg);
 		// 绑定的隐藏域
 		if (this.param.bind != '')
@@ -86,7 +105,7 @@ class Upload{
 			button : this.domCache.children('.dz-button')
 		};
 		// 上传消息模版
-		v.uploadTmp = `<div class="dz-preview dz-image-preview">
+		v.uploadTmp = `<div class="dz-preview dz-image-preview${this.param.mini ? ' dz-preview-mini' : ''}">
 							<div class="dz-image">
 								<img data-dz-thumbnail />
 							</div>

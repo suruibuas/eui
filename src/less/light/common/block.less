@@ -101,14 +101,13 @@
         .person>.info,
         .pic>.info
         {
-            margin-top: 10px;
+            margin-top: 15px;
             overflow: hidden;
             height: 30px;
             line-height: 40px;
             span:first-child
             {
                 float: left;
-                font-size: @font-size-1;
                 color: @color-7;
             }
             span:last-child
@@ -164,13 +163,13 @@
             }
             .info
             {
-                height: 35px;
-                line-height: 35px;
+                height: 32px;
+                line-height: 30px;
                 img
                 {
                     .border-radius(50px);
-                    width: 24px;
-                    height:24px;
+                    width: 32px;
+                    height:32px;
                     vertical-align: middle;
                     border: 2px @color-3 solid;
                     margin-right: 5px;
@@ -239,7 +238,7 @@
     }
     .note
     {
-        margin-top: 10px;
+        margin-top: 5px;
         color: @color-7;
         display: inline-block;
     }
@@ -257,8 +256,6 @@
         .error
         {
             color: #ff6582;
-            position: absolute;
-            margin-top: 2px;
         }
         .font-num
         {
@@ -269,7 +266,7 @@
     }
     .form-group:not(:last-child)
     {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
     .input-group
     {
@@ -492,12 +489,15 @@
 .quote-info{
     border-left-color: @mcolor-3;
     background: #F8F7DE;
+    color: #9c920e;
 }
 .quote-error{
     border-left-color: @mcolor-1;
     background: #fae1dd;
+    color: @mcolor-1;
 }
 .quote-success{
     border-left-color: @mcolor-2;
     background: #D6EFC7;
+    color: #3d8300;
 }

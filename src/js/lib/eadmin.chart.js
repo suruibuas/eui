@@ -36,7 +36,9 @@ class EChart{
 				show : true,
 				text : '默认图表'
 			},
-			legend : true
+			legend : true,
+			// 自动响应高度宽度
+			responsive : true
 		}
 		// 配置参数
 		this.param = $.extend(true, _param, param);
@@ -115,7 +117,8 @@ class EChart{
 					fontColor : this.skin.fontColor,
 					padding   : 0
 				},
-				responsive : true,
+				responsive : this.param.responsive,
+				maintainAspectRatio : this.param.responsive,
 				legend     : {
 					display : this.param.legend,
 					labels  : {
@@ -196,7 +199,8 @@ class EChart{
 					fontColor : this.skin.fontColor,
 					padding   : 0
 				},
-				responsive : true,
+				responsive : this.param.responsive,
+				maintainAspectRatio : this.param.responsive,
 				legend : {
 					display : this.param.legend,
 					labels  : {
@@ -222,7 +226,8 @@ class EChart{
 							fontColor: this.skin.fontColor
 						}
 					}]
-				}
+				},
+				maintenanceAspectRatio : false
 			}
 		};
 		if (this.param.labels == undefined || 
@@ -284,13 +289,15 @@ class EChart{
 					fontColor : this.skin.fontColor,
 					padding   : 0
 				},
-				responsive : true,
+				responsive : this.param.responsive,
+				maintainAspectRatio : this.param.responsive,
 				legend : {
 					display : this.param.legend,
 					labels  : {
 						fontColor : this.skin.fontColor
 					}
-				}
+				},
+				maintenanceAspectRatio : false
 			}
 		};
 		if (this.param.labels == undefined || 

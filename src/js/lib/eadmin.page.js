@@ -12,6 +12,7 @@ class Page{
 		this.get    = {};
 		// 搜索条件
 		this.query  = '';
+		this.searchBoxCache = null;
 		// 搜索盒子
 		if (param.search != undefined)
 		{
@@ -20,6 +21,7 @@ class Page{
 								param.search.boxid;
 			this.searchBoxCache = $(this.searchBox);
 		}
+		this.pageBoxCache = null;
 		// 分页盒子
 		if (param.config.page != undefined)
 		{
@@ -353,7 +355,7 @@ class Page{
 		this.pageBoxCache.find('.prev-page').after(html);
 		if (this.init && 
 			page && 
-			this.param.config.page.show_message)
+			module.conf.page_show_message)
 		{
 			Eadmin.message.success({
 				content  : '当前第 ' + this.page + ' 页，共 ' + this.pageCount + ' 页'
@@ -393,10 +395,14 @@ class Page{
 			this.pageBoxCache.html(html);
 			Eadmin.form(this.pageBoxCache);
 		}
-		Eadmin.loading('数据加载中，请稍候...');
+		let shade = `<div class="table-shade" style="display:flex;">
+						<i class="ri-loader-4-line rotate"></i>数据加载中，请稍候...
+					</div>`;
+		this.tmpBox.html(shade);
+		this.searchBoxCache.hide();
+		this.pageBoxCache.hide();
 		if (page)
 		{
-			this.tmpBox.empty();
 			if (this.window != null)
 			{
 				if ( ! _.startsWith(this.window, '#tab'))
@@ -431,6 +437,8 @@ class Page{
 					if (_.isFunction(this.param.callback))
 						this.param.callback(data);
 				});
+				this.searchBoxCache.show();
+				this.pageBoxCache.show();
 				// 分页
 				if (data.count > 0)
 				{
@@ -441,7 +449,6 @@ class Page{
 				{
 					this.searchBoxCache.append(`<div class="empty">该列表暂无更多数据~</div>`);
 				}
-				Eadmin.loadingHide();
 				this.init = true;
 				this.get['_search'] = 0;
 			}

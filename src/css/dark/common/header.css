@@ -21,6 +21,7 @@ header {
   width: 100%;
   position: relative;
   padding: 0 60px;
+  height: 85px;
 }
 header .main-nav {
   height: 50px;
@@ -79,7 +80,6 @@ header .main-nav .nav-slider {
   display: none;
 }
 header .sub-nav {
-  margin-top: 5px;
   height: 30px;
   line-height: 30px;
   display: flex;

@@ -57,6 +57,9 @@
   position: relative;
   padding-top: 10px;
 }
+.tab-panel .block-title {
+  padding: 0 10px;
+}
 .tab-panel .block {
   padding: 0;
   box-shadow: none;
