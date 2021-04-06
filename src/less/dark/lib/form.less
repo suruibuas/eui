@@ -153,6 +153,27 @@ select{
         color: @color-3;
     }
 }
+.radio-tag,
+.radio-checked-tag,
+.radio-disabled-tag{
+    .border-radius();
+    padding: 10px 15px;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.radio-tag{
+    border:2px dashed @input-color-1;
+}
+.radio-checked-tag{
+    border:2px solid @color-3;
+    background: @input-color-4;
+}
+.radio-disabled-tag{
+    border:2px dashed @input-color-1;
+    color: @color-6;
+    cursor: not-allowed;
+}
 .select{
     .border-radius();
     padding: 10px 30px 8px 10px;

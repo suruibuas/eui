@@ -414,6 +414,7 @@
   border-radius: 5px;
   background: #232B4C;
   border-left: 5px #30375B solid;
+  margin-top: 10px;
 }
 .quote blockquote {
   padding: 5px 0;
@@ -447,4 +448,63 @@
   border-left-color: #6fee00;
   background: #D6EFC7;
   color: #3d8300;
+}
+#login {
+  background-image: url(../img/login-bg.png);
+  background-repeat: no-repeat;
+}
+#login > .block-box {
+  position: absolute;
+  margin: -180px 0 0 -160px;
+  display: block;
+  width: 320px;
+  left: 50%;
+  top: 50%;
+}
+#login > .block-box .block {
+  min-height: 360px;
+  padding: 30px;
+}
+#login > .block-box .block .form-group {
+  min-height: 44px;
+}
+#login > .block-box input {
+  padding: 12px 10px;
+}
+#login > .block-box input::-webkit-input-placeholder {
+  font-size: 14px;
+}
+#login > .block-box form button {
+  border-radius: 4px;
+}
+#login #star {
+  position: absolute;
+  height: 200px;
+  bottom: 0;
+  width: 100%;
+  z-index: -1;
+}
+#login .main-title,
+#login .sub-title {
+  text-align: center;
+}
+#login .main-title {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+#login .sub-title {
+  font-size: 14px;
+  margin-bottom: 15px;
+  color: #B1b1b1;
+}
+#login form button {
+  width: 100%;
+}
+#login #verify {
+  width: 100px;
+  margin-left: 10px;
+  height: 40px;
+  vertical-align: middle;
+  border-radius: 4px;
+  cursor: pointer;
 }

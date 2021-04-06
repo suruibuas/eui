@@ -160,6 +160,27 @@ select {
   transition: color 0.2s linear;
   color: #0084FF;
 }
+.radio-tag,
+.radio-checked-tag,
+.radio-disabled-tag {
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.radio-tag {
+  border: 2px dashed #30375B;
+}
+.radio-checked-tag {
+  border: 2px solid #0084FF;
+  background: #2a3560;
+}
+.radio-disabled-tag {
+  border: 2px dashed #30375B;
+  color: #7886A3;
+  cursor: not-allowed;
+}
 .select {
   border-radius: 5px;
   padding: 10px 30px 8px 10px;

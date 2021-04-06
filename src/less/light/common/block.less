@@ -466,6 +466,7 @@
     .border-radius();
     background: @input-color-3;
     border-left: 5px @input-color-1 solid;
+    margin-top: 10px;
     blockquote{
         padding: 5px 0;
         margin-left: 30px;
@@ -500,4 +501,56 @@
     border-left-color: @mcolor-2;
     background: #D6EFC7;
     color: #3d8300;
+}
+// 登录
+#login{
+    background-image:url(../img/login-bg.png);
+    background-repeat: no-repeat;
+    >.block-box{
+        position: absolute;
+        margin:-180px 0 0 -160px;
+        display:block;
+        width:320px;
+        left:50%;
+        top:50%;
+        .block{
+            min-height:360px;
+            padding:30px;
+            .form-group{
+                min-height:44px;
+            }
+        }
+        input{padding:12px 10px}input::-webkit-input-placeholder{font-size:14px}form button{border-radius:4px};
+    }
+    #star{
+        position: absolute;
+        height:200px;
+        bottom:0;
+        width:100%;
+        z-index:-1;
+    }
+    .main-title,
+    .sub-title{
+        text-align:center;
+    }
+    .main-title{
+        font-size:28px;
+        margin-bottom:30px;
+    }
+    .sub-title{
+        font-size:14px;
+        margin-bottom:15px;
+        color:#B1b1b1;
+    }
+    form button{
+        width:100%;
+    }
+    #verify{
+        width: 100px; 
+        margin-left: 10px; 
+        height: 40px; 
+        vertical-align: middle; 
+        border-radius: 4px;
+        cursor: pointer;
+    }
 }

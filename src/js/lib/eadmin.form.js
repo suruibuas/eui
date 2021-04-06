@@ -262,9 +262,14 @@ class Form{
 			radio.each(function(){
 				let _this = $(this);
 				let v = {
-					class : 'radio'
+					class : 'radio',
+					model : _this.data('model'),
+					icon  : [
+						'ri-radio-button-line',
+						'ri-checkbox-blank-circle-line'
+					]
 				}
-				if (_this.data('model') == 'switch')
+				if (v.model == 'switch')
 				{
 					_this.prop('checked', true);
 					v.checked = '';
@@ -280,10 +285,15 @@ class Form{
 				{
 					v.class += _this.is(':disabled') ? '-disabled' : '';
 					v.class += _this.is(':checked') ? '-checked' : '';
+					if (v.model == 'tag')
+					{
+						v.class += '-tag';
+					}
+					else
+					{
+						_this.before(`<i class="${_this.is(':checked') ? v.icon[0] : v.icon[1]}"></i>`);
+					}
 					_this.parent().addClass(v.class);
-					v.icon = _this.is(':checked') ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line',
-					v.html = `<i class="${v.icon}"></i>`;
-					_this.before(v.html);
 				}
 				Mount.observer.observe(_this[0], {
 					attributeFilter : ['disabled']
@@ -604,22 +614,34 @@ class Form{
 		// 单选按钮
 		on('click', dom[4], function(){
 			let [_this, v] = [$(this), {}];
-			if(_this.data('model') === 'switch')
-				return;
 			v.radio = _this.parent();
-			if (v.radio.hasClass('radio-checked'))
+			v.icon  = [
+				'ri-radio-button-line',
+				'ri-checkbox-blank-circle-line'
+			];
+			if(_this.data('model') === 'switch' || 
+				v.radio.hasClass('radio-checked') || 
+				v.radio.hasClass('radio-checked-tag'))
 				return;
+			if (_this.data('model') == 'tag')
+			{
+				v.radio.
+					attr('class', 'radio-checked-tag').
+					siblings('.radio-checked-tag').
+					attr('class', 'radio-tag');
+				return;
+			}
 			v.radio.
 				removeClass('radio').
 				addClass('radio-checked').
 				children('i').
-				attr('class', 'ri-radio-button-line');
+				attr('class', v.icon[0]);
 			v.radio.
 				siblings('.radio-checked').
 				addClass('radio').
 				removeClass('radio-checked').
 				children('i').
-				attr('class', 'ri-checkbox-blank-circle-line');
+				attr('class', v.icon[1]);
 		}).
 		// 复选按钮
 		on('click', dom[5], function(){
