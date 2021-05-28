@@ -75,9 +75,16 @@ class Datepikcer{
 	 * 创建结构
 	 */
 	_create(){
-		let dom = createId();
+		let [dom, zindex] = [
+			createId(), ''
+		];
+		if (Mount.window != null)
+		{
+			zindex = $('#' + Mount.window).css('z-index');
+			zindex = zindex == undefined ? '' : `style="z-index:${zindex};"`;
+		}
 		// 组装HTML结构
-		let html = `<div id="datepicker-${dom}" class="datepicker animated faster${(Mount.window) == null ? '' : ' ' + Mount.window}">`;
+		let html = `<div id="datepicker-${dom}" ${zindex} class="datepicker animated faster${(Mount.window) == null ? '' : ' ' + Mount.window}">`;
 		html += `<div class="quick">
 			<span class="title">快捷选择</span>
 			<span>3天内</span>
@@ -192,28 +199,26 @@ class Datepikcer{
 		if (this.param.default.length > 0)
 		{
 			let format = '';
-			if (_.isNumber(this.param.default[0]) && 
-				(this.param.default[0] + '').length == 10)
+			format = _.replace(this.param.format, 'Y', '%y');
+			format = _.replace(format, 'm', '%M');
+			format = _.replace(format, 'd', '%d');
+			if (this.time)
 			{
-				format = _.replace(this.param.format, 'Y', '%y');
-				format = _.replace(format, 'm', '%M');
-				format = _.replace(format, 'd', '%d');
-				if (this.time)
-				{
-					format = _.replace(format, 'H', '%h');
-					format = _.replace(format, 'i', '%m');
-					format = _.replace(format, 's', '%s');
-				}
+				format = _.replace(format, 'H', '%h');
+				format = _.replace(format, 'i', '%m');
+				format = _.replace(format, 's', '%s');
 			}
+			if (this.param.unixtime)
+				this.inputDom.data('default-date', _.join(this.param.default, ','));
 			for (let i in this.param.default)
 			{
 				if (format == '')
 					continue;
 				this.param.default[i] = Time(this.param.default[i], format);
 			}
-			this.inputDom.
-				val(_.join(this.param.default, ' - ')).
-				data('default-date', _.join(this.param.default, ','));
+			if ( ! this.param.unixtime)
+				this.inputDom.data('default-date', _.join(this.param.default, ','));
+			this.inputDom.val(_.join(this.param.default, ' - '));
 		}
 		// 局部变量统一定义
 		let v = {
@@ -607,6 +612,12 @@ class Datepikcer{
 			fadeOut(that.picker);
 			that.focusInput = null;
 			clear = false;
+			let _this = $(this);
+			if (_this.val() != '')
+				return;
+			if (_this.next('input').length == 0)
+				return;
+			_this.next('input').val('');
 		});
 		this.picker.
 		// 收起面板

@@ -62,12 +62,19 @@ class Citypikcer{
 	 * 创建结构
 	 */
 	_create(){
-		let dom  = createId();
+		let [dom, zindex] = [
+			createId(), ''
+		];
+		if (Mount.window != null)
+		{
+			zindex = $('#' + Mount.window).css('z-index');
+			zindex = zindex == undefined ? '' : `z-index:${zindex};`;
+		}
 		// 组装HTML结构
 		let html = `<div id="citypicker-${dom}" class="citypicker animated faster${(Mount.window) == null ? '' : ' ' + Mount.window}"`;
 		if (this.param.type == 1)
 		{
-			html += ' style="width:472px;">';
+			html += ` style="width:472px;${zindex}">`;
 			html += `<span class="title">Tips：输入城市拼音首字母可快速选择，例如：hf</span>
 			<div class="header">
 				<span class="current">热门</span>
@@ -86,7 +93,7 @@ class Citypikcer{
 		}
 		else
 		{
-			html += `><div class="vert iscroll"></div>`;
+			html += `style="${zindex}"><div class="vert iscroll"></div>`;
 		}
 		html += `</div>`;
 		body.append(html);

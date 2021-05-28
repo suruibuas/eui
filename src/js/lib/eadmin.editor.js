@@ -2,7 +2,7 @@
  * eadmin 编辑器
  */
 
-class Editor{	
+class Editor{
 
 	constructor(dom, param){
         this.storeKey = md5(Eadmin.currentHref + dom);

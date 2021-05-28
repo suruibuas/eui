@@ -72,7 +72,7 @@ class Page{
 			search : () => {
 				if (this.param.search == undefined) 
 					return;
-				let html = `<div class="table-search"><form><div class="block-box">`;
+				let html = `<div class="table-search"><form><div class="block-box table-search-box">`;
 				_.each(this.param.search.field, (v, k) => {
 					html += `<div class="col-3"><div class="form-group">`;
 					switch (v.type)
@@ -444,6 +444,7 @@ class Page{
 				{
 					func();
 					this._page(data, page);
+					this.searchBoxCache.children('.empty').remove();
 				}
 				else
 				{

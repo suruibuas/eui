@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EAdmin - 开箱即用的后台中台</title>
+    <link href="./css/eadmin.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href=./img/favicon.ico>
+</head>
+
+<body id="login">
+    <!-- 大盒子 -->
+    <div class="block-box">
+        <div class="block">
+            <form action="" method="POST" data-callback="loginCallback">
+                <div class="main-title">
+                    EAdmin
+                </div>
+                <div class="sub-title">
+                    致力于打造开箱即用的后台UI组件框架
+                </div>
+                <!-- 表单组盒子 -->
+                <div class="form-group">
+                    <input 
+                        name="uname" 
+                        type="text" 
+                        placeholder="账号" 
+                        data-validate="require" 
+                        data-validate-msg="请输入账号"
+                    >
+                </div>
+                <!-- 表单组盒子 -->
+                <div class="form-group">
+                    <input 
+                        name="pword" 
+                        type="password" 
+                        placeholder="密码" 
+                        data-validate="require" 
+                        data-validate-msg="请输入密码"
+                    >
+                </div>
+                <!-- 表单组盒子 -->
+                <div class="form-group">
+                    <input 
+                        name="verify" 
+                        type="text" 
+                        placeholder="验证码" 
+                        data-validate="require" 
+                        data-validate-msg="请输入验证码"
+                        style="width: 145px;"
+                    >
+                    <img id="verify" src="./img/yzcode.png" alt="图形验证码">
+                </div>
+                <button 
+                    class="highlight" 
+                    data-loading="登录中..." 
+                    data-submit>登 录</button>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="./js/core/al.load.min.js" init="./js/core/al.init.min.js"></script>
+<script>
+    var module = {
+        // 以下配置已是最精简配置，不要删除其中的项目
+        conf : {
+            // 启动页
+            'homepage'          : false,
+            // 页面内文本可选
+            'allow_select_text' : true,
+            // 允许右键
+            'allow_right_click' : true,
+            // 全局消息默认距离顶部的距离，单位px
+            'message_top'       : 80,
+            // 全局消息默认显示时长，单位秒
+            'message_duration'  : 2,
+            // 发送HTTP请求时的通用参数
+            'http' : {
+                // 通用接口地址
+                baseURL : '',
+                // 请求超时
+                timeout : 4000,
+                // 自定义请求头
+                headers : {
+                    'Content-Type' : 'application/x-www-form-urlencoded'
+                },
+                // API接口返回的code码的字段名
+                code_field   : 'code',
+                // API接口返回代表成功的code码的值
+                code_success : 100,
+                // API接口返回的处理结果内容的字段名
+                msg_field    : 'msg',
+                // API接口返回的数据体的字段名
+                data_field   : 'data'
+            }
+        },
+        // 加载依赖框架
+        framework: {
+            'jquery' : '3.4.0',
+            'eadmin' : '1.0.1',
+            'lodash' : '4.17.11',
+            'axios'  : '0.19.0'
+        },
+        // 默认加载的类库，如果用不到可以在此删除
+        lib : [
+            // 表单
+            'form',
+            // 表单验证
+            'validate',
+            // 按钮
+            'button',
+            // 全局消息
+            'message'
+        ],
+        // 插件
+        plugin : [
+        ],
+        // 全部加载完成回调
+        ready : function(){
+            let verify = $('#verify');
+            let captchaRefresh = () => {
+                verify.attr('src', '/captcha?rand=' + Math.random());
+            }
+            verify.click(function(){
+                captchaRefresh();
+            });
+        }
+    }
+</script>
+</html>

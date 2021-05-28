@@ -42,11 +42,8 @@ let eadmin = class Eadmin{
         // 默认响应链接跳转
         this.jumpHref();
         // 如果有通知消息则设置默认顶部距离
-        if (module.lib.indexOf('notice') != -1)
-        {
-            $('body').append('<div id="notice"></div>');
-            $('#notice').css('top', module.conf.notice_top);
-        }
+        $('body').append('<div id="notice"></div>');
+        $('#notice').css('top', module.conf.notice_top);
         // 预加载错误图片
         if (module.conf.error_default_img != undefined && 
             module.conf.error_default_img != '')
@@ -325,6 +322,19 @@ let eadmin = class Eadmin{
             Mount.dropzone = [];
         }
         Mount.window = null;
+        // 清理定时器
+        if (Mount.timeout.length > 0)
+        {
+            _.each(Mount.timeout, (val) => {
+                clearTimeout(val);
+            });
+        }
+        if (Mount.interval.length > 0)
+        {
+            _.each(Mount.interval, (val) => {
+                clearInterval(val);
+            });
+        }
         // 加载
         setTimeout(() => {
             Method = {};
@@ -482,7 +492,7 @@ let eadmin = class Eadmin{
         // 按钮渲染
         Button.run(box);
         // 标签
-        if (module.lib.indexOf('tag') != -1) Tag.run(box);
+        Tag.run(box);
         // 监听滚动
         this.onscroll();
         // 滚动条处理
@@ -497,7 +507,7 @@ let eadmin = class Eadmin{
         }
         this.boxScroll = this.scroll(box[0]);
         // 进度条
-        if (module.lib.indexOf('progress') != -1) Progress.run(box);
+        Progress.run(box);
     }
 
     /**
@@ -530,11 +540,6 @@ let eadmin = class Eadmin{
      * 日期选择
      */
     datepicker(dom, param){
-        if (module.lib.indexOf('datepicker') == -1)
-        {
-            console.log('请先在lib中加载datepicker组件');
-            return;
-        }
         new Datepikcer(dom, param);
         return this;
     }
@@ -543,11 +548,6 @@ let eadmin = class Eadmin{
      * 城市选择
      */
     citypicker(dom, param){
-        if (module.lib.indexOf('citypicker') == -1)
-        {
-            console.log('请先在lib中加载citypicker组件');
-            return;
-        }
         new Citypikcer(dom, param);
         return this;
     }
@@ -556,11 +556,6 @@ let eadmin = class Eadmin{
      * 弹窗
      */
     window(dom, param){
-        if (module.lib.indexOf('window') == -1)
-        {
-            console.log('请先在lib中加载window组件');
-            return;
-        }
         new Window(dom, param);
         return this;
     }
@@ -569,11 +564,6 @@ let eadmin = class Eadmin{
      * 滑块
      */
     slider(dom, param){
-        if (module.lib.indexOf('slider') == -1)
-        {
-            console.log('请先在lib中加载slider组件');
-            return;
-        }
         new Slider(dom, param);
         return this;
     }
@@ -582,11 +572,6 @@ let eadmin = class Eadmin{
      * 穿梭框
      */
     transfer(dom, param){
-        if (module.lib.indexOf('transfer') == -1)
-        {
-            console.log('请先在lib中加载transfer组件');
-            return;
-        }
         new Transfer(dom, param);
         return this;
     }
@@ -595,11 +580,6 @@ let eadmin = class Eadmin{
      * 评分
      */
     rate(dom, param){
-        if (module.lib.indexOf('rate') == -1)
-        {
-            console.log('请先在lib中加载rate组件');
-            return;
-        }
         new Rate(dom, param);
         return this;
     }
@@ -608,11 +588,6 @@ let eadmin = class Eadmin{
      * 颜色选择
      */
     colorpicker(dom, param){
-        if (module.lib.indexOf('colorpicker') == -1)
-        {
-            console.log('请先在lib中加载colorpicker组件');
-            return;
-        }
         new Colorpicker(dom, param);
         return this;
     }
@@ -621,11 +596,6 @@ let eadmin = class Eadmin{
      * 表格
      */
     table(dom, param){
-        if (module.lib.indexOf('table') == -1)
-        {
-            console.log('请先在lib中加载table组件');
-            return;
-        }
         return new Table(dom, param);
     }
 
@@ -633,11 +603,6 @@ let eadmin = class Eadmin{
      * 自定义分页
      */
     page(param){
-        if (module.lib.indexOf('page') == -1)
-        {
-            console.log('请先在lib中加载page组件');
-            return;
-        }
         new Page(param);
         return this;
     }
@@ -646,11 +611,6 @@ let eadmin = class Eadmin{
      * 上传
      */
     upload(dom, param){
-        if (module.lib.indexOf('upload') == -1)
-        {
-            console.log('请先在lib中加载upload组件');
-            return;
-        }
         new Upload(dom, param);
         return this;
     }
@@ -659,11 +619,6 @@ let eadmin = class Eadmin{
      * 图表
      */
     chart(dom, param){
-        if (module.lib.indexOf('chart') == -1)
-        {
-            console.log('请先在lib中加载chart组件');
-            return;
-        }
         new EChart(dom, param);
         return this;
     }
@@ -672,11 +627,6 @@ let eadmin = class Eadmin{
      * 树形
      */
     tree(dom, param){
-        if (module.lib.indexOf('tree') == -1)
-        {
-            console.log('请先在lib中加载tree组件');
-            return;
-        }
         new Tree(dom, param);
         return this;
     }
@@ -685,11 +635,6 @@ let eadmin = class Eadmin{
      * 选项卡
      */
     tab(dom, param){
-        if (module.lib.indexOf('tab') == -1)
-        {
-            console.log('请先在lib中加载tab组件');
-            return;
-        }
         new Tab(dom, param);
         return this;
     }
@@ -698,11 +643,6 @@ let eadmin = class Eadmin{
      * 编辑器
      */
     editor(dom, param){
-        if (module.lib.indexOf('editor') == -1)
-        {
-            console.log('请先在lib中加载editor组件');
-            return;
-        }
         new Editor(dom, param);
         return this;
     }
@@ -713,11 +653,6 @@ let eadmin = class Eadmin{
      * @param {*} param 
      */
     dropdown(dom, param){
-        if (module.lib.indexOf('dropdown') == -1)
-        {
-            console.log('请先在lib中加载dropdown组件');
-            return;
-        }
         new Dropdown(dom, param);
         return this;
     }
@@ -751,7 +686,6 @@ let eadmin = class Eadmin{
      */
     request(name = ''){
         // 获取参数原始值
-        let dom = $('#' + Mount.window + '_query');
         if (dom.length == 0)
         {
             return {};
@@ -849,7 +783,39 @@ let eadmin = class Eadmin{
                     param.then(data);
                 };
             }
-            Popup.success(conf);
+            // 自定义提醒模式
+            if (data.remind == undefined)
+            {
+                Popup.success(conf);
+                return;
+            }
+            if (data.remind == 'no')
+            {
+                if (conf.callback != undefined) 
+                    conf.callback();
+                return;
+            }
+            switch (data.remind)
+            {
+                case 'notice':
+                    Notice.success({
+                        title : '消息提醒',
+                        desc  : msg
+                    });
+                    if (conf.callback != undefined) 
+                        conf.callback();
+                break;
+                case 'message':
+                    Message.success({
+                        content : msg
+                    });
+                    if (conf.callback != undefined) 
+                        conf.callback();
+                break;
+                case 'popup':
+                    Popup.success(conf);
+                break;
+            }
         }).
         catch((e) => {console.log(e);});
     }
@@ -906,7 +872,39 @@ let eadmin = class Eadmin{
                     param.then(data);
                 };
             }
-            Popup.success(conf);
+            // 自定义提醒模式
+            if (data.remind == undefined)
+            {
+                Popup.success(conf);
+                return;
+            }
+            if (data.remind == 'no')
+            {
+                if (conf.callback != undefined) 
+                    conf.callback();
+                return;
+            }
+            switch (data.remind)
+            {
+                case 'notice':
+                    Notice.success({
+                        title : '消息提醒',
+                        desc  : msg
+                    });
+                    if (conf.callback != undefined) 
+                        conf.callback();
+                break;
+                case 'message':
+                    Message.success({
+                        content : msg
+                    });
+                    if (conf.callback != undefined) 
+                        conf.callback();
+                break;
+                case 'popup':
+                    Popup.success(conf);
+                break;
+            }
         }).
         catch((error) => {
             console.log(error);
@@ -944,36 +942,30 @@ loader.ready(() => {
     // 主界面
     Eadmin.homepage();
     // TIPS
-    if(module.lib.indexOf('tips') != -1)
-        Tips.run();
+    Tips.run();
     // POPUP
-    if(module.lib.indexOf('popup') != -1)
-        Eadmin.popup = Popup;
+    Eadmin.popup = Popup;
     // MESSAGE
-    if(module.lib.indexOf('message') != -1)
-        Eadmin.message = Message;
+    Eadmin.message = Message;
     // NOTICE
-    if(module.lib.indexOf('notice') != -1)
-        Eadmin.notice = Notice;
+    Eadmin.notice = Notice;
     // BUTTON
-    if(module.lib.indexOf('button') != -1)
-    {
-        Eadmin.button = Button;
-        Button.event();
-    }
+    Eadmin.button = Button;
+    Button.event();
     // 表单事件
-    if(module.lib.indexOf('form') != -1)
-        Form.event();
+    Form.event();
     // 表单验证
-    if(module.lib.indexOf('validate') != -1)
-        Validate.run();
+    Validate.run();
     // 图片查看器
-    if (module.lib.indexOf('imageview') != -1)
-        Imageview.run();
+    Imageview.run();
     // 点击遮罩关闭弹窗
     if ( ! module.conf.window_close_by_shade) return;
     $('.mask').on('click', () => {
-        if ($('.window').length == 0) return;
+        if ($('.window').length == 0) 
+            return;
+        // 如果有弹出框则不做动作
+        if ($('.popup:visible').length > 0)
+            return;
         let window = $('.window:last');
         window.children('.window-close').trigger('click');
     });

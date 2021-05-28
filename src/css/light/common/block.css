@@ -152,7 +152,7 @@
   margin-right: 10px;
 }
 .block-box .block .pic .info {
-  height: 32px;
+  height: 34px;
   line-height: 30px;
 }
 .block-box .block .pic .info img {
@@ -204,7 +204,10 @@
 }
 .block-box .title {
   font-size: 14px;
-  color: #10161c;
+  color: #666;
+  margin-bottom: 0 !important;
+  height: 28px;
+  line-height: 28px;
 }
 .block-box .note {
   margin-top: 5px;
@@ -414,7 +417,7 @@
   border-radius: 5px;
   background: #F7F7F7;
   border-left: 5px #DCE8F2 solid;
-  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .quote blockquote {
   padding: 5px 0;
@@ -476,13 +479,6 @@
 }
 #login > .block-box form button {
   border-radius: 4px;
-}
-#login #star {
-  position: absolute;
-  height: 200px;
-  bottom: 0;
-  width: 100%;
-  z-index: -1;
 }
 #login .main-title,
 #login .sub-title {

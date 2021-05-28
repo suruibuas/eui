@@ -164,6 +164,7 @@ class Transfer{
 						<span class="count"><em>0</em> / <em>${v.to.length}</em></span>
 					</div>
 					<div class="iscroll transfer-body${v.search}" style="height:${v.height}px;"><ul>`;
+		v.default = [];
 		for (let i in v.to)
 		{
 			let d = (v.to[i].disabled == true) ? 'disabled' : '';
@@ -172,6 +173,7 @@ class Transfer{
 								<input data-num="1" value="${v.to[i].val}" type="checkbox" ${d}> ${v.to[i].txt}
 							</label>
 						</li>`;
+			v.default.push(v.to[i].val);
 		}
 		v.html += `</ul></div>`;
 		if (this.param.search)
@@ -182,7 +184,7 @@ class Transfer{
 							</label>
 						</div>`;
 		}
-		v.html += `</div><input type="hidden" name="${this.param.bind}">`;
+		v.html += `</div><input type="hidden" name="${this.param.bind}" value="${_.join(v.default, ',')}">`;
 		this.domCache.html(v.html);
 	}
 

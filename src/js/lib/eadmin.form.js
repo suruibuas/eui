@@ -102,6 +102,8 @@ class Form{
 				v.group = _this.prev('.input-group');
 				_this.appendTo(v.group);
 				$(v.html).appendTo(v.group);
+				if (v.val < v.min) _this.val(v.min);
+				if (v.val > v.max) _this.val(v.max);
 			}
 			// 日期选择框处理
 			v.date = _this.data('default-date');
@@ -154,6 +156,7 @@ class Form{
 					if (v.name == undefined)
 						console.log('下拉菜单上没有指定name,后端无法取值');
 					v.default = _this.data('selected') || '';
+					v.default = v.default.toString();
 					_this.removeAttr('name').
 						before(`<input type="hidden" name="${v.name}" value="${v.default}">`);
 					v.default = v.default.split(',');
@@ -645,7 +648,6 @@ class Form{
 		}).
 		// 复选按钮
 		on('click', dom[5], function(){
-			console.log(1);
 			let _this  = $(this);
 			let v = {
 				checkbox : _this.parent()

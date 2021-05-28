@@ -163,7 +163,7 @@
             }
             .info
             {
-                height: 32px;
+                height: 34px;
                 line-height: 30px;
                 img
                 {
@@ -234,7 +234,10 @@
     .title
     {
         font-size: @font-size-2;
-        color: darken(@font-color-1, 20%);
+        color: #666;
+        margin-bottom: 0 !important;
+        height: 28px;
+        line-height: 28px;
     }
     .note
     {
@@ -466,7 +469,7 @@
     .border-radius();
     background: @input-color-3;
     border-left: 5px @input-color-1 solid;
-    margin-top: 10px;
+    margin-bottom: 10px;
     blockquote{
         padding: 5px 0;
         margin-left: 30px;
@@ -520,14 +523,9 @@
                 min-height:44px;
             }
         }
-        input{padding:12px 10px}input::-webkit-input-placeholder{font-size:14px}form button{border-radius:4px};
-    }
-    #star{
-        position: absolute;
-        height:200px;
-        bottom:0;
-        width:100%;
-        z-index:-1;
+        input{padding:12px 10px}
+        input::-webkit-input-placeholder{font-size:14px}
+        form button{border-radius:4px};
     }
     .main-title,
     .sub-title{

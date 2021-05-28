@@ -165,9 +165,20 @@ class Window{
 				// 在表单提交时写道window的data上
 				let change = that.windowDom.data('change');
 				change = change == undefined ? false : true;
+				$('.' + that.window).remove();
+				// 清理窗口内选项卡下页面的元素
+				let tab = that.windowDom.find('.tab-panel');
+				if (tab.length > 0)
+				{
+					tab.each(function(){
+						let _id = $(this).attr('id'); 
+						if (_id == undefined)
+							return true;
+						$('.' + _id).remove();
+					});
+				}
 				that.windowDom.remove();
 				Mount.window = null;
-				$('.' + that.window).remove();
 				Eadmin.maskHide();
 				// 关闭回调
 				if (onclose && _.isFunction(that.param.close))
@@ -214,7 +225,7 @@ class Window{
 						// 延迟按钮
 						Button.run(that.windowDom);
 						// 标签
-						if (module.lib.indexOf('tag') != -1) Tag.run(v.body);
+						Tag.run(v.body);
 						v.scroll = Eadmin.scroll('#' + that.window + ' .body');
 						// 滚动条处理
 						let scroll = body.find('.iscroll');
@@ -227,7 +238,7 @@ class Window{
 							});
 						}
 						// 进度条
-						if (module.lib.indexOf('progress') != -1) Progress.run(v.body);
+						Progress.run(v.body);
 					});
 				}, timeout);
 			},
@@ -353,7 +364,7 @@ class Window{
 									Eadmin.post({
 										url  : v.action,
 										form : v.formData,
-										then : () => {
+										then : (data) => {
 											// 清除编辑器的本地缓存
 											let editor = v.form.find('.editor');
 											if (editor.length > 0)
@@ -365,7 +376,7 @@ class Window{
 												});
 											}
 											if (_.isFunction(that.param.close)) 
-												that.param.close(true);
+												that.param.close(true, data);
 										},
 										error : () => {
 											Eadmin.button.reset(_this);

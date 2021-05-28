@@ -86,6 +86,7 @@ gulp.task('jsmin', function(){
     ]).
     pipe(plumber()).
 	pipe(babel()).
+    pipe(concat('eadmin.lib.js')).
     pipe(uglify()).
     pipe(rename({
     	suffix : '.min'

@@ -210,6 +210,20 @@ class Upload{
 			}
 		}).
 		on('success', (file, response) => {
+			if (response[module.conf.http.code_field] != undefined && 
+				response[module.conf.http.code_field] != module.conf.http.code_success)
+			{
+				_this.upload.removeFile(file);
+				Eadmin.message.error({
+					content : response[module.conf.http.msg_field]
+				});
+				return;
+			}
+			if (response.pic == undefined)
+			{
+				console.log('后端上传接口的返回值中没有pic字段，上传操作失败');
+				return;
+			}
 			let fileCount = parseInt(v.button.find('em').html());
 			v.button.find('em').html(fileCount - 1);
 			_this.pic.push(response.pic);

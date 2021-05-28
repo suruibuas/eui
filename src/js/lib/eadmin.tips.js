@@ -66,8 +66,15 @@ class Tips{
 		}
 		if (v.tips.length == 0)
 		{
-			v.style = param.center ? ' style="text-align:center;"' : '';
-			v.html  = `<div class="tips animated faster"${v.style}>
+			v.style = param.center ? ' text-align:center;' : '';
+			let zindex;
+			if (Mount.window != null)
+			{
+				zindex   = $('#' + Mount.window).css('z-index');
+				zindex   = zindex == undefined ? '' : `z-index:${zindex};`;
+				v.style += zindex;
+			}
+			v.html  = `<div style="${v.style}" class="tips animated faster">
 						<div></div>
 						<div class="tips-arrow"></div>
 					</div>`;

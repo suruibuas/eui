@@ -44,14 +44,20 @@ class Dropdown{
 	 * 创建
 	 */
 	_create(){
-		let [id, html] = [
+		let [id, html, zindex] = [
 			'dropdown-' + createId(),
+			'',
 			''
 		];
-		html = `<div id="${id}" class="dropdown animated faster${this.param.fixed ? ' fixed' : ''}"`;
+		if (Mount.window != null)
+		{
+			zindex = $('#' + Mount.window).css('z-index');
+			zindex = zindex == undefined ? '' : `z-index:${zindex};`;
+		}
+		html = `<div id="${id}" class="dropdown animated faster${this.param.fixed ? ' fixed' : ''}" style="`;
 		if (this.param.width > 0)
-			html += ` style="width:${this.param.width}px;"`;
-		html += '>';
+			html += ` width:${this.param.width}px;${zindex}`;
+		html += '">';
 		if (this.param.title != '')
 			html += `<div class="title">${this.param.title}</div>`;
 		html += `<ul class="iscroll">`;

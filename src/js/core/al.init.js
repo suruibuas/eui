@@ -24,9 +24,11 @@ let Method = {};
 // 挂载点
 let Mount  = {
 	dropzone : [],
-	window : null,
-	page   : false,
-	skin   : 'dark'
+	window   : null,
+	page     : false,
+	skin     : 'dark',
+	timeout  : [],
+	interval : []
 };
 // 全局监听单选、复选、下拉启用禁用，用来响应虚拟UI的显示状态
 Mount.observer = new MutationObserver((m) => {

@@ -25,35 +25,37 @@ class Table{
 		// 每页条数
 		this.size = 10;
 		// 总页数
-		this.pageCount = null;
+		this.pageCount  = null;
 		// 搜索容器
-		this.searchBox = null;
+		this.searchBox  = null;
 		// 按钮容器
-		this.toolsBox  = null;
+		this.toolsBox   = null;
 		// 分页容器
-		this.pageBox   = null;
+		this.pageBox    = null;
 		// 表格
-		this.table     = null;
+		this.table      = null;
 		// 遮罩
-		this.shade     = null;
+		this.shade      = null;
 		// 有没有初始化过表格
-		this.init      = false;
+		this.init       = false;
 		// 列按钮配置数据
-		this.btns      = [];
+		this.btns       = [];
+		// 列弹窗配置数据
+		this.columnOpen = [];
 		// 选中的行数
-		this.checked   = 0;
+		this.checked    = 0;
 		// GET参数
-		this.get 	   = {};
+		this.get 	    = {};
 		// 搜索条件
-		this.query     = '';
+		this.query      = '';
 		// 容器宽度，用来做表格的宽度
-		this.width     = +this.domCache.width();
+		this.width      = +this.domCache.width();
 		// 滚动条类实例化，用来更新横向滚动条
-		this.scroll    = null;
+		this.scroll     = null;
 		// 配置表头按钮ID
-		this.columnId  = 'column-config-' + createId();
+		this.columnId   = 'column-config-' + createId();
 		// 表头列数据
-		this.column    = [];
+		this.column     = [];
 		// 表头配置信息
 		this.columnConfig = store(this.storeKey + '_column');
 		this.columnConfig = this.columnConfig == undefined ? {} : JSON.parse(this.columnConfig);
@@ -469,7 +471,9 @@ class Table{
 			// 开关
 			'[data-model="switch"]',
 			// 列按钮
-			'.column-btn'
+			'.column-btn',
+			// 列弹窗
+			'.column-window'
 		];
 		// 私有方法
 		let func = {
@@ -775,6 +779,14 @@ class Table{
 				}
 				run();
 			}
+		}).
+		// 列弹窗
+		on('click', dom[14], function(){
+			let [_this, v] = [$(this), {}];
+			v.row  = _this.data('row');
+			v.key  = _this.data('key');
+			v.open = that.columnOpen[v.row][v.key];
+			Eadmin.window(false, v.open);
 		});
 		// 表格列配置
 		if (this.param.config.column_config)
@@ -979,6 +991,7 @@ class Table{
 		let that = this;
 		this.checked = 0;
 		this.btns = [];
+		this.columnOpen = [];
 		this.shade.css('display', 'flex');
 		this.table.lbox.hide();
 		this.table.rbox.hide();
@@ -1031,11 +1044,9 @@ class Table{
 					that.btns.push(btn);
 					let html = '';
 					_.each(btn, (b, btn_key) => {
-						let [icon, id, url, _class] = [
+						let [icon, id] = [
 							b.icon != undefined ? `<i class="${b.icon}"></i>` : '',
-							`table-column-btn-${row_key}-${btn_key}`,
-							b.open != undefined ? b.open.url : '',
-							'', ''
+							`table-column-btn-${row_key}-${btn_key}`
 						];
 						let disabled = b.disabled === true ? ' disabled' : '';
 						html += `<button 
@@ -1043,8 +1054,7 @@ class Table{
 									${disabled}
 									data-row="${row_key}" 
 									data-key="${btn_key}" 
-									data-window-url="${url}"
-									class="small column-btn${_class}" 
+									class="small column-btn" 
 									style="background:${that.color[btn_key]}; border-color:${that.color[btn_key]};"
 									>
 									${icon} ${b.name}
@@ -1058,29 +1068,31 @@ class Table{
 					html += `<img src="${_.isFunction(c.format) ? c.format(r) : r[c.field]}"`;
 					if (c.head === true) 
 						html += ' class="table-img-head"';
+					if (c.style != undefined)
+						html += ' ' + c.style;
 					html += '>';
 					return html;
 				},
 				// 格式化
 				format : (c, r) => {
+					// 处理搜索结果高亮
+					if (c.highlight === true && 
+						that.get[c.field] != undefined)
+					{
+						r[c.field] = _.replace(r[c.field], that.get[c.field], `<span style="color:red;">${that.get[c.field]}</span>`);
+					}
 					return _.isFunction(c.format) ? c.format(r) : r[c.field];
 				},
 				// 链接
 				href : (c, r) => {
 					if ( ! _.isFunction(c.link))
 						return '';
-					if (_.isBoolean(c) && c)
+					if (_.isBoolean(r) && r)
 						return '</a>';
 					let link = c.link(r);
-					let html = `<a href="${link.href}"`;
-					if (link.native === true)
-						html += ` data-native`;
+					let html = `<a href="${link.href}" data-native`;
 					if (link.target != undefined)
 						html += ` target="${link.target}"`;
-					if (link.windowUrl != undefined)
-						html += ` data-window-url="${link.windowUrl}"`;
-					if (link.class != undefined)
-						html += ` class="${link.class}"`;
 					html += '>';
 					return html;
 				}
@@ -1113,18 +1125,29 @@ class Table{
 					// 全选
 					v.html += this._checkbox(row);
 					v.fl   += this._checkbox(row, true);
+					let ck = 0;
 					_.each(this.param.column, (c, k) => {
 						// 是否隐藏该列，用在只需要搜索，列表里没有的列
 						if (c.column === false)
 							return true;
+						let window = '';
+						if (c.open != undefined)
+						{
+							window = ' column-window';
+							if (that.columnOpen[row_key] == undefined)
+								that.columnOpen[row_key] = [];
+							that.columnOpen[row_key].push(c.open(row));
+						}
 						let html = `<td`;
 						// 标签
 						html += func.tag(c, row);
-						// 判断该列是否需要显示
-						let checked = true;
-						if (this.columnConfig[c.field] != undefined)
-							checked = this.columnConfig[c.field];
-						html += ` class="td-${k}${checked ? '' : ' dn'}">`;
+						html += ` class="td-${k}${window}"`;
+						if (window != '')
+						{
+							html += ` data-row="${row_key}" data-key="${ck}"`;
+							ck++;
+						}
+						html += '>';
 						// 开关
 						if (c.switch === true)
 							html += func.switch(c, row);
@@ -1133,11 +1156,25 @@ class Table{
 							html += func.button(c, row, row_key);
 						else
 						{
-							// 链接
-							html += func.href(c, row);
+							if (window != '')
+							{
+								html += '<a href="javascript:;">';
+							}
+							else
+							{
+								// 链接
+								html += func.href(c, row);
+							}
 							html += c.img === true ? func.img(c, row) : func.format(c, row);
-							// 链接闭合
-							html += func.href(true);
+							if (window != '')
+							{
+								html += '</a>';
+							}
+							else
+							{
+								// 链接闭合
+								html += func.href(c, true);
+							}
 						}
 						html += `</td>`;
 						// 首列
@@ -1155,7 +1192,7 @@ class Table{
 				// 缺省图处理
 				defaultImg(this.table.c);
 				// 标签
-				if (module.lib.indexOf('tag') != -1) Tag.run(this.table.c);
+				Tag.run(this.table.c);
 				if (this.table.t.width() <= this.width)
 				{
 					this.table.lbox.remove();
@@ -1182,7 +1219,7 @@ class Table{
 				// 表单
 				Eadmin.form(this.table.c);
 				// 进度条
-				if (module.lib.indexOf('progress') != -1) Progress.run(this.table.c);
+				Progress.run(this.table.c);
 				// 分页
 				this._page(v.data, page);
 				let checkall = this.table.head.find(':checkbox');
