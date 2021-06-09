@@ -175,8 +175,23 @@ h6 i {
 .mb20 {
   margin-bottom: 20px !important;
 }
+.ml0 {
+  margin-left: 0 !important;
+}
+.ml10 {
+  margin-left: 10px !important;
+}
+.ml20 {
+  margin-left: 20px !important;
+}
 .mr0 {
   margin-right: 0 !important;
+}
+.mr10 {
+  margin-right: 10px !important;
+}
+.mr20 {
+  margin-right: 20px !important;
 }
 .p0 {
   padding: 0 !important;

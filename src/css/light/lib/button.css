@@ -36,6 +36,9 @@ button:hover:not(:disabled) {
   transition: border-color 0.2s linear, background-color 0.2s linear, box-shadow 0.2s linear;
   border-color: #0084FF;
 }
+button:active:not(:disabled) {
+  border-color: #005cb3;
+}
 button i {
   font-size: 18px;
 }
@@ -67,6 +70,10 @@ button:disabled {
 .highlight:hover:not(:disabled) {
   background: #0077e6;
   border-color: #0077e6;
+}
+.highlight:active:not(:disabled) {
+  background: #005cb3;
+  border-color: #005cb3;
 }
 .highlight:disabled {
   color: #BBC5D8;

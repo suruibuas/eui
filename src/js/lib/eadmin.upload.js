@@ -15,21 +15,21 @@ class Upload{
 		// 默认参数
 		let _param   = {
 			// 表单名
-			filename : 'file',
+			filename   : 'file',
 			// 允许的格式
-			doc : ['.jpg', '.gif', '.png', '.jpeg'],
+			doc 	   : ['.jpg', '.gif', '.png', '.jpeg'],
 			// 自动上传
 			autoupload : true,
 			// 最大尺寸
-			maxsize : 5000,
+			maxsize    : 5000,
 			// 最大文件数量
-			maxfile : null,
+			maxfile    : null,
 			// 默认值
-			default : '',
+			default    : '',
 			// 绑定的隐藏域，用来后端取值
-			bind : '',
+			bind 	   : '',
 			// mini显示
-			mini : false
+			mini 	   : false
 		}
 		// 配置参数
 		this.param = $.extend(_param, param);
@@ -126,6 +126,7 @@ class Upload{
 			maxFilesize      	 : this.param.maxsize,
 			acceptedFiles    	 : _.join(this.param.doc, ','),
 			autoProcessQueue 	 : this.param.autoupload,
+			timeout				 : 100000,
 			parallelUploads  	 : 1000,
 			previewTemplate  	 : v.uploadTmp,
 			maxFiles 		 	 : this.param.maxfile,

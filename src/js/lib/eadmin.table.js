@@ -1069,14 +1069,14 @@ class Table{
 					if (c.head === true) 
 						html += ' class="table-img-head"';
 					if (c.style != undefined)
-						html += ' ' + c.style;
+						html += ' style="' + c.style + '"';
 					html += '>';
 					return html;
 				},
 				// 格式化
 				format : (c, r) => {
 					// 处理搜索结果高亮
-					if (c.highlight === true && 
+					if (c.hl === true && 
 						that.get[c.field] != undefined)
 					{
 						r[c.field] = _.replace(r[c.field], that.get[c.field], `<span style="color:red;">${that.get[c.field]}</span>`);

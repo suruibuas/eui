@@ -38,8 +38,6 @@ class Window{
 			btn    : [],
 			// 关闭回调
 			close  : null,
-			// 提交表单回调
-			submit : null,
 			// 弹窗风格，window、popup
 			style  : 'window'
 		}

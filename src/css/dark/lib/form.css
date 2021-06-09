@@ -82,7 +82,7 @@ textarea {
 .icon-input i:not(.add):not(.cut),
 .icon-input-right i:not(.add):not(.cut) {
   position: absolute;
-  top: 1px;
+  top: 0px;
 }
 .icon-input input {
   padding-left: 26px;

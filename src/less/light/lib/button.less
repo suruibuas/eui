@@ -26,6 +26,10 @@ button
         .animate-form();
         border-color: @color-3;
     }
+    &:active:not(:disabled)
+    {
+        border-color: darken(@color-3, 15%);
+    }
     i
     {
         font-size: 18px;
@@ -65,6 +69,11 @@ button:disabled
     {
         background:darken(@color-3, 5%);
         border-color: darken(@color-3, 5%);
+    }
+    &:active:not(:disabled)
+    {
+        background: darken(@color-3, 15%);
+        border-color: darken(@color-3, 15%);
     }
 }
 .highlight:disabled

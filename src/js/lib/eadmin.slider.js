@@ -40,7 +40,9 @@ class Slider{
 				// 是否需要提示
 				tips 	 : '',
 				// 回调
-				change 	 : null
+				change 	 : null,
+				// 绑定隐藏域
+				bind     : null
 			};
 			// 配置参数
 			this.param = $.extend(_param, param);
@@ -108,6 +110,9 @@ class Slider{
 						data-tips-center="1" style="left:${left}px;">
 					</div>
 					<div class="slider-bar" style="width:${left + this.btnWidth}px;"></div>`;
+			// 隐藏域
+			if (this.param.bind != null)
+				html += `<input type="hidden" name="${this.param.bind}" value="${this.param.value}">`;
 			dom.html(html);
 		}
 		// 生成HTML结构
@@ -209,8 +214,11 @@ class Slider{
 				});
 				// 回调
 				v.timer = setTimeout(() => {
-					if (that.param.change != null && _.isFunction(that.param.change))
-						that.param.change(v.val);			
+					if (that.param.change != null && 
+						_.isFunction(that.param.change))
+						that.param.change(v.val);
+					if (that.param.bind != null)
+						_this.next().next().val(v.val);
 				}, 400);
 			}).bind('mouseup', function(){
 				_this.removeClass('tips-disabled');
@@ -226,9 +234,7 @@ class Slider{
 			// 如果没有配置全局禁止选中文本，则处理允许选中文本
 			if(selectEnabled) userselect(1);
 			// 设置这个值是表示当前滑块刚被移动过，防止click的重复触发
-			$(this).
-				parent().
-				data('btn', true);
+			$(this).parent().data('btn', true);
 		}).
 		// 点击选择位置
 		on('click', function(event){

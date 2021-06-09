@@ -6,9 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="renderer" content="webkit">
     <meta name="msapplication-tap-highlight" content="no"> 
-    <title>EAdmin - 开箱即用的后台中台</title>
+    <title>EAdmin - 开箱即用的后台中台UI框架</title>
     <link href="./css/eadmin_light.min.css" rel="stylesheet">
-    <link href="https://highlightjs.org/static/demo/styles/monokai-sublime.css" rel="stylesheet">
     <link rel="shortcut icon" href=./img/favicon.ico>
 </head>
 
@@ -24,7 +23,9 @@
             <div class="col-4 nav"></div>
             <!-- 个人信息容器 -->
             <div class="col-4">
-                <i class="ri-qq-line"></i>
+                <a href="https://jq.qq.com/?_wv=1027&k=mRjroync" data-native target="_blank">
+                    <i class="ri-qq-line"></i>
+                </a>
                 <i class="ri-wechat-2-line"></i>
                 <a href="https://github.com/suruibuas/eadmin" data-native target="_blank">
                     <i class="ri-github-line"></i>
@@ -120,7 +121,9 @@
             // 城市数据
             'city.js',
             // 模版数据过滤器
-            'template-filter.js'
+            'template-filter.js',
+            // 不需要mock数据可删除
+            'mock.js'
         ],
         // 默认加载的类库，如果用不到可以在此删除
         lib : [
@@ -141,7 +144,9 @@
             // 不需要上传可删除
             'dropzone',
             // 不需要富文本编辑器可删除
-            'quill'
+            'quill',
+            // 不需要mock数据可删除
+            'mock'
         ],
         // 全部加载完成回调
         ready : function(){

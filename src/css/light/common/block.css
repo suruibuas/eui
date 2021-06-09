@@ -26,9 +26,11 @@
 .block-title {
   width: 100%;
   height: 20px;
-  line-height: 20px;
-  margin-bottom: 20px;
+  line-height: 18px;
+  margin-bottom: 10px;
   position: relative;
+  font-size: 16px;
+  color: #666;
 }
 .block-title span {
   background: -moz-linear-gradient(top, #66b5ff, #0084FF);
@@ -44,6 +46,7 @@
 .block-title a {
   float: right;
   color: #66b5ff !important;
+  font-size: 14px;
 }
 .block-box {
   display: flex;
@@ -60,7 +63,7 @@
   position: relative;
 }
 .block-box .block .font-list {
-  margin-top: 20px;
+  margin-top: 18px;
   width: 100%;
 }
 .block-box .block .font-list li {
@@ -203,11 +206,10 @@
   margin-top: 0;
 }
 .block-box .title {
-  font-size: 14px;
+  font-size: 16px;
   color: #666;
   margin-bottom: 0 !important;
-  height: 28px;
-  line-height: 28px;
+  height: 20px;
 }
 .block-box .note {
   margin-top: 5px;

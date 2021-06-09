@@ -45,7 +45,19 @@ class Transfer{
 				async    : false,
 				dataType : 'json',
 				success  : (data) => {
-					param.data = data;
+					// 没有执行码
+					if (data[module.conf.http.code_field] == undefined)
+					{
+						console.log('接口返回结果中没有找到定义的code码字段');
+						return;
+					}
+					// 没有数据体
+					if (data[module.conf.http.data_field] == undefined)
+					{
+						console.log('接口返回结果中没有找到定义的数据体字段');
+						return;
+					}
+					param.data = data[module.conf.http.data_field];
 				}
 			});
 		}

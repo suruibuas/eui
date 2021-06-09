@@ -103,7 +103,7 @@ class Form{
 				_this.appendTo(v.group);
 				$(v.html).appendTo(v.group);
 				if (v.val < v.min) _this.val(v.min);
-				if (v.val > v.max) _this.val(v.max);
+				if (v.max > 0 && v.val > v.max) _this.val(v.max);
 			}
 			// 日期选择框处理
 			v.date = _this.data('default-date');

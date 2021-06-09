@@ -69,7 +69,7 @@ class Validate{
 				//邮箱
 				preg['email']   = '[\\w\-\\.]+@[\\w-\\.]+(\\.\\w+)+';
 				//QQ
-				preg['qq']      = '[1-9][\\d]{4,9}';
+				preg['qq']      = '[1-9][\\d]{5,10}';
 				//身份证
 				preg['idcard']  = '(^\\d{15}$)|(^\\d{17}(\\d|X|x)$)';
 				//网址
@@ -77,15 +77,15 @@ class Validate{
 				//日期
 				preg['date']    = '\\d{4}[/-]+\\d{2}[/-]+\\d{2}';
 				//金额
-				preg['money']   = '\\d{1,}\\.\\d{2,4}';
+				preg['money']   = '\\d{1,}\\.\\d{2,4}$';
 				//ip
 				preg['ip']      = '\\d{1,}\\.\\d{1,}\\.\\d{1,}\\.\\d{1,}';
 				//纯数字
-				preg['number']  = '[0-9]+';
+				preg['number']  = '^[\\d]+$';
 				//纯字母
-				preg['letter']  = '[a-zA-Z]+';
+				preg['letter']  = '^[\\w]+$';
 				//数字加字母
-				preg['numberLetter'] = '[0-9a-zA-Z]+';
+				preg['numberLetter'] = '^[0-9a-zA-Z]+$';
 				//邮编
 				preg['zipcode'] = '[1-9][0-9]{5}';
 				if (preg[key] == undefined)

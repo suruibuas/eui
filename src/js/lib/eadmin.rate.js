@@ -22,7 +22,9 @@ class Rate{
 			// 总分数
 			num 	 : 5,
 			// 回调
-			change   : null
+			change   : null,
+			// 隐藏域
+			bind     : null
 		}
 		// 配置参数
 		this.param = $.extend(_param, param);
@@ -54,6 +56,8 @@ class Rate{
 					</div>`;
 		}
 		this.domCache.html(html);
+		if (this.param.bind != null)
+			this.domCache.after(`<input name="${this.param.bind}" type="hidden" value="${this.param.default}">`);
 	}
 
 	/**
@@ -99,6 +103,8 @@ class Rate{
 			_this.parent().data('level', level);
 			if (_.isFunction(that.param.change))
 				that.param.change(level);
+			if (that.param.bind != null)
+				that.domCache.next('input').val(level);
 		}).
 		// 离开
 		on('mouseleave', function(){
