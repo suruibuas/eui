@@ -8,6 +8,7 @@
     <meta name="msapplication-tap-highlight" content="no"> 
     <title>EAdmin - 开箱即用的后台中台UI框架</title>
     <link href="./css/eadmin.min.css" rel="stylesheet">
+    <link href="https://highlightjs.org/static/demo/styles/monokai-sublime.css" rel="stylesheet">
     <link rel="shortcut icon" href=./img/favicon.ico>
 </head>
 
@@ -146,7 +147,11 @@
             // 不需要富文本编辑器可删除
             'quill',
             // 不需要mock数据可删除
-            'mock'
+            'mock',
+            // 代码高亮
+            'highlight',
+            // 代码显示行数
+            'highlightjs-line-numbers'
         ],
         // 全部加载完成回调
         ready : function(){

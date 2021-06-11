@@ -376,20 +376,25 @@ function getRoute(homepage = true)
 }
 
 // 获取URL参数
-function query(url)
+function query(url, qs = false)
 {
-	let arr = url.split('?');
-	if (arr.length == 1)
+	let arr;
+	if ( ! qs)
 	{
-		return '';
+		arr = url.split('?');
+		if (arr.length == 1)
+			return '';
+		arr = arr[1].split('&');
 	}
-	arr = arr[1];
-	arr = arr.split('&');
+	else
+	{
+		arr = url.split('&');
+	}
 	let query = {};
 	for (let i in arr)
 	{
 		let get = arr[i].split('=');
 		query[get[0]] = get[1];
 	}
-	return JSON.stringify(query);
+	return qs ? query : JSON.stringify(query);
 }

@@ -465,7 +465,7 @@ class Form{
 			v.select.trigger('change');
 			// 判断是否有绑定的子菜单
 			v.bind = v.select.data('bind');
-			if (v.bind == undefined) return;
+			if (v.bind == undefined) return false;
 			// 联动菜单
 			v.api = v.select.data('api');
 			if (v.api == undefined || 
@@ -527,7 +527,31 @@ class Form{
 			v.span.html('请选择' + (v.custom || ''));
 			v.real.val(v.real.find('option:first').val());
 			v.option.find('.active').removeClass('active');
-			_this.hide().prev().show();
+			_this.hide();
+			if (v.select.data('open') == 1)
+			{
+				_this.
+					prev().
+					show().
+					removeClass('rotate-180').
+					addClass('rotate-0');
+				v.select.data('open', 0);
+				fadeOut(v.option);
+			}
+			else
+			{
+				_this.prev().show();
+			}
+			// 判断是否有绑定的子菜单
+			v.bind = v.real.data('bind');
+			if (v.bind == undefined) return false;
+			v.child = $('#' + v.bind);
+			v.child.
+				attr('disabled', true).
+				val(v.child.find('option:first').val());
+			v.span   = v.child.next().children('span');
+			v.custom = v.child.data('custom-txt');
+			v.span.html('请选择' + (v.custom || ''));
 			return false;
 		}).
 		// 多选下拉

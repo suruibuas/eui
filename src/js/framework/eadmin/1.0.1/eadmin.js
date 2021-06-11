@@ -69,12 +69,12 @@ let eadmin = class Eadmin{
                     return;
                 }
                 Popup.confirm({
-                    content  : '是否同意开启双击回顶功能，本消息仅提示一次',
-                    callback : () => {
+                    content : '是否同意开启双击回顶功能，本消息仅提示一次',
+                    submit  : () => {
                         store('dblclick', '1');
                         Popup.success({
-                            content  : '双击回顶设置成功',
-                            callback : () => {box.scrollTop(0);}
+                            content : '双击回顶设置成功',
+                            submit  : () => {box.scrollTop(0);}
                         });
                     },
                     cancel : () => {
@@ -83,6 +83,8 @@ let eadmin = class Eadmin{
                 });
             });
         }
+        if (module.plugin == undefined)
+            module.plugin = [];
         // 遮罩
         $('body').append('<div class="mask dn"></div>');
         // 加载进度条

@@ -166,6 +166,9 @@ h6 i {
 .mt20 {
   margin-top: 20px !important;
 }
+.mt30 {
+  margin-top: 30px !important;
+}
 .mb0 {
   margin-bottom: 0 !important;
 }
@@ -174,6 +177,9 @@ h6 i {
 }
 .mb20 {
   margin-bottom: 20px !important;
+}
+.mb30 {
+  margin-bottom: 30px !important;
 }
 .ml0 {
   margin-left: 0 !important;
@@ -184,6 +190,9 @@ h6 i {
 .ml20 {
   margin-left: 20px !important;
 }
+.ml30 {
+  margin-left: 30px !important;
+}
 .mr0 {
   margin-right: 0 !important;
 }
@@ -192,6 +201,9 @@ h6 i {
 }
 .mr20 {
   margin-right: 20px !important;
+}
+.mr30 {
+  margin-right: 30px !important;
 }
 .p0 {
   padding: 0 !important;
@@ -235,6 +247,9 @@ h6 i {
 .font-color-8 {
   color: #593110 !important;
 }
+.font-color-0 {
+  color: #0084FF !important;
+}
 .color-1 {
   background-color: #FF1844 !important;
 }
@@ -258,6 +273,9 @@ h6 i {
 }
 .color-8 {
   background-color: #593110 !important;
+}
+.color-0 {
+  background-color: #0084FF !important;
 }
 .linear-1 {
   background: -moz-linear-gradient(left, #ff7e97, #FF1844) !important;
@@ -299,6 +317,11 @@ h6 i {
   background: -webkit-linear-gradient(left, #af6120, #593110) !important;
   background: -o-linear-gradient(left, #af6120, #593110) !important;
 }
+.linear-0 {
+  background: -moz-linear-gradient(left, #66b5ff, #0084FF) !important;
+  background: -webkit-linear-gradient(left, #66b5ff, #0084FF) !important;
+  background: -o-linear-gradient(left, #66b5ff, #0084FF) !important;
+}
 /**
  * ================= 杂项 ==================
  */
@@ -308,8 +331,17 @@ h6 i {
 .fr {
   float: right;
 }
+.fs12 {
+  font-size: 12px !important;
+}
+.fs14 {
+  font-size: 14px !important;
+}
+.fs16 {
+  font-size: 16px !important;
+}
 .fs18 {
-  font-size: 18px;
+  font-size: 18px !important;
 }
 .va-m {
   vertical-align: middle;

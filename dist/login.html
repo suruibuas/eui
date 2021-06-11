@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>EAdmin - 开箱即用的后台中台</title>
+    <title>EAdmin - 商城项目完整演示案例</title>
     <link href="./css/eadmin.min.css" rel="stylesheet">
     <link rel="shortcut icon" href=./img/favicon.ico>
 </head>
@@ -13,19 +13,20 @@
     <!-- 大盒子 -->
     <div class="block-box">
         <div class="block">
-            <form action="" method="POST" data-callback="loginCallback">
+            <form action="/api/login/" method="POST" data-callback="loginCallback">
                 <div class="main-title">
-                    EAdmin
+                    EAdmin - 商城
                 </div>
                 <div class="sub-title">
-                    致力于打造开箱即用的后台UI组件框架
+                    商城项目完整演示案例 - V1.0.1极速版
                 </div>
                 <!-- 表单组盒子 -->
                 <div class="form-group">
                     <input 
                         name="uname" 
                         type="text" 
-                        placeholder="账号" 
+                        placeholder="请输入账号：eadmin" 
+                        autocomplete="off"
                         data-validate="require" 
                         data-validate-msg="请输入账号"
                     >
@@ -35,7 +36,8 @@
                     <input 
                         name="pword" 
                         type="password" 
-                        placeholder="密码" 
+                        autocomplete="off"
+                        placeholder="请输入密码：888888" 
                         data-validate="require" 
                         data-validate-msg="请输入密码"
                     >
@@ -45,7 +47,8 @@
                     <input 
                         name="verify" 
                         type="text" 
-                        placeholder="验证码" 
+                        autocomplete="off"
+                        placeholder="请输入验证码" 
                         data-validate="require" 
                         data-validate-msg="请输入验证码"
                         style="width: 145px;"
@@ -66,15 +69,15 @@
         // 以下配置已是最精简配置，不要删除其中的项目
         conf : {
             // 启动页
-            'homepage'          : false,
+            'homepage'           : false,
             // 页面内文本可选
-            'allow_select_text' : true,
+            'allow_select_text'  : true,
             // 允许右键
-            'allow_right_click' : true,
+            'allow_right_click'  : true,
             // 全局消息默认距离顶部的距离，单位px
-            'message_top'       : 80,
+            'message_top'        : 80,
             // 全局消息默认显示时长，单位秒
-            'message_duration'  : 2,
+            'message_duration'   : 2,
             // 发送HTTP请求时的通用参数
             'http' : {
                 // 通用接口地址
@@ -104,20 +107,24 @@
         },
         // 默认加载的类库，如果用不到可以在此删除
         lib : [
-            // 表单
-            'form',
-            // 表单验证
-            'validate',
-            // 按钮
-            'button',
-            // 全局消息
-            'message'
+            // 类库
+            'lib'
+        ],
+        // 数据
+        data : [
+            // 不需要mock数据可删除
+            'mock.js'
         ],
         // 插件
         plugin : [
+            // 不需要mock数据可删除
+            'mock'
         ],
         // 全部加载完成回调
         ready : function(){
+            // 点击切换验证码，演示案例，验证码是假的
+            // 正式使用取消下面的注释，修改src指向的地址即可
+            /*
             let verify = $('#verify');
             let captchaRefresh = () => {
                 verify.attr('src', '/captcha?rand=' + Math.random());
@@ -125,6 +132,23 @@
             verify.click(function(){
                 captchaRefresh();
             });
+            */
+            // 表单提交回调，就是form表单data-callback中设置的
+            // Method是框架内置的动作挂载点，固定写法
+            // response是提交表单接口API的返回值
+            // 可根据该返回值的内容执行一些业务逻辑处理，比如页面跳转等
+            Method.loginCallback = (response) => {
+                // 如果登录失败
+                if (response.code != 100)
+                {
+                    // 刷新验证码
+                    // captchaRefresh();
+                    // $('[name="verify"]').val('');
+                    return;
+                }
+                // 登录成功跳转到主页面
+                window.location.href = 'demo.html';
+            }
         }
     }
 </script>

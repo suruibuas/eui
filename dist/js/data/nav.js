@@ -1,25 +1,46 @@
 window.nav = [
     {
-        'name'   : '文档',
+        'name'   : '概况',
         'href'   : ''
     },
     {
-        'name' : '实例',
+        'name' : '店铺',
         'href' : 'javascript:;'
     },
     {
-        'name' : '打赏',
-        'href' : './doc/start/打赏.html#frame',
-        'container' : 'right-frame'
+        'name' : '商品',
+        'href' : ''
     },
     {
-        'name' : '亮色',
-        'href' : '',
-        'native' : true
+        'name' : '订单',
+        'href' : ''
     },
     {
-        'name'   : 'GitHub',
-        'href'   : 'https://github.com/suruibuas/eadmin',
-        'native' : true
+        'name' : '会员',
+        'href' : ''
+    },
+    {
+        'name' : '营销',
+        'href' : ''
+    },
+    {
+        'name' : '门店',
+        'href' : ''
+    },
+    {
+        'name' : '财务',
+        'href' : ''
+    },
+    {
+        'name' : '统计',
+        'href' : ''
+    },
+    {
+        'name' : '渠道',
+        'href' : ''
+    },
+    {
+        'name' : '设置',
+        'href' : ''
     }
 ];

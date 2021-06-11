@@ -645,8 +645,8 @@ class Table{
 					if (row.confirm === true)
 					{
 						Eadmin.popup.confirm({
-							content  : '确认执行此操作吗？',
-							callback : run
+							content : '确认执行此操作吗？',
+							submit  : run
 						});
 						return true;
 					}

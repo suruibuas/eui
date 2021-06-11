@@ -137,9 +137,13 @@ class Window{
 		{
 			v.html += `<div class="btnbar">`;
 			_.each(this.param.btn, (row) => {
+				if (row.highlight == undefined)
+					row.highlight = true;
+				if (row.action == undefined)
+					row.action = 'submit';
 				let loading = (['cancel', 'refresh'].indexOf(row.action) == -1) ? ' data-loading="执行中..."' : '';
 				v.html += `<button
-								${_.has(row, 'highlight') ? ' class="highlight"' : ''}
+								${row.highlight ? ' class="highlight"' : ''}
 								${loading}${row.action == 'submit' ? ' data-submit' : ''}>
 							${row.name}
 							</button>`;

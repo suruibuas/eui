@@ -81,8 +81,8 @@ class Popup{
 		popup.find('#sure').
 		on('click', function(){
 			$(this).html('执行中...').attr('disabled', true);
-			if (_.isFunction(param.callback))
-				param.callback();
+			if (_.isFunction(param.submit))
+				param.submit();
 		});
 	}
 
@@ -131,8 +131,8 @@ class Popup{
 				fadeOut(popup);
 				clearInterval(this.Timer);
 				this.Timer = null;
-				if (_.isFunction(param.callback))
-					param.callback();
+				if (_.isFunction(param.submit))
+					param.submit();
 				if (param.refresh === true)
 					Eadmin.refresh();
 			}
