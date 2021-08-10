@@ -1,0 +1,129 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>默认输入框</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <input type="text" placeholder="请输入你需要的内容">
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>禁用输入框</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 增加disabled属性禁用输入框 -->
+                <input type="text" placeholder="该文本框已被禁用" disabled>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>带图标的输入框</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 增加属性data-icon，则输入框将增加图标，具体图标的名称如何查询，请到官方文档“图标”一章查看 -->
+                <input 
+                    type="text" 
+                    placeholder="可以指定输入框的图标" 
+                    data-icon="ri-search-line">
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>图标在右侧</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 增加属性data-icon，并在图标名称后增加"|right"则图标会在右侧显示，默认不加的话在左侧显示图标 -->
+                <input 
+                    type="text" 
+                    placeholder="图标在右侧的文本框" 
+                    data-icon="ri-search-line|right">
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>前方有固定文本</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 增加属性data-prepend可以设置输入框的前方固定文本 -->
+                <input 
+                    type="text" 
+                    placeholder="请输入网址" 
+                    data-prepend="http://">
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>后方有固定文本</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 增加属性data-append可以设置输入框的后方固定文本 -->
+                <input 
+                    type="text" 
+                    placeholder="请输入省份" 
+                    data-append="省">
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>前后有固定文本</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 同时增加属性data-prepend和data-append可以同时指定输入框的前后固定文本 -->
+                <input 
+                    type="text" 
+                    placeholder="请输入金额" 
+                    data-prepend="$" 
+                    data-append=".00">
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>加减输入框</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 
+                    在输入框上增加class num-input则输入框会增加可操作的加减按钮
+                    增加属性data-min设置允许的最小值
+                    增加属性data-max设置允许的最大值
+                    增加属性data-step设置每次点击增加或减小的数字
+                -->
+                <input 
+                    class="num-input" 
+                    type="text" 
+                    data-min="0" 
+                    data-max="10" 
+                    data-step="1">
+            </div>
+        </div>
+    </div>
+</div>

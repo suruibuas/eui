@@ -1,0 +1,149 @@
+<div class="quote quote-info">
+    演示案例，请忽略字段的合理性
+</div>
+<!--
+    ====================================
+    form表单如果不指定action参数，则默认提交到当前页面
+    比如本例：点击窗口的确定保存数据按钮，就会提交到：./tmp/demo/add.html
+    ====================================
+    返回数据示例
+    ====================================
+    {
+        code : 100,
+        msg  : '数据新建成功'
+    }
+    ====================================
+    打开弹窗后不提交表单，直接关闭，上级页面的表单不会刷新
+    提交表单后窗口关闭，上级页面的表单会刷新
+    ====================================
+-->
+<form action="/api/add/">
+    <!-- 大盒子 -->
+    <div class="block-box">
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-12">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <h4 class="title">所属实例</h4>
+                <select 
+                    name="emp" 
+                    data-width="100%"
+                    data-validate="require"
+                    data-validate-msg="请选择所属实例">
+                    <option value="0">请选择所属实例</option>
+                    <option value="1">eadmin</option>
+                </select>
+            </div>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-12">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <h4 class="title">服务名称</h4>
+                <input
+                    name="name"
+                    type="text"
+                    placeholder="请输入服务名称"
+                    data-validate="require"
+                    data-validate-msg="请输入服务名称">
+            </div>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-12">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <h4 class="title">封面图</h4>
+                <div id="thumb"></div>
+            </div>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-12">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <h4 class="title">接口地址</h4>
+                <input
+                    name="api"
+                    type="text"
+                    placeholder="请输入接口地址"
+                    data-validate="require"
+                    data-validate-msg="请输入接口地址"
+                    data-prepend="http://">
+            </div>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-12">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <h4 class="title">进度</h4>
+                <label>
+                    <input name="plan" type="radio" value="0" checked> 开发中
+                </label>
+                <label>
+                    <input name="plan" type="radio" value="1"> 已上线
+                </label>
+                <label>
+                    <input name="plan" type="radio" value="2"> 离线
+                </label>
+            </div>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-12">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <h4 class="title">标签</h4>
+                <label>
+                    <input name="tag" type="checkbox" value="1"> js
+                </label>
+                <label>
+                    <input name="tag" type="checkbox" value="2"> css
+                </label>
+                <label>
+                    <input name="tag" type="checkbox" value="3"> vue
+                </label>
+                <label>
+                    <input name="tag" type="checkbox" value="4"> react
+                </label>
+                <span class="note">请尽可能的选择最合适的标签</span>
+            </div>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-12">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <h4 class="title">创建日期</h4>
+                <input 
+                    id="addtime" 
+                    name="addtime"
+                    type="text" 
+                    placeholder="请选择创建日期" 
+                    data-icon="ri-calendar-2-line|right">
+                <span class="note">创建日期不选择的话默认为创建当天</span>
+            </div>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-12">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <h4 class="title">服务状态</h4>
+                <label>
+                    <input 
+                        name="status" 
+                        type="radio" 
+                        data-model="switch" 
+                        value="1">
+                </label>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    (() => {
+        // 上传封面图
+        Eadmin.upload('#thumb', {
+            api  : '/api/upload/',
+            bind : 'thumb'
+        });
+        // 创建日期
+        Eadmin.datepicker('#addtime');
+    })();
+</script>

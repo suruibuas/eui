@@ -1,0 +1,63 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * TIPS
+ */
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 全局配置
+ */
+/**
+ * ================= 颜色设置 ==================
+ */
+/**
+ * ================= 字体设置 ==================
+ */
+/**
+ * ================= 通用方法 ==================
+ */
+.tips {
+  box-shadow: rgba(0, 64, 128, 0.2) 0px 0px 20px;
+  border-radius: 5px;
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  background: #FFF;
+  padding: 10px 14px;
+  cursor: default;
+  max-width: 260px;
+  min-width: 44px;
+  line-height: 20px;
+  z-index: 9999;
+}
+.tips .tips-arrow {
+  position: absolute;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent;
+}
+.tips .down {
+  left: 50%;
+  margin-left: -5px;
+  bottom: -10px;
+  border-top-color: #FFF;
+}
+.tips .top {
+  left: 50%;
+  margin-left: -5px;
+  top: -10px;
+  border-bottom-color: #FFF;
+}
+.tips .right {
+  top: 50%;
+  margin-top: -5px;
+  right: -10px;
+  border-left-color: #FFF;
+}
+.tips .left {
+  top: 50%;
+  margin-top: -5px;
+  left: -10px;
+  border-right-color: #FFF;
+}

@@ -1,0 +1,43 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 进度条
+ */
+
+@import "../global";
+
+.progress
+{
+    height: 30px;
+    position: relative;
+    .bg,
+    .percent,
+    .point
+    {
+        .border-radius(50px);
+        position: absolute;
+        top: 10px;
+        left: 0;
+        height: 12px;
+    }
+    .bg
+    {
+        width: 100%;
+        background: @color-5;
+        font-size: @font-size-1;
+    }
+    .percent
+    {
+        .linear();
+        .box-shadow(@shadow-color, 10px);
+    }
+    .point
+    {
+        width: 100%;
+        line-height: 12px;
+        color: @font-color-3;
+        font-size: @font-size-1;
+        text-align: center;
+        text-shadow: 1px 1px 1px #36495C;
+    }
+}

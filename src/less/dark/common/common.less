@@ -1,0 +1,405 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 通用样式文件
+ */
+
+@import "../global";
+
+@font-face
+{
+    font-family: "num";
+    src: url(../font/num.ttf);
+}
+
+/**
+ * ================= 旋转 ==================
+ */
+
+@-webkit-keyframes load
+{
+    0%
+    {
+        transform: rotate(0deg);
+    }  
+    100%
+    {
+        transform: rotate(360deg);
+    }
+}
+.rotate
+{
+    animation: load 1s cubic-bezier(.1, .1, .1, .1) infinite;
+    -webkit-animation: load 1s cubic-bezier(.1, .1, .1, .1) infinite;
+}
+.rotate-0
+{
+    transform-origin:center center;
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transition: transform 0.2s; 
+    -moz-transition: -moz-transform 0.2s; 
+    -moz-transition: -moz-transform 0.2s; 
+    -o-transition: -o-transform 0.2s; 
+    -ms-transition: -ms-transform 0.2s; 
+}
+.rotate-90
+{
+    transform-origin:center center;
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transition: transform 0.2s; 
+    -moz-transition: -moz-transform 0.2s; 
+    -moz-transition: -moz-transform 0.2s; 
+    -o-transition: -o-transform 0.2s; 
+    -ms-transition: -ms-transform 0.2s; 
+}
+.rotate-180
+{
+    transform-origin:center center;
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transition: transform 0.2s;
+    -moz-transition: -moz-transform 0.2s; 
+    -moz-transition: -moz-transform 0.2s; 
+    -o-transition: -o-transform 0.2s; 
+    -ms-transition: -ms-transform 0.2s; 
+}
+
+/**
+ * ================= 标题 ==================
+ */
+h1,h2,h3,h4,h5,h6
+{
+    font-weight: normal;
+    margin-top: 0;
+    line-height: 22px;
+}
+h3,h4,h5,h6
+{
+    margin-bottom:10px;
+}
+h1
+{
+    margin-bottom: 20px;
+    font-size: 24px;
+    i
+    {
+        font-size: 24px;
+    }
+}
+h2
+{
+    margin-bottom: 20px;
+    font-size: 20px;
+    i
+    {
+        font-size: 20px;
+    }
+}
+h3
+{
+    font-size: 18px;
+    i
+    {
+        font-size: 18px;
+    }
+}
+h4
+{
+    font-size: 16px;
+    i
+    {
+        font-size: 16px;
+    }
+}
+h5
+{
+    font-size: 14px;
+    i
+    {
+        font-size: 14px;
+    }
+}
+h6
+{
+    font-size: 12px;
+    i
+    {
+        font-size: 12px;
+    }
+}
+
+/**
+ * ================= 遮罩 ==================
+ */
+.mask
+{
+    .alpha(0.6);
+    width: 100%;
+    height: 100%;
+    background: @color-8;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9998;
+    text-align: center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor: pointer;
+    color: @font-color-3;
+    i
+    {
+        font-size: 18px;
+    }
+}
+
+/**
+ * ================= 边距 ==================
+ */
+.m0{
+    margin: 0 !important;
+}
+.mt0
+{
+    margin-top: 0 !important;
+}
+.mt10
+{
+    margin-top: 10px !important;
+}
+.mt20
+{
+    margin-top: 20px !important;
+}
+.mt30
+{
+    margin-top: 30px !important;
+}
+.mb0
+{
+    margin-bottom: 0 !important;
+}
+.mb10
+{
+    margin-bottom: 10px !important;
+}
+.mb20
+{
+    margin-bottom: 20px !important;
+}
+.mb30
+{
+    margin-bottom: 30px !important;
+}
+.ml0{
+    margin-left: 0 !important;
+}
+.ml10
+{
+    margin-left: 10px !important;
+}
+.ml20
+{
+    margin-left: 20px !important;
+}
+.ml30
+{
+    margin-left: 30px !important;
+}
+.mr0{
+    margin-right: 0 !important;
+}
+.mr10
+{
+    margin-right: 10px !important;
+}
+.mr20
+{
+    margin-right: 20px !important;
+}
+.mr30
+{
+    margin-right: 30px !important;
+}
+.p0
+{
+    padding: 0 !important;
+}
+.pl0
+{
+    padding-left: 0 !important;
+}
+.pt0
+{
+    padding-top: 0 !important;
+}
+.pb0
+{
+    padding-bottom: 0 !important;
+}
+.pr0
+{
+    padding-right: 0 !important;
+}
+
+/**
+ * ================= 颜色 ==================
+ */
+
+.font-color-1{
+    color: @mcolor-1 !important;
+}
+.font-color-2{
+    color: @mcolor-2 !important;
+}
+.font-color-3{
+    color: @mcolor-3 !important;
+}
+.font-color-4{
+    color: @mcolor-4 !important;
+}
+.font-color-5{
+    color: @mcolor-5 !important;
+}
+.font-color-6{
+    color: @mcolor-6 !important;
+}
+.font-color-7{
+    color: @mcolor-7 !important;
+}
+.font-color-8{
+    color: @mcolor-8 !important;
+}
+.font-color-9{
+    color: @color-6 !important;
+}
+.font-color-0{
+    color:@color-3 !important;
+}
+
+.color-1{
+    background-color: @mcolor-1 !important;
+}
+.color-2{
+    background-color: @mcolor-2 !important;
+}
+.color-3{
+    background-color: @mcolor-3 !important;
+}
+.color-4{
+    background-color: @mcolor-4 !important;
+}
+.color-5{
+    background-color: @mcolor-5 !important;
+}
+.color-6{
+    background-color: @mcolor-6 !important;
+}
+.color-7{
+    background-color: @mcolor-7 !important;
+}
+.color-8{
+    background-color: @mcolor-8 !important;
+}
+.color-9{
+    background-color: @color-6 !important;
+}
+.color-0{
+    background-color: @color-3 !important;
+}
+
+.linear-1{
+    .linear(lighten(@mcolor-1, 20%), @mcolor-1) !important;
+}
+.linear-2{
+    .linear(lighten(@mcolor-2, 20%), @mcolor-2) !important;
+}
+.linear-3{
+    .linear(lighten(@mcolor-3, 20%), @mcolor-3) !important;
+}
+.linear-4{
+    .linear(lighten(@mcolor-4, 20%), @mcolor-4) !important;
+}
+.linear-5{
+    .linear(lighten(@mcolor-5, 20%), @mcolor-5) !important;
+}
+.linear-6{
+    .linear(lighten(@mcolor-6, 20%), @mcolor-6) !important;
+}
+.linear-7{
+    .linear(lighten(@mcolor-7, 20%), @mcolor-7) !important;
+}
+.linear-8{
+    .linear(lighten(@mcolor-8, 20%), @mcolor-8) !important;
+}
+.linear-9{
+    .linear(lighten(@color-6, 20%), @color-6) !important;
+}
+.linear-0{
+    .linear(lighten(@color-3, 20%), @color-3) !important;
+}
+
+/**
+ * ================= 杂项 ==================
+ */
+
+.fl
+{
+    float: left;
+}
+.fr
+{
+    float: right;
+}
+.fs12
+{
+    font-size: 12px !important;
+}
+.fs14
+{
+    font-size: 14px !important;
+}
+.fs16
+{
+    font-size: 16px !important;
+}
+.fs18
+{
+    font-size: 18px !important;
+}
+.va-m
+{
+    vertical-align:middle;
+}
+.fwb
+{
+    font-weight: bold;
+}
+.tac
+{
+    text-align: center;
+}
+.cp
+{
+    cursor: pointer;
+}
+.flex
+{
+    display: flex;
+    flex-wrap: wrap;
+}
+.dn
+{
+    display: none;
+}

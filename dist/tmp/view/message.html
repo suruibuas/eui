@@ -1,0 +1,91 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>普通消息</h3>
+            <!--
+                Eadmin.message.info({
+                    content : 'EAdmin，开箱即用的后台UI'
+                });
+            -->
+            <button id="message-1" class="hl">普通消息</button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>成功消息</h3>
+            <!--
+                Eadmin.message.success({
+                    content : 'EAdmin，开箱即用的后台UI'
+                });
+            -->
+            <button id="message-2" class="hl">成功消息</button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>失败消息</h3>
+            <!--
+                Eadmin.message.error({
+                    content : 'EAdmin，开箱即用的后台UI'
+                });
+            -->
+            <button id="message-3" class="hl">失败消息</button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>指定停留时长</h3>
+            <!--
+                Eadmin.message.info({
+                    content  : 'EAdmin，开箱即用的后台UI，停留5秒',
+                    // 指定停留时长，单位秒，默认3秒
+                    duration : 5
+                });
+            -->
+            <button id="message-4" class="hl">停留5秒</button>
+        </div>
+    </div>
+</div>
+<script>
+    (() => {
+        // 普通消息
+        $('#message-1').click(() => {
+            Eadmin.message.info({
+                content : 'EAdmin，开箱即用的后台UI'
+            });
+        });
+        // 成功消息
+        $('#message-2').click(function(){
+            Eadmin.message.success({
+                content : 'EAdmin，开箱即用的后台UI'
+            });
+        });
+        // 失败消息
+        $('#message-3').click(function(){
+            Eadmin.message.error({
+                content : 'EAdmin，开箱即用的后台UI'
+            });
+        });
+        // 指定停留时长，单位秒
+        $('#message-4').click(function(){
+            Eadmin.message.info({
+                content  : 'EAdmin，开箱即用的后台UI，停留5秒',
+                duration : 5
+            });
+        });
+    })();
+</script>

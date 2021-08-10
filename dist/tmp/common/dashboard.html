@@ -1,0 +1,225 @@
+<h4>
+    实时概况
+    <span class="ml10 fs12">更新时间：2021-06-10 18:49:21</span>
+</h4>
+<div class="block-box">
+    <div class="col-3">
+        <div class="block block-data" data-color="3">
+            <h5>
+                今日订单数 
+                <i
+                    class="ri-question-line fs18"
+                    data-tips="只有经过支付的订单才会参与统计，支付后关闭的订单也会参与统计。"
+                    data-tips-offset="middle"></i>
+            </h5>
+            <div class="data">
+                <span class="num">322</span>
+            </div>
+            <span class="note">
+                同日比 +100% <i class="ri-arrow-up-s-fill fs16 font-color-1"></i>
+            </span>
+            <span class="note ml10">昨日订单数：0</span>
+            <h5 class="mt30">
+                订单总数
+                <span class="fr">136</span>
+            </h5>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="block block-data" data-color="3">
+            <h5>
+                今日销售额(元)
+            </h5>
+            <div class="data">
+                <span class="num">19.40</span>
+            </div>
+            <span class="note">
+                同日比 +100% <i class="ri-arrow-up-s-fill fs16 font-color-1"></i>
+            </span>
+            <span class="note ml10">昨日销售额(元) 0.00</span>
+            <h5 class="mt30">
+                销售总额
+                <span class="fr">43367.65</span>
+            </h5>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="block block-data" data-color="3">
+            <h5>
+                今日新增会员数
+            </h5>
+            <div class="data">
+                <span class="num">1</span>
+            </div>
+            <span class="note">
+                同日比 +100% <i class="ri-arrow-up-s-fill fs16 font-color-1"></i>
+            </span>
+            <span class="note ml10">昨日新增会员数 0</span>
+            <h5 class="mt30">
+                会员总数
+                <span class="fr">553</span>
+            </h5>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="block block-data" data-color="3">
+            <h5>
+                今日浏览量
+            </h5>
+            <div class="data">
+                <span class="num">6</span>
+            </div>
+            <span class="note">
+                同日比 -37% <i class="ri-arrow-down-s-fill fs16 font-color-2"></i>
+            </span>
+            <span class="note ml10">昨日浏览量：10</span>
+            <h5 class="mt30">
+                总浏览量
+                <span class="fr">4458</span>
+            </h5>
+        </div>
+    </div>
+    <div class="col-3 p0 flex">
+        <div class="col-6">
+            <div class="block block-data">
+                <h5>待付款订单</h5>
+                <div class="data">
+                    <span class="num">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="block block-data" data-color="2">
+                <h5>待发货订单</h5>
+                <div class="data">
+                    <span class="num">28</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-3 p0 flex">
+        <div class="col-6">
+            <div class="block block-data" data-color="3">
+                <h5>退款中订单</h5>
+                <div class="data">
+                    <span class="num">6</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="block block-data" data-color="1">
+                <h5>库存预警</h5>
+                <div class="data">
+                    <span class="num">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-3 p0 flex">
+        <div class="col-6">
+            <div class="block block-data">
+                <h5>出售中商品</h5>
+                <div class="data">
+                    <span class="num">256</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="block block-data">
+                <h5>仓库中商品</h5>
+                <div class="data">
+                    <span class="num">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-3 p0 flex">
+        <div class="col-6">
+            <div class="block block-data">
+                <h5>分销商申请</h5>
+                <div class="data">
+                    <span class="num">168</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="block block-data" data-color="1">
+                <h5>提现待审核</h5>
+                <div class="data">
+                    <span class="num">1</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="block">
+            <canvas id="chart-1"></canvas>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="block">
+            <canvas id="chart-2"></canvas>
+        </div>
+    </div>
+</div>
+<script>
+    (() => {
+        Eadmin.chart('#chart-1', {
+            type : 'bar',
+            labels : [
+                '06-02',
+                '06-03',
+                '06-04',
+                '06-05',
+                '06-06',
+                '06-07',
+                '06-08',
+                '06-09',
+                '06-10',
+                '06-11'
+            ],
+            datas : [
+                {
+                    label : '订单数',
+                    data  : [
+                        55, 323, 666, 51, 12, 412, 12, 66, 521, 1887
+                    ]
+                }
+            ],
+            title : {
+                text : '近十天订单数（个）'
+            }
+        });
+        Eadmin.chart('#chart-2', {
+            labels : [
+                '06-02',
+                '06-03',
+                '06-04',
+                '06-05',
+                '06-06',
+                '06-07',
+                '06-08',
+                '06-09',
+                '06-10',
+                '06-11'
+            ],
+            datas : [
+                {
+                    label : '销售额',
+                    data  : [
+                        55, 323, 6660, 51, 12, 412, 12, 66, 52001, 1887
+                    ]
+                },
+                {
+                    label : '退款额',
+                    data  : [
+                        0, 12, 55, 0, 0, 0, 55, 0, 6642, 120
+                    ]
+                }
+            ],
+            title : {
+                text : '近十天销售额（元）'
+            }
+        });
+    })();
+</script>

@@ -1,0 +1,69 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 布局 -->
+    <div class="col-12">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>编辑器</h3>
+            <!--
+                ==============================================
+                编辑器容器上的 data-name 参数指定编辑器的名称，用于
+                后端POST取值，例如本例中，后端取值就是$_POST['content']
+                如果需要设置默认值（编辑场景），则直接在编辑器容器的
+                div中写内容即可，例如现在需要编辑：
+                <div id="editor" data-name="content">这里写默认内容即可</div>
+                ==============================================
+                Eadmin.editor('#editor', {
+                    // 编辑器高度，默认300（单位px）
+                    height      : 400,
+                    // 是否只读
+                    readonly    : false,
+                    // 设置默认显示文案
+                    placeholder : '请输入内容...',
+                    // 图片上传接口地址
+                    api         : '/api/upload/',
+                    // 文件域名称，上传图片后端取值用
+                    filename    : 'file',
+                    // 允许的图片格式
+                    doc         : ['.jpg', '.png', '.gif'],
+                    // 允许的图片大小，单位KB
+                    size        : 1000,
+                    // 是否自动保存输入内容到本地缓存
+                    autosave    : true,
+                    // 自动保存时间间隔
+                    savetime    : 3
+                });
+            -->
+            <div id="editor" data-name="content"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (() => {
+        Eadmin.editor('#editor', {
+            // 编辑器高度
+            height      : 400,
+            // 是否只读
+            readonly    : false,
+            // 设置默认显示文案
+            placeholder : '请输入内容...',
+            // 图片上传接口地址
+            api         : '/api/upload/',
+            // 文件域名称，上传图片后端取值用
+            filename    : 'file',
+            // 允许的图片格式
+            doc         : ['.jpg', '.png', '.gif'],
+            // 允许的图片大小，单位KB
+            size        : 1000,
+            // 是否自动保存输入内容到本地缓存
+            autosave    : true,
+            // 自动保存时间间隔
+            savetime    : 3
+        });
+    })();
+</script>

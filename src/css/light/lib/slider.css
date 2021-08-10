@@ -1,0 +1,74 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 滑块
+ */
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 全局配置
+ */
+/**
+ * ================= 颜色设置 ==================
+ */
+/**
+ * ================= 字体设置 ==================
+ */
+/**
+ * ================= 通用方法 ==================
+ */
+.slider {
+  border-radius: 5px;
+  height: 4px;
+  background: #DCE8F2;
+  cursor: pointer;
+  position: relative;
+  margin: 30px 0 10px 0;
+}
+.slider .slider-bar {
+  border-radius: 5px;
+  background: -moz-linear-gradient(left, #66b5ff, #0084FF);
+  background: -webkit-linear-gradient(left, #66b5ff, #0084FF);
+  background: -o-linear-gradient(left, #66b5ff, #0084FF);
+  position: absolute;
+  width: 0;
+  height: 4px;
+}
+.slider .slider-btn {
+  transition: box-shadow 0.2s linear;
+  border-radius: 50px;
+  width: 16px;
+  height: 16px;
+  cursor: grab;
+  position: absolute;
+  background: #FFF;
+  border: 3px #0084FF solid;
+  z-index: 999;
+  left: 0;
+  top: -6px;
+}
+.slider .slider-btn:hover {
+  transition: box-shadow 0.2s linear;
+  box-shadow: rgba(0, 64, 128, 0.2) 0px 0px 20px;
+}
+.slider .step {
+  border-radius: 50%;
+  width: 4px;
+  height: 4px;
+  background: #DCE8F2;
+  position: absolute;
+}
+.slider-disabled {
+  background: #BBC5D8;
+  cursor: not-allowed;
+}
+.slider-disabled .slider-bar {
+  background: #999;
+}
+.slider-disabled .slider-btn {
+  border-color: #999;
+  cursor: not-allowed;
+}
+.slider-disabled .slider-btn:hover {
+  box-shadow: rgba(0, 64, 128, 0.2) 0px 0px 0px;
+}

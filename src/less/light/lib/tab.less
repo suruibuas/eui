@@ -1,0 +1,77 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 选项卡
+ */
+
+@import "../global";
+
+.tab
+{
+    border-bottom: 2px @input-color-1 solid;
+    white-space: nowrap;
+    span
+    {
+        background: @input-color-3;
+        display: inline-block;
+        height: 40px;
+        line-height: 40px;
+        cursor: pointer;
+        position: relative;
+        padding: 0 15px;
+        border: 2px @input-color-1 solid;
+        border-bottom: none;
+        margin-right: 8px;
+        border-radius: 5px 5px 0 0;
+        .mark{
+            .border-radius(50px);
+            position: absolute;
+            background: @mcolor-1;
+            color: @font-color-3;
+            right: 2px;
+            top: -4px;
+            font-size: 10px;
+            line-height: 14px;
+            padding: 0px 3px;
+        }
+    }
+    .active
+    {
+        background: @color-2;
+        height: 42px;
+        border-bottom: 2px @color-2 solid;
+        margin-bottom: -2px;
+    }
+}
+.tab-panel
+{
+    min-height: 200px;
+    display: none;
+    position: relative;
+    .block
+    {
+        padding: 0;
+        box-shadow: none;
+    }
+    .block-title{
+        padding: 0 10px;
+    }
+    .block-pb
+    {
+        padding: 20px;
+        background: @input-color-3;
+        border: 2px @input-color-1 solid;
+    }
+    .panel-loading
+    {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        text-align: center;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+}

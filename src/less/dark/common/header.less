@@ -1,0 +1,132 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 顶部导航栏
+ */
+
+@import "../global";
+
+header
+{
+    width: 100%; 
+    position: relative;
+    padding: 0 60px;
+    height: 85px;
+    display: none;
+    // 主导航
+    .main-nav
+    {
+        @height : 50px;
+        height: @height;
+        line-height: @height;
+        display: flex;
+        >div
+        {   
+            padding: 0;
+        }
+        // LOGO
+        >div:first-child
+        {
+            font-size: @font-size-4;
+            font-weight: bold;
+            padding-left: 35px;
+            img
+            {
+                width: 32px;
+                height: 32px;
+                position: absolute;
+                top: 9px;
+                left: 0;
+            }
+        }
+        // 菜单
+        .nav
+        {
+            a
+            {
+                float: left;
+                li
+                {
+                    padding: 0 15px;
+                }
+            }
+            .active
+            {
+                .nav-slider
+                {
+                    display: block;
+                }
+            }
+        }
+        // 用户
+        >div:last-child
+        {
+            text-align: right;
+            position: relative;
+            img
+            {
+                .border-radius(100%);
+                position: absolute;
+                width: 28px;
+                height: 28px;
+                top: 10px;
+                right: 0;
+                border: 2px @color-3 solid;
+            }
+            i
+            {
+                font-size: 18px;
+                margin-right: 0;
+                margin-left: 20px;
+            }
+        }
+        .nav-slider
+        {
+            .border-radius(50px);
+            .linear();
+            height: 4px;
+            margin-top: -50px;
+            display: none;
+        }
+    }
+    // 二级导航
+    .sub-nav
+    {
+        @height:30px;
+        height: @height;
+        line-height: @height;
+        display: flex;
+        >div
+        {
+            padding: 0;
+        }
+        li
+        {
+            font-size: @font-size-1;
+            float: left;
+            text-align: center;
+            padding: 0 15px;
+            margin-right: 10px;
+        }
+        .active{
+            li
+            {
+                .border-radius(50px);
+                .linear();
+            }
+            &:hover
+            {
+                color: @font-color-1;
+            }
+        }
+    }
+}
+#loading-progress
+{
+    .linear();
+    height: 4px;
+    background-color: @color-3;
+    position: fixed;
+    top: 0;
+    left: 0;
+}

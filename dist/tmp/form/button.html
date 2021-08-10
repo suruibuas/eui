@@ -1,0 +1,122 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 布局 -->
+    <div class="col-4">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>线性按钮</h3>
+            <button>默认按钮</button>
+            <!-- 增加class middle就是中等大小按钮 -->
+            <button class="middle">中等按钮</button>
+            <!-- 增加class small就是小尺寸按钮 -->
+            <button class="small">小按钮</button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-4">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>高亮按钮</h3>
+            <!-- 增加class hl(highlight的字母缩写)则按钮高亮显示 -->
+            <button class="hl">高亮按钮</button>
+            <!-- 增加class hl(highlight的字母缩写)则按钮高亮显示 -->
+            <button class="hl middle">中等按钮</button>
+            <!-- 增加class hl(highlight的字母缩写)则按钮高亮显示 -->
+            <button class="hl small">小按钮</button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-4">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>禁用按钮</h3>
+            <!-- 增加属性disabled则按钮禁用 -->
+            <button disabled>默认按钮</button>
+            <!-- 增加属性disabled则按钮禁用 -->
+            <button class="hl" disabled>高亮按钮</button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-4">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>带图标的按钮</h3>
+            <!-- 增加属性data-icon，则按钮将增加图标，具体图标的名称如何查询，请到官方文档“图标”一章查看 -->
+            <button data-icon="ri-settings-4-line">配置</button>
+            <!-- 如果按钮的内容为空，并且有data-icon属性，则按钮只显示图标，也就是常说的图标按钮 -->
+            <button data-icon="ri-settings-5-line"></button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-4">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>加载中按钮</h3>
+            <!-- 
+                增加属性data-loading则按钮在点击后会进入loading状态并且按钮的文案会改为data-loading属性设置的文案
+                data-do属性指定按钮点击后具体需要执行的动作，具体参考本文件最下方的写法
+            -->
+            <button 
+                data-loading="上报中..." 
+                data-do="updateData">上报数据</button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-4">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>延迟按钮</h3>
+            <!-- 增加属性data-delay则按钮将在指定的秒数后可以被点击，单位为秒，例如下面的按钮就是5秒后可以被点击 -->
+            <button data-delay="5">确定</button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-4">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>综合示例</h3>
+            <!-- 
+                下面是一个同时包含多种属性的按钮
+                1：高亮
+                2：有图标
+                3：延迟3秒可点
+                4：点击后有loading
+                5：点击后有自定义动作
+            -->
+            <button 
+                class="hl" 
+                data-icon="ri-mail-line"
+                data-delay="3"
+                data-loading="邮件发送中..."
+                data-do="eadmin">发送邮件</button>
+        </div>
+    </div>
+</div>
+<script>
+    // Method为系统内置的全局动作挂载对象
+    // 此处的updateData就是data-loading按钮上指定的data-do动作方法，按钮点击后会自动调用
+    // 框架会在该方法内自动注入被点击按钮的对象，用来重置按钮使用
+    Method.updateData = (btn) => {
+        // 具体业务处理，此处写了一个延迟2秒来演示具体业务处理时的耗时
+        setTimeout(() => {
+            // 因为按钮点击后会变为禁用状态，所以在业务处理完以后要恢复按钮的可点状态
+            // reset里传入的btn就是框架自动注入的被点击按钮的对象
+            Eadmin.button.reset(btn);
+            console.log('业务处理完成');
+        }, 2000);
+    }
+
+    // 这个是综合示例中的按钮点击动作
+    Method.eadmin = (btn) => {
+        setTimeout(() => {
+            // 业务处理完以后记得重置按钮为可点状态
+            Eadmin.button.reset(btn);
+            console.log('感谢大家对eadmin的支持，github小星星麻烦点一下');
+        }, 1000);
+    }
+</script>

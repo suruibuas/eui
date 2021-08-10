@@ -1,0 +1,97 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 弹窗
+ */
+
+@import "../global";
+
+.window
+{
+    .border-radius();
+    .box-shadow();
+    position: fixed;
+    border:1px @input-color-1 solid;
+    background: @color-2;
+    z-index: 9998;
+    padding: 5px 0px 20px 15px;
+    top: 50%;
+    left: 50%;
+    .title
+    {
+        position: relative;
+        height: 28px;
+        line-height: 28px;
+        margin:0 25px 10px 0;
+    }
+    .window-loading
+    {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        text-align: center;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+    .window-close
+    {
+        position: absolute;
+        top: 8px;
+        right: 6px;
+        width: 20px;
+        height: 20px;
+        i
+        {
+            .animate(color);
+            position: absolute;
+            font-size: 18px;
+            cursor: pointer;
+            color: @mcolor-1;
+            &:hover
+            {
+                .animate(color);
+                color: lighten(@mcolor-1, 20%);
+            }
+        }
+    }
+    .body
+    {
+        position: relative;
+        overflow: hidden;
+        padding-right: 15px;
+        .block
+        {
+            padding: 0;
+            box-shadow: none;
+        }
+        .block-title{
+            padding: 0 10px;
+        }
+        .block-pb
+        {
+            padding: 20px;
+            background: @input-color-3;
+            border: 2px @input-color-1 solid;
+        }
+        .form-group
+        {
+            .title
+            {
+                margin-bottom: 0px;
+            }
+        }
+    }
+    .btnbar
+    {
+        margin: 7px 15px 10px 0;
+        text-align: right;
+        button
+        {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+    }
+}

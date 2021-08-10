@@ -1,0 +1,300 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 表单
+ */
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 全局配置
+ */
+/**
+ * ================= 颜色设置 ==================
+ */
+/**
+ * ================= 字体设置 ==================
+ */
+/**
+ * ================= 通用方法 ==================
+ */
+::-webkit-input-placeholder {
+  color: #999;
+}
+:-moz-placeholder {
+  color: #999;
+}
+::-moz-placeholder {
+  color: #999;
+}
+:-ms-input-placeholder {
+  color: #999;
+}
+input,
+textarea {
+  border-radius: 5px;
+  transition: border-color 0.2s linear, background-color 0.2s linear, box-shadow 0.2s linear;
+  padding: 10px;
+  border: 1px #DCE8F2 solid;
+  background: #F7F7F7;
+  width: 100%;
+  color: #36495C;
+}
+input:focus,
+textarea:focus {
+  transition: border-color 0.2s linear, background-color 0.2s linear, box-shadow 0.2s linear;
+  box-shadow: rgba(0, 64, 128, 0.2) 0px 0px 20px;
+  outline: none;
+  border-color: #0084FF;
+  background: #F5FCFF;
+}
+input:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+  color: #BBC5D8;
+}
+input:disabled::-webkit-input-placeholder,
+textarea:disabled::-webkit-input-placeholder {
+  color: #BBC5D8;
+}
+input:disabled:-moz-placeholder,
+textarea:disabled::-webkit-input-placeholder {
+  color: #BBC5D8;
+}
+input:disabled::-moz-placeholder,
+textarea:disabled::-webkit-input-placeholder {
+  color: #BBC5D8;
+}
+input:disabled:-ms-input-placeholder,
+textarea:disabled::-webkit-input-placeholder {
+  color: #BBC5D8;
+}
+label {
+  position: relative;
+}
+textarea {
+  cursor: text;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.no-resize {
+  resize: none;
+}
+.icon-input i:not(.add):not(.cut),
+.icon-input-right i:not(.add):not(.cut) {
+  position: absolute;
+  top: 0px;
+}
+.icon-input input {
+  padding-left: 26px;
+}
+.icon-input i {
+  left: 8px;
+}
+.icon-input-right input {
+  padding-right: 24px;
+}
+.icon-input-right i {
+  margin-right: 0;
+  right: 8px;
+}
+.error-input {
+  border-color: #FF1844;
+  background: #FAE1DD;
+}
+.error-input:focus {
+  border-color: #FF1844;
+  background: #FAE1DD;
+}
+input[type="radio"],
+input[type="checkbox"],
+select {
+  border: 0;
+  position: absolute;
+  left: -9999px;
+}
+select {
+  min-width: 120px;
+}
+.radio,
+.radio-disabled,
+.radio-checked,
+.radio-disabled-checked,
+.checkbox,
+.checkbox-disabled,
+.checkbox-checked,
+.checkbox-disabled-checked {
+  margin-right: 10px;
+  line-height: 40px;
+  display: inline-block;
+}
+.radio i,
+.radio-disabled i,
+.radio-checked i,
+.radio-disabled-checked i,
+.checkbox i,
+.checkbox-disabled i,
+.checkbox-checked i,
+.checkbox-disabled-checked i {
+  font-size: 18px;
+  margin-right: 0;
+  font-weight: bold;
+}
+.radio,
+.checkbox,
+.checkbox-checked {
+  cursor: pointer;
+}
+.radio-disabled,
+.radio-disabled-checked,
+.checkbox-disabled,
+.checkbox-disabled-checked {
+  color: #BBC5D8;
+  cursor: not-allowed;
+}
+.radio i,
+.checkbox i {
+  transition: color 0.2s linear;
+}
+.radio-checked i,
+.checkbox-checked i {
+  transition: color 0.2s linear;
+  color: #0084FF;
+}
+.radio-tag,
+.radio-checked-tag,
+.radio-disabled-tag {
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+.radio-tag {
+  border: 2px dashed #DCE8F2;
+}
+.radio-checked-tag {
+  border: 2px solid #0084FF;
+  color: #0084FF;
+  background: #ebf5ff;
+}
+.radio-disabled-tag {
+  border: 2px dashed #DCE8F2;
+  color: #BBC5D8;
+  cursor: not-allowed;
+}
+.select {
+  border-radius: 5px;
+  padding: 10px 30px 8px 10px;
+  border: 1px #DCE8F2 solid;
+  background: #F7F7F7;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  margin-right: 5px;
+}
+.select i:not(.rotate) {
+  position: absolute;
+  right: 0px;
+  top: 10px;
+}
+.select i.ri-loader-4-line {
+  font-size: 14px;
+}
+.select span {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+}
+.select .select-clear {
+  display: none;
+}
+.select-disabled {
+  cursor: not-allowed;
+  border-color: #DCE8F2;
+}
+.select-disabled span,
+.select-disabled i {
+  color: #BBC5D8;
+}
+.select-option {
+  border-radius: 5px;
+  box-shadow: rgba(0, 64, 128, 0.2) 0px 0px 20px;
+  display: none;
+  position: absolute;
+  border: 1px #DCE8F2 solid;
+  background: #FFF;
+  margin-top: 5px;
+  outline: none;
+  z-index: 9999;
+  cursor: pointer;
+}
+.select-option ul {
+  padding: 6px;
+  position: relative;
+  max-height: 240px;
+}
+.select-option ul li {
+  padding: 5px 10px 5px 5px;
+  cursor: pointer;
+}
+.select-option ul li label {
+  height: 26px;
+  line-height: 26px;
+  width: 100%;
+}
+.select-option ul li:not(:first-child) {
+  margin-top: 4px;
+}
+.select-option ul li:hover {
+  border-radius: 5px;
+  background: #DCE8F2;
+}
+.select-option ul .multiple {
+  padding: 0 10px 0 5px;
+}
+.select-option ul .active {
+  border-radius: 5px;
+  background: #DCE8F2;
+}
+.select-option .disabled {
+  color: #BBC5D8;
+  cursor: not-allowed;
+}
+.select-option .disabled:hover {
+  background: #FFF;
+}
+.checkbox-switch {
+  border-radius: 50px;
+  background: #999;
+  width: 44px;
+  height: 22px;
+  cursor: pointer;
+  padding: 3px;
+  display: inline-block;
+  position: relative;
+}
+.checkbox-switch span {
+  transition: margin-left 0.2s linear;
+  border-radius: 50px;
+  background: #FFF;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  position: absolute;
+}
+.switch-open {
+  background: -moz-linear-gradient(left, #66b5ff, #0084FF);
+  background: -webkit-linear-gradient(left, #66b5ff, #0084FF);
+  background: -o-linear-gradient(left, #66b5ff, #0084FF);
+}
+.switch-open span {
+  box-shadow: rgba(0, 64, 128, 0.2) 0px 0px 20px;
+  transition: margin-left 0.2s linear;
+  margin-left: 22px;
+}
+.switch-disabled {
+  cursor: not-allowed;
+  background: #BBC5D8;
+}

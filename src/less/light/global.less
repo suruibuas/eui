@@ -1,0 +1,119 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 全局配置
+ */
+
+/**
+ * ================= 颜色设置 ==================
+ */
+
+// 主背景色
+@color-1:#F5F5F5;
+// 高亮色
+@color-2:#FFF;
+// 主色
+@color-3:#0084FF;
+// 表格边框线色
+@color-4:#DCE8F2;
+// 浅色
+@color-5:#DCE8F2;
+// 禁用色
+@color-6:#BBC5D8;
+// 备注色
+@color-7:#999;
+// 遮罩颜色
+@color-8:#555;
+// 滚动条色
+@color-9:#999;
+// 浮层背景色，下拉菜单、日期选择等等
+@color-10:#FFF;
+// 表格行高亮色
+@color-11:#DFF0FF;
+// 消息和通知背景色
+@color-12:#FFF;
+
+// 默认字体颜色
+@font-color-1:#36495C;
+// 高亮字颜色，用在深色背景下的文字
+@font-color-3:#FFF;
+
+// 表单边框色
+@input-color-1:#DCE8F2;
+// 表单验证错误背景色
+@input-color-2:#FAE1DD;
+// 表单背景色
+@input-color-3:#F7F7F7;
+// 表单移入背景色
+@input-color-4:#F5FCFF;
+
+// 阴影颜色
+@shadow-color:rgba(0, 64, 128, .2);
+
+// 多元色
+@mcolor-1: #FF1844;
+@mcolor-2: #6fee00;
+@mcolor-3: #ffee01;
+@mcolor-4: #ff7c00;
+@mcolor-5: #f52394;
+@mcolor-6: #00b2d4;
+@mcolor-7: #3366FF;
+@mcolor-8: #FF3E28;
+
+/**
+ * ================= 字体设置 ==================
+ */
+
+// 默认字体大小
+@font-size-1: 12px;
+// 标题字体大小
+@font-size-2: 14px;
+// 大号字体大小
+@font-size-3: 16px;
+// 特大号字
+@font-size-4: 18px;
+
+
+/**
+ * ================= 通用方法 ==================
+ */
+
+// 延时动画
+.animate(@action, @time : 0.2s)
+{
+    transition:@action @time linear;
+}
+
+// 表单延时动画
+.animate-form()
+{
+    transition:border-color 0.2s linear,
+    background-color 0.2s linear, 
+    box-shadow 0.2s linear;
+}
+
+// 圆角
+.border-radius(@radius : 5px)
+{
+    border-radius: @radius;
+}
+
+// 阴影
+.box-shadow(@color:@shadow-color, @width:20px)
+{
+    box-shadow: @color 0px 0px @width;
+}
+
+// 透明度
+.alpha(@alpha : 1)
+{
+    opacity: @alpha;
+}
+
+// 渐变
+.linear(@start:lighten(@color-3, 20%), @end:@color-3, @position:left)
+{
+    background: -moz-linear-gradient(@position, @start, @end);
+    background: -webkit-linear-gradient(@position, @start, @end);
+    background: -o-linear-gradient(@position, @start, @end);
+}

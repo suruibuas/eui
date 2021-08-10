@@ -1,0 +1,33 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 状态
+ */
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 全局配置
+ */
+/**
+ * ================= 颜色设置 ==================
+ */
+/**
+ * ================= 字体设置 ==================
+ */
+/**
+ * ================= 通用方法 ==================
+ */
+.status {
+  padding-left: 14px;
+  position: relative;
+  margin-right: 10px;
+  font-size: 14px;
+}
+.status i {
+  border-radius: 50px;
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  top: 6px;
+  left: 0;
+}

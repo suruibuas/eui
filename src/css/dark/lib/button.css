@@ -1,0 +1,83 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 按钮
+ */
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 全局配置
+ */
+/**
+ * ================= 颜色设置 ==================
+ */
+/**
+ * ================= 字体设置 ==================
+ */
+/**
+ * ================= 通用方法 ==================
+ */
+button {
+  border-radius: 50px;
+  transition: border-color 0.2s linear, background-color 0.2s linear, box-shadow 0.2s linear;
+  color: #FFF;
+  background: none;
+  border: 2px #30375B solid;
+  cursor: pointer;
+  padding: 0px 20px;
+  outline: none;
+  font-size: 16px;
+  margin-right: 5px;
+  height: 46px;
+  line-height: 1;
+}
+button:hover:not(:disabled) {
+  box-shadow: #060916 0px 0px 20px;
+  transition: border-color 0.2s linear, background-color 0.2s linear, box-shadow 0.2s linear;
+  border-color: #0084FF;
+}
+button:active:not(:disabled) {
+  border-color: #005cb3;
+}
+button i {
+  font-size: 18px;
+}
+button:disabled {
+  color: #7886A3;
+  cursor: not-allowed;
+}
+.middle {
+  font-size: 14px;
+  padding: 0px 16px;
+  height: 36px;
+}
+.middle i {
+  font-size: 14px;
+}
+.small {
+  font-size: 14px;
+  padding: 0 8px;
+  height: 26px;
+}
+.small i {
+  font-size: 12px;
+}
+.hl {
+  background: #0084FF;
+  border-color: #0084FF;
+  color: #FFF;
+}
+.hl:hover:not(:disabled) {
+  background: #0077e6;
+  border-color: #0077e6;
+}
+.hl:active:not(:disabled) {
+  background: #005cb3;
+  border-color: #005cb3;
+}
+.hl:disabled {
+  color: #7886A3;
+  background: #30375B;
+  cursor: not-allowed;
+  border-color: #30375B;
+}

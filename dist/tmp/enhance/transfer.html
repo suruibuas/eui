@@ -1,0 +1,247 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 
+        ===========================================
+        穿梭框数据有2种方式
+        1：本地生成
+        2：API接口返回
+        -------------------------------------------
+        1：本地生成
+        -------------------------------------------
+        var data = [];
+        for (var i = 1; i <= 10; i++)
+        {
+            data.push({
+                // 显示的文本
+                txt  : '选项 ' + i,
+                // 真实取值
+                val  : i
+            });
+        }
+        console.log(data);
+        -------------------------------------------
+        只要保证生成的数据是以下格式即可
+        -------------------------------------------
+        [
+            {
+                "txt": "选项 1",
+                "val": 1
+            },
+            {
+                "txt": "选项 2",
+                "val": 2
+            },
+            {
+                "txt": "选项 3",
+                "val": 3
+            },
+            {
+                "txt": "选项 4",
+                "val": 4
+            },
+            {
+                "txt": "选项 5",
+                "val": 5
+            },
+            {
+                "txt": "选项 6",
+                "val": 6
+            },
+            {
+                "txt": "选项 7",
+                "val": 7
+            },
+            {
+                "txt": "选项 8",
+                "val": 8
+            },
+            {
+                "txt": "选项 9",
+                "val": 9
+            },
+            {
+                "txt": "选项 10",
+                "val": 10
+            }
+        ]
+        -------------------------------------------
+        2：API接口返回
+        -------------------------------------------
+        设置data参数为API接口地址即可，参考案例2
+        接口返回数据建议格式如下
+        -------------------------------------------
+        {
+            "code": 100,
+            "data": [
+                {
+                    "txt": "选项 1",
+                    "val": 1
+                },
+                {
+                    "txt": "选项 2",
+                    "val": 2
+                },
+                {
+                    "txt": "选项 3",
+                    "val": 3
+                },
+                {
+                    "txt": "选项 4",
+                    "val": 4
+                },
+                {
+                    "txt": "选项 5",
+                    "val": 5
+                },
+                {
+                    "txt": "选项 6",
+                    "val": 6
+                },
+                {
+                    "txt": "选项 7",
+                    "val": 7
+                },
+                {
+                    "txt": "选项 8",
+                    "val": 8
+                },
+                {
+                    "txt": "选项 9",
+                    "val": 9
+                },
+                {
+                    "txt": "选项 10",
+                    "val": 10
+                }
+            ]
+        }
+        ===========================================
+    -->
+    <!-- 布局 -->
+    <div class="col-6">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>默认穿梭框</h3>
+            <!--
+                // 本地生成穿梭框的数据
+                var data = [];
+                for (var i = 1; i <= 10; i++)
+                {
+                    data.push({
+                        // 显示的文本
+                        txt  : '选项 ' + i,
+                        // 真实取值
+                        val  : i
+                    });
+                }
+                Eadmin.transfer('#transfer-1', {
+                    // 数据
+                    data : data
+                });
+            -->
+            <!-- 穿梭框容器 -->
+            <div id="transfer-1"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-6">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>支持搜索</h3>
+            <!--
+                Eadmin.transfer('#transfer-2', {
+                    // API接口作为数据源
+                    data   : '/api/transfer/',
+                    // 指定参数 search 为 true，表示支持搜索
+                    search : true
+                });
+            -->
+            <!-- 穿梭框容器 -->
+            <div id="transfer-2"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-6">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>自定义宽高</h3>
+            <!--
+                Eadmin.transfer('#transfer-3', {
+                    // 数据源
+                    data   : data,
+                    // 宽度
+                    width  : 160,
+                    // 高度
+                    height : 265
+                });
+            -->
+            <!-- 穿梭框容器 -->
+            <div id="transfer-3"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-6">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>绑定隐藏域</h3>
+            <!--
+                Eadmin.transfer('#transfer-4', {
+                    // 数据源
+                    data : data,
+                    // 指定参数 bind 设置绑定的input 隐藏域，框架会自动生成name为bind参数指定的隐藏域
+                    // 在选中穿梭框的选项后，框架会把选中的项以","分割的形式存入该隐藏域中，用于后端POST取值
+                    // 本例中会自动生成：<input name="transfer" type="hidden">
+                    bind : 'transfer'
+                });
+            -->
+            <!-- 穿梭框容器 -->
+            <div id="transfer-4"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (() => {
+        // 本地生成数据示例
+        var data = [];
+        for (var i = 1; i <= 10; i++)
+        {
+            data.push({
+                txt  : '选项 ' + i,
+                val  : i
+            });
+        }
+        // 默认穿梭框
+        Eadmin.transfer('#transfer-1', {
+            // 数据源
+            data : data
+        });
+        // 支持搜索
+        Eadmin.transfer('#transfer-2', {
+            // 数据源
+            data   : '/api/transfer/',
+            // 支持搜索
+            search : true
+        });
+        // 自定义宽高
+        Eadmin.transfer('#transfer-3', {
+            // 数据源
+            data   : data,
+            // 宽度
+            width  : 160,
+            // 高度
+            height : 265
+        });
+        // 绑定隐藏域
+        Eadmin.transfer('#transfer-4', {
+            // 数据源
+            data : data,
+            // 绑定的隐藏域
+            bind : 'transfer'
+        });
+    })();
+</script>

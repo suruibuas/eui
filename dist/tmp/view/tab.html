@@ -1,0 +1,62 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 布局 -->
+    <div class="col-6">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>选项卡</h3>
+            <!-- 选项卡容器 -->
+            <div id="tab">
+                <!-- 直接在选项卡里写内容 -->
+                <div class="tab-panel">
+                    <p class="mt10">声音内容</p>
+                </div>
+                <!-- 如果是加载页面，则不需要写内容 -->
+                <div class="tab-panel"></div>
+                <!-- 直接在选项卡里写内容 -->
+                <div class="tab-panel">
+                    <p class="mt10">通用内容</p>
+                </div>
+                <!-- 直接在选项卡里写内容 -->
+                <div class="tab-panel">
+                    <p class="mt10">通知内容</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (() => {
+        Eadmin.tab('#tab', [
+            {
+                // 名称
+                name   : '声音',
+                // 图标，不需要可以不用设置该参数
+                icon   : 'ri-mic-line',
+                // 设置active为true指定当前点中的选项卡
+                active : true,
+                // 角标数字，不需要可以不用设置
+                num    : 6
+            },
+            {
+                name : '表单',
+                icon : 'ri-tv-2-line',
+                // 指定load参数设置加载的页面的url地址
+                load : './doc/scene/表单.html'
+            },
+            {
+                name : '通用',
+                icon : 'ri-collage-line'
+            },
+            {
+                name : '通知',
+                icon : 'ri-notification-2-line'
+            }
+        ]);
+    })();
+</script>

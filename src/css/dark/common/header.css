@@ -1,0 +1,116 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 顶部导航栏
+ */
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 全局配置
+ */
+/**
+ * ================= 颜色设置 ==================
+ */
+/**
+ * ================= 字体设置 ==================
+ */
+/**
+ * ================= 通用方法 ==================
+ */
+header {
+  width: 100%;
+  position: relative;
+  padding: 0 60px;
+  height: 85px;
+  display: none;
+}
+header .main-nav {
+  height: 50px;
+  line-height: 50px;
+  display: flex;
+}
+header .main-nav > div {
+  padding: 0;
+}
+header .main-nav > div:first-child {
+  font-size: 18px;
+  font-weight: bold;
+  padding-left: 35px;
+}
+header .main-nav > div:first-child img {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 9px;
+  left: 0;
+}
+header .main-nav .nav a {
+  float: left;
+}
+header .main-nav .nav a li {
+  padding: 0 15px;
+}
+header .main-nav .nav .active .nav-slider {
+  display: block;
+}
+header .main-nav > div:last-child {
+  text-align: right;
+  position: relative;
+}
+header .main-nav > div:last-child img {
+  border-radius: 100%;
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  top: 10px;
+  right: 0;
+  border: 2px #0084FF solid;
+}
+header .main-nav > div:last-child i {
+  font-size: 18px;
+  margin-right: 0;
+  margin-left: 20px;
+}
+header .main-nav .nav-slider {
+  border-radius: 50px;
+  background: -moz-linear-gradient(left, #66b5ff, #0084FF);
+  background: -webkit-linear-gradient(left, #66b5ff, #0084FF);
+  background: -o-linear-gradient(left, #66b5ff, #0084FF);
+  height: 4px;
+  margin-top: -50px;
+  display: none;
+}
+header .sub-nav {
+  height: 30px;
+  line-height: 30px;
+  display: flex;
+}
+header .sub-nav > div {
+  padding: 0;
+}
+header .sub-nav li {
+  font-size: 12px;
+  float: left;
+  text-align: center;
+  padding: 0 15px;
+  margin-right: 10px;
+}
+header .sub-nav .active li {
+  border-radius: 50px;
+  background: -moz-linear-gradient(left, #66b5ff, #0084FF);
+  background: -webkit-linear-gradient(left, #66b5ff, #0084FF);
+  background: -o-linear-gradient(left, #66b5ff, #0084FF);
+}
+header .sub-nav .active:hover {
+  color: #FFF;
+}
+#loading-progress {
+  background: -moz-linear-gradient(left, #66b5ff, #0084FF);
+  background: -webkit-linear-gradient(left, #66b5ff, #0084FF);
+  background: -o-linear-gradient(left, #66b5ff, #0084FF);
+  height: 4px;
+  background-color: #0084FF;
+  position: fixed;
+  top: 0;
+  left: 0;
+}

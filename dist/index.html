@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="msapplication-tap-highlight" content="no"> 
+    <title>EAdmin - 完整演示案例</title>
+    <link href="./static/css/eadmin.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href=./static/img/favicon.ico>
+</head>
+
+<body>
+    <header>
+        <!-- 主导航 -->
+        <div class="main-nav">
+            <!-- Logo -->
+            <div class="col-3">
+                <img src="./static/img/logo.png"><span>EAdmin演示</span>
+            </div>
+            <!-- 主导航容器 -->
+            <div class="col-6 nav"></div>
+            <!-- 个人信息容器 -->
+            <div id="user" class="col-3 cp">
+                <i class="ri-user-5-line"></i> admin
+            </div>
+        </div>
+        <!-- 二级导航 -->
+        <div class="sub-nav">
+            <div class="col-3"></div>
+            <!-- 二级导航容器 -->
+            <div class="col-8"></div>
+        </div>
+    </header>
+    <!-- 主体内容容器 -->
+    <div id="container"></div>
+</body>
+<script src="./static/js/core/al.load.min.js" init="./static/js/core/al.init.min.js"></script>
+<script>
+    let module = {
+        // 框架全局配置
+        conf : {
+            // 启动页
+            'homepage'           : './tmp/common/dashboard.html',
+            // 关闭input的autocomplete
+            'close_autocomplete' : true,
+            // 加载页面默认延迟时长，避免页面过快刷新
+            'load_page_timeout'  : 0,
+            // 自动点击子分类第一个项目
+            'auto_click_sub_nav' : true,
+            // 页面内文本可选
+            'allow_user_select'  : true,
+            // 允许右键
+            'allow_right_click'  : true,
+            // 弹窗默认宽度
+            'window_width'       : 350,
+            // 弹窗默认高度
+            'window_height'      : 500,
+            // 弹窗默认标题
+            'window_title'       : 'EAdmin演示 - 默认弹窗',
+            // 是否允许点击遮罩关闭弹窗
+            'window_close_by_shade' : true,
+            // 导航分类的数据源类型 local、api
+            'nav_data_source'    : 'local',
+            // 导航分类API地址
+            'nav_api_url'        : '',
+            // 全局消息默认距离顶部的距离，单位px
+            'message_top'        : 80,
+            // 全局消息默认显示时长，单位秒
+            'message_duration'   : 2,
+            // 通知消息默认距离顶部的距离，单位px
+            'notice_top'         : 80,
+            // 通知消息默认显示时长，单位秒
+            'notice_duration'    : 5,
+            // 缺省图片地址
+            'error_default_img'  : './static/img/default.jpg',
+            // 是否支持双击返回顶部
+            'dblclick_goto_top'  : true,
+            // 翻页后是否显示翻页相关信息
+            'page_show_message'  : false,
+            // 发送HTTP请求时的通用参数
+            'http' : {
+                // 通用接口地址
+                baseURL : './',
+                // 请求超时
+                timeout : 4000,
+                // 自定义请求头
+                headers : {
+                    'Content-Type' : 'application/x-www-form-urlencoded',
+                },
+                // API接口返回的code码的字段名
+                code_field   : 'code',
+                // API接口返回代表成功的code码的值
+                code_success : 100,
+                // API接口返回的处理结果内容的字段名
+                msg_field    : 'msg',
+                // API接口返回的数据体的字段名
+                data_field   : 'data',
+                // 数据体通用格式化，用来兼容已经固定的API接口的返回值格式
+                response     : (data) => {
+                    return data;
+                }
+            }
+        },
+        // 加载依赖框架
+        framework: {
+            'jquery' : '3.4.0',
+            'eadmin' : '1.0.1',
+            'lodash' : '4.17.11',
+            'axios'  : '0.19.0',
+            'chart'  : '3.0.0',
+            'art-template' : '4.12.2'
+        },
+        // 数据
+        data : [
+            // 城市数据
+            'city.js',
+            // 模版数据过滤器
+            'template-filter.js',
+            // 不需要mock数据可删除
+            'mock.js'
+        ],
+        // 默认加载的类库，如果用不到可以在此删除
+        lib : [
+            'lib'
+        ],
+        // 插件
+        plugin : [
+            // 必须
+            'perfect-scrollbar',
+            // 必须
+            'time',
+            // 不需要表格导出excel可删除
+            'xlsx',
+            // 不需要表格和本地存储可删除
+            'store',
+            // 不需要表格和MD5加密可删除
+            'md5',
+            // 不需要上传可删除
+            'dropzone',
+            // 不需要富文本编辑器可删除
+            'quill',
+            // 不需要mock数据可删除
+            'mock'
+        ],
+        // 全部加载完成回调
+        ready : function(){
+            Eadmin.dropdown('#user', {
+                // 触发方式
+                trigger : 'hover',
+                // 固定
+                fixed   : true,
+                // 数据体
+                data : [
+                    {
+                        name  : '修改密码',
+                        click : () => {
+                            Eadmin.window(false, {
+                                title  : '修改登录密码',
+                                url    : './tmp/common/edit_pass.html',
+                                width  : 300,
+                                height : 340,
+                                btn    : [{
+                                    // 按钮名称
+                                    name   : '确定修改密码',
+                                    // 点击按钮提交表单时的前置动作，点击后会自动调用窗口内文件里的Method下挂载的指定方法
+                                    // 比如这里提交表单前检测两次密码输入的是否一致
+                                    before : 'checkPword',
+                                }],
+                                close  : (change) => {
+                                    // 弹窗关闭时如果窗口内表单发生过变化，则注销登录
+                                    if (change)
+                                        window.location.href = './login.html';
+                                }
+                            });
+                        }
+                    },
+                    {
+                        name  : '清除缓存',
+                        click : () => {
+                            // GET请求调用接口
+                            Eadmin.get({
+                                // 调用的接口地址
+                                url   : '/api/clearCache/',
+                                // 调用接口成功后弹出提示
+                                popup : true
+                            });
+                        }
+                    },
+                    {
+                        // 分割线
+                        divided : true
+                    },
+                    {
+                        name  : '注销登录',
+                        click : () => {
+                            Eadmin.popup.confirm({
+                                content : '确定注销登录吗？',
+                                submit  : () => {
+                                    window.location.href = './login.html';
+                                }
+                            });
+                        }
+                    }
+                ]
+            });
+        }
+    }
+</script>
+</html>

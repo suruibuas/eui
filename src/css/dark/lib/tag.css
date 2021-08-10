@@ -1,0 +1,30 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 标签
+ */
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 全局配置
+ */
+/**
+ * ================= 颜色设置 ==================
+ */
+/**
+ * ================= 字体设置 ==================
+ */
+/**
+ * ================= 通用方法 ==================
+ */
+.tag {
+  border-radius: 5px;
+  display: inline-block;
+  padding: 6px 10px;
+  outline: none;
+  font-family: inherit;
+  line-height: 1.1;
+  margin: 5px 6px 5px 0;
+  color: #FFF;
+  text-shadow: 1px 1px 1px #36495C;
+}

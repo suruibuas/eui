@@ -1,0 +1,42 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 消息
+ */
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 全局配置
+ */
+/**
+ * ================= 颜色设置 ==================
+ */
+/**
+ * ================= 字体设置 ==================
+ */
+/**
+ * ================= 通用方法 ==================
+ */
+.message {
+  border-radius: 5px;
+  box-shadow: rgba(0, 64, 128, 0.2) 0px 0px 20px;
+  opacity: 0.6;
+  color: #36495C;
+  position: fixed;
+  background: #FFF;
+  z-index: 9999;
+  padding: 10px 15px;
+  left: 50%;
+}
+.message i {
+  font-size: 16px;
+}
+.message .info {
+  color: #ffee01;
+}
+.message .error {
+  color: #FF1844;
+}
+.message .success {
+  color: #6fee00;
+}

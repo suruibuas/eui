@@ -1,0 +1,81 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 选项卡
+ */
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 全局配置
+ */
+/**
+ * ================= 颜色设置 ==================
+ */
+/**
+ * ================= 字体设置 ==================
+ */
+/**
+ * ================= 通用方法 ==================
+ */
+.tab {
+  border-bottom: 2px #DCE8F2 solid;
+  white-space: nowrap;
+}
+.tab span {
+  background: #F7F7F7;
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  cursor: pointer;
+  position: relative;
+  padding: 0 15px;
+  border: 2px #DCE8F2 solid;
+  border-bottom: none;
+  margin-right: 8px;
+  border-radius: 5px 5px 0 0;
+}
+.tab span .mark {
+  border-radius: 50px;
+  position: absolute;
+  background: #FF1844;
+  color: #FFF;
+  right: 2px;
+  top: -4px;
+  font-size: 10px;
+  line-height: 14px;
+  padding: 0px 3px;
+}
+.tab .active {
+  background: #FFF;
+  height: 42px;
+  border-bottom: 2px #FFF solid;
+  margin-bottom: -2px;
+}
+.tab-panel {
+  min-height: 200px;
+  display: none;
+  position: relative;
+}
+.tab-panel .block {
+  padding: 0;
+  box-shadow: none;
+}
+.tab-panel .block-title {
+  padding: 0 10px;
+}
+.tab-panel .block-pb {
+  padding: 20px;
+  background: #F7F7F7;
+  border: 2px #DCE8F2 solid;
+}
+.tab-panel .panel-loading {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,98 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 
+        城市数据文件存储在：/static/js/data/city.js中
+    -->
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>单城市选择器</h3>
+            <!--
+                // 单城市支持拼音首字母快捷搜索
+                Eadmin.citypicker('#citypicker-1');
+            -->
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <input 
+                    id="citypicker-1" 
+                    type="text" 
+                    placeholder="请选择城市" 
+                    data-icon="ri-building-line|right">
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>省市区级联选择</h3>
+            <!--
+                // 省市区也支持拼音首字母快速搜索
+                Eadmin.citypicker('#citypicker-2', {
+                    // 指定参数 type 为 2，表示使用省市区级联模式
+                    type   : 2,
+                    // 省市区中间的分隔符
+                    format : '/',
+                    // 层级，如果设置为2表示只支持省市选择
+                    level  : 3
+                });
+            -->
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <input 
+                    id="citypicker-2" 
+                    type="text" 
+                    placeholder="省市区级联选择" 
+                    data-icon="ri-building-line|right">
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>回调</h3>
+            <!--
+                Eadmin.citypicker('#citypicker-3', {
+                    // 指定参数 change 在省市区发生变化时可以触发指定的回调
+                    // 框架会默认注入选择的城市作为参数
+                    change : (val) => {
+                        console.log('选择的是：' + val);
+                    }
+                });
+            -->
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <input 
+                    id="citypicker-3" 
+                    type="text" 
+                    placeholder="回调" 
+                    data-icon="ri-building-line|right">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (() => {
+        // 默认城市选择
+        Eadmin.citypicker('#citypicker-1');
+        // 自定义分隔符和层级
+        Eadmin.citypicker('#citypicker-2', {
+            type   : 2,
+            format : '/',
+            level  : 3
+        });
+        // 回调
+        Eadmin.citypicker('#citypicker-3', {
+            change : (val) => {
+                console.log('选择的是：' + val);
+            }
+        });
+    })();
+</script>

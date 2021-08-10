@@ -1,0 +1,215 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>普通通知</h3>
+            <!--
+                Eadmin.notice.info({
+                    // 标题
+                    title : 'EAdmin',
+                    // 内容
+                    desc  : 'EAdmin，开箱即用的后台UI'
+                });
+            -->
+            <button id="notice-1" class="hl">普通通知</button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>成功通知</h3>
+            <!--
+                Eadmin.notice.success({
+                    title : 'EAdmin',
+                    desc  : 'EAdmin，开箱即用的后台UI'
+                });
+            -->
+            <button id="notice-2" class="hl">成功通知</button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>失败通知</h3>
+            <!--
+                Eadmin.notice.error({
+                    title : 'EAdmin',
+                    desc  : 'EAdmin，开箱即用的后台UI'
+                });
+            -->
+            <button id="notice-3" class="hl">失败通知</button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>简洁通知</h3>
+            <!--
+                Eadmin.notice.error({
+                    // 只设置标题则会以简洁模式显示
+                    title : 'EAdmin'
+                });
+            -->
+            <button id="notice-4" class="hl">简洁通知</button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>自定义显示时间长度</h3>
+            <!--
+                Eadmin.notice.info({
+                    title    : '自定义时长',
+                    desc     : 'EAdmin，开箱即用的后台UI，显示3秒',
+                    // 指定duration设置停留时长，单位秒
+                    duration : 3
+                });
+            -->
+            <button id="notice-5" class="hl">显示时长</button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>带链接的通知</h3>
+            <!--
+                Eadmin.notice.info({
+                    title : 'EAdmin',
+                    desc  : 'EAdmin，开箱即用的后台UI',
+                    // 指定链接，可以同时指定多个链接
+                    href  : [
+                        {
+                            // 链接地址
+                            href   : 'http://www.baidu.com',
+                            // 显示文案
+                            txt    : '查看详情',
+                            // 指定native为true，则该链接将采用原生跳转，否则会采用框架内部的链接跳转模式
+                            native : true,
+                            // 链接打开方式，只有native为true时有效
+                            target : '_blank'
+                        }
+                    ]
+                });
+            -->
+            <button id="notice-6" class="hl">带链接</button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>不自动关闭的通知</h3>
+            <!--
+                Eadmin.notice.info({
+                    title    : '不会自动关闭',
+                    desc     : 'duration设置为0则不会自动关闭',
+                    // 设置duration为0，则不会自动关闭
+                    duration : 0
+                });
+            -->
+            <button id="notice-7" class="hl">手动关闭</button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>关闭回调</h3>
+            <!--
+                Eadmin.notice.info({
+                    title : '关闭后有回调',
+                    desc  : 'EAdmin，开箱即用的后台UI',
+                    // 指定close参数设置关闭时的回调方法
+                    close : () => {
+                        console.log('通知消息关闭了');
+                    }
+                });
+            -->
+            <button id="notice-8" class="hl">关闭回调</button>
+        </div>
+    </div>
+</div>
+<script>
+    (() => {
+        // 普通通知
+        $('#notice-1').click(() => {
+            Eadmin.notice.info({
+                title : 'EAdmin',
+                desc  : 'EAdmin，开箱即用的后台UI'
+            });
+        });
+        // 成功通知
+        $('#notice-2').click(() => {
+            Eadmin.notice.success({
+                title : 'EAdmin',
+                desc  : 'EAdmin，开箱即用的后台UI'
+            });
+        });
+        // 失败通知
+        $('#notice-3').click(() => {
+            Eadmin.notice.error({
+                title : 'EAdmin',
+                desc  : 'EAdmin，开箱即用的后台UI'
+            });
+        });
+        // 简洁通知
+        $('#notice-4').click(() => {
+            Eadmin.notice.error({
+                title : 'EAdmin'
+            });
+        });
+        // 自定义显示时间长度
+        $('#notice-5').click(() => {
+            Eadmin.notice.info({
+                title    : '自定义时长',
+                desc     : 'EAdmin，开箱即用的后台UI，显示3秒',
+                duration : 3
+            });
+        });
+        // 带链接的通知
+        $('#notice-6').click(() => {
+            Eadmin.notice.info({
+                title : 'EAdmin',
+                desc  : 'EAdmin，开箱即用的后台UI',
+                href  : [
+                    {
+                        href   : 'http://www.baidu.com',
+                        txt    : '查看详情',
+                        native : true,
+                        target : '_blank'
+                    }
+                ]
+            });
+        });
+        // 不自动关闭的通知
+        $('#notice-7').click(() => {
+            Eadmin.notice.info({
+                title    : '不会自动关闭',
+                desc     : 'duration设置为0则不会自动关闭',
+                duration : 0
+            });
+        });
+        // 关闭回调
+        $('#notice-8').click(() => {
+            Eadmin.notice.info({
+                title : '关闭后有回调',
+                desc  : 'EAdmin，开箱即用的后台UI',
+                close : () => {
+                    console.log('通知消息关闭了');
+                }
+            });
+        });
+    })();
+</script>

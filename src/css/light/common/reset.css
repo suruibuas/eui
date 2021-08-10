@@ -1,0 +1,76 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 重置
+ */
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 全局配置
+ */
+/**
+ * ================= 颜色设置 ==================
+ */
+/**
+ * ================= 字体设置 ==================
+ */
+/**
+ * ================= 通用方法 ==================
+ */
+* {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -moz-user-focus: none;
+}
+body {
+  background: #F5F5F5;
+  font-size: 14px;
+  font-family: "Microsoft YaHei";
+  color: #36495C;
+}
+ul,
+li,
+p {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+a {
+  transition: color 0.2s linear;
+  color: #36495C;
+  text-decoration: none;
+}
+a:hover {
+  transition: color 0.2s linear;
+  color: #10161c;
+}
+em {
+  font-style: normal;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+th {
+  font-weight: normal;
+  text-align: initial;
+}
+td {
+  padding: 0;
+}
+i {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 5px;
+  font-size: 16px;
+}
+img,
+video {
+  border-radius: 5px;
+}
+@-moz-document url-prefix() {
+  i {
+    vertical-align: middle;
+  }
+}

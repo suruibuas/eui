@@ -1,0 +1,30 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 评分
+ */
+
+@import "../global";
+
+.rate
+{
+    margin-top: 20px;
+    .star
+    {
+        .animate(color);
+        display: inline-block;
+        font-size: 18px;
+        margin-right: 8px;
+        cursor: pointer;
+    }
+    .full
+    {
+        .animate(color);
+        color: @mcolor-3;
+    }
+    .disabled
+    {
+        cursor: not-allowed;
+        color: @color-6;
+    }
+}

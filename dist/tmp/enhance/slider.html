@@ -1,0 +1,180 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>默认滑块</h3>
+            <!--
+                Eadmin.slider('#slider-1');
+            -->
+            <!-- 滑块容器 -->
+            <div id="slider-1"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>有默认值</h3>
+            <!--
+                Eadmin.slider('#slider-2', {
+                    // 指定参数 value 设置默认值
+                    value : 30
+                });
+            -->
+            <!-- 滑块容器 -->
+            <div id="slider-2"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>禁用</h3>
+            <!--
+                Eadmin.slider('#slider-3', {
+                    // 指定参数 disabled 为 true 禁用滑块
+                    disabled : true
+                });
+            -->
+            <!-- 滑块容器 -->
+            <div id="slider-3"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>固定步长</h3>
+            <!--
+                Eadmin.slider('#slider-4', {
+                    // 指定参数 step 设置固定步长，必须可被最大值整除
+                    step : 10
+                });
+            -->
+            <!-- 滑块容器 -->
+            <div id="slider-4"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>自定义最大最小值</h3>
+            <!--
+                Eadmin.slider('#slider-5', {
+                    // 自定义最小值，默认为0
+                    min : 10,
+                    // 自定义最大值，默认为100
+                    max : 1000
+                });
+            -->
+            <!-- 滑块容器 -->
+            <div id="slider-5"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>自定义提示</h3>
+            <!--
+                Eadmin.slider('#slider-6', {
+                    // 指定参数 tips 设置鼠标移入滑块后的自定义提示内容
+                    // 其中 "[val]" 框架会自动替换为当前真实的滑块数值
+                    tips : '自定义提示：[val]'
+                });
+            -->
+            <!-- 滑块容器 -->
+            <div id="slider-6"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>值变化时回调</h3>
+            <!--
+                Eadmin.slider('#slider-7', {
+                    // 指定参数 change 来监听滑块值发生变化，默认注入当前的滑块数值为参数
+                    change : (val) => {
+                        // 这里的 val 就是框架自动注入的滑块的数值
+                        console.log(val);
+                    }
+                });
+            -->
+            <!-- 滑块容器 -->
+            <div id="slider-7"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>绑定隐藏域</h3>
+            <!--
+                Eadmin.slider('#slider-8', {
+                    // 指定参数 bind 来绑定 input 隐藏域，框架会自动生成一个隐藏域，该隐藏域的name值就是 bind 参数指定的
+                    // 滑块数值变化时数值会实时写入到该隐藏域中，用于后端POST取值
+                    // 例如本例，会自动生成一个：<input name="slider" type="hidden">
+                    bind : 'slider'
+                });
+            -->
+            <!-- 滑块容器 -->
+            <div id="slider-8"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (() => {
+        // 默认滑块
+        Eadmin.slider('#slider-1');
+        // 有默认值
+        Eadmin.slider('#slider-2', {
+            value : 30
+        });
+        // 禁用
+        Eadmin.slider('#slider-3', {
+            value : 30,
+            // 禁用
+            disabled : true
+        });
+        // 固定步长
+        Eadmin.slider('#slider-4', {
+            // 默认值
+            value : 0,
+            // 固定步长，必须可被最大值整除
+            step  : 10
+        });
+        // 自定义最大值最小值
+        Eadmin.slider('#slider-5', {
+            // 自定义最小值
+            min : 10,
+            // 自定义最大值
+            max : 1000
+        });
+        // 自定义提示
+        Eadmin.slider('#slider-6', {
+            // 提示
+            tips : '自定义提示：[val]'
+        });
+        // 值改变时回调
+        Eadmin.slider('#slider-7', {
+            // 值发生改变后的回调
+            change : (val) => {
+                console.log(val);
+            }
+        });
+        // 取值绑定隐藏域
+        Eadmin.slider('#slider-8', {
+            // 绑定的隐藏域
+            bind : 'slider'
+        });
+    })();
+</script>

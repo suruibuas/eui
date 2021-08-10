@@ -1,0 +1,73 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 通知
+ */
+
+@import "../global";
+
+#notice
+{
+    position: fixed;
+    right: 10px;
+    width: 300px;
+    z-index: 9999;
+}
+.notice
+{
+    .border-radius();
+    .box-shadow();
+    background: @color-12;
+    padding: 15px 10px;
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+    i
+    {
+        position: absolute;
+        margin-right: 0;
+    }
+    .notice-title
+    {
+        font-size: @font-size-3;
+        margin-bottom: 5px;
+    }
+    .desc
+    {
+        line-height: 18px;
+        margin-top: 5px;
+        color: @color-7;
+    }
+    .close
+    {
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .title-icon
+    {
+        font-size: 26px;
+    }
+    .href
+    {
+        margin: 10px 0 5px 0;
+        a
+        {
+            color: @color-3;
+            font-weight: bold;
+        }
+    }
+    .info
+    {
+        color: @mcolor-3;
+    }
+    .error
+    {
+        color: @mcolor-1;
+    }
+    .success
+    {
+        color: @mcolor-2;
+    }
+}

@@ -1,0 +1,51 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>自动定位</h3>
+            <i 
+                class="ri-question-line fs18" 
+                data-tips="这是一段很长的Tips文案，设定的左侧显示，如果左侧空间不足，则TIPS会自动显示在右侧，无需人工干预"
+                data-tips-position="left">
+            </i>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>默认提示</h3>
+            <!--
+                在任何DOM元素上增加属性 data-tips 即可使该元素增加tips提示效果
+            -->
+            <i 
+                class="ri-question-line fs18" 
+                data-tips="默认显示在顶部的Tips~">
+            </i>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>自定义显示位置</h3>
+            <!--
+                增加data-tips-position属性可以自定义设置tips的位置
+                支持：top、down、left、right，默认为top
+                如果不手动指定，则tips会根据当前所在位置自动设置
+            -->
+            <i 
+                class="ri-question-line fs18" 
+                data-tips="自定义显示位置的提示" 
+                data-tips-position="right">
+            </i>
+        </div>
+    </div>
+</div>

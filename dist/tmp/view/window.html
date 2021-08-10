@@ -1,0 +1,282 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>默认弹窗</h3>
+            <!--
+                Eadmin.window('#window-1');
+            -->
+            <button 
+                id="window-1" 
+                class="hl" 
+                data-window-url="window.html">
+                打开窗口
+            </button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>禁止拖动</h3>
+            <!--
+                Eadmin.window('#window-2', {
+                    // 设置参数 drag 为 false，则窗口不能拖动，默认为 true
+                    drag : false
+                });
+            -->
+            <button 
+                id="window-2" 
+                class="hl" 
+                data-window-url="window.html">
+                打开窗口
+            </button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>自定义宽高</h3>
+            <!--
+                Eadmin.window('#window-3', {
+                    // 宽度如果直接写数字，是px为单位
+                    width  : 600,
+                    // 同时也支持百分比
+                    height : '80%'
+                });
+            -->
+            <button 
+                id="window-3" 
+                class="hl" 
+                data-window-url="window.html">
+                打开窗口
+            </button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>带按钮栏</h3>
+            <!--
+                Eadmin.window('#window-4', {
+                    // 按钮栏
+                    btn : [
+                        {
+                            name : '自定义',
+                            // 设置hl为false取消按钮高亮效果
+                            hl   : false,
+                            // 自定义按钮点击后的动作，注入obj对象，其中包含3个常用方法如下
+                            // 重置按钮可点击状态
+                            // obj.reset();
+                            // 刷新窗口
+                            // obj.refresh();
+                            // 关闭窗口
+                            // obj.close();
+                            action : (obj) => {
+                                console.log('点击了窗口中的自定义按钮');
+                                obj.reset();
+                            }
+                        },
+                        {
+                            // 按钮名称
+                            name   : '确定',
+                            // 内置了3个动作，如果内置的3个动作不满足，可以使用自定义动作
+                            // submit：提交窗口内的表单，默认为submit
+                            // cancel：取消
+                            // refresh：刷新窗口
+                            action : 'submit',
+                            // 指定action为submit时，提交的表单的ID，一般用在窗口中有不止一个form表单的情况下
+                            // formid : '#form-1'
+                        }
+                    ],
+                    // 窗口关闭回调，注入change参数，如果窗口中包含表单，并且表单的内容发生了变化，则该值为true，否则为false
+                    close : (change) => {
+                        console.log(change);
+                        // 如果窗口内表单发生变化，则刷新页面
+                        if (change) Eadmin.refresh();
+                    }
+                });
+            -->
+            <button 
+                id="window-4" 
+                class="hl" 
+                data-window-url="window.html">
+                打开窗口
+            </button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>关闭回调</h3>
+            <!--
+                Eadmin.window('#window-5', {
+                    // 指定close参数设置窗口关闭时的回调函数
+                    // 注入一个参数change，在窗口内包含表单并且表单内容发生变化时该值为true，否则为false
+                    close : (change) => {
+                        console.log(change);
+                        console.log('窗口关闭了');
+                    }
+                });
+            -->
+            <button 
+                id="window-5" 
+                class="hl" 
+                data-window-url="window.html">
+                打开窗口
+            </button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>右侧弹出</h3>
+            <!--
+                // 设置弹窗打开的模式，模式是弹出
+                Eadmin.window('#window-6', {
+                    width : '70%',
+                    // 设置style为popup，则弹窗从右侧弹出，一般用于弹窗内页面比较大的情况
+                    style : 'popup'
+                });
+            -->
+            <button 
+                id="window-6" 
+                class="hl" 
+                data-window-url="window.html">
+                打开窗口
+            </button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>iframe模式加载窗口</h3>
+            <!--
+                Eadmin.window('#window-7', {
+                    width  : '80%',
+                    height : '80%',
+                    model  : 'iframe'
+                });
+            -->
+            <button 
+                id="window-7" 
+                class="hl" 
+                data-window-url="http://www.baidu.com">
+                打开窗口
+            </button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>手动打开弹窗</h3>
+            <!--
+                // 某些情况下希望手动触发点击事件弹出弹窗
+                $('#window-8').on('click', () => {
+                    // 设置弹窗的第一个参数为false
+                    Eadmin.window(false, {
+                        // 手动指定弹窗url，正常情况下url是通过data-window-url属性直接写在需要触发弹窗的dom元素上的
+                        url : 'window.html'
+                    });
+                });
+            -->
+            <button id="window-8" class="hl">
+                打开窗口
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    (() => {
+        // 默认弹窗
+        Eadmin.window('#window-1');
+        // 禁止拖动
+        Eadmin.window('#window-2', {
+            drag : false
+        });
+        // 自定义宽度高度
+        Eadmin.window('#window-3', {
+            width  : '80%',
+            height : '90%'
+        });
+        // 带按钮栏
+        Eadmin.window('#window-4', {
+            // 按钮栏
+            btn : [
+                {
+                    name : '自定义',
+                    // 设置hl为false取消按钮高亮效果
+                    hl   : false,
+                    // 自定义按钮点击后的动作，注入obj对象，其中包含3个常用方法如下
+                    // 重置按钮可点击状态
+                    // obj.reset();
+                    // 刷新窗口
+                    // obj.refresh();
+                    // 关闭窗口
+                    // obj.close();
+                    action : (obj) => {
+                        console.log('点击了窗口中的自定义按钮');
+                        obj.reset();
+                    }
+                },
+                {
+                    // 按钮名称
+                    name   : '确定',
+                    // 内置了3个动作，如果内置的3个动作不满足，可以使用自定义动作
+                    // submit：提交窗口内的表单，默认为submit
+                    // cancel：取消
+                    // refresh：刷新窗口
+                    action : 'submit',
+                    // 指定action为submit时，提交的表单的ID，一般用在窗口中有不止一个form表单的情况下
+                    // formid : '#form-1'
+                }
+            ],
+            // 窗口关闭回调，注入change参数，如果窗口中包含表单，并且表单的内容发生了变化，则该值为true，否则为false
+            close : (change) => {
+                console.log(change);
+                // 如果窗口内表单发生变化，则刷新页面
+                if (change) Eadmin.refresh();
+            }
+        });
+        // 弹窗关闭回调
+        Eadmin.window('#window-5', {
+            close : (change) => {
+                console.log(change);
+                console.log('窗口关闭了');
+            }
+        });
+        // 设置弹窗打开的模式，模式是弹出
+        Eadmin.window('#window-6', {
+            width : '70%',
+            // 设置style为popup，则弹窗从右侧弹出，一般用于弹窗内页面比较大的情况
+            style : 'popup'
+        });
+        // iframe模式打开弹窗
+        Eadmin.window('#window-7', {
+            width  : '80%',
+            height : '80%',
+            model  : 'iframe'
+        });
+        // 某些情况下希望手动触发点击事件弹出弹窗
+        $('#window-8').on('click', () => {
+            // 设置弹窗的第一个参数为false
+            Eadmin.window(false, {
+                // 手动指定弹窗url，正常情况下url是通过data-window-url属性直接写在需要触发弹窗的dom元素上的
+                url : 'window.html'
+            });
+        });
+    })();
+</script>

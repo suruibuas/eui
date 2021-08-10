@@ -1,0 +1,163 @@
+<style>
+    #search{
+        padding: 20px 20px 10px 20px;
+    }
+</style>
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!--
+    ==============================
+    数据接口返回数据示例
+    ==============================
+    {
+        "code": 100,
+        "data": {
+            // 数据总条数
+            "count": 100,
+            // 列表
+            "list": [
+                {
+                    "id": 1,
+                    "title": "eadmin",
+                    "cate": "演示",
+                    "hit": 10,
+                    "comment": 20,
+                    "good": 50,
+                    "icon": "",
+                    "name": "管理员",
+                    "addtime": 1628081989,
+                    "status": 1
+                }
+            ]
+        }
+    }
+    ==============================
+-->
+<div class="block-box">
+    <div class="col-12">
+        <!-- 自定义分页的搜索容器 -->
+        <div class="block" id="search"></div>
+    </div>
+</div>
+<!-- 
+    自定义分页主体数据容器
+    其中属性 data-template 设置的值就是下面数据模版的ID值
+ -->
+<div class="block-box" data-template="data"></div>
+<!--
+    数据模板
+    Eadmin的数据模版使用的是腾讯开源的 art-template并进行了二次封装，使用更加容易
+    具体模版的语法请参考：http://aui.github.io/art-template/zh-cn/docs/
+-->
+<script id="data" type="text/html">
+{{each list row key}}
+<!-- 响应盒子，bootstrap -->
+<div class="col-3">
+    <!-- 容器盒子，具体布局使用 -->
+    <div class="block">
+        <div class="pic">
+            <!-- 增加class用来手动触发点击弹窗 -->
+            <a href="javascript:;" data-window-url="=window.html?id={{row.id}}">
+                <img class="cover" src="{{row.pic}}">
+            </a>
+            <a href="javascript:;"><h4>{{row.title}}</h4></a>
+            <div class="note">{{row.cate}}</div>
+            <!-- 图标栏 -->
+            <div class="icon">
+                <span><i class="ri-eye-line"></i>{{row.hit}}</span>
+                <span><i class="ri-message-3-line"></i>{{row.comment}}</span> 
+                <span><i class="ri-thumb-up-line"></i>{{row.good}}</span>
+            </div>
+            <!-- 扩展信息 -->
+            <div class="info">
+                <span><a href="javascript:;"><img src="{{row.icon}}">{{row.name}}</a></span>
+                <span><i class="ri-timer-line"></i> {{row.addtime|dateFormat "%y-%M-%d"}}</span>
+            </div>
+            <!-- 角标 -->
+            {{if row.status == 1}}
+            <div class="corner">新品</div>
+            {{else}}
+            <div class="corner color-1">下架</div>
+            {{/if}}
+        </div>
+    </div>
+</div>
+{{/each}}
+</script>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 自定义分页的分页容器 -->
+    <div class="col-12" id="page"></div>
+</div>
+<script>
+    (() => {
+        let param = {};
+        param.config = {
+            // 数据接口
+            data : '/api/page/',
+            // 数据模版ID
+            tmp  : 'data',
+            // 分页
+            page : {
+                // 分页容器的ID
+                boxid : '#page',
+                // 每页条数
+                size  : 12,
+                // 数字分页数目
+                num   : 5,
+                // 传递给后端代表页数的字段名，用来后端取值
+                page_field : 'page',
+                // 传递给后端代表条数的字段名，用来后端取值
+                size_field : 'size'
+            }
+        };
+        // 搜索
+        param.search = {
+            // 搜索容器的ID
+            boxid : '#search',
+            // 搜索字段配置
+            field : {
+                title : {
+                    name : '商品标题',
+                    type : 'input'
+                },
+                addtime : {
+                    name : '发布时间',
+                    type : 'datepicker',
+                    // 日历参数配置，完全兼容日期选择器所有参数，日期选择器具体参数请参考相关章节的文档
+                    // 如果不配置param参数，则默认采用单日历模式
+                    param : {
+                        type : 'date-range',
+                        unixtime : true
+                    }
+                },
+                type : {
+                    name   : '类型',
+                    type   : 'select',
+                    option : [
+                        {
+                            key : 'GET',
+                            val : 'get'
+                        },
+                        {
+                            key : 'POST',
+                            val : 'post'
+                        }
+                    ]
+                }
+            }
+        };
+        // 模版编译完成后的回调，可在此处处理业务逻辑
+        param.callback = () => {
+            Eadmin.window('[data-window-url]', {
+                title : '查看详情',
+                width : '95%',
+                style : 'popup'
+            });
+        }
+        Eadmin.page(param);
+    })();
+</script>

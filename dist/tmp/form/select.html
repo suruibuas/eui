@@ -1,0 +1,199 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>默认下拉菜单</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <select name="fruit">
+                    <option value="0">请选择</option>
+                    <option value="1">苹果</option>
+                    <option value="2">香蕉</option>
+                    <option value="3">梨</option>
+                    <option value="4">橘子</option>
+                    <option value="5">西瓜</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>有选中值</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 在option上增加属性 selected 设置选中 -->
+                <select name="fruit">
+                    <option value="0">请选择</option>
+                    <option value="1">苹果</option>
+                    <option value="2" selected>香蕉</option>
+                    <option value="3">梨</option>
+                    <option value="4">橘子</option>
+                    <option value="5">西瓜</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>有禁用选项</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 在option上增加属性 disabled 设置禁用 -->
+                <select name="fruit">
+                    <option value="0">请选择</option>
+                    <option value="1">苹果</option>
+                    <option value="2" disabled>香蕉</option>
+                    <option value="3">梨</option>
+                    <option value="4">橘子</option>
+                    <option value="5">西瓜</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>禁用的下拉菜单</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 增加属性 disabled 禁用下拉菜单 -->
+                <select name="fruit" disabled>
+                    <option value="0">请选择</option>
+                    <option value="1">苹果</option>
+                    <option value="2">香蕉</option>
+                    <option value="3">梨</option>
+                    <option value="4">橘子</option>
+                    <option value="5">西瓜</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>自定义宽度</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 
+                    增加属性 data-width来指定下拉菜单的宽度
+                    支持px和百分比，如果是px则直接写数字，例如下面的例子
+                    如果需要百分比，则写数字加 "%"
+                    =========================================
+                    百分比宽度的例子如下，设置宽度为 "100%"
+                    =========================================
+                    <select name="fruit" data-width="100%">
+                 -->
+                <select name="fruit" data-width="70">
+                    <option value="0">请选择</option>
+                    <option value="1">苹果</option>
+                    <option value="2">香蕉</option>
+                    <option value="3">梨</option>
+                    <option value="4">橘子</option>
+                    <option value="5">西瓜</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>联动菜单</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 
+                    ====================================
+                    这个是一级菜单
+                    ====================================
+                    给一级菜单增加 data-bind 属性，来指定一级菜单绑定的子菜单的ID
+                    增加 data-api 属性，来指定在一级菜单选中时去该API调取子菜单的数据
+                    框架会在一级菜单的 change 事件触发时自动往 data-api 指定的接口地址
+                    发送一个 get 请求，并自动在该接口地址上拼接上一级菜单选中的值
+                    ====================================
+                    例如下面的例子 data-api 写的是：/api/select/?fruit=
+                    此时选中水果选项，则框架会自动将API拼接成：/api/select/?fruit=1
+                    ====================================
+                    api返回数据示例如下
+                    ====================================
+                    {
+                        "code": 100,
+                        "data": {
+                            "1": "苹果",
+                            "2": "香蕉",
+                            "3": "西瓜",
+                            "4": "菠萝",
+                            "5": "梨",
+                            "6": "柚子"
+                        }
+                    }
+                    ====================================
+                 -->
+                <select 
+                    name="fruit"
+                    data-width="100" 
+                    data-bind="child" 
+                    data-api="/api/select/?fruit=">
+                    <option value="0">请选择</option>
+                    <option value="1">水果</option>
+                    <option value="2">运动</option>
+                </select>
+                <!-- 
+                    ====================================
+                    这个是二级菜单
+                    二级菜单的ID对应一级菜单的 data-bind属性里设置的值
+                    增加 data-selected 属性来指定默认选中的项，一般用在编辑场景中
+                    例如编辑商品，需要默认选中商品的一级和二级分类，这个时候就可以通过
+                    data-selected来设置二级菜单的默认选中值，因为二级菜单是通过一级菜单的data-api
+                    异步获取的数据，所以需要用该方法来指定默认选中的option
+                    ====================================
+                 -->
+                <select 
+                    id="child" 
+                    name="two" 
+                    data-width="100"
+                    data-selected="1">
+                    <option value="0">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>多选下拉</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 
+                    增加属性 data-multiple 则下拉菜单将采用多选模式，选择多个选项，最终框架会把值用 "," 分割
+                    例如下面的例子选择了：苹果、橘子，则最终的值为：1,4，后端在接受POST参数的时候收到的就是 "1,4"
+                    增加 data-selected 属性用来设置默认选中的项，一般用在编辑场景，下面的例子，默认选中的就是苹果和橘子
+                 -->
+                <select 
+                    name="fruit"
+                    data-multiple
+                    data-selected="1">
+                    <option value="0">请选择</option>
+                    <option value="1">苹果</option>
+                    <option value="2">香蕉</option>
+                    <option value="3">梨</option>
+                    <option value="4">橘子</option>
+                    <option value="5">西瓜</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

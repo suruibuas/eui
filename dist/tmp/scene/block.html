@@ -1,0 +1,126 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 在block盒子上增加class block-data -->
+        <div class="block block-data">
+            <h5>默认数据面板</h5>
+            <div class="data">
+                <span class="num">48</span>
+                <span>个</span>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 
+            在block盒子上增加class block-data
+            增加属性 data-color 来设置数字的颜色，支持1-8，共8种颜色
+         -->
+        <div 
+            class="block block-data" 
+            data-color="1">
+            <h5>改变数字颜色</h5>
+            <div class="data">
+                <span class="num">48</span>
+                <span>个</span>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 
+            在block盒子上增加class block-data
+            增加属性 data-color 来设置数字的颜色，支持1-8，共8种颜色
+            增加属性 data-icon 指定面板图标
+         -->
+         <div 
+            class="block block-data" 
+            data-color="2" 
+            data-icon="ri-chrome-line">
+            <h5>带图标</h5>
+            <div class="data">
+                <span class="num">48</span>
+                <span>个</span>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 
+            在block盒子上增加class block-data
+            增加属性 data-color 来设置数字的颜色，支持1-8，共8种颜色
+            增加属性 data-icon  指定面板图标
+            增加属性 data-small 则面板采用紧凑模式显示，紧凑型常用于列表上方的统计相关数据显示
+         -->
+         <div 
+            class="block block-data" 
+            data-color="3"
+            data-small>
+            <h5>紧凑数据块</h5>
+            <div class="data">
+                <span class="num">48</span>
+                <span>个</span>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 
+            在block盒子上增加class block-data
+            增加属性 data-color 来设置数字的颜色，支持1-8，共8种颜色
+            增加属性 data-icon  指定面板图标
+         -->
+         <div 
+            class="block block-data" 
+            data-color="4">
+            <h5>带进度条和辅助文案</h5>
+            <div class="data">
+                <span class="num">48</span>
+                <span>个</span>
+            </div>
+            <div 
+                data-percent="38"
+                data-show-percent
+                data-percent-color="4">
+            </div>
+            <span class="note">进度未达标</span>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 进度面板属于常规布局，不需要在block上增加block-data样式 -->
+        <div class="block">
+            <h5>进度面板</h5>
+            <span class="note">注册量</span>
+            <div 
+                data-show-percent
+                data-percent-color="1"
+                data-percent="38">
+            </div>
+            <span class="note">销售量</span>
+            <div 
+                data-show-percent
+                data-percent-color="2"
+                data-percent="40">
+            </div>
+            <span class="note">转化率</span>
+            <div 
+                data-show-percent
+                data-percent-color="3"
+                data-percent="30">
+            </div>
+            <span class="note">退款率</span>
+            <div 
+                data-show-percent
+                data-percent-color="4"
+                data-percent="5">
+            </div>
+        </div>
+    </div>
+</div>

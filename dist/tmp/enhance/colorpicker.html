@@ -1,0 +1,114 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>默认颜色</h3>
+            <!--
+                Eadmin.colorpicker('#color-1');
+            -->
+            <!-- 颜色容器 -->
+            <div id="color-1"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>自定义色值</h3>
+            <!--
+                Eadmin.colorpicker('#color-2', {
+                    // 指定参数 color 可以自定义需要的色值，数组格式
+                    color : [
+                        '#000', '#CCC'
+                    ]
+                });
+            -->
+            <!-- 颜色容器 -->
+            <div id="color-2"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>有默认值</h3>
+            <!--
+                Eadmin.colorpicker('#color-3', {
+                    // 指定参数 default 来设置默认选中的色值，常用在编辑场景
+                    default : '#90e200'
+                });
+            -->
+            <!-- 颜色容器 -->
+            <div id="color-3"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>回调事件</h3>
+            <!--
+                Eadmin.colorpicker('#color-4', {
+                    // 指定参数 change 来设置色值发生改变时的回调
+                    // 框架会自动注入当前选择的色值作为参数
+                    change : (val) => {
+                        console.log('选中的色值是：' + val);
+                    }
+                });
+            -->
+            <!-- 颜色容器 -->
+            <div id="color-4"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>绑定隐藏域</h3>
+            <!--
+                Eadmin.colorpicker('#color-5', {
+                    // 指定 bind 参数设置绑定的隐藏域，框架会自动生成input隐藏域name为bind参数指定的值
+                    // 本例会自动生成：<input name="color" type="hidden">
+                    // 在色值变化时会自动将色值写入该隐藏域中，用于后端POST取值
+                    bind : 'color'
+                });
+            -->
+            <!-- 颜色容器 -->
+            <div id="color-5"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (() => {
+        // 默认颜色选择
+        Eadmin.colorpicker('#color-1');
+        // 自定义颜色
+        Eadmin.colorpicker('#color-2', {
+            color : [
+                '#000',
+                '#CCC'
+            ]
+        });
+        // 默认选中的颜色
+        Eadmin.colorpicker('#color-3', {
+            default : '#90e200'
+        });
+        // 回调
+        Eadmin.colorpicker('#color-4', {
+            change : (val) => {
+                console.log('选中的色值是：' + val);
+            }
+        });
+        // 绑定隐藏域
+        Eadmin.colorpicker('#color-5', {
+            bind : 'color'
+        });
+    })();
+</script>

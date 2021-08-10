@@ -1,0 +1,127 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>默认评分</h3>
+            <!--
+                Eadmin.rate('#rate-1');
+            -->
+            <!-- 评分容器 -->
+            <div id="rate-1"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>有默认分值</h3>
+            <!--
+                Eadmin.rate('#rate-2', {
+                    // 指定参数 default 设置默认分数
+                    default : 2
+                });
+            -->
+            <!-- 评分容器 -->
+            <div id="rate-2"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>禁用</h3>
+            <!--
+                Eadmin.rate('#rate-3', {
+                    // 指定参数 disabled 为 true 禁用评分
+                    disabled : true
+                });
+            -->
+            <!-- 评分容器 -->
+            <div id="rate-3"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>自定义总分数</h3>
+            <!--
+                Eadmin.rate('#rate-4', {
+                    // 指定参数 num 自定义最大分数，默认5
+                    num : 10
+                });
+            -->
+            <!-- 评分容器 -->
+            <div id="rate-4"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>回调事件</h3>
+            <!--
+                Eadmin.rate('#rate-5', {
+                    // 指定 change 参数在分数变化时会触发该回调，框架自动注入当前选择的分数作为参数
+                    change : (val) => {
+                        console.log('选择了' + val + '星');
+                    }
+                });
+            -->
+            <!-- 评分容器 -->
+            <div id="rate-5"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>绑定隐藏域</h3>
+            <!--
+                Eadmin.rate('#rate-6', {
+                    // 指定 bind 参数设置绑定的隐藏域，框架会自动生成input隐藏域name为bind参数指定的值
+                    // 本例会自动生成：<input name="rate" type="hidden">
+                    // 在分数变化时会自动将分数写入该隐藏域中，用于后端POST取值
+                    bind : 'rate'
+                });
+            -->
+            <!-- 评分容器 -->
+            <div id="rate-6"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (() => {
+        // 默认评分
+        Eadmin.rate('#rate-1');
+        // 有默认分值
+        Eadmin.rate('#rate-2', {
+            default : 2
+        });
+        // 禁用
+        Eadmin.rate('#rate-3', {
+            disabled : true
+        });
+        // 自定义最大分数
+        Eadmin.rate('#rate-4', {
+            num : 10
+        });
+        // 评分改变回调
+        Eadmin.rate('#rate-5', {
+            change : (val) => {
+                console.log('选择了' + val + '星');
+            }
+        });
+        // 绑定隐藏域
+        Eadmin.rate('#rate-6', {
+            bind : 'rate'
+        });
+    })();
+</script>

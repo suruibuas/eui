@@ -1,0 +1,37 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 评分
+ */
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 全局配置
+ */
+/**
+ * ================= 颜色设置 ==================
+ */
+/**
+ * ================= 字体设置 ==================
+ */
+/**
+ * ================= 通用方法 ==================
+ */
+.rate {
+  margin-top: 20px;
+}
+.rate .star {
+  transition: color 0.2s linear;
+  display: inline-block;
+  font-size: 18px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+.rate .full {
+  transition: color 0.2s linear;
+  color: #ffee01;
+}
+.rate .disabled {
+  cursor: not-allowed;
+  color: #7886A3;
+}

@@ -1,0 +1,80 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>默认文本域</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <textarea 
+                    rows="6" 
+                    placeholder="请输入内容..."></textarea>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>禁用文本域</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 增加disabled属性禁用文本域 -->
+                <textarea 
+                    rows="6" 
+                    placeholder="请输入内容..." 
+                    disabled></textarea>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>禁止缩放的文本域</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 增加class no-resize可以设置文本域禁止缩放 -->
+                <textarea 
+                    class="no-resize" 
+                    rows="6" 
+                    placeholder="禁止缩放的文本域"></textarea>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>带字数限制</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 增加属性maxlength可以指定文本域允许的最大输入字数 -->
+                <textarea 
+                    maxlength="20" 
+                    rows="6" 
+                    placeholder="最多可输入20个字..."></textarea>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>精确控制高度</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 直接在文本域上写样式来指定高度即可 -->
+                <textarea 
+                    style="height: 150px;"
+                    placeholder="该文本域高度为：150px"></textarea>
+            </div>
+        </div>
+    </div>
+</div>

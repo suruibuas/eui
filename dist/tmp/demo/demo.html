@@ -1,0 +1,542 @@
+<div class="quote quote-success">
+    本页面综合演示了从列表到新建，到详情，再到统计等等详细流程，可以立刻应用到实际项目中。代码中也包含了详细的注释，请clone到本地后查看：
+    <a href="https://github.com/suruibuas/eadmin" data-native target="_blank">Github</a>
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-3">
+        <!-- 数据块，用于展示统计类的数据 -->
+        <div 
+            class="block block-data"
+            data-small
+            data-color="2">
+            <h5>总笔数（已支付）</h5>
+            <div class="data">
+                <!--
+                    展示数据的地方默认给一个占位符，具体赋值步骤在本页面底部的JS处
+                -->
+                <span id="num" class="num">--</span>
+                <span>笔</span>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-3">
+        <!-- 数据块，用于展示统计类的数据 -->
+        <div 
+            class="block block-data"
+            data-small
+            data-color="1">
+            <h5>总成交金额（已支付）</h5>
+            <div class="data">
+                <span id="money" class="num">--</span>
+                <span>元</span>
+            </div>
+            <!--
+                如果有一些需要扩展说明的可以加tips图标
+                本例演示的是更加高级的点击tips再弹出弹窗展示更丰富的数据
+            -->
+            <i
+                id="money-show-more"
+                class="ri-question-line more"
+                data-window-url="./tmp/demo/chart.html"
+                data-tips="点击查看数据分析">
+            </i>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-3">
+        <!-- 数据块，用于展示统计类的数据 -->
+        <div 
+            class="block block-data"
+            data-small
+            data-color="3">
+            <h5>总退款金额</h5>
+            <div class="data">
+                <span id="back" class="num">--</span>
+                <span>元</span>
+            </div>
+        </div>
+    </div>
+    <!-- 响应盒子，bootstrap -->
+    <div class="col-3">
+        <!-- 数据块，用于展示统计类的数据 -->
+        <div class="block block-data"
+            data-small
+            data-color="4">
+            <h5>总复购金额（已支付）</h5>
+            <div class="data">
+                <span id="repay" class="num">--</span>
+                <span>USD</span>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-12">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <!-- 表格容器 -->
+            <div id="table"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (() => {
+        // 定义统计数据数字展示的dom对象，就是上面的span，其中的默认占位符是--
+        // 注意：虽然这里定义的变量是给表格的callback回调里赋值使用的，但是这些
+        // 变量不要在表格的callback回调里定义，因为可能会有小概率造成变量覆盖
+        // 所以一定要在页面加载完第一时间定义
+        let [num, money, back, repay] = [
+            // scope是eadmin封装的方法，用来安全的获取dom对象，可以理解为JQ的$('#num')
+            scope('#num'), 
+            scope('#money'), 
+            scope('#back'), 
+            scope('#repay')
+        ];
+        // 表格参数
+        let param = {};
+        // 表格基础参数配置
+        param.config = {
+            // 指定复选框绑定的字段名，如果不指定该项则无复选框
+            checkbox : 'id',
+            // 表格列配置，默认不支持列配置
+            column_config : true,
+            // 是否支持导出excel，默认不支持导出excel
+            // 点击导出按钮时，框架会向api接口发送一个请求，如果有搜索条件，则会自动拼接上搜索参数
+            // 在请求地址最后会拼接上 _export=1，后端可以通过该参数判断如果是导出操作，可以取消分页的SQL语句
+            // 因为导出操作，大部分情况下是导出符合条件的所有数据，一般不需要分页
+            // ===================================================
+            // 比如本例，点击导出按钮时，发送到后端的URL是：/api/demo/?_export=1&page=1&size=10
+            export_excel  : true,
+            // 固定首尾列，默认不开启
+            fixed : {
+                // 首列
+                first : true,
+                // 尾列
+                last  : true
+            },
+            // 分页参数配置
+            // 某些列表不需要分页，则配置该项为false，则表格将没有分页相关的显示
+            page : {
+                // 每页条数
+                size : 10,
+                // 数字分页数目
+                num  : 5,
+                // 传递给后端代表页数的字段名，用来后端取值
+                page_field : 'page',
+                // 传递给后端代表条数的字段名，用来后端取值
+                size_field : 'size'
+            },
+            // =================================
+            // 数据源接口地址
+            // 框架会把搜索参数、分页、导出excel等参数拼接到接口地址后
+            // 例如本例的接口地址是：/api/table/，此时点击分页则接口地址会自动拼接成：/api/table/?page=1&size=10
+            // =================================
+            data : '/api/demo/'
+        };
+        // 按钮栏配置，数组格式，同时支持配置多个功能按钮
+        param.button = [
+            // 第一个按钮展示的是点击后打开一个弹窗
+            {
+                // 按钮名称
+                name : '新建数据',
+                // 按钮图标，如果不需要图标可以不设置该参数
+                icon : 'ri-add-circle-line',
+                // 点击后打开弹窗，更详细的弹窗参数请参考弹窗页面
+                open : {
+                    // 弹窗的标题
+                    title  : '新建数据',
+                    // 弹窗的宽度
+                    width  : 360,
+                    // 弹窗的高度
+                    height : '80%',
+                    // 弹窗的URL地址
+                    url    : './tmp/demo/add.html',
+                    // 弹窗的操作按钮配置
+                    btn    : [
+                        {
+                            // 按钮名称
+                            name : '确定保存数据'
+                            // 点击按钮动作默认是 submit，提交窗口内表单，该参数可以不用写
+                            // action : 'submit'
+                        },
+                        {
+                            name   : '取消',
+                            // 取消按钮高亮，默认是true，按钮会高亮显示
+                            hl     : false,
+                            // 点击按钮的动作是取消
+                            action : 'cancel'
+                        }
+                    ],
+                    // 弹窗关闭时的回调
+                    close : (change) => {
+                        // 判断弹窗里的表单内容是否有变化，如果有变化则刷新表格
+                        // 比如打开弹窗里是新建数据，提交后希望表格数据可以刷新
+                        // 就可以通过change为true来判断是否需要刷新表格，避免每次关闭弹窗都刷新表格，导致体验不好
+                        if (change) Tb.refresh();
+                    }
+                }
+            },
+            // 第二个按钮展示的是点击后调用后端接口
+            {
+                // 按钮名称
+                name : '批量删除',
+                // 按钮图标，如果不需要图标可以不设置该参数
+                icon : 'ri-delete-bin-line',
+                // 是否需要确认框，默认没有确认框
+                confirm : true,
+                // 是否需要检测复选框未选中，开启后如果复选框一个都没有选的话则会弹出提示信息
+                check_checked : true,
+                // 执行完毕是否需要刷新表格数据，此设置在callback中不起作用
+                refresh : true,
+                // ========================================
+                // 点击按钮后调用的API地址，会把选中的checkbox对应的字段值用","分割后拼接到接口地址后面
+                // 例如：/api/delete/?id=1,2,3,4,5
+                // ========================================
+                // 返回值示例
+                // ========================================
+                // {
+                //      code : 100,
+                //      msg  : '数据删除成功',
+                //      data : {
+                //          success : 1
+                //      }
+                // }
+                // ========================================
+                api : '/api/delete/'
+            }
+        ];
+        // 表格列配置
+        param.column = [
+            {
+                // 显示的表头
+                name  : 'ID',
+                // 调取的字段
+                field : 'id'
+            },
+            {
+                // 显示的表头
+                name  : '所属实例',
+                // 调取的字段
+                field : 'emp'
+            },
+            {
+                // 显示的表头
+                name   : '服务名称',
+                // 调取的字段
+                field  : 'name',
+                // 设置search为true，表示该字段支持搜索，默认的搜索是input框，还支持下拉菜单、日期选择、城市选择
+                // 具体的搜索配置参考下方搜索配置项
+                search : true,
+                // 是否高亮显示，该项只有在search为true时生效，会自动把搜索结果中的关键词高亮显示
+                // 例如该列的内容为："我爱你中国"，搜索关键词是"中国"，则"中国"两个字会替换成红色字体高亮显示出来
+                hl     : true,
+                // 设置link参数，则该列内容会被 a 标签包裹，可以点击跳转
+                // 该参数是一个回调函数，其中会自动注入当前行的数据作为参数
+                link   : (row) => {
+                    return {
+                        // 链接地址，可以使用row来拼接传递参数
+                        href   : 'http://www.eadmin.com.cn/',
+                        // 新窗口打开，默认当前窗口打开
+                        target : '_blank'
+                    }
+                }
+            },
+            {
+                // 显示的表头
+                name   : '头像',
+                // 调取的字段
+                field  : 'icon',
+                // 设置 img为 true表示该字段采用图片模式显示
+                img    : true,
+                // 设置head为true表示该字段的图片采用头像模式显示
+                head   : true
+            },
+            {
+                // 显示的表头
+                name   : '封面图',
+                // 调取的字段
+                field  : 'pic',
+                // 设置 img为 true表示该字段采用图片模式显示
+                img    : true,
+                // 个别情况下图片需要自定义一些样式，可以设置style参数，来自定义图片显示的样式
+                //style  : 'width:128px; height:auto; margin:6px 0;'
+            },
+            {
+                // 显示的表头
+                name   : '接口地址',
+                // 调取的字段
+                field  : 'api',
+                // 设置search为true，表示该字段支持搜索
+                search : true
+            },
+            {
+                // 显示的表头
+                name   : '进度',
+                // 调取的字段
+                field  : 'plan',
+                // 设置 format 参数，可以自定义格式化字段显示的效果
+                format : (row) => {
+                    // 这里是使用状态样式显示该字段
+                    // 状态样式具体参数请参考status.html文件或者查看状态相关文档
+                    let [code, name] = [1, '']
+                    switch (row.plan)
+                    {
+                        case 0:
+                            code = 3;
+                            name = '开发中';
+                        break;
+                        case 1:
+                            code = 2;
+                            name = '已上线';
+                        break;
+                        case 2:
+                            code = 1;
+                            name = '离线';
+                        break;
+                    }
+                    return `<span class="status">
+                                ${name}<i class="color-${code}"></i>
+                            </span>`;
+                }
+            },
+            {
+                // 显示的表头
+                name  : '标签',
+                // 调取的字段
+                field : 'tag',
+                // 设置tag为true，则使用标签样式显示，多个标签使用 "," 分割
+                tag   : true
+            },
+            {
+                name   : '创建人',
+                field  : 'create'
+            },
+            {
+                name   : '创建日期',
+                field  : 'addtime',
+                search : true,
+                // 演示后端接口返回的是时间戳，通过format格式化
+                format : (row) => {
+                    return Time(row.addtime, '%y-%M-%d %h:%m:%s');
+                }
+            },
+            {
+                name   : '有效日期',
+                field  : 'realdate',
+                // 设置column为false则该列将不会在表格中显示，适用于某一字段只需要搜索，却不在列表中显示的情况
+                // 该配置仅在search为true时有意义
+                column : false,
+                search : true
+            },
+            {
+                name  : '审核人',
+                field : 'audit',
+                // 设置open参数指定点击该列打开弹窗，自动注入该行数据作为参数
+                open  : (row) => {
+                    // 详细参数可参考弹窗页面，完全兼容弹窗所有参数
+                    return {
+                        // 弹窗标题
+                        title  : '查看详情 - ' + row.name,
+                        // 宽度
+                        width  : '80%',
+                        // 高度
+                        height : 600,
+                        // 链接URL
+                        url    : 'window.html?id=' + row.id
+                    };
+                }
+            },
+            {
+                name   : '请求方式',
+                field  : 'type',
+                // 该字段的搜索类型为下拉菜单，具体参考下方的搜索配置
+                search : true
+            },
+            {
+                name   : '状态',
+                field  : 'status',
+                search : true,
+                // 设置参数switch为true，开启开关模式，开启该模式必须需要设置API参数
+                // 用来指定点击和关闭开关调用的后端API接口
+                switch : true,
+                // 后端API接口地址，注入当前行作为参数，会自动拼接本次点击后的状态值
+                // 打开为1，关闭为0
+                // 本例中真实调用后端的接口地址为：/api/status/?id=[row.id]&status=[status]
+                api : (row) => {
+                    // ========================================
+                    // 返回值示例
+                    // ========================================
+                    // {
+                    //      code : 100,
+                    //      msg  : '状态更新成功'
+                    // }
+                    // ========================================
+                    return '/api/status/?id=' + row.id
+                }
+            },
+            {
+                name  : '查看次数',
+                field : 'view',
+                // 设置order为true，则表示该字段支持排序操作
+                // 点击后会往 param.config.data中配置的接口地址上发送一个GET请求，并拼接上本次的排序内容，字段和排序类型中间使用 "," 分割
+                // 本例中，点击正序排序实际发送的请求如下
+                // /api/table/?order=view,asc
+                // 本例中，点击倒序排序实际发送的请求如下
+                // /api/table/?order=view,desc
+                order : true
+            },
+            {
+                name  : '请求次数',
+                field : 'use',
+                order : true
+            },
+            {
+                name : '操作',
+                // 设置button参数指定当前列为按钮列，该配置一般用在表格的最后一列
+                // 注入当前行的数据作为参数，用来拼接一些参数
+                button : (row) => {
+                    // 按钮数组
+                    let btns = [];
+                    // 第一个按钮展示打开弹窗
+                    btns[0] = {
+                        // 按钮名称
+                        name : '详情',
+                        // 按钮图标，如果不需要可以不设置该参数
+                        icon : 'ri-eye-line',
+                        // 打开弹窗，兼容弹窗所有参数，详细弹窗参数请查看弹窗章节文档
+                        open : {
+                            // 弹窗标题
+                            title : '查看详情',
+                            // 宽度
+                            width : '80%',
+                            // 弹窗链接
+                            url   : './tmp/demo/details.html',
+                            // 右侧弹出
+                            style : 'popup'
+                        }
+                    };
+                    // 第二个按钮展示点击后调用接口操作
+                    btns[1] = {
+                        // 按钮名称
+                        name    : '删除',
+                        // 按钮图标，如果不需要可以不设置该参数
+                        icon    : 'ri-delete-bin-line',
+                        // 点击后是否需要弹出confirm确认框
+                        confirm : true,
+                        // 点击后是否需要刷新表格数据
+                        refresh : true,
+                        // ========================================
+                        // 点击后调用的API接口地址
+                        // ========================================
+                        // 返回值示例
+                        // ========================================
+                        // {
+                        //      code : 100,
+                        //      msg  : '数据删除成功'
+                        // }
+                        // ========================================
+                        api     : '/api/delete/?id=' + row.id
+                    };
+                    // 个别情况需要根据某一字段判断按钮是否可点击
+                    // 下面演示根据参数来设定某一按钮的个别参数
+                    // 下面的例子就是如果power字段为0，则编辑按钮不可点击
+                    if (row.power == 0)
+                        btns[0].disabled = true;
+                    // 最后一定要return出去
+                    return btns;
+                }
+            }
+        ];
+        // =====================================================
+        // 表格搜索配置
+        // =====================================================
+        // 如果不在此处为字段特别配置，则一律默认采用input框模式
+        // select：下拉菜单
+        // datepicker：日期选择器
+        // citypicker：城市选择器
+        // =====================================================
+        param.search = {
+            // 设置日期选择器
+            addtime : {
+                type : 'datepicker',
+                // 日历参数配置，完全兼容日期选择器所有参数，日期选择器具体参数请参考相关章节的文档
+                // 如果不配置param参数，则默认采用单日历模式
+                param : {
+                    type : 'date-range',
+                    unixtime : true
+                }
+            },
+            // 有效日期
+            realdate : {
+                type : 'datepicker',
+                // 日历参数配置，完全兼容日期选择器所有参数，日期选择器具体参数请参考相关章节的文档
+                // 如果不配置param参数，则默认采用单日历模式
+                param : {
+                    type : 'date-range',
+                    unixtime : true
+                }
+            },
+            // 设置下拉菜单
+            type : {
+                type : 'select',
+                option : [
+                    {
+                        // 显示的内容
+                        key : 'GET',
+                        // 具体取值
+                        val : 'get'
+                    },
+                    {
+                        // 显示的内容
+                        key : 'POST',
+                        // 具体取值
+                        val : 'post'
+                    }
+                ]
+            },
+            status : {
+                type : 'select',
+                option : [
+                    {
+                        // 显示的内容
+                        key : '正常',
+                        // 具体取值
+                        val : 1
+                    },
+                    {
+                        // 显示的内容
+                        key : '禁用',
+                        // 具体取值
+                        val : 0
+                    }
+                ]
+            }
+        };
+        // 表格创建完成后的回调，默认注入API接口返回的数据作为参数
+        param.callback = (response) => {
+            // 打印接口返回值，F12调试看一下就明白了
+            console.log(response);
+            /*
+                一定要保证api接口返回了以下4个统计数据
+            */
+            // 总笔数
+            num.html(response.num || 0);
+            // 总成交金额
+            money.html(response.money || 0);
+            // 总退款金额
+            back.html(response.back || 0);
+            // 总复购金额
+            repay.html(response.repay || 0);
+        }
+        let Tb = Eadmin.table('#table', param);
+        // 总成交金额的tips点击打开详细数据弹窗
+        Eadmin.window('#money-show-more', {
+            width  : 900,
+            height : 600,
+            title  : '总成交金额 - 数据分析',
+            drag   : false
+        });
+    })();
+</script>

@@ -1,0 +1,67 @@
+<div class="block-box">
+    <div class="col-12">
+        <canvas
+            id="chart-1"
+            style="width:100%; height: 300px;">
+        </canvas>
+    </div>
+    <div class="col-7">
+        <canvas
+            id="chart-2"
+            style="width:100%; height: 200px;"></canvas>
+    </div>
+    <div class="col-5">
+        <canvas
+            id="chart-3"
+            style="width: 100%; height: 200px;"></canvas>
+    </div>
+</div>
+<script>
+    (() => {
+        Eadmin.chart('#chart-1', {
+            type   : 'bar',
+            labels : [
+                '食品', '服装', '日百',
+                '数码', '养身', '厨卫',
+                '烟酒', '计生', '儿童'
+            ],
+            datas  : [
+                {
+                    label : '交易金额（元）',
+                    data  : [55, 323, 666, 51, 12, 412, 6681, 412, 3341]
+                }
+            ],
+            title : {
+                text : '各分类总成交金额'
+            },
+            responsive: false
+        });
+        Eadmin.chart('#chart-2', {
+            labels : [
+                '微信', '支付宝', '云闪付', '邮政',
+                '银行卡转账', '线下付款'
+            ],
+            datas : [
+                {
+                    label : '支付方式（元）',
+                    data  : [48192, 229109, 23, 0, 89, 2231]
+                }
+            ],
+            title : {
+                text : '支付方式'
+            },
+            responsive: false
+        });
+        Eadmin.chart('#chart-3', {
+            type : 'pie',
+            labels : [
+                'android', 'iOS', '微信小程序'
+            ],
+            datas : [91829, 22819, 44523],
+            title : {
+                text : '充值终端'
+            },
+            responsive: false
+        });
+    })();
+</script>

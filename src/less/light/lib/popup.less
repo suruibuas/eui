@@ -1,0 +1,65 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 模态
+ */
+
+@import "../global";
+
+.popup
+{
+    .border-radius();
+    .box-shadow();
+    position: fixed;
+    border:1px @input-color-1 solid;
+    background: @input-color-3;
+    z-index: 9999;
+    padding: 5px 10px;
+    top: 30%;
+    left: 50%;
+    text-align: center;
+    width: 260px;
+    margin: 0 0 0 -130px;
+    span
+    {
+        display: block;
+    }
+    i
+    {
+        font-size: 36px;
+    }
+    .title
+    {
+        font-size: 18px;
+        margin: 15px 0 10px 0;
+    }
+    .txt
+    {
+        margin: 10px;
+        line-height: 22px;
+    }
+    .btn
+    {
+        margin: 15px 0;
+        button
+        {
+            margin: 0;
+        }
+    }
+    .alert
+    {
+        color: @mcolor-3;
+    }
+    .error
+    {
+        color: @mcolor-1;
+    }
+    .success
+    {
+        color: @mcolor-2;
+    }
+    .confirm
+    {
+        color: @mcolor-3;
+    }
+}

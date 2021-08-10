@@ -1,0 +1,220 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!--
+        ==================================
+        内置验证规则
+        ==================================
+        01、require      => 不能为空
+        02、mobile       => 手机号
+        03、phone        => 固定电话
+        04、email        => 邮箱
+        05、qq           => QQ号
+        06、idcard       => 身份证号
+        07、url          => url
+        08、date         => 日期，格式为“2020-05-05”
+        09、money        => 金额，2-4位小数
+        10、ip           => ip地址
+        11、number       => 纯数字
+        12、letter       => 纯字母，包含大小写
+        13、numberLetter => 数字和字母
+        14、zipcode      => 邮编
+    -->
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>非空验证</h3>
+            <!--
+                指定参数data-validate设置验证规则，格式：内置规则或正则表达式|长度限制|取值限制
+                其中长度限制和取值限制是框架内置的
+                =============================================
+                长度必须大于5，则写法如下
+                data-validate="len=5-"
+                =============================================
+                长度必须小于100，则写法如下
+                data-validate="len=-100"
+                =============================================
+                长度必须在5-100之间，则写法如下
+                data-validate="len=5-100"
+                =============================================
+                取值必须大于5，则写法如下
+                data-validate="val=5-"
+                =============================================
+                取值必须小于100，则写法如下
+                data-validate="val=-100"
+                =============================================
+                取值必须在5-100之间，则写法如下
+                data-validate="val=5-100"
+                =============================================
+                指定参数data-validate-msg设置验证失败的文案提示
+            -->
+            <div class="form-group">
+                <input
+                    type="text" 
+                    placeholder="请输入内容"
+                    data-validate="require"
+                    data-validate-msg="请输入内容">
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>手机号验证</h3>
+            <div class="form-group">
+                <input
+                    type="text" 
+                    placeholder="请输入手机号"
+                    data-validate="mobile"
+                    data-validate-msg="请输入正确的手机号">
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>长度限制</h3>
+            <div class="form-group">
+                <input
+                    type="text" 
+                    placeholder="长度必须>=5"
+                    data-validate="len=5-"
+                    data-validate-msg="长度必须>=5">
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>取值限制</h3>
+            <div class="form-group">
+                <input
+                    type="text" 
+                    placeholder="取值必须>=5"
+                    data-validate="val=5-"
+                    data-validate-msg="取值必须>=5">
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>综合验证</h3>
+            <div class="form-group">
+                <input
+                    type="text" 
+                    placeholder="不为空并且长度1-5之间，取值在5-10000之间"
+                    data-validate="require|len=1-5|val=5-10000"
+                    data-validate-msg="不能为空|长度必须在1-5之间|取值必须在5-10000之间">
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>下拉菜单验证</h3>
+            <!--
+                下拉菜单只支持require非空，和自定义正则表达式2种写法
+                下拉的非空判断依据是当前下拉菜单选中的项是不是第一项
+                验证规则认为下拉菜单的第一项就是默认项，即未选中项。
+                例如本例，如果在提交表单时选中的是请选择，则触发验证不通过
+            -->
+            <div class="form-group">
+                <select 
+                    data-width="100%"
+                    data-validate="require" 
+                    data-validate-msg="此项必须选择">
+                    <option value="0">请选择</option>
+                    <option value="1">苹果</option>
+                    <option value="2">香蕉</option>
+                    <option value="3">梨</option>
+                    <option value="4">橘子</option>
+                    <option value="5">西瓜</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>复选框验证</h3>
+            <!--
+                复选框只支持require规则，校验是否一项都未选中
+                验证规则写在同组复选框的第一个上
+            -->
+            <div class="form-group">
+                <label>
+                    <input 
+                        name="t1" 
+                        type="checkbox" 
+                        value="1" 
+                        data-validate="require" 
+                        data-validate-msg="此项必须选择"> 香蕉
+                </label>
+                <label>
+                    <input 
+                        name="t1" 
+                        type="checkbox" 
+                        value="2"> 橘子
+                </label>
+                <label>
+                    <input 
+                        name="t1" 
+                        type="checkbox" 
+                        value="3"> 西瓜
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>单选框验证</h3>
+            <!--
+                单选框只支持require规则，校验是否一项都未选中
+                验证规则写在同组单选框的第一个上
+            -->
+            <div class="form-group">
+                <label>
+                    <input 
+                        name="t2" 
+                        type="radio" 
+                        value="1" 
+                        data-validate="require" 
+                        data-validate-msg="此项必须选择"> 香蕉
+                </label>
+                <label>
+                    <input 
+                        name="t2" 
+                        type="radio" 
+                        value="2"> 橘子
+                </label>
+                <label>
+                    <input 
+                        name="t2" 
+                        type="radio" 
+                        value="3"> 西瓜
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>自定义正则</h3>
+            <!-- 如果内置规则不满足验证条件，则可以直接书写正则表达式进行验证 -->
+            <div class="form-group">
+                <input
+                    type="text" 
+                    placeholder="自定义正则验证"
+                    data-validate="^[\d]+$"
+                    data-validate-msg="输入内容必须是数字">
+            </div>
+        </div>
+    </div>
+</div>

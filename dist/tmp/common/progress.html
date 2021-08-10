@@ -1,0 +1,61 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>默认进度条</h3>
+            <!--
+                在div上增加data-percent属性，即可使该div使用进度条模式显示
+            -->
+            <div data-percent="40"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>显示进度数字</h3>
+            <!--
+                增加属性data-show-percent即可显示进度百分比数字
+            -->
+            <div 
+                data-percent="40"
+                data-show-percent></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>自定义宽度</h3>
+            <!--
+                在div上增加data-percent-width属性，可自定义进度条宽度，单位"px"
+            -->
+            <div 
+                data-percent="40" 
+                data-show-percent 
+                data-percent-width="150"></div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>自定义颜色</h3>
+            <!--
+                在div上增加data-percent-color属性，可以指定进度条颜色，支持1-9，共9种颜色
+                如果不设置，则默认使用主色作为进度条颜色
+            -->
+            <div 
+                data-percent="80" 
+                data-show-percent 
+                data-percent-color="2"></div>
+        </div>
+    </div>
+</div>

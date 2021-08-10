@@ -1,0 +1,247 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>默认日期选择</h3>
+            <!--
+                Eadmin.datepicker('#datepicker-1');
+            -->
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <input 
+                    id="datepicker-1" 
+                    type="text" 
+                    placeholder="请选择日期" 
+                    data-icon="ri-calendar-2-line|right">
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>带按钮栏</h3>
+            <!--
+                // 指定参数 confirm 为 true，则会增加按钮栏
+                // 此时选中日期后需要点击确认按钮才能真正选中
+                // 如果不选择日期直接点击确定，默认会选中今天
+                Eadmin.datepicker('#datepicker-2', {
+                    confirm : true
+                });
+            -->
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <input 
+                    id="datepicker-2" 
+                    type="text" 
+                    placeholder="带按钮栏" 
+                    data-icon="ri-calendar-2-line|right">
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>可选择时分秒</h3>
+            <!--
+                Eadmin.datepicker('#datepicker-3', {
+                    // 需要选择时分秒，必须先开启按钮栏
+                    confirm : true,
+                    // 指定format参数，并且格式化中包含 H（时）、i（分）、s（秒），则会开启时间选择
+                    // 如果只包含 H:i，则表示只需要开启选择小时和分钟，不需要秒
+                    // 例如：本例支持选择时分秒
+                    // 如果将format参数设置为 'Y-m-d H:i'，则表示只支持时、分选择
+                    format  : 'Y-m-d H:i:s'
+                });
+            -->
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <input 
+                    id="datepicker-3" 
+                    type="text" 
+                    placeholder="可选择时分秒" 
+                    data-icon="ri-calendar-2-line|right">
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>指定开始结束日期</h3>
+            <!--
+                // 开始、结束日期格式必须是年月日的无符号表现形式
+                // 例如，需要设置开始为2021年10月01日，则start参数设置为：20211001
+                // 结束日期格式与开始日期格式一致，设置后只有指定范围内的日期可以被选中
+                // 可以只设置开始日期或者结束日期，也可以同时设置
+                Eadmin.datepicker('#datepicker-4', {
+                    // 开始日期
+                    start : 20200301,
+                    // 结束日期
+                    end   : 20200331
+                });
+            -->
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <input 
+                    id="datepicker-4" 
+                    type="text" 
+                    placeholder="可选择时分秒" 
+                    data-icon="ri-calendar-2-line|right">
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>双日历选择范围</h3>
+            <!--
+                // 双日历在选中日期后，框架会把两个日期用 "," 分割，后端接收到后可以根据 "," 来拆分
+                // 例如选中的日期是：2021-01-01 - 2021-10-10，input的name是date
+                // 则此时后端 $_POST['date']收到的是：2021-01-01,2021-10-10，可以根据 "," 拆分成2个日期来做业务处理
+                Eadmin.datepicker('#datepicker-5', {
+                    // 双日历必须设置 type 为 'date-range'，单日历可以不用设置该参数
+                    type    : 'date-range',
+                    // 需要确认栏
+                    confirm : true,
+                    // 格式化
+                    format  : 'Y-m-d H:i:s',
+                    // 指定参数 quick 为 true则会开启双日历的快捷选择，默认为不开启
+                    quick   : true
+                });
+            -->
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <input 
+                    id="datepicker-5" 
+                    type="text" 
+                    placeholder="双日历选择范围" 
+                    data-icon="ri-calendar-2-line|right">
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>回调</h3>
+            <!--
+                Eadmin.datepicker('#datepicker-6', {
+                    // 指定参数 change 可以设置选中日期后的回调事件，框架默认注入选中的日期作为参数
+                    change : (val) => {
+                        console.log('选择的日期是：' + val);
+                    }
+                });
+            -->
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <input 
+                    id="datepicker-6" 
+                    type="text" 
+                    placeholder="回调" 
+                    data-icon="ri-calendar-2-line|right">
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>默认值</h3>
+            <!--
+                Eadmin.datepicker('#datepicker-7', {
+                    // 指定参数 default 设置默认值，一般用于编辑场景中，该参数是数组格式
+                    // 数组中的日期格式必须是时间戳格式，如果是单日历则只需要设置数组的第一项
+                    // 如果是双日历，则默认值包含2项，分别是开始日期和结束日期
+                    // 双日历默认值示例：default : [1611303785, 1611303785]
+                    default : [1611303785]
+                });
+            -->
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <input 
+                    id="datepicker-7" 
+                    type="text" 
+                    placeholder="默认值" 
+                    data-icon="ri-calendar-2-line|right">
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>unixtime</h3>
+            <!--
+                Eadmin.datepicker('#datepicker-8', {
+                    // 有些时候后端希望接收到的日期是时间戳格式，此时可以指定 unixtime 为 true
+                    // 则在选中日期时框架会自动转为unixtime，在提交表单时后端接收到的就是unixtime格式
+                    // 例如选中的日期是：2021-08-03，则后端实际收到的是：1627920000
+                    unixtime : true
+                });
+            -->
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <input 
+                    id="datepicker-8" 
+                    type="text" 
+                    placeholder="unixtime" 
+                    data-icon="ri-calendar-2-line|right">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (() => {
+        // 默认日期选择
+        Eadmin.datepicker('#datepicker-1');
+        // 需要确认栏
+        Eadmin.datepicker('#datepicker-2', {
+            confirm : true
+        });
+        // 格式化
+        Eadmin.datepicker('#datepicker-3', {
+            confirm : true,
+            format  : 'Y-m-d H:i:s'
+        });
+        // 指定开始和结束时间
+        Eadmin.datepicker('#datepicker-4', {
+            start : 20200301,
+            end   : 20200331
+        });
+        // 双日历
+        Eadmin.datepicker('#datepicker-5', {
+            // 双日历必须设置 type 为 'date-range'，单日历可以不用设置该参数
+            type    : 'date-range',
+            // 需要确认栏
+            confirm : true,
+            // 格式化
+            format  : 'Y-m-d H:i:s',
+            // 是否支持快捷选择
+            quick   : true
+        });
+        // 回调
+        Eadmin.datepicker('#datepicker-6', {
+            change : (val) => {
+                console.log('选择的日期是：' + val);
+            }
+        });
+        // 默认选中的日期，数组格式，双日历的情况该数组有开始和结束两个时间
+        Eadmin.datepicker('#datepicker-7', {
+            default : [1611303785]
+        });
+        // 是否格式化成时间戳
+        Eadmin.datepicker('#datepicker-8', {
+            unixtime : true
+        });
+    })();
+</script>

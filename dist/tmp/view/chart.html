@@ -1,0 +1,191 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!--
+        // 默认情况下图表是自适应宽高的，会填充满整个外层容器的空间，如果希望可以自定义图表的大小
+        // 可以给图表容器增加 style，设置宽度高度，如下
+        <canvas id="chart-1" style="width:200px; height:200px;"></canvas>
+        // 在调用时增加参数 responsive : false，(3种图表都支持该参数),例如：
+        Eadmin.chart('#chart-3', {
+            type : 'pie',
+            labels : [
+                '男性', '女性'
+            ],
+            datas : [
+                55, 323
+            ],
+            title : {
+                text : '性别比例'
+            },
+            // 增加该参数为false后，图表将取消自动适应大小
+            responsive : false
+        });
+    -->
+    <!-- 布局 -->
+    <div class="col-6">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>折线图</h3>
+            <!--
+                // 第一个参数是图表容器ID
+                Eadmin.chart('#chart-1', {
+                    labels : [
+                        '一月',
+                        '二月',
+                        '三月',
+                        '四月',
+                        '五月',
+                        '六月'
+                    ],
+                    datas : [
+                        {
+                            label : '营业额',
+                            data  : [
+                                55, 323, 666, 51, 12, 412
+                            ]
+                        },
+                        {
+                            label : '纯利润',
+                            data  : [
+                                13, 123, 44, 234, 829, 443
+                            ]
+                        }
+                    ],
+                    title : {
+                        text : '上半年业绩'
+                    }
+                });
+            -->
+            <!-- 图表容器 -->
+            <canvas id="chart-1"></canvas>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-6">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>柱状图</h3>
+            <!--
+                // 第一个参数是图表容器ID
+                Eadmin.chart('#chart-2', {
+                    // 指定type为'bar'，则图表以柱状图展现
+                    type : 'bar',
+                    labels : [
+                        '一月', '二月', '三月',
+                        '四月', '五月', '六月'
+                    ],
+                    datas : [
+                        {
+                            label : '营业额',
+                            data  : [55, 323, 666, 51, 12, 412]
+                        },
+                        {
+                            label : '纯利润',
+                            data  : [13, 123, 44, 234, 829, 443]
+                        }
+                    ],
+                    title : {
+                        text : '上半年业绩'
+                    }
+                });
+            -->
+            <!-- 图表容器 -->
+            <canvas id="chart-2"></canvas>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-6">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>饼状图</h3>
+            <!--
+                // 第一个参数是图表容器ID
+                Eadmin.chart('#chart-3', {
+                    // 指定type为'pie'，则图表以饼状图展现
+                    type : 'pie',
+                    labels : [
+                        '男性', '女性'
+                    ],
+                    datas : [
+                        55, 323
+                    ],
+                    title : {
+                        text : '性别比例'
+                    }
+                });
+            -->
+            <!-- 图表容器 -->
+            <canvas id="chart-3"></canvas>
+        </div>
+    </div>
+</div>
+<script>
+    (() => {
+        // 折线图
+        Eadmin.chart('#chart-1', {
+            labels : [
+                '一月',
+                '二月',
+                '三月',
+                '四月',
+                '五月',
+                '六月'
+            ],
+            datas : [
+                {
+                    label : '营业额',
+                    data  : [
+                        55, 323, 666, 51, 12, 412
+                    ]
+                },
+                {
+                    label : '纯利润',
+                    data  : [
+                        13, 123, 44, 234, 829, 443
+                    ]
+                }
+            ],
+            title : {
+                text : '上半年业绩'
+            }
+        });
+        // 柱状图
+        Eadmin.chart('#chart-2', {
+            type : 'bar',
+            labels : [
+                '一月', '二月', '三月',
+                '四月', '五月', '六月'
+            ],
+            datas : [
+                {
+                    label : '营业额',
+                    data  : [55, 323, 666, 51, 12, 412]
+                },
+                {
+                    label : '纯利润',
+                    data  : [13, 123, 44, 234, 829, 443]
+                }
+            ],
+            title : {
+                text : '上半年业绩'
+            }
+        });
+        // 饼状图
+        Eadmin.chart('#chart-3', {
+            type : 'pie',
+            labels : [
+                '男性', '女性'
+            ],
+            datas : [
+                55, 323
+            ],
+            title : {
+                text : '性别比例'
+            }
+        });
+    })();
+</script>

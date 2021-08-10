@@ -1,0 +1,28 @@
+{
+  "name": "eadmin",
+  "version": "1.0.1",
+  "description": "EAdmin极速后台开箱即用模版",
+  "main": "index.js",
+  "scripts": {},
+  "author": "surui / 317953536@qq.com",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "browser-sync": "^2.18.13",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-header": "^1.8.9",
+    "gulp-less": "^3.3.2",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-order": "^1.1.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0",
+    "gulp-watch": "^4.3.11"
+  },
+  "dependencies": {
+    "@types/jquery": "^3.3.29"
+  }
+}

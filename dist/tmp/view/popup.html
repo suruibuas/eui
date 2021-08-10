@@ -1,0 +1,120 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>提示弹框</h3>
+            <!--
+                Eadmin.popup.alert({
+                    // 提示内容
+                    content : 'EAdmin，开箱即用的后台UI',
+                    // 点击确定后的回调，如果不需要可以不指定该参数
+                    submit  : () => {
+                        console.log('alert关闭');
+                    }
+                });
+            -->
+            <button id="popup-1" class="hl">提示弹框</button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>失败弹框</h3>
+            <!--
+                Eadmin.popup.error({
+                    // 提示内容
+                    content : 'EAdmin，开箱即用的后台UI'
+                });
+            -->
+            <button id="popup-2" class="hl">失败弹框</button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>成功弹框</h3>
+            <!--
+                Eadmin.popup.success({
+                    // 提示内容
+                    content : 'EAdmin，开箱即用的后台UI'
+                });
+            -->
+            <button id="popup-3" class="hl">成功弹框</button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>确认弹框</h3>
+            <!--
+                Eadmin.popup.confirm({
+                    // 提示内容
+                    content : 'EAdmin，开箱即用的后台UI',
+                    // 点击确认回调
+                    submit  : () => {
+                        console.log('点击了确定');
+                        Eadmin.popup.success({
+                            content : '操作执行成功'
+                        });
+                    },
+                    // 点击取消回调
+                    cancel : () => {
+                        console.log('点击了取消');
+                    }
+                });
+            -->
+            <button id="popup-4" class="hl">确认弹框</button>
+        </div>
+    </div>
+</div>
+<script>
+    (() => {
+        // 提示
+        $('#popup-1').click(function(){
+            Eadmin.popup.alert({
+                content : 'EAdmin，开箱即用的后台UI',
+                // 点击确定后的回调
+                submit  : () => {
+                    console.log('alert关闭');
+                }
+            });
+        });
+        // 失败
+        $('#popup-2').click(function(){
+            Eadmin.popup.error({
+                content : 'EAdmin，开箱即用的后台UI'
+            });
+        });
+        // 成功
+        $('#popup-3').click(function(){
+            Eadmin.popup.success({
+                content : 'EAdmin，开箱即用的后台UI'
+            });
+        });
+        // 确认
+        $('#popup-4').click(function(){
+            Eadmin.popup.confirm({
+                content : 'EAdmin，开箱即用的后台UI',
+                submit  : () => {
+                    console.log('点击了确定');
+                    Eadmin.popup.success({
+                        content : '操作执行成功'
+                    });
+                },
+                cancel : () => {
+                    console.log('点击了取消');
+                }
+            });
+        });
+    })();
+</script>

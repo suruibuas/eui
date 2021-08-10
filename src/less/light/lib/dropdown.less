@@ -1,0 +1,60 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 头部导航文件
+ */
+
+@import "../global";
+
+.dropdown{
+    .border-radius();
+    .box-shadow();
+    border:1px @input-color-1 solid;
+    background: @color-10;
+    position: absolute;
+    z-index: 9999;
+    outline: none;
+    padding: 5px 0;
+    display: none;
+    ul{
+        max-height: 300px;
+        overflow: hidden;
+        position: relative;
+    }
+    li:not(.divided){
+        height: 32px;
+        line-height: 32px;
+        padding: 0 10px;
+        cursor: pointer;
+        display: flex;
+        flex-wrap: nowrap;
+        span{
+            flex: 1 1 auto;
+        }
+        .checked{
+            margin: 0 0 0 20px;
+        }
+        &:hover:not(.disabled){
+            background: @color-5;
+        }
+    }
+    .ps__rail-y{
+        right: 0;
+    }
+    .title{
+        text-align: center;
+        height: 30px;
+        line-height: 25px;
+        border-bottom: 1px @input-color-1 solid;
+        margin-bottom: 5px;
+        padding: 0 10px;
+    }
+    .divided{
+        margin: 4px 0;
+        border-bottom: 1px @input-color-1 solid;
+    }
+    .disabled{
+        color: @color-6;
+        cursor: not-allowed !important;
+    }
+}

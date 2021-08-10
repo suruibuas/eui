@@ -1,0 +1,32 @@
+<!-- 大盒子 -->
+<div class="block-box">
+    <div class="col-12">
+        <div class="block">
+            <!-- 选项卡 -->
+            <div id="details">
+                <div class="tab-panel"></div>
+                <div class="tab-panel"></div>
+                <div class="tab-panel"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (() => {
+        Eadmin.tab('#details', [
+            {
+                name   : '详细资料',
+                active : true,
+                load   :  './tmp/demo/info.html',
+            },
+            {
+                name   : '充值记录',
+                load   :  './tmp/demo/demo.html'
+            },
+            {
+                name   : '消费记录',
+                load   :  './tmp/demo/demo.html'
+            }
+        ]);
+    })();
+</script>

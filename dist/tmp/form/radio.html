@@ -1,0 +1,111 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>默认单选按钮</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 单选按钮必须放在label中 -->
+                <label>
+                    <input name="fruit" type="radio"> 选项
+                </label>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>禁用单选按钮</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 增加 disabled 属性禁用单选按钮 -->
+                <label>
+                    <input 
+                        name="fruit" 
+                        type="radio" 
+                        disabled> 选项
+                </label>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>默认选中</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 增加属性 checked 默认选中单选按钮 -->
+                <label>
+                    <input 
+                        name="fruit" 
+                        type="radio" 
+                        checked> 选项
+                </label>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>开关模式</h3>
+            <!-- 表单组盒子，这里的margin-top是为了让每个块高度一样，可以不用写 -->
+            <div class="form-group" style="margin-top: 25px;">
+                <!-- 
+                    增加属性 data-model 为 "switch" 则单选按钮将被设置为开关显示模式
+                    开关模式下只可接受 1 和 0两个值，1表示打开，0表示关闭
+                -->
+                <label>
+                    <input 
+                        name="fruit" 
+                        type="radio" 
+                        data-model="switch" 
+                        value="0">
+                </label>
+            </div>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>标签模式</h3>
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <!-- 增加属性 data-model 为 "tag" 则单选按钮将被设置为标签显示模式 -->
+                <label>
+                    <input 
+                        name="fruit_1" 
+                        type="radio" 
+                        data-model="tag"
+                        value="1"> 选项
+                </label>
+                <label>
+                    <input 
+                        name="fruit_1" 
+                        type="radio" 
+                        data-model="tag" 
+                        checked
+                        value="2"> 默认选中
+                </label>
+                <label>
+                    <input 
+                        name="fruit_1" 
+                        type="radio" 
+                        data-model="tag" 
+                        disabled
+                        value="3"> 禁用
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

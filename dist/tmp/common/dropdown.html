@@ -1,0 +1,379 @@
+<div class="quote quote-info">
+    演示案例中只演示效果，不做使用说明，请clone演示代码，代码中有非常详细的使用注释，或者前往
+    <a href="http://www.eadmin.com.cn" data-native target="_blank">http://www.eadmin.com.cn</a>
+    查看开发文档
+</div>
+<!-- 大盒子 -->
+<div class="block-box">
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>默认下拉菜单</h3>
+            <!--
+                Eadmin.dropdown('#dropdown-1', {
+                    // 标题
+                    title : '下拉菜单',
+                    // 下拉菜单数据
+                    data  : [
+                        {
+                            name  : '项目一',
+                            click : () => {
+                                console.log('项目一');
+                            }
+                        },
+                        {
+                            name  : '项目二',
+                            click : () => {
+                                console.log('项目二');
+                            }
+                        }
+                    ]
+                });
+            -->
+            <button id="dropdown-1" data-icon="ri-more-fill"></button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>改变触发方式</h3>
+            <!--
+                // 改变触发方式
+                Eadmin.dropdown('#dropdown-2', {
+                    // 标题
+                    title   : '下拉菜单',
+                    // 指定触发方式为鼠标移入
+                    // click：点击触发，（默认）
+                    // hover：鼠标移入触发
+                    // contextMenu：右键点击触发
+                    trigger : 'hover',
+                    // 下拉菜单数据
+                    data  : [
+                        {
+                            name  : '项目一',
+                            click : () => {
+                                console.log('项目一');
+                            }
+                        },
+                        {
+                            name  : '项目二',
+                            click : () => {
+                                console.log('项目二');
+                            }
+                        }
+                    ]
+                });
+            -->
+            <button id="dropdown-2" data-icon="ri-more-fill"></button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>自定义宽度</h3>
+            <!--
+                // 指定宽度
+                Eadmin.dropdown('#dropdown-3', {
+                    // 标题
+                    title   : '下拉菜单',
+                    // 指定触发方式为鼠标移入
+                    trigger : 'hover',
+                    // 指定宽度，单位px
+                    width   : 150,
+                    // 下拉菜单数据
+                    data  : [
+                        {
+                            name  : '项目一',
+                            click : () => {
+                                console.log('项目一');
+                            }
+                        },
+                        {
+                            name  : '项目二',
+                            click : () => {
+                                console.log('项目二');
+                            }
+                        }
+                    ]
+                });
+            -->
+            <button id="dropdown-3" data-icon="ri-more-fill"></button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>指定图标和分割线</h3>
+            <!--
+                Eadmin.dropdown('#dropdown-4', {
+                    // 标题
+                    title   : '下拉菜单',
+                    // 指定触发方式为鼠标移入
+                    trigger : 'hover',
+                    // 下拉菜单数据
+                    data  : [
+                        {
+                            name  : '项目一',
+                            // 图标
+                            icon  : 'ri-video-line',
+                            click : () => {
+                                console.log('项目一');
+                            }
+                        },
+                        {
+                            name  : '项目二',
+                            icon  : 'ri-input-cursor-move',
+                            click : () => {
+                                console.log('项目二');
+                            }
+                        },
+                        // 分割线
+                        {
+                            divided : true
+                        },
+                        {
+                            name  : '项目三',
+                            icon  : 'ri-file-edit-line',
+                            click : () => {
+                                console.log('项目三');
+                            }
+                        },
+                        {
+                            name  : '项目四',
+                            icon  : 'ri-radio-button-line',
+                            click : () => {
+                                console.log('项目四');
+                            }
+                        },
+                    ]
+                });
+            -->
+            <button id="dropdown-4" data-icon="ri-more-fill"></button>
+        </div>
+    </div>
+    <!-- 布局 -->
+    <div class="col-3">
+        <!-- 具体盒子容器 -->
+        <div class="block">
+            <h3>复选模式</h3>
+            <!--
+                // 复选模式
+                Eadmin.dropdown('#dropdown-5', {
+                    // 标题
+                    title   : '下拉菜单',
+                    // 指定触发方式为鼠标移入
+                    trigger : 'hover',
+                    // 指定宽度，单位px
+                    width   : 150,
+                    // 下拉菜单数据
+                    data    : [
+                        {
+                            name     : '项目一',
+                            icon     : 'ri-video-line',
+                            // 指定checked参数则拥有复选功能
+                            checked  : true,
+                            // 自定义参数，如果设置该值，则会在click的会调用传递该参数指定的对象
+                            custom   : {
+                                field_1 : 1,
+                                field_2 : 2
+                            },
+                            click    : (val) => {
+                                // 本例中的val值
+                                {
+                                    // 该字段就是custom中指定的
+                                    "field_1": 1,
+                                    "field_2": 2,
+                                    // 当前点击项目的索引值，框架默认注入
+                                    "_index": 0,
+                                    // 如果开启复选，则该字段是当前项目选中的状态
+                                    // true：选中
+                                    // false：未选中
+                                    "_checked": false
+                                }
+                                console.log(val);
+                            }
+                        },
+                        {
+                            name     : '项目二',
+                            icon     : 'ri-input-cursor-move',
+                            checked  : true,
+                            click    : (val) => {
+                                console.log(val);
+                            }
+                        },
+                        {
+                            name     : '项目三',
+                            icon     : 'ri-file-edit-line',
+                            checked  : false,
+                            // 指定disabled可以使该选项禁用
+                            disabled : true,
+                            click    : (val) => {
+                                console.log(val);
+                            }
+                        }
+                    ]
+                });
+            -->
+            <button id="dropdown-5" data-icon="ri-more-fill"></button>
+        </div>
+    </div>
+</div>
+<script>
+    (() => {
+        // 默认下拉
+        Eadmin.dropdown('#dropdown-1', {
+            // 标题
+            title : '下拉菜单',
+            // 下拉菜单数据
+            data  : [
+                {
+                    name  : '项目一',
+                    click : () => {
+                        console.log('项目一');
+                    }
+                },
+                {
+                    name  : '项目二',
+                    click : () => {
+                        console.log('项目二');
+                    }
+                }
+            ]
+        });
+        // 改变触发方式
+        Eadmin.dropdown('#dropdown-2', {
+            // 标题
+            title   : '下拉菜单',
+            // 指定触发方式为鼠标移入
+            trigger : 'hover',
+            // 下拉菜单数据
+            data  : [
+                {
+                    name  : '项目一',
+                    click : () => {
+                        console.log('项目一');
+                    }
+                },
+                {
+                    name  : '项目二',
+                    click : () => {
+                        console.log('项目二');
+                    }
+                }
+            ]
+        });
+        // 指定宽度
+        Eadmin.dropdown('#dropdown-3', {
+            // 标题
+            title   : '下拉菜单',
+            // 指定触发方式为鼠标移入
+            trigger : 'hover',
+            // 指定宽度，单位px
+            width   : 150,
+            // 下拉菜单数据
+            data  : [
+                {
+                    name  : '项目一',
+                    click : () => {
+                        console.log('项目一');
+                    }
+                },
+                {
+                    name  : '项目二',
+                    click : () => {
+                        console.log('项目二');
+                    }
+                }
+            ]
+        });
+        // 指定图标和分割线
+        Eadmin.dropdown('#dropdown-4', {
+            // 标题
+            title   : '下拉菜单',
+            // 指定触发方式为鼠标移入
+            trigger : 'hover',
+            // 下拉菜单数据
+            data  : [
+                {
+                    name  : '项目一',
+                    icon  : 'ri-video-line',
+                    click : () => {
+                        console.log('项目一');
+                    }
+                },
+                {
+                    name  : '项目二',
+                    icon  : 'ri-input-cursor-move',
+                    click : () => {
+                        console.log('项目二');
+                    }
+                },
+                {
+                    divided : true
+                },
+                {
+                    name  : '项目三',
+                    icon  : 'ri-file-edit-line',
+                    click : () => {
+                        console.log('项目三');
+                    }
+                },
+                {
+                    name  : '项目四',
+                    icon  : 'ri-radio-button-line',
+                    click : () => {
+                        console.log('项目四');
+                    }
+                }
+            ]
+        });
+        // 复选模式
+        Eadmin.dropdown('#dropdown-5', {
+            // 标题
+            title   : '下拉菜单',
+            // 指定触发方式为鼠标移入
+            trigger : 'hover',
+            // 指定宽度，单位px
+            width   : 150,
+            // 下拉菜单数据
+            data    : [
+                {
+                    name     : '项目一',
+                    icon     : 'ri-video-line',
+                    // 指定checked参数则拥有复选功能
+                    checked  : true,
+                    // 自定义参数，如果设置该值，则会在click的会调用传递该参数指定的对象
+                    custom   : {
+                        field_1 : 1,
+                        field_2 : 2
+                    },
+                    click    : (val) => {
+                        console.log(val);
+                    }
+                },
+                {
+                    name     : '项目二',
+                    icon     : 'ri-input-cursor-move',
+                    checked  : true,
+                    click    : (val) => {
+                        console.log(val);
+                    }
+                },
+                {
+                    name     : '项目三',
+                    icon     : 'ri-file-edit-line',
+                    checked  : false,
+                    // 指定disabled可以使该选项禁用
+                    disabled : true,
+                    click    : (val) => {
+                        console.log(val);
+                    }
+                }
+            ]
+        });
+    })();
+</script>

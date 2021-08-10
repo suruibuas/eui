@@ -1,0 +1,375 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 通用样式文件
+ */
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 全局配置
+ */
+/**
+ * ================= 颜色设置 ==================
+ */
+/**
+ * ================= 字体设置 ==================
+ */
+/**
+ * ================= 通用方法 ==================
+ */
+@font-face {
+  font-family: "num";
+  src: url(../font/num.ttf);
+}
+/**
+ * ================= 旋转 ==================
+ */
+@-webkit-keyframes load {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.rotate {
+  animation: load 1s cubic-bezier(0.1, 0.1, 0.1, 0.1) infinite;
+  -webkit-animation: load 1s cubic-bezier(0.1, 0.1, 0.1, 0.1) infinite;
+}
+.rotate-0 {
+  transform-origin: center center;
+  transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transition: transform 0.2s;
+  -moz-transition: -moz-transform 0.2s;
+  -o-transition: -o-transform 0.2s;
+  -ms-transition: -ms-transform 0.2s;
+}
+.rotate-90 {
+  transform-origin: center center;
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transition: transform 0.2s;
+  -moz-transition: -moz-transform 0.2s;
+  -o-transition: -o-transform 0.2s;
+  -ms-transition: -ms-transform 0.2s;
+}
+.rotate-180 {
+  transform-origin: center center;
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transition: transform 0.2s;
+  -moz-transition: -moz-transform 0.2s;
+  -o-transition: -o-transform 0.2s;
+  -ms-transition: -ms-transform 0.2s;
+}
+/**
+ * ================= 标题 ==================
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  margin-top: 0;
+  line-height: 22px;
+}
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 10px;
+}
+h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+h1 i {
+  font-size: 24px;
+}
+h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+h2 i {
+  font-size: 20px;
+}
+h3 {
+  font-size: 18px;
+}
+h3 i {
+  font-size: 18px;
+}
+h4 {
+  font-size: 16px;
+}
+h4 i {
+  font-size: 16px;
+}
+h5 {
+  font-size: 14px;
+}
+h5 i {
+  font-size: 14px;
+}
+h6 {
+  font-size: 12px;
+}
+h6 i {
+  font-size: 12px;
+}
+/**
+ * ================= 遮罩 ==================
+ */
+.mask {
+  opacity: 0.6;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9998;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #FFF;
+}
+.mask i {
+  font-size: 18px;
+}
+/**
+ * ================= 边距 ==================
+ */
+.m0 {
+  margin: 0 !important;
+}
+.mt0 {
+  margin-top: 0 !important;
+}
+.mt10 {
+  margin-top: 10px !important;
+}
+.mt20 {
+  margin-top: 20px !important;
+}
+.mt30 {
+  margin-top: 30px !important;
+}
+.mb0 {
+  margin-bottom: 0 !important;
+}
+.mb10 {
+  margin-bottom: 10px !important;
+}
+.mb20 {
+  margin-bottom: 20px !important;
+}
+.mb30 {
+  margin-bottom: 30px !important;
+}
+.ml0 {
+  margin-left: 0 !important;
+}
+.ml10 {
+  margin-left: 10px !important;
+}
+.ml20 {
+  margin-left: 20px !important;
+}
+.ml30 {
+  margin-left: 30px !important;
+}
+.mr0 {
+  margin-right: 0 !important;
+}
+.mr10 {
+  margin-right: 10px !important;
+}
+.mr20 {
+  margin-right: 20px !important;
+}
+.mr30 {
+  margin-right: 30px !important;
+}
+.p0 {
+  padding: 0 !important;
+}
+.pl0 {
+  padding-left: 0 !important;
+}
+.pt0 {
+  padding-top: 0 !important;
+}
+.pb0 {
+  padding-bottom: 0 !important;
+}
+.pr0 {
+  padding-right: 0 !important;
+}
+/**
+ * ================= 颜色 ==================
+ */
+.font-color-1 {
+  color: #FF1844 !important;
+}
+.font-color-2 {
+  color: #6fee00 !important;
+}
+.font-color-3 {
+  color: #ffee01 !important;
+}
+.font-color-4 {
+  color: #ff7c00 !important;
+}
+.font-color-5 {
+  color: #f52394 !important;
+}
+.font-color-6 {
+  color: #00b2d4 !important;
+}
+.font-color-7 {
+  color: #3366FF !important;
+}
+.font-color-8 {
+  color: #FF3E28 !important;
+}
+.font-color-9 {
+  color: #7886A3 !important;
+}
+.font-color-0 {
+  color: #0084FF !important;
+}
+.color-1 {
+  background-color: #FF1844 !important;
+}
+.color-2 {
+  background-color: #6fee00 !important;
+}
+.color-3 {
+  background-color: #ffee01 !important;
+}
+.color-4 {
+  background-color: #ff7c00 !important;
+}
+.color-5 {
+  background-color: #f52394 !important;
+}
+.color-6 {
+  background-color: #00b2d4 !important;
+}
+.color-7 {
+  background-color: #3366FF !important;
+}
+.color-8 {
+  background-color: #FF3E28 !important;
+}
+.color-9 {
+  background-color: #7886A3 !important;
+}
+.color-0 {
+  background-color: #0084FF !important;
+}
+.linear-1 {
+  background: -moz-linear-gradient(left, #ff7e97, #FF1844) !important;
+  background: -webkit-linear-gradient(left, #ff7e97, #FF1844) !important;
+  background: -o-linear-gradient(left, #ff7e97, #FF1844) !important;
+}
+.linear-2 {
+  background: -moz-linear-gradient(left, #a4ff55, #6fee00) !important;
+  background: -webkit-linear-gradient(left, #a4ff55, #6fee00) !important;
+  background: -o-linear-gradient(left, #a4ff55, #6fee00) !important;
+}
+.linear-3 {
+  background: -moz-linear-gradient(left, #fff567, #ffee01) !important;
+  background: -webkit-linear-gradient(left, #fff567, #ffee01) !important;
+  background: -o-linear-gradient(left, #fff567, #ffee01) !important;
+}
+.linear-4 {
+  background: -moz-linear-gradient(left, #ffb066, #ff7c00) !important;
+  background: -webkit-linear-gradient(left, #ffb066, #ff7c00) !important;
+  background: -o-linear-gradient(left, #ffb066, #ff7c00) !important;
+}
+.linear-5 {
+  background: -moz-linear-gradient(left, #f985c3, #f52394) !important;
+  background: -webkit-linear-gradient(left, #f985c3, #f52394) !important;
+  background: -o-linear-gradient(left, #f985c3, #f52394) !important;
+}
+.linear-6 {
+  background: -moz-linear-gradient(left, #3be0ff, #00b2d4) !important;
+  background: -webkit-linear-gradient(left, #3be0ff, #00b2d4) !important;
+  background: -o-linear-gradient(left, #3be0ff, #00b2d4) !important;
+}
+.linear-7 {
+  background: -moz-linear-gradient(left, #99b3ff, #3366FF) !important;
+  background: -webkit-linear-gradient(left, #99b3ff, #3366FF) !important;
+  background: -o-linear-gradient(left, #99b3ff, #3366FF) !important;
+}
+.linear-8 {
+  background: -moz-linear-gradient(left, #ff9a8e, #FF3E28) !important;
+  background: -webkit-linear-gradient(left, #ff9a8e, #FF3E28) !important;
+  background: -o-linear-gradient(left, #ff9a8e, #FF3E28) !important;
+}
+.linear-9 {
+  background: -moz-linear-gradient(left, #b5bccc, #7886A3) !important;
+  background: -webkit-linear-gradient(left, #b5bccc, #7886A3) !important;
+  background: -o-linear-gradient(left, #b5bccc, #7886A3) !important;
+}
+.linear-0 {
+  background: -moz-linear-gradient(left, #66b5ff, #0084FF) !important;
+  background: -webkit-linear-gradient(left, #66b5ff, #0084FF) !important;
+  background: -o-linear-gradient(left, #66b5ff, #0084FF) !important;
+}
+/**
+ * ================= 杂项 ==================
+ */
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.fs12 {
+  font-size: 12px !important;
+}
+.fs14 {
+  font-size: 14px !important;
+}
+.fs16 {
+  font-size: 16px !important;
+}
+.fs18 {
+  font-size: 18px !important;
+}
+.va-m {
+  vertical-align: middle;
+}
+.fwb {
+  font-weight: bold;
+}
+.tac {
+  text-align: center;
+}
+.cp {
+  cursor: pointer;
+}
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.dn {
+  display: none;
+}

@@ -1,0 +1,50 @@
+<form action="/api/editpass/">
+    <!-- 大盒子 -->
+    <div class="block-box">
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-12">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <h4 class="title">新密码</h4>
+                <input
+                    id="pword"
+                    type="password"
+                    name="pword"
+                    placeholder="请输入新密码"
+                    data-validate="require" 
+                    data-validate-msg="请输入新密码">
+            </div>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-12">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <h4 class="title">确认新密码</h4>
+                <input
+                    id="repword"
+                    type="password"
+                    placeholder="请输入确认密码"
+                    data-validate="require"
+                    data-validate-msg="请输入确认密码">
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    Method.checkPword = (next) => {
+        let [pword, repword] = [
+            $('#pword').val(),
+            $('#repword').val()
+        ];
+        if (pword != repword)
+        {
+            Eadmin.message.error({
+                content : '两次密码输入不同，请检查'
+            });
+        }
+        else
+        {
+            next();
+        }
+    }
+</script>

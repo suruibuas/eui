@@ -1,0 +1,304 @@
+<!--
+    表单提交的地址根据实际情况改成自己的
+    忽略该页面字段的合理性，只是做一个演示
+-->
+<form action="/api/editinfo/id/1/">
+    <!-- 大盒子 -->
+    <div class="block-box">
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-3">
+            <h4 class="title">手机号</h4>
+            <h4>+86 138-8877-6677</h4>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-3">
+            <h4 class="title">用户ID</h4>
+            <h4>88740910</h4>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-3">
+            <h4 class="title">注册时间</h4>
+            <h4>2021-08-10 13:00:00</h4>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-3">
+            <h4 class="title">注册端口</h4>
+            <h4>
+                <i class="ri-android-line"></i>android
+            </h4>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-3">
+            <h4 class="title">注册方式</h4>
+            <h4>
+                <i class="ri-smartphone-line"></i>手机号
+            </h4>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-3">
+            <h4 class="title">登录次数</h4>
+            <h4>223</h4>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-3">
+            <h4 class="title">最近登录时间</h4>
+            <h4>2021-08-10 13:00:00</h4>
+        </div>
+        <div class="col-12 p0 flex">
+            <!-- 响应盒子，bootstrap -->
+            <div class="col-3">
+                <!-- 表单组盒子 -->
+                <div class="form-group">
+                    <h4 class="title">昵称</h4>
+                    <input
+                        type="text"
+                        name="nickname"
+                        placeholder="请输入昵称">
+                </div>
+            </div>
+            <!-- 响应盒子，bootstrap -->
+            <div class="col-3">
+                <!-- 表单组盒子 -->
+                <div class="form-group">
+                    <h4 class="title">所属平台</h4>
+                    <select
+                        name="shop"
+                        data-width="100%">
+                        <option value="0">请选择所属商户</option>
+                        <option value="1">淘宝</option>
+                        <option value="2">天猫</option>
+                        <option value="3">京东</option>
+                    </select>
+                </div>
+            </div>
+            <!-- 响应盒子，bootstrap -->
+            <div class="col-3">
+                <!-- 表单组盒子 -->
+                <div class="form-group">
+                    <h4 class="title">所属销售</h4>
+                    <select
+                        name="agent"
+                        data-width="100%"
+                        data-multiple
+                        data-selected="1,2">
+                        <option value="0">请选择所属销售</option>
+                        <option value="1">张三</option>
+                        <option value="2">李四</option>
+                        <option value="3">王五</option>
+                        <option value="4">赵六</option>
+                    </select>
+                </div>
+            </div>
+            <!-- 响应盒子，bootstrap -->
+            <div class="col-3">
+                <!-- 表单组盒子 -->
+                <div class="form-group">
+                    <h4 class="title">用户头像</h4>
+                    <div id="icon"></div>
+                </div>
+            </div>
+            <div class="col-3">
+                <h4 class="title">用户简介</h4>
+                <textarea
+                    name="intro"
+                    style="height: 126px;"
+                    placeholder="请输入用户简介..."></textarea>
+            </div>
+            <div class="col-9 flex p0">
+                <!-- 响应盒子，bootstrap -->
+                <div class="col-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <h4 class="title">总消费金额</h4>
+                        <input
+                            type="text"
+                            name="spend"
+                            class="num-input"
+                            placeholder="请输入总消费金额">
+                    </div>
+                </div>
+                <!-- 响应盒子，bootstrap -->
+                <div class="col-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <h4 class="title">现金余额</h4>
+                        <input
+                            type="text"
+                            name="money"
+                            class="num-input"
+                            placeholder="请输入现金余额">
+                    </div>
+                </div>
+                <!-- 响应盒子，bootstrap -->
+                <div class="col-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <h4 class="title">金币余额</h4>
+                        <input
+                            type="text"
+                            name="gold"
+                            class="num-input"
+                            placeholder="请输入金币余额">
+                    </div>
+                </div>
+                <!-- 响应盒子，bootstrap -->
+                <div class="col-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <h4 class="title">代充余额</h4>
+                        <input
+                            type="text"
+                            name="virtual"
+                            class="num-input"
+                            placeholder="请输入代充余额">
+                    </div>
+                </div>
+                <!-- 响应盒子，bootstrap -->
+                <div class="col-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <h4 class="title">用户等级</h4>
+                        <input
+                            type="text"
+                            name="level"
+                            class="num-input"
+                            placeholder="请输入用户等级">
+                    </div>
+                </div>
+                <!-- 响应盒子，bootstrap -->
+                <div class="col-4">
+                    <!-- 表单组盒子 -->
+                    <div class="form-group">
+                        <h4 class="title">VIP等级</h4>
+                        <input
+                            type="text"
+                            name="noble"
+                            class="num-input"
+                            placeholder="请输入VIP等级">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-3">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <h4 class="title">会员状态</h4>
+                <label>
+                    <input 
+                        name="status" 
+                        type="radio" 
+                        value="1" 
+                        data-model="switch">
+                </label>
+                <span class="note">禁用后会员将立刻下线并无法登录</span>
+            </div>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-3">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <h4 class="title">直播权限</h4>
+                <label>
+                    <input 
+                        name="anchor" 
+                        type="radio" 
+                        value="1" 
+                        data-model="switch">
+                </label>
+                <span class="note">请确保审核过其资料后再开启</span>
+            </div>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-3">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <h4 class="title">全局禁言</h4>
+                <label>
+                    <input 
+                        name="nosay" 
+                        type="radio" 
+                        value="0" 
+                        data-model="switch">
+                </label>
+                <span class="note">开启后会员将无法通过任何途径发言</span>
+            </div>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-3">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <h4 class="title">禁止编辑资料</h4>
+                <label>
+                    <input 
+                        name="noedit" 
+                        type="radio" 
+                        value="0" 
+                        data-model="switch">
+                </label>
+                <span class="note">针对恶意修改昵称头像的用户可开启</span>
+            </div>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-3">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <h4 class="title">防踢</h4>
+                <label>
+                    <input 
+                        name="preventKick" 
+                        type="radio" 
+                        value="0" 
+                        data-model="switch">
+                </label>
+                <span class="note">开启后无法将该用户踢出直播间</span>
+            </div>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-3">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <h4 class="title">防禁言</h4>
+                <label>
+                    <input 
+                        name="preventNosay" 
+                        type="radio" 
+                        value="0" 
+                        data-model="switch">
+                </label>
+                <span class="note">开启后无法将该用户禁言</span>
+            </div>
+        </div>
+        <!-- 响应盒子，bootstrap -->
+        <div class="col-3">
+            <!-- 表单组盒子 -->
+            <div class="form-group">
+                <h4 class="title">是否结算</h4>
+                <label>
+                    <input 
+                        name="settlement" 
+                        type="radio" 
+                        value="0" 
+                        data-model="switch">
+                </label>
+                <span class="note">关闭后该用户的消费将不再结算</span>
+            </div>
+        </div>
+    </div>
+    <button
+        class="hl mt20"
+        data-icon="ri-edit-box-line"
+        data-loading="数据保存中..."
+        data-submit>编辑会员资料
+    </button>
+</form>
+<script>
+    (() => {
+        Eadmin.upload('#icon', {
+            api     : '/api/upload/',
+            bind    : 'icon',
+            maxfile : 1,
+            mini    : true
+        });
+    })();
+</script>

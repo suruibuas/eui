@@ -1,0 +1,71 @@
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 头部导航文件
+ */
+/**
+ * eadmin / www.eadmin.com.cn
+ * 
+ * 全局配置
+ */
+/**
+ * ================= 颜色设置 ==================
+ */
+/**
+ * ================= 字体设置 ==================
+ */
+/**
+ * ================= 通用方法 ==================
+ */
+.dropdown {
+  border-radius: 5px;
+  box-shadow: #060916 0px 0px 20px;
+  border: 1px #30375B solid;
+  background: #232B4C;
+  position: absolute;
+  z-index: 9999;
+  outline: none;
+  padding: 5px 0;
+  display: none;
+}
+.dropdown ul {
+  max-height: 300px;
+  overflow: hidden;
+  position: relative;
+}
+.dropdown li:not(.divided) {
+  height: 32px;
+  line-height: 32px;
+  padding: 0 10px;
+  cursor: pointer;
+  display: flex;
+  flex-wrap: nowrap;
+}
+.dropdown li:not(.divided) span {
+  flex: 1 1 auto;
+}
+.dropdown li:not(.divided) .checked {
+  margin: 0 0 0 20px;
+}
+.dropdown li:not(.divided):hover:not(.disabled) {
+  background: #4E5675;
+}
+.dropdown .ps__rail-y {
+  right: 0;
+}
+.dropdown .title {
+  text-align: center;
+  height: 30px;
+  line-height: 25px;
+  border-bottom: 1px #30375B solid;
+  margin-bottom: 5px;
+  padding: 0 10px;
+}
+.dropdown .divided {
+  margin: 4px 0;
+  border-bottom: 1px #30375B solid;
+}
+.dropdown .disabled {
+  color: #7886A3;
+  cursor: not-allowed !important;
+}
