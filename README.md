@@ -6,6 +6,8 @@
 
 [官网](http://www.eui6.com)
 
+联系作者：QQ（317953536）
+
  **新版本界面预览图如下：** 
  
  ![](https://files.catbox.moe/21mbsi.jpg)
